@@ -25,6 +25,7 @@ class Gerador extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post() );
 		//dados a serem enviados para o cabecalho
 		$dados['js'] = 'js/Gerador.js';
+		$dados['MSG'] = $this->session->MSG; 
 		/*Carregando as instituições*/
  		$this->load->model('GeradorModel');
  		$this->GeradorModel->index( $post , $_SESSION['CODINST'] );
@@ -33,8 +34,6 @@ class Gerador extends CI_Controller {
 		$this->load->view('template/header',$dados);
 		$this->load->view('GeradorView');
 		$this->load->view('template/footer');
-		//echo $_SESSION['CODINST'];
-		//echo $_SESSION['NOME'];
 	}
 
 	public function novo()
@@ -105,8 +104,15 @@ class Gerador extends CI_Controller {
 
 	public function excluir()
 	{
+		$id = $this->uri->segment(3);
 		$this->load->model('GeradorModel');
- 		$this->GeradorModel->excluir($this->uri->segment(3));	
-		$this->index();
+		//validando se o gerador está vinculado
+		if($this->GeradorModel->geradorPodeSerExcluido( $id )){
+			$this->GeradorModel->excluir( $id );	
+			$this->session->set_userdata('MSG', array( 's', 'Excluido com Sucesso' ));			
+		}else{
+			$this->session->set_userdata('MSG', array( 'e', 'Gerador vinculado em Eluição, Não é permitido a exclusão' ));
+		}
+		$this->index(); 		
 	}
 }

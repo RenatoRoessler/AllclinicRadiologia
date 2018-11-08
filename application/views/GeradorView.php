@@ -9,6 +9,7 @@
 					Gerador
 				</li>
 			</ol>
+			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
 			<form id="formulario" name="formulario" action="<?php echo base_url() .'/Gerador/' ?> " method="post" class="form-horizontal" data-parsley-validate >
 				<div class="row sys-main-title sys-title sys-title-2">
 					<div class="col-xs-12 col-md-12 col-sm-12">
@@ -35,13 +36,13 @@
 					</div>      	
 
 		    	</div>
+
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12">
 					<div class="col-md-12">
 						<div class="panel-group" >	
 							<div class="panel panel-default">
-							
 						    	<div class="panel-body table-responsive">
 						    		<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
 						    			<thead>
@@ -75,10 +76,10 @@
 												<td><?php echo $v['DESCFABRICANTE']; ?></td>
 												<td><?php echo $v['NOME']; ?></td>
 												<td><?php echo $v['DESCATIVO']; ?></td>
-						    					<td width="10"> 
-						    						<a class="btn btn-default" href=<?php echo base_url() .'/Gerador/editar/'. $v['CODGERADOR']  ?> > 
+						    					<td width="10">
+													<a class="btn btn-default" href=<?php echo base_url() .'/Gerador/editar/'. $v['CODGERADOR']  ?> > 
 						    							<i class="fa fa-edit fa-lg" ></i> 
-						    						</a>
+						    						</a>		
 						    					</td>
 						    					<td width="10">
 						    						<a class="btn btn-default" href=<?php echo base_url() .'/Gerador/excluir/'. $v['CODGERADOR']  ?> > 
@@ -91,7 +92,6 @@
 						    			</tbody>
 						    		</table>
 						    	</div>
-
 						    </div>						  
 						</div>
 					</div>
@@ -99,6 +99,20 @@
 			</form>
 		</div>
 	</div>
+
+
+<div class="row col-md-11 col-sm-11 col-xs-11 sys-btn-action-base-container">
+	<div class="col-sm-1 col-xs-2">
+		<button class="btn btn-warning sys-btn-action-base" id="btnEditar" 
+			data-toggle="tooltip" data-placement="top" title="Editar" ><i class="fa fa-pencil"></i></button>
+	</div>
+	<div class="col-sm-1 col-xs-2">
+		<button class="btn btn-danger sys-btn-action-base" id="btnExcluir" 
+			data-toggle="tooltip" data-placement="top" title="Excluir" ><i class="fa fa-trash-o fa-fw"></i></button>
+	</div>
+	
+</div>
+	
 
 
 

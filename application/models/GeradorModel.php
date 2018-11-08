@@ -221,4 +221,27 @@ class GeradorModel extends MY_Model {
 		return false;
 	}
 
+	/**
+	 *  verifica se o gerador pode ser Excluido
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return bollean
+	 */
+	public function geradorPodeSerExcluido( $codgerador ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from eluicao where CODGERADOR = $codgerador "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			if ($this->dados[0]['QTD'] > 0 ){
+				return false;
+			}else{
+				return true;
+			}	 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
 }

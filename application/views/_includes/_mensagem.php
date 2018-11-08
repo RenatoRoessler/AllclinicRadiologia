@@ -9,5 +9,4 @@
 			$_SESSION['MSG'] =  NULL;
 		}
 	}
-
 ?>

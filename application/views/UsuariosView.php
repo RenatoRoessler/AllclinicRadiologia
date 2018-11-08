@@ -67,7 +67,6 @@
 						    					<th>Email</th>
 						    					<th>Instituição</th>
 						    					<th>Editar</th>
-						    					<th>Excluir</th>
 						    				</tr>
 						    			</thead>
 						    			<tbody>
@@ -83,9 +82,6 @@
 						    						<a class="btn btn-default" href=<?php echo base_url() .'/Usuarios/editar/'. $v['APELUSER']  ?> > 
 						    							<i class="fa fa-edit fa-lg"></i> 
 						    						</a>
-						    					</td>
-						    					<td width="10"> 						    					
-						    						<a class="btn btn-default" href=<?php echo base_url() .'/Usuarios/excluir/'. $v['APELUSER']  ?> > <i class="fa fa-minus-circle fa-lg" style="color:red"></i> </a>  
 						    					</td>
 						    				</tr>
 						    				<?php } ?>

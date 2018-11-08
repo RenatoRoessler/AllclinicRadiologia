@@ -1,9 +1,21 @@
 var Gerador = function(){
 	var _self = this;
-
-
- 
 	
+
+	this.excluir = function(a){
+		var id = $("#tableIndex tbody tr.bg-lightgray").attr('id');
+		dialogo({
+			'titulo':'Salvar',
+			'texto':'Ol&aacute;,<br/>deseja salvar registro ?' + $("#tableIndex tbody tr.bg-lightgray").attr('id'),
+			'fnc1':function(){
+				//$("#Mensagem").val(content) ;
+			},
+			'tipo':'p',
+			'btn1':'Salvar',
+			'btn2':'Cancelar'
+		});
+
+	}	
 
 }
 
@@ -51,6 +63,7 @@ $("document").ready(function(){
 				language: "pt-BR",
 				autoclose: true
 			});
+
 
 
 });

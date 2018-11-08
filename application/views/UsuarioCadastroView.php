@@ -35,22 +35,23 @@
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Login:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFAPELUSER" name="FFAPELUSER" value="<?php echo $retorno[0]["APELUSER"]; ?>"  style="text-transform:uppercase" >
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFAPELUSER" name="FFAPELUSER" 
+								value="<?php echo $retorno[0]["APELUSER"]; ?>" minlength="5" maxlength="10"  style="text-transform:uppercase" >
 							</div>
-							<div class="form-group col-main col-sm-3 col-xs-12">
+							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>
 								<input type="email" class="col-sm-12 col-xs-12 form-control" id="FFNOME" name="FFNOME" value="<?php echo $retorno[0]["NOME"]; ?>" 
-								minlength="5" maxlength="45"  required style="text-transform:uppercase">
+								minlength="5" maxlength="45"  required style="text-transform:uppercase" autocomplete="off">
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFEMAIL" class="sys-label col-sm-12 col-xs-12">E-mail:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFEMAIL" name="FFEMAIL" value="<?php echo $retorno[0]["EMAIL"]; ?>" 
-								minlength="3" maxlength="255" required  style="text-transform:lowercase">
+								minlength="3" maxlength="255" required  style="text-transform:lowercase" autocomplete="off">
 							</div>
 							
 						</div>
 						<div class="row col-sm-12 col-xs-12">
-							<div class="col-main col-sm-2 col-xs-12">
+							<div class="col-main col-sm-3 col-xs-12">
 								<label for="FFINSTITUICAO" class="sys-label col-sm-12 col-xs-12">Instituição:</label>	
 								<select class="form-control form-control-sm" id="FFINSTITUICAO" name="FFINSTITUICAO" data-live-search="true">
 								<option <?php if( $retorno[0]["CODINST"] == "") echo "selected"; ?> value="">Selecione a Conta</option>
