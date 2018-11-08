@@ -28,8 +28,8 @@ class UsuarioModel extends MY_Model {
 			if(isset($post['Instituicao'])) {
 				$FF .= ( $post['Instituicao'] ) ? "and a.CODINST = $post[Instituicao] " : '';
 			}
-			if(isset($post['Apeluser'])) {
-				$FF .= ( $post['Apeluser'] ) ? "and A.APELUSER like upper('%$post[APELUSER]%') " : '';
+			if(isset($post['Login'])) {
+				$FF .= ( $post['Login'] ) ? "and A.APELUSER like upper('%$post[Login]%') " : '';
 			}
 			if(isset($post['Nome'])) {
 				$FF .= ( $post['Nome'])  ? "and A.NOME like upper('%$post[Nome]%') " : '';

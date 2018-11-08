@@ -2,7 +2,7 @@ var PesquisarPaciente = function(){
 	var _self = this;
 	this.filtraTextoPadrao = function( param, callback ){
 		$.ajax({
-			url : '/Allclinic/Paciente/listarPacientesTela/',
+			url : '/AllclinicRadiologia/Paciente/listarPacientesTela/',
 			type : 'POST',
 			timeout: 10000,
 			data : param,

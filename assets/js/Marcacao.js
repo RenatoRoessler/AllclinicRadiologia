@@ -15,11 +15,11 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Marcacao/novo');
+		ir('/AllclinicRadiologia/Marcacao/novo');
 	});
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Marcacao/Index');
+		ir('/AllclinicRadiologia/Marcacao/Index');
 	});	
 	$("#btnLimpar")
 		.click(function(){

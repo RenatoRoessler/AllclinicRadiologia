@@ -15,15 +15,16 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Usuarios/novo');
+		ir('/AllclinicRadiologia/Usuarios/novo');
 	});
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Usuarios/Index');
+		ir('/AllclinicRadiologia/Usuarios/Index');
 	});	
 	$("#btnLimpar")
 		.click(function(){
 			$("input").val('');
+			$("select").prop('selectedIndex',0);
 			$('#btnSearch').trigger('click')
 		});
 	$("#btnSalvar")

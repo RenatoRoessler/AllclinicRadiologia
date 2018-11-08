@@ -16,7 +16,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Eluicao/novo');
+		ir('/AllclinicRadiologia/Eluicao/novo');
 	});
 
 	$("#btnLimpar")
@@ -27,7 +27,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Eluicao');
+		ir('/AllclinicRadiologia/Eluicao');
 	});		
 
 	$("#btnSalvar")
@@ -44,9 +44,6 @@ $("document").ready(function(){
 				language: "pt-BR",
 				autoclose: true
 			});
-
-
-
 
 
 });

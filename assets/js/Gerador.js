@@ -17,7 +17,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Gerador/novo');
+		ir('/AllclinicRadiologia/Gerador/novo');
 	});
 
 	$("#btnLimpar")
@@ -28,7 +28,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Gerador');
+		ir('/AllclinicRadiologia/Gerador');
 	});		
 
 	$("#btnSalvar")

@@ -15,7 +15,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Fabricante/novo');
+		ir('/AllclinicRadiologia/Fabricante/novo');
 	});
 
 	$("#btnLimpar")
@@ -26,7 +26,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Fabricante');
+		ir('/AllclinicRadiologia/Fabricante');
 	});		
 
 	$("#btnSalvar")

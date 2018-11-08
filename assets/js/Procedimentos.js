@@ -17,7 +17,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Procedimentos/novo');
+		ir('/AllclinicRadiologia/Procedimentos/novo');
 	});
 
 	$("#btnLimpar")
@@ -28,7 +28,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Procedimentos');
+		ir('/AllclinicRadiologia/Procedimentos');
 	});		
 
 	$("#btnSalvar")

@@ -14,7 +14,7 @@ var Fracionamento = function(){
 		}
 
 		$.ajax({
-			url : '/Allclinic/Fracionamento/adicionar/',
+			url : '/AllclinicRadiologia/Fracionamento/adicionar/',
 			type : 'POST',
 			timeout: 30000,
 			data : {
@@ -32,7 +32,7 @@ var Fracionamento = function(){
 				mensagem(j.content.tipoMsg , j.content.Mensagem);
 				let codigo = j.content.codfracionamento;
 				loader('hide');
-				ir('/Allclinic/Fracionamento/editar/' +  codigo);
+				ir('/AllclinicRadiologia/Fracionamento/editar/' +  codigo);
 			},
 			error: function( request, status, error ){ 
 				loader('hide');
@@ -101,7 +101,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Fracionamento/novo');
+		ir('/AllclinicRadiologia/Fracionamento/novo');
 	});
 
 	$("#btnLimpar")
@@ -112,7 +112,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Fracionamento');
+		ir('/AllclinicRadiologia/Fracionamento');
 	});		
 
 	$("#btnSalvar")
@@ -131,7 +131,7 @@ $("document").ready(function(){
 	});
 	$("#btnVoltarAdministracao")
 	.click(function(){
-		ir('/Allclinic/Fracionamento/editar/' + $('#FFCODFRACIONAMENTO1').val() );
+		ir('/AllclinicRadiologia/Fracionamento/editar/' + $('#FFCODFRACIONAMENTO1').val() );
 	});	
 
 	$("#btnTeste")

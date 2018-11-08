@@ -16,7 +16,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Evolucao/novo');
+		ir('/AllclinicRadiologia/Evolucao/novo');
 	});
 
 	$("#btnLimpar")
@@ -27,7 +27,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Evolucao');
+		ir('/AllclinicRadiologia/Evolucao');
 	});		
 
 	$("#btnSalvar")
@@ -49,9 +49,4 @@ $("document").ready(function(){
 				language: "pt-BR",
 				autoclose: true
 			});
-
-
-
-
-
 });

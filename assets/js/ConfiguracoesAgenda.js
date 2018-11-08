@@ -17,7 +17,7 @@ $("document").ready(function(){
 	
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/ConfiguracoesAgenda/novo');
+		ir('/AllclinicRadiologia/ConfiguracoesAgenda/novo');
 	});
 
 	$("#btnLimpar")
@@ -28,7 +28,7 @@ $("document").ready(function(){
 
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/ConfiguracoesAgenda');
+		ir('/AllclinicRadiologia/ConfiguracoesAgenda');
 	});		
 
 	$("#btnSalvar")

@@ -18,7 +18,7 @@ $("document").ready(function(){
 	});
 	$("#btnNovo")
 	.click(function(){
-		ir('/Allclinic/Instituicao/novo');
+		ir('/AllclinicRadiologia/Instituicao/novo');
 	});	
 	$("#btnSalvar")
 	.click(function(){
@@ -27,7 +27,7 @@ $("document").ready(function(){
 	
 	$("#btnVoltar")
 	.click(function(){
-		ir('/Allclinic/Instituicao');
+		ir('/AllclinicRadiologia/Instituicao');
 	});	
 
 
