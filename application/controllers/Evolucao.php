@@ -1,0 +1,31 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+
+class Evolucao extends CI_Controller {
+
+	public function __construct(){
+		parent::__construct();
+		if(!$this->session->userdata('logado')){
+			redirect(base_url('usuarios/login'));
+		}
+	}
+
+	public function index(){
+		/*  Limpando variaveis  */
+		$post = limpaVariavelArray( $this->input->post());
+		$dados['js'] = 'js/Evolucao.js'; 
+		$post['CODINST'] = $_SESSION['CODINST'];
+
+		/*Carregando as Evoluções */
+ 		$this->load->model('EvolucaoModel');
+ 		$this->EvolucaoModel->index( $post  );
+ 		$dados['evolucao'] = $this->EvolucaoModel->dados;
+
+		$this->load->view('template/header',$dados);
+		$this->load->view('EvolucaoView');
+		$this->load->view('template/footer');
+	}
+	
+
+}

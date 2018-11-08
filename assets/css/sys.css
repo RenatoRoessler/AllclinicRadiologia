@@ -1,0 +1,222 @@
+@CHARSET "ISO-8859-1";
+body{
+	/*background-image: url("../images/background.png");*/
+	background-color: #e8e8e8 !important;
+	color: #666 !important;
+	font-size: 11px !important;
+}
+li>a>ul>li:hover {
+	background: #060 !important;
+}
+.main-container-form{
+	border: 1px solid #ccc;
+	padding: 1.3em;
+	background: #fff !important;
+}
+.divisor{
+	border-bottom: 1px solid #e7e7e7;
+	margin-bottom: 5px;
+}
+.sys-label{
+	font-size:11px;
+    color: #666;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    margin-left: -5px;
+}
+.sys-tools{
+	border-bottom: 1px solid #e7e7e7;
+	margin-bottom: 10px;
+	padding-top: 0px;
+}
+.sys-footer{
+	bottom: 0px !important;
+	margin: 15px 0px 0px 0px !important;
+	border-radius: 0px !important;
+	width: 100% !important;
+	color: #fff;
+	min-height: 40px !important;
+    z-index: 0;
+}
+.sys-label-loader{
+	font-size: 0.9em;
+	color: #ccc;
+}
+.sys-lista-filter{
+	margin-bottom:15px;
+	padding-bottom:5px;
+	border-bottom: 1px solid #ddd;
+}
+::-webkit-input-placeholder{
+   color: #bbb !important;
+   font-style: italic;
+}
+:-moz-placeholder {
+   color: #bbb !important;
+   font-style: italic;
+}
+::-moz-placeholder {
+   color: #bbb !important;
+   font-style: italic;
+}
+:-ms-input-placeholder {  
+   color: #bbb !important;
+   font-style: italic;
+}
+/*  CUSTOMIZACAO DO MENU 	*/
+.navbar-default, .navbar-collapse{
+    background-color: #113250;
+}
+.pagination>li>a{
+	border: 1px solid #e7e7e7 !important;
+}
+.sys-select{
+	background-color: #fff;
+	padding: 1px 12px !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+.sys-box-message{
+	padding: 10px 15px 15px 20px !important;
+	margin-top: 10px !important;
+	border: 1px solid #060;
+	background: #fcfcfc;
+}
+/******************************
+	DEFINICAO DO MULTIMENU
+*********************************/
+.dropdown-submenu>a:after {
+	display: block;
+	content: " ";
+	float: right;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 5px 0 5px 5px;
+	border-left-color: #ccc;
+	margin-top: 5px;
+	margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+	border-left-color: #fff;
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{
+	background: #222 !important;
+	color: #fff !important;
+}
+@media ( max-width: 767px ){
+	.open{
+		border-bottom: 1px solid #222 !important;
+	}
+}
+.sys-loader-small{
+	width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: 0.8;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    float: left;
+    z-index:210;
+}
+.sys-footer-info-btn{
+	font-family: 'Glyphicons Halflings' !important;
+	font-size: 20px;
+	position: relative;
+	top:-20px;
+	left: 49%;
+	cursor:pointer;
+	color:#222;
+}
+.sys-footer-info-input{
+	border: 0px !important;
+	border-bottom: 1px solid #ddd !important;
+	padding:2px !important;
+	height: 20px !important;
+}
+.sys-footer-info{
+	box-shadow: inset 0px 5px 10px 0px rgba(0,0,0,0.1);
+	border-top: 1px solid #ccc;
+	background-color: #fff;
+	position: fixed;
+	bottom: 0px;
+	z-index: 200;
+	height: 160px;
+}
+.sys-icon-red::before{
+	color: red !important;
+}
+.sys-label-audio{
+	color:#666;
+	padding: 15px 5px 5px 5px;
+	text-align: left;
+	font-size: 11px;
+	line-height: 12px;
+	width: 100%;
+	white-space: nowrap;
+}
+.sys-content-audio-action{
+	white-space: nowrap;
+	height: 20px;
+	line-height: 20px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+	overflow:hidden; 
+}
+.sys-container-player-toggle{
+	font-family: 'Glyphicons Halflings' !important;
+	float: left;
+	margin-top: 5px;
+	margin-left: -11px;
+	border: 1px solid #ea2f10;
+	background-color: #f04124;
+	color: #fff;
+	padding: 10px 7px 10px 10px;
+	border-radius: 30px 0px 0px 30px;
+	cursor:pointer;
+	font-size:20px;
+}
+.sys-container-player{
+	border: 1px solid #ccc;
+	background-color: #f0f0f0;
+	margin: 5px -5px 5px 5px !important;
+	padding: 5px !important;
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-width: 388px;
+	max-height: 285px;
+	z-index:100;
+}
+.sys-texto-padrao-iframe{
+	background: #fff;
+}
+.sys-label-float{
+	top:40px;
+	left: 0;
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	padding: 5px 25px 5px 10px;
+	font-size: 14px ;
+	font-style: italic;
+	font-weight: bold; 
+	z-index: 10;
+	border-radius: 0 0 20px 0;
+}
+.sys-search-paciente{
+	background: #fff;
+	border: 1px solid #ccc;
+}	
+.sys-search-paciente-view{
+	background: #eee;
+	border: 1px solid #ccc;
+}
+.sys-border{
+	margin: 3px 0px;
+	border: 1px solid #ddd;
+	padding: 5px 20px 20px 20px !important;
+}
