@@ -10,9 +10,7 @@
 					<br/>
 				</li>
 			</ol>
-
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
-
 			<?php 
 			echo validation_errors('<div class="alert alert-danger">','</div>');
 			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
@@ -39,16 +37,16 @@
 							<div class="form-group col-main col-sm-3 col-xs-12">
 								<label for="FFDESCRICAO" class="sys-label col-sm-12 col-xs-12">Descrição:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFDESCRICAO" name="FFDESCRICAO" value="<?php echo $retorno[0]["DESCRICAO"]; ?>" 
-								minlength="10" maxlength="45"  required style="text-transform:uppercase">
+								minlength="10" maxlength="45"  required style="text-transform:uppercase" autocomplete="off">
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFESPECIFICACAO" class="sys-label col-sm-12 col-xs-12">Especificação:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFESPECIFICACAO" name="FFESPECIFICACAO" value="<?php echo $retorno[0]["ESPECIFICACAO"]; ?>" 
-								minlength="10" maxlength="45" required  style="text-transform:uppercase">
+								minlength="10" maxlength="45" required  style="text-transform:uppercase" autocomplete="off">
 							</div>	
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFTIPO" class="sys-label col-sm-12 col-xs-12">Tipo:</label>	
-								<select class="form-control form-control-sm col-sm-12 col-xs-12 selectpicker" id="FFTIPO" name="FFTIPO">
+								<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFTIPO" name="FFTIPO">
 									<option <?php if( $retorno[0]["TIPO"] == "") echo "selected"; ?> value="">Selecione o Tipo</option>
 									<option <?php if( $retorno[0]["TIPO"] == "1") echo "selected"; ?> value="1">Gerador</option>
 									<option <?php if( $retorno[0]["TIPO"] == "2") echo "selected"; ?> value="2">Radiofarmaco</option>
@@ -69,7 +67,6 @@
 			<?php 
             echo form_close();
             ?>
-
 		</div>
 	</div>
 

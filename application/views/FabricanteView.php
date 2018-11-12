@@ -9,6 +9,7 @@
 					Fabricante
 				</li>
 			</ol>
+			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
 			<form id="formulario" name="formulario" action="<?php echo base_url() .'/Fabricante/' ?> " method="post" class="form-horizontal" data-parsley-validate >
 				<div class="row sys-main-title sys-title sys-title-2">
 					<div class="col-xs-12 col-md-12 col-sm-12">

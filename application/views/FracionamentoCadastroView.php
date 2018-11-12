@@ -44,7 +44,7 @@
 									foreach ($marcacao as $k => $v) {
 									$sel = ($v["CODMARCACAO"] == $retorno[0]["CODMARCACAO"]  ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODMARCACAO'];?>" <?php echo $sel; ?> > <?php echo $v["KIT_LOTE"]; ?> </option>
+									<option value="<?php echo $v['CODMARCACAO'];?>" <?php echo $sel; ?> > <?php echo $v["CODMARCACAO"]; ?> </option>
 									<?php  
 										}
 									?>									

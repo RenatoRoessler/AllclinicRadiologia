@@ -40,12 +40,13 @@
 <body class="bg-light fixed-nav sticky-footer" id="page-top"> 
 	 <?php include VIEWPATH . "_includes/_dialog.php";?> 
 	<!-- Navegação !-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top " id="mainNav">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 		<a class="navbar-brand" href="<?php echo base_url();  ?>">Allclinic</a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCurso" aria-control="navbarCurso" aria-expanded="false" aria-label="Navegação Toggle">
 			<span class="navbar-toggler-icon"></span>
 			
 		</button>
+		
 		<div id="navbarCurso" class="collapse navbar-collapse">
 			<ul class="navbar-nav navbar-sidenav" id="linksaccordion">
 				<li class="nav-item">
@@ -96,7 +97,8 @@
 						<i class="fa fa-fw fa-exchange"></i>
 						<span class="nav-link-text">Evolução</span>				
 					</a>
-					<ul class="sidenav-second-level collapse"  id="linksEvolucao">						<li>
+					<ul class="sidenav-second-level collapse"  id="linksEvolucao">						
+						<li>
 							<a href="<?php echo base_url('Eluicao');  ?>"> Eluição</a>
 						</li>
 						<li>
@@ -115,7 +117,8 @@
 						<i class="fa fa-sign-out"></i>
 						<span class="nav-link-text">Sair</span>	
 					</a>
-				</li>
+				</li>				
+				
 			</ul>
 
 			<ul class="navbar-nav sidenav-toggler">
@@ -124,7 +127,20 @@
 						<i class="fa fa-fw fa-angle-left"></i>	
 					</a>
 				</li>
-			</ul>	
+			</ul>				
+			<ul class="navbar-nav ml-auto">							
+				<li class="nav-item dropdown">				
+					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-user-circle fa-fw"></i>
+					</a>					
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+						<a class="dropdown-item" ><?php echo $_SESSION['NOME']?></a>
+						<a class="dropdown-item" ><?php echo $_SESSION['INST_FANTASIA']?></a>
+					<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="<?php echo base_url('usuarios/logout');  ?>" >Sair</a>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</nav>
 

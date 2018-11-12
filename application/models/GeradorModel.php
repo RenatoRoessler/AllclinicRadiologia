@@ -20,7 +20,7 @@ class GeradorModel extends MY_Model {
 	 *
 	 * 	@return array
 	 */
-	public function index( $post,$codinst ) {
+	public function index( $post ,$codinst ) {
 
 		try {			
 			$FF = '';
@@ -30,6 +30,7 @@ class GeradorModel extends MY_Model {
 			if(isset($post['Lote'])) {
 				$FF .= ( $post['Lote'] ) ? "and g.LOTE =  $post[Lote] " : '';
 			}
+			$FF .= "and g.CODINST = $codinst";
 			$this->dados = $this->query(
 				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO,g.ATIVO, g.DATA_CALIBRACAO,g.ATIVIDADE_CALIBRACAO,
 							g.CODINST,g.APELUSER,g.CODFABRICANTE,g.DATA,i.FANTASIA,a.DESCRICAO as DESCFABRICANTE,

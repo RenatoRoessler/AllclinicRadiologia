@@ -38,7 +38,7 @@ class FabricanteModel extends MY_Model {
 				case when f.tipo = '1' then 'Gerador'
 				     when f.tipo = '2' then 'Radiofarmaco' end TIPODESC		
 				from 		fabricante f
-				where 		1=1
+				where 		f.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	f.DESCRICAO"
 			);
@@ -64,7 +64,7 @@ class FabricanteModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into fabricante(DESCRICAO,ESPECIFICACAO,TIPO) value ( '$post[FFDESCRICAO]','$post[FFESPECIFICACAO]','$post[FFTIPO]')"
+			$this->db->query("insert into fabricante(DESCRICAO,ESPECIFICACAO,TIPO,CODINST) value ( '$post[FFDESCRICAO]','$post[FFESPECIFICACAO]','$post[FFTIPO]',$_SESSION[CODINST])"
 			);
 			if( $this->db->trans_status() === false){
 				$this->db->trans_rollback();
@@ -196,6 +196,7 @@ class FabricanteModel extends MY_Model {
 				"select 	f.CODFABRICANTE, f.DESCRICAO,f.ESPECIFICACAO, f.TIPO				
 				from 		fabricante f
 				where 		f.TIPO = $tipo
+				and 		f.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	f.DESCRICAO"
 			);
@@ -225,6 +226,7 @@ class FabricanteModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	f.CODFABRICANTE, f.DESCRICAO,f.ESPECIFICACAO, f.TIPO				
 				from 		fabricante f
+				where 		f.CODINST = $_SESSION[CODINST]
 				order by 	f.DESCRICAO"
 			);
 			
@@ -239,8 +241,29 @@ class FabricanteModel extends MY_Model {
 		return false;
 	}
 
-	
-
+		/**
+	 *  verifica se o fabricante pode ser Excluido
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return bollean
+	 */
+	public function fabricantePodeSerExcluido( $codfabricante ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from GERADOR where CODFABRICANTE = $codfabricante "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			if ($this->dados[0]['QTD'] > 0 ){
+				return false;
+			}else{
+				return true;
+			}	 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
 	
 
 }

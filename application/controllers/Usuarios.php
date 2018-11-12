@@ -56,6 +56,7 @@ class Usuarios extends CI_Controller {
 		$dadosSessao['NOME'] =  NULL;
 		$dadosSessao['APELUSER'] =  NULL;
 		$dadosSessao['logado'] = FALSE;
+		$dadosSessao['INST_FANTASIA'] = NULL;
 		$this->session->set_userdata($dadosSessao);
 		redirect(base_url(''));	
 	}
@@ -73,11 +74,14 @@ class Usuarios extends CI_Controller {
 			$this->db->where('senha',md5($senha));
 			$userLogado = $this->db->get('usuario')->result_array();
 			if(count($userLogado)==1){
-				//$dadosSessao['userLogado'] = $userLogado[0];
+				//$dadosSessao['userLogado'] = $userLogado[0];				
 				$dadosSessao['logado'] =  TRUE;
 				$dadosSessao['CODINST'] =  $userLogado[0]['CODINST'];
 				$dadosSessao['NOME'] =  $userLogado[0]['NOME'];
 				$dadosSessao['APELUSER'] =  $userLogado[0]['APELUSER'];
+				$this->db->where('codinst',$userLogado[0]['CODINST']);
+				$instituicao =  $this->db->get('instituicao')->result_array();
+				$dadosSessao['INST_FANTASIA'] =  $instituicao[0]['FANTASIA'];
 				$this->session->set_userdata($dadosSessao);
 				redirect(base_url());
 			}else{

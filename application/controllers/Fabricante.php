@@ -18,6 +18,7 @@ class Fabricante extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post() );
 		//dados a serem enviados para o cabecalho
 		$dados['js'] = 'js/Fabricante.js';
+		$dados['MSG'] = $this->session->MSG; 
 		/*Carregando os Fabricantes*/
  		$this->load->model('FabricanteModel');
  		$this->FabricanteModel->index( $post );
@@ -42,8 +43,8 @@ class Fabricante extends CI_Controller {
 	{
 		$post = limpaVariavelArray( $this->input->post());
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFDESCRICAO','Descrição','required|min_length[10]|max_length[45]');
-		$this->form_validation->set_rules('FFESPECIFICACAO','Especificação','required|min_length[10]|max_length[45]');
+		$this->form_validation->set_rules('FFDESCRICAO','Descrição','required|min_length[5]|max_length[45]');
+		$this->form_validation->set_rules('FFESPECIFICACAO','Especificação','required|min_length[5]|max_length[45]');
 		$this->form_validation->set_rules('FFTIPO','TIPO','required');
 		$codigo = null;
 		$this->load->model('FabricanteModel');
@@ -82,9 +83,18 @@ class Fabricante extends CI_Controller {
 
 	public function excluir()
 	{
+		$id = $this->uri->segment(3);
 		$this->load->model('FabricanteModel');
-		$this->FabricanteModel->excluir($this->uri->segment(3));
-		$this->index();		
+		//$this->FabricanteModel->excluir($id);
+		//$this->index();	
+		//validando se o gerador está vinculado
+		if($this->FabricanteModel->fabricantePodeSerExcluido( $id )){
+			$this->FabricanteModel->excluir( $id );	
+			$this->session->set_userdata('MSG', array( 's', 'Excluido com Sucesso' ));			
+		}else{
+			$this->session->set_userdata('MSG', array( 'e', 'Fabricante em uso, Não é permitido a exclusão' ));
+		}
+		$this->index(); 
 	}
 	
 }
