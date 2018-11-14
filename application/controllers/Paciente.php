@@ -110,10 +110,5 @@ class Paciente extends MY_Controller {
 		}
 		echo $trs;
 	}
-
-	/* 
-$trs .= 
-				"<tr data-idlaudo='$v[CODLAU]' data-codrea='$v[CODREA]' data-codexa='$v[CODEXA]' data-usuario='$v[USUARIO]' data-alterou='$v[ALTEROU]'><td>$v[TITULO]</td><td>$v[REALIZANTE]</td><td>$v[EXAME]</td></tr>";
-	*/
 	
 }

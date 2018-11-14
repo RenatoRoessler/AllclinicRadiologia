@@ -35,6 +35,7 @@
 	</div>
 	<script src="<?php echo base_url('assets/js/SYS.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/PesquisarPaciente.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/PesquisaExame.js') ?>"></script>
 	
 </head>
 <body class="bg-light fixed-nav sticky-footer" id="page-top"> 

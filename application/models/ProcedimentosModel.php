@@ -142,15 +142,21 @@ class ProcedimentosModel extends MY_Model {
 	 *
 	 * 	@return array
 	 */
-	public function buscaTodosProcedimento( ) {
+	public function buscaTodosProcedimento( $post = null) {
 
 		try {			
 			$FF = '';
 			//$FF .= ( $post['FFCodigo'] ) ? "and B.codbco = $post[FFCodigo] " : '';
-			//$FF .= ( $post['FFNome'] ) ? "and B.Nome like upper('%$post[FFNome]%') " : '';
+			if(isset($post['descricao'])) {
+				$FF .= ( $post['descricao'] ) ? "and p.DESCRICAO like upper('%$post[descricao]%') " : '';
+			}
+			
 			$this->dados = $this->query(
 				"select 	p.CODPROCEDIMENTO,p.DESCRICAO, p.ATIVO			
-				from 		PROCEDIMENTOS p				
+				from 		PROCEDIMENTOS p	
+				where       p.ATIVO = 'S'
+				and         p.CODINST = $_SESSION[CODINST]
+				 $FF			
 				order by 	p.DESCRICAO"
 			);			
 			$this->dados = $this->dados->result_array();			

@@ -16,16 +16,23 @@ class Agendamento extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$dados['js'] = 'js/Agendamento.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
-
+		// se não existir
+		if( !isset($post['Data']) ){
+			$post['Data'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['Data'] < 1){
+			$post['Data'] = date("d/m/Y");	
+		}
 		/*Carregando os Agendamentos */
  		$this->load->model('AgendamentoModel');
- 		$this->AgendamentoModel->index( $post['CODINST']  );
+ 		$this->AgendamentoModel->index( $post );
  		$dados['agendamento'] = $this->AgendamentoModel->dados;
  		/* Carregnado os Pacientes */
  		$this->load->model('PacienteModel');
  		$this->PacienteModel->buscaTodosPaciente();
  		$dados['pacientes'] = $this->PacienteModel->dados;
- 			/* Carregnado os Procedimentos */
+ 		/* Carregnado os Procedimentos */
  		$this->load->model('ProcedimentosModel');
  		$this->ProcedimentosModel->buscaTodosProcedimento();
  		$dados['procedimentos'] = $this->ProcedimentosModel->dados;
@@ -58,12 +65,11 @@ class Agendamento extends CI_Controller {
 		public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');
-		
+		$this->load->library('form_validation');		
 		$this->form_validation->set_rules('FFHORA','Hora','required');
 		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
 		$this->form_validation->set_rules('FFPROCEDIMENTO','Procedimento','required');
-		$this->form_validation->set_rules('FFPRONTUARIO','Paciente','required');		
+		$this->form_validation->set_rules('FFPRONTUARIO','Paciente','required');	
 	
 		$codigo = null;
 		$this->load->model('AgendamentoModel');
@@ -87,8 +93,6 @@ class Agendamento extends CI_Controller {
 		}					
 	}
 
-
-
 	public function editar()
 	{
 		$dados['js'] = 'js/Agendamento.js'; 
@@ -110,4 +114,17 @@ class Agendamento extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function excluir()
+	{
+		$id = $this->uri->segment(3);
+		$this->load->model('AgendamentoModel');
+		//validando se o agendamento já foi fracionado
+		if($this->AgendamentoModel->agendamentoPodeSerExcluido( $id )){
+			$this->AgendamentoModel->excluir( $id );	
+			$this->session->set_userdata('MSG', array( 's', 'Excluido com Sucesso' ));			
+		}else{
+			$this->session->set_userdata('MSG', array( 'e', 'Agendamento Fracionado, Não é permitido a exclusão' ));
+		}
+		$this->index(); 		
+	}
 }

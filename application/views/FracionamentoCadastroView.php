@@ -11,7 +11,7 @@
 				</li>
 			</ol>
 
-			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
+			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
 
 			<?php 
 			echo validation_errors('<div class="alert alert-danger">','</div>');
@@ -52,22 +52,6 @@
 							</div>	
 						</div>
 						<div class="row col-sm-12 col-xs-12">
-							<!--
-							<div class="col-main col-sm-3 col-xs-12">
-								<label for="FFPRONTUARIO" class="sys-label col-sm-12 col-xs-12">Paciete:</label>	
-								<select class="form-control form-control-sm" id="FFPRONTUARIO" name="FFPRONTUARIO" data-live-search="true">
-								<option  value="">Selecione o Paciente</option>
-								<?php
-									foreach ($paciente as $k => $v) {
-								?>
-									<option value="<?php echo $v['PRONTUARIO'];?>" > <?php echo $v["NOME"]; ?> </option>
-									<?php  
-										}
-									?>									
-								</select>
-							</div>
-						-->
-					
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFNOMEPAC" class="sys-label col-sm-12 col-xs-12">Paciente:</label>
 								<div class="input-group mb-3">
@@ -150,7 +134,7 @@
 	</div>
 
 	<?php include VIEWPATH . "_includes/_pesquisaPaciente.php"; ?>
-	
+	<?php include VIEWPATH . "_includes/_pesquisaExame.php"; ?>
 
 	<script type="text/javascript">
 	    function somenteNumeros(num) {

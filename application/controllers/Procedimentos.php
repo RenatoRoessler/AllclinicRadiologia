@@ -38,7 +38,7 @@ class Procedimentos extends CI_Controller {
 	{
 		$dados['js'] = 'js/Procedimentos.js';
  		$dados['retorno'] = null; 
- 		$dados['MSG'] = $this->session->MSG; 
+		$dados['MSG'] = $this->session->MSG; 
 		$this->load->view('template/header',$dados);
 		$this->load->view('ProcedimentosCadastroView');
 		$this->load->view('template/footer');
@@ -81,6 +81,27 @@ class Procedimentos extends CI_Controller {
 		$this->load->view('template/header',$dados);
 		$this->load->view('ProcedimentosCadastroView');
 		$this->load->view('template/footer');
+	}
+
+		/**
+	 * 	Método para listar os Procedimentos para filtro
+	 *
+	 *	@author renato roessler
+	 * 	@return void
+	 */
+	public function listarProcedimentosFiltro(){	
+		$post = limpaVariavelArray( $this->input->post());	
+		//	Carregando Modelo
+		$this->load->model( 'ProcedimentosModel' );		
+		//	Buscando laudos a partir dos filtros usados
+		$this->ProcedimentosModel->buscaTodosProcedimento( $post );
+		
+		$trs = '';
+		foreach ( $this->ProcedimentosModel->dados as $k => $v ){
+			$trs .= 
+				"<tr data-codprocedimento='$v[CODPROCEDIMENTO]' data-descricao='$v[DESCRICAO]'><td>$v[CODPROCEDIMENTO]</td><td>$v[DESCRICAO]</td></tr>";
+		}
+		echo $trs;
 	}
 
 
