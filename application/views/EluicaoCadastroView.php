@@ -50,14 +50,14 @@
 									?>									
 								</select>
 							</div>
-							 <div class="form-group col-main col-sm-1 col-xs-12">
+							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off">
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
 					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data:</label>
 					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"];  ?>"  autocomplete="off"/>
+					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
 					                <span class="input-group-addon">
 					                      <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
@@ -65,7 +65,7 @@
 					        </div>					       
 					        <div class="col-main col-sm-1 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]["HORA"];  ?>" />
+        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
     						</div>
     						 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume:</label>
@@ -151,7 +151,7 @@
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPUREZA_QUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 selectpicker" id="FFPUREZA_QUIMICA" name="FFPUREZA_QUIMICA">
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZA_QUIMICA" name="FFPUREZA_QUIMICA">
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>						
 											</select>

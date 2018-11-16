@@ -8,7 +8,8 @@
 				<li class="breadcrumb-item">
 					Agendamento
 				</li>
-			</ol>			
+			</ol>	
+			<?php include VIEWPATH . "_includes/_mensagem.php";?> 		
 			<form id="formulario" name="formulario" action="<?php echo base_url() .'/Agendamento/' ?> " method="post" class="form-horizontal" data-parsley-validate >
 				<input type="hidden" class="col-sm-12 col-xs-12 form-control" name="FFPRONTUARIO" id="FFPRONTUARIO" name="FFPRONTUARIO" value= "<?php echo $this->input->post("FFPRONTUARIO") ?>" >		
 				<input type="hidden" class="col-sm-12 col-xs-12 form-control"  id="FFPROCEDIMENTO" name="FFPROCEDIMENTO" value= "<?php echo $this->input->post("FFPROCEDIMENTO") ?>" >	

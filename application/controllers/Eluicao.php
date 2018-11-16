@@ -16,6 +16,18 @@ class Eluicao extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$dados['js'] = 'js/Eluicao.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
+		// se não existir
+		if( !isset($post['FFDATAPESQUISA']) ){
+			$post['FFDATAPESQUISA'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAPESQUISA'] < 1){
+			$post['FFDATAPESQUISA'] = date("d/m/Y");	
+		}
+		// se não existir
+		if( !isset($post['FFATIVOFILTRO']) ){
+			$post['FFATIVOFILTRO'] = 'S';
+		}
 
 		/*Carregando os Geradores Ativos*/
  		$this->load->model('GeradorModel');

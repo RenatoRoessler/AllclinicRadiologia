@@ -83,7 +83,7 @@ class Procedimentos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-		/**
+	/**
 	 * 	Método para listar os Procedimentos para filtro
 	 *
 	 *	@author renato roessler
@@ -103,6 +103,5 @@ class Procedimentos extends CI_Controller {
 		}
 		echo $trs;
 	}
-
 
 }

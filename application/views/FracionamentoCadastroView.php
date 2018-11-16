@@ -20,7 +20,9 @@
             echo form_open($action , $attributes);
             ?>
             	<input type="hidden" id="FFCODFRACIONAMENTO1" name="FFCODFRACIONAMENTO1" value="<?php echo $retorno[0]["CODFRACIONAMENTO"]; ?>" >	
-            	<input type="hidden" class="col-sm-12 col-xs-12 form-control" id="FFPRONTUARIO" name="FFPRONTUARIO" value="" >		
+            	<input type="hidden" class="col-sm-12 col-xs-12 form-control" id="FFPRONTUARIO" name="FFPRONTUARIO" value="" >	
+				<input type="hidden"  id="FFCODAGTOEXA1" name="FFCODAGTOEXA1" value="" >	
+					
 		    	<!-- ABAS -->
 				<div class="col-sm-12 col-md-12 col-xs-12">
 	    			<ul class="nav nav-tabs col-sm-12 col-md-12 col-xs-12" role="tablist">
@@ -53,22 +55,17 @@
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-4 col-xs-12">
-								<label for="FFNOMEPAC" class="sys-label col-sm-12 col-xs-12">Paciente:</label>
+								<label for="FFAGENDAMENTO" class="sys-label col-sm-12 col-xs-12">Agendamento:</label>
 								<div class="input-group mb-3">
-								  <input type="text" class="form-control" placeholder="Nome do Paciente" aria-label="Nome do Paciente" aria-describedby="basic-addon2" id="FFNOMEPAC" readonly>
+								  <input type="text" class="form-control" placeholder="Agendamento" aria-label="Agendamento" aria-describedby="basic-addon2" id="FFAGENDAMENTO" readonly>
 								  <div class="input-group-append">
-								    <button class="btn btn-outline-secondary fa fa-search"  id="btnTeste" type="button" >Pesquisar</button>
+								    <button class="btn btn-outline-secondary fa fa-search"  id="btnAgendamento" type="button" >Pesquisar</button>
 								  </div>
 								</div>								
 							</div>
-
-							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="" onkeyup="somenteNumeros(this);">
-							</div>
 							<div class="col-xs-2 col-sm-2 pull-right">
 								<label for="btnAdicionar" class="sys-label col-sm-12 col-xs-12">&nbsp; </label>
-				      			<button type="button" id="btnAdicionar" class="btn btn-primary btn-sm sys-btn-search" ><i class="fa fa-plus"></i> Adicionar Paciente</button>
+				      			<button type="button" id="btnAdicionar" class="btn btn-primary btn-sm sys-btn-search" ><i class="fa fa-plus"></i> Adicionar Agendamento</button>
 			      			</div>									
 						</div>
 						<div class="row col-sm-12 col-xs-12">	
@@ -81,8 +78,11 @@
 								    			<thead>
 								    				<tr>
 						    							<th>Nome</th>
-						    							<th>CPF</th>
-						    							<th>Atividade</th>
+						    							<th>Procedimento</th>
+						    							<th>Atividade Inicial</th>
+														<th>Hora Inicial</th>
+														<th>Atividade Administrada</th>
+														<th>Hora Administrada</th>
 						    							<th>Administrar</th>
 						    							<th>Excluir</th>
 						    						</tr>
@@ -94,8 +94,11 @@
 								    				?>
 								    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 								    					<td><?php echo $v['NOME']; ?></td>
-								    					<td><?php echo $v['CPF']; ?></td>
+								    					<td><?php echo $v['NOMEPROCEDIMENTO']; ?></td>
 								    					<td><?php echo $v['ATIVIDADE']; ?></td>
+														<td><?php echo $v['HORAINICIO']; ?></td>
+														<td><?php echo $v['ATV_ADMINISTRADA']; ?></td>
+														<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
 								    					<td width="10"> 
 								    						<a href=<?php echo base_url() .'/Fracionamento/administrarIndex/'. $v['CODITFRACIONAMENTO']  ?> > 
 								    							<i class="fa fa-stethoscope fa-lg"></i>
@@ -129,12 +132,11 @@
 			<?php 
             echo form_close();
             ?>
-
 		</div>
 	</div>
 
 	<?php include VIEWPATH . "_includes/_pesquisaPaciente.php"; ?>
-	<?php include VIEWPATH . "_includes/_pesquisaExame.php"; ?>
+	<?php include VIEWPATH . "_includes/_pesquisaAgendamento.php"; ?>
 
 	<script type="text/javascript">
 	    function somenteNumeros(num) {

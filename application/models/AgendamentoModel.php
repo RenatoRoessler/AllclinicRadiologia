@@ -238,4 +238,46 @@ class AgendamentoModel extends MY_Model {
 		return false;
 	}
 
+	/**
+	 * 	Metodo para buscar os agendamentos 
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $codagto integer - itneger com o código
+	 *
+	 * 	@return array
+	 */
+	public function buscaAgendamentoFiltro( $post ) {
+
+		try {				
+			$FF = '';
+			if(isset($post['data'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['data'])));  
+				$FF .= ( $post['data'] ) ? "and a.DATA = '$data' " : '';
+			}
+			if(isset($post['nome'])) {
+				$FF .= ( $post['nome'] ) ? "and p.nome like '%" . strtoupper( $post['nome'] ) . "%'" : "";
+			}
+			
+			$this->dados = $this->query(
+				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, p.NOME ,p.CPF, a.PRONTUARIO, a.HORA, a.DATA,
+							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA
+				from 		AGENDAMENTO a
+				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
+				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
+				join PACIENTE p on (a.PRONTUARIO = p.PRONTUARIO)
+				where 		1 = 1
+				$FF
+				order by a.DATA, a.HORA desc
+				"
+			);			
+			$this->dados = $this->dados->result_array();			
+			return true;
+	
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}	
+
 }

@@ -16,6 +16,7 @@ class Agendamento extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$dados['js'] = 'js/Agendamento.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
+		$dados['MSG'] = $this->session->MSG; 
 		// se não existir
 		if( !isset($post['Data']) ){
 			$post['Data'] = date("d/m/Y");
@@ -126,5 +127,26 @@ class Agendamento extends CI_Controller {
 			$this->session->set_userdata('MSG', array( 'e', 'Agendamento Fracionado, Não é permitido a exclusão' ));
 		}
 		$this->index(); 		
+	}
+
+	/**
+	 * 	Método para listar os Agendamentos para filtro
+	 *
+	 *	@author renato roessler
+	 * 	@return void
+	 */
+	public function listarAgendamentoFiltro(){	
+		$post = limpaVariavelArray( $this->input->post());	
+		//	Carregando Modelo
+		$this->load->model( 'AgendamentoModel' );		
+		//	Buscando laudos a partir dos filtros usados
+		$this->AgendamentoModel->buscaAgendamentoFiltro( $post );
+		
+		$trs = '';
+		foreach ( $this->AgendamentoModel->dados as $k => $v ){
+			$trs .= 
+				"<tr data-codagtoexa='$v[CODAGTOEXA]' data-nome='$v[NOME]' data-descricao='$v[DESCRICAO]'><td>$v[CODAGTOEXA]</td><td>$v[DATA1]</td><td>$v[HORA]</td><td>$v[NOME]</td><td>$v[DESCRICAO]</td></tr>";
+		}
+		echo $trs;
 	}
 }

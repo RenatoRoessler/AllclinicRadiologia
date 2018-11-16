@@ -98,12 +98,10 @@ class FracionamentoModel extends MY_Model {
 			$this->db->trans_begin();
 			$this->db->query("insert into ITEMFRACIONAMENTO(
 								CODFRACIONAMENTO,
-								PRONTUARIO,
-								ATIVIDADE
+								CODAGTOEXA
 								) value 
 								($post[CODFRACIONAMENTO],
-								$post[PRONTUARIO],
-								$post[ATIVIDADE]
+								$post[CODAGTOEXA]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -161,10 +159,14 @@ class FracionamentoModel extends MY_Model {
 		try {
 			$this->dados = $this->query(
 				"select 	f.CODFRACIONAMENTO, f.CODMARCACAO, i.CODITFRACIONAMENTO, i.PRONTUARIO,  
-							i.ATIVIDADE, p.NOME , p.CPF
+							i.ATIVIDADE, p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
+							i.ATIVIDADE, i.HORAINICIO, i.ATV_ADMINISTRADA, i.HORA_ADMINISTRADA
 				from 		FRACIONAMENTO f
-				left join ITEMFRACIONAMENTO i on (f.CODFRACIONAMENTO = i.CODFRACIONAMENTO)
-				left join PACIENTE p on (i.PRONTUARIO = p.PRONTUARIO)
+				join ITEMFRACIONAMENTO i on (f.CODFRACIONAMENTO = i.CODFRACIONAMENTO)
+				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
+				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
+				left join PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
+				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
 				where  f.CODFRACIONAMENTO = 	$codfracionamento
 				"
 			);			
@@ -220,7 +222,6 @@ class FracionamentoModel extends MY_Model {
 			$this->db->query(
 				"delete from itemfracionamento where coditfracionamento = $coditfracionamento "
 			);
-
 			if( $this->db->trans_status() === false ){
 				$this->db->trans_rollback();
 				return false;

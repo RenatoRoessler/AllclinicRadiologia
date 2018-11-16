@@ -37,7 +37,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODITFRACIONAMENTO" name="FFCODITFRACIONAMENTO" value="<?php echo $retorno[0]["CODITFRACIONAMENTO"]; ?>"  readonly >
 							</div>	
 							<div class="form-group col-main col-sm-2 col-xs-12">
-								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade Incial:</label>
+								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade Inicial:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $retorno[0]["ATIVIDADE"]; ?>"  onkeyup="somenteNumeros(this); " >
 							</div>							
 						    <div class="col-main col-sm-1 col-xs-12">

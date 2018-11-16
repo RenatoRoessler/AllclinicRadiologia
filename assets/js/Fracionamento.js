@@ -8,8 +8,8 @@ var Fracionamento = function(){
 			document.getElementById("FFMARCACAO").focus();
 			return false;
 		}
-		if(document.getElementById("FFPRONTUARIO").value == ""){
-			mensagem( 'e', 'Selecione o Paciente');
+		if(document.getElementById("FFAGENDAMENTO").value == ""){
+			mensagem( 'e', 'Selecione o Agendamento');
 			return false;
 		}
 
@@ -21,7 +21,7 @@ var Fracionamento = function(){
 				'Codigo' :  '1',
 				'CODMARCACAO' : $('#FFMARCACAO').val(),
 				'CODFRACIONAMENTO' : $('#FFCODFRACIONAMENTO').val(),
-				'PRONTUARIO' : $('#FFPRONTUARIO').val(),
+				'CODAGTOEXA' : $('#FFCODAGTOEXA1').val(),
 				'ATIVIDADE' : $('#FFATIVIDADE').val() > 0 ? $('#FFATIVIDADE').val() : 0,
 			},
 			beforeSend: function(){
@@ -41,21 +41,11 @@ var Fracionamento = function(){
 		});		
 	}
 
-
-	this.pesquisarPaciente = function(){
+	this.pesquisaAgendamento = function(){
 		dialogo({
-			"titulo" : "Pesquisa Paciente",
-			"texto" : $("#DialogLaudoPadrao").html(),
+			"titulo" : "Pesquisa Agendamento",
+			"texto" : $("#DialogPesquisaAgendamento").html(),
 			"fnc1" : function(){
-				/*
-				var line = $("#tableTextoPadrao .bg-lightgray");
-				if( $('#FFFILTRO') ){
-					//$('#FFATIVIDADE').val() = $('#FFFILTRO');
-					document.getElementById('FFATIVIDADE').value = line.data("prontuario") ;
-				}else{
-					document.getElementById('FFATIVIDADE').clear;	
-				}
-				*/
 				hideModal();
 			},
 			"fnc2" : function(){
@@ -69,22 +59,19 @@ var Fracionamento = function(){
 			"icon2" : "remove"
 		});
 		//$("#btnDialogoS1").prop("disabled",true);
-		$("#btnFiltraLaudoPadrao")
+		$("#btnFiltrarAgendamentos")
 			.click(function(){
 				var param = {};
-				param.cpf = $("#FFFiltroCPF").val()
-				param.nome = $("#NomeTextoPadrao").val()
-				param.prontuario = $("#FFFiltroPRONTUARIO").val()
-				pesquisarPaciente.filtraTextoPadrao( param, function(){
-					startOrderTable("#tableTextoPadrao", true);
+				param.nome = $("#FFNOMEPAC").val()
+				param.data = $("#FFDATAHORAFILTRO").val()
+				pesquisaAgendamento.filtraAgendamento( param, function(){
+					startOrderTable("#tableAgendamentos", true);
 				} );
 			});
 		setTimeout(function(){
-			$("#NomeTextoPadrao").focus()
-			keyCallClick( "#NomeTextoPadrao", "#btnFiltraLaudoPadrao", 13 ); // 13 -> ENTER
-			keyCallClick( "#FFFiltroPRONTUARIO", "#btnFiltraLaudoPadrao", 13 ); // 13 -> ENTER
-			keyCallClick( "#FFFiltroCPF", "#btnFiltraLaudoPadrao", 13 ); // 13 -> ENTER
-			startOrderTable("#tableTextoPadrao");
+			$("#FFNOMEPAC").focus()
+			keyCallClick( "#FFNOMEPAC", "#btnFiltrarAgendamentos", 13 ); // 13 -> ENTER
+			startOrderTable("#tableAgendamentos");
 		},700);
 		startSelect();
 	}
@@ -93,6 +80,7 @@ var Fracionamento = function(){
 $("document").ready(function(){
 	var controle = new Fracionamento();
 	pesquisarPaciente = new PesquisarPaciente();
+	pesquisaAgendamento = new PesquisaAgendamento();
 
 	$("#btnSearch")
 	.click(function(){
@@ -134,17 +122,15 @@ $("document").ready(function(){
 		ir('/AllclinicRadiologia/Fracionamento/editar/' + $('#FFCODFRACIONAMENTO1').val() );
 	});	
 
-	$("#btnTeste")
+	$("#btnAgendamento")
 	.click(function(){
-		controle.pesquisarPaciente();
+		controle.pesquisaAgendamento();
 	});
-	$("#FFNOMEPAC")
+	$("#FFAGENDAMENTO")
 	.click(function(){
-		controle.pesquisarPaciente();
-	});
+		controle.pesquisaAgendamento();
+	});	
 
 	startTooltip();
-
-
 
 });

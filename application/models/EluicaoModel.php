@@ -27,10 +27,18 @@ class EluicaoModel extends MY_Model {
 			if(isset($post['Codigo'])) {
 				$FF .= ( $post['Codigo'] ) ? "and e.CODELUICAO = $post[Codigo] " : '';
 			}
+			if(isset($post['FFDATAPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA = '$data' " : '';
+			}
+			if(isset($post['FFATIVOFILTRO'])) {
+				$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = $post[FFATIVOFILTRO] " : '';
+			}
 			$this->dados = $this->query(
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
-							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA, e.LOTE
+							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA, e.LOTE,
+							DATE_FORMAT(e.DATA, '%d/%c/%Y') as DATA1
 				from 		Eluicao e
 				where 		1=1
 							$FF
