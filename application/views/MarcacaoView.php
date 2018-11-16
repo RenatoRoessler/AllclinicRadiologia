@@ -25,10 +25,26 @@
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
-		    		<div class="form-group col-main col-sm-2 col-xs-2">
+		    		<div class="form-group col-main col-sm-1 col-xs-2">
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>"  >
-					</div>	    	
+					</div>
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div>	
+					<div class="form-group col-main col-sm-1 col-xs-12">
+						<label for="FFATIVOFILTRO" class="sys-label col-sm-12 col-xs-12">Ativo</label>
+						<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVOFILTRO" name="FFATIVOFILTRO">
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "S") echo "selected"; ?> value="S">Sim</option>	
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Não</option>												
+						</select>
+					</div>     	
 
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>

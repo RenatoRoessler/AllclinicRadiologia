@@ -62,7 +62,12 @@ $("document").ready(function(){
 				format: "dd/mm/yyyy",	
 				language: "pt-BR",
 				autoclose: true
-			});
+	});
+	$('#FFDATAPESQUISA').datepicker({	
+		format: "dd/mm/yyyy",	
+		language: "pt-BR",
+		autoclose: true
+	});	
 
 
 

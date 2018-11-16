@@ -32,7 +32,7 @@ class EluicaoModel extends MY_Model {
 				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA = '$data' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
-				$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = $post[FFATIVOFILTRO] " : '';
+				$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = '$post[FFATIVOFILTRO]' " : '';
 			}
 			$this->dados = $this->query(
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
@@ -40,7 +40,8 @@ class EluicaoModel extends MY_Model {
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA, e.LOTE,
 							DATE_FORMAT(e.DATA, '%d/%c/%Y') as DATA1
 				from 		Eluicao e
-				where 		1=1
+				join        Gerador g on (e.CODGERADOR = g.CODGERADOR)
+				where 		g.CODINST =  $_SESSION[CODINST]
 							$FF
 				order by 	e.CODELUICAO"
 			);			
@@ -66,7 +67,20 @@ class EluicaoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
+
+			if(isset($post['FFATIVIDADETEORICA'])){
+				$post['FFATIVIDADETEORICA'] = 0;
+			} 
+			if(isset($post['FFATIVIDADE_MEDIDA'])){
+				$post['FFATIVIDADE_MEDIDA'] = 0;
+			}
+			if(isset($post['FFRESULTADO'])){
+				$post['FFRESULTADO'] = 0;
+			} 
+			if(isset($post['FFPUREZA_RADIONUCLIDICA'])){
+				$post['FFPUREZA_RADIONUCLIDICA'] = 0;
+			}  
 
 			$this->db->trans_begin();
 			$this->db->query("insert into ELUICAO(
@@ -98,7 +112,7 @@ class EluicaoModel extends MY_Model {
 								'$post[FFPUREZA_QUIMICA]',
 								'$post[FFLIMPIDA]',
 								$post[FFGERADOR],
-								$post[FFLOTE]
+								'$post[FFLOTE]'
 								)"
 			);
 			if( $this->db->trans_status() === false){

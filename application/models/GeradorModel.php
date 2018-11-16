@@ -30,18 +30,26 @@ class GeradorModel extends MY_Model {
 			if(isset($post['Lote'])) {
 				$FF .= ( $post['Lote'] ) ? "and g.LOTE =  $post[Lote] " : '';
 			}
+			if(isset($post['FFDATAPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and g.DATA = '$data' " : '';
+			}
+			if(isset($post['FFATIVOFILTRO'])) {
+				$FF .= ( $post['FFATIVOFILTRO'] ) ? "and g.ATIVO = '$post[FFATIVOFILTRO]' " : '';
+			}	
 			$FF .= "and g.CODINST = $codinst";
 			$this->dados = $this->query(
 				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO,g.ATIVO, g.DATA_CALIBRACAO,g.ATIVIDADE_CALIBRACAO,
 							g.CODINST,g.APELUSER,g.CODFABRICANTE,g.DATA,i.FANTASIA,a.DESCRICAO as DESCFABRICANTE,
 							u.NOME, case when g.ATIVO = 'S' then 'Ativo'
-										 when g.ATIVO = 'N' then 'Inativo' end DESCATIVO
+										 when g.ATIVO = 'N' then 'Inativo' end DESCATIVO,
+										 DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATA1
 				
 				from 		gerador g
 				left join   instituicao i on (g.codinst = i.codinst)
 				left join   fabricante a on (g.codfabricante = a.codfabricante)
 				left join   Usuario u on (g.apeluser = u.apeluser)
-				where 		1=1
+				where 		g.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	g.CODGERADOR"
 			);			

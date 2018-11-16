@@ -16,7 +16,19 @@ class Marcacao extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$post['CODINST'] = $_SESSION['CODINST'];
 		$dados['js'] = 'js/Marcacao.js'; 
-		/*carregando os fabricantes */ 
+		// se não existir
+		if( !isset($post['FFDATAPESQUISA']) ){
+			$post['FFDATAPESQUISA'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAPESQUISA'] < 1){
+			$post['FFDATAPESQUISA'] = date("d/m/Y");	
+		}
+		// se não existir
+		if( !isset($post['FFATIVOFILTRO']) ){
+			$post['FFATIVOFILTRO'] = 'S';
+		}
+		/*carregando as Marcações */ 
 		$this->load->model('MarcacaoModel');
 		$this->MarcacaoModel->index( $post );
 		$dados['marcacao'] = $this->MarcacaoModel->dados;

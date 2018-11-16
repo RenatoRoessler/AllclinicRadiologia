@@ -26,14 +26,30 @@
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
-		    		<div class="form-group col-main col-sm-2 col-xs-2">
+		    		<div class="form-group col-main col-sm-1 col-xs-2">
 						<label for="FFCodigo" class="sys-label col-sm-12 col-xs-12">Código:</label>
-						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCodigo" name="FFCodigo" value="<?php echo $this->input->post("FFCodigo") ?>"  >
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCodigo" name="FFCodigo" value="<?php echo $this->input->post("FFCodigo") ?>"  autocomplete="off">
 					</div>	
 					<div class="form-group col-main col-sm-3 col-xs-3">
 						<label for="Lote" class="sys-label col-sm-12 col-xs-12">Lote:</label>
-						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Lote" name="Lote" value="<?php echo $this->input->post("Lote") ?>"  style="text-transform:uppercase" >
-					</div>      	
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Lote" name="Lote" value="<?php echo $this->input->post("Lote") ?>"  style="text-transform:uppercase"  autocomplete="off">
+					</div> 
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div>	
+					<div class="form-group col-main col-sm-1 col-xs-12">
+						<label for="FFATIVOFILTRO" class="sys-label col-sm-12 col-xs-12">Ativo</label>
+						<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVOFILTRO" name="FFATIVOFILTRO">
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "S") echo "selected"; ?> value="S">Sim</option>	
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Não</option>												
+						</select>
+					</div>        	
 
 		    	</div>
 
@@ -69,7 +85,7 @@
 						    					<td><?php echo $v['CODGERADOR']; ?></td>
 						    					<td><?php echo $v['LOTE']; ?></td>
 						    					<td><?php echo $v['NRO_ELUICAO']; ?></td>
-												<td><?php echo $v['DATA']; ?></td>
+												<td><?php echo $v['DATA1']; ?></td>
 												<td><?php echo $v['HORA']; ?></td>
 												<td><?php echo $v['FANTASIA']; ?></td>
 												<td><?php echo $v['ATIVIDADE_CALIBRACAO']; ?></td>

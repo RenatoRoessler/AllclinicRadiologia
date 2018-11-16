@@ -27,6 +27,13 @@ class MarcacaoModel extends MY_Model {
 			if(isset($post['Codigo'])) {
 				$FF .= ( $post['Codigo'] ) ? "and m.CODMARCACAO = $post[Codigo] " : '';
 			}
+			if(isset($post['FFDATAPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA = '$data' " : '';
+			}
+			if(isset($post['FFATIVOFILTRO'])) {
+				//$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = '$post[FFATIVOFILTRO]' " : '';
+			}
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
 							m.NCI_CODFABRICANTE, m.NACI_LOTE, m.CQ, m.ORGANICO, m.QUIMICO, m.APELUSER,
@@ -36,8 +43,9 @@ class MarcacaoModel extends MY_Model {
 				left join usuario u on (m.apeluser = u.apeluser)
 				left join fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
 				left join fabricante fa on (m.KIT_CODRADIOFARMACO = fa.CODFABRICANTE)
-				where 		1=1
-
+				join      eluicao e on (m.CODELUICAO = e.CODELUICAO)
+				join      gerador g on (e.CODGERADOR = g.CODGERADOR)
+				where 	  g.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	m.CODMARCACAO desc"
 			);			
@@ -226,7 +234,10 @@ class MarcacaoModel extends MY_Model {
 				            m.KIT_LOTE,	m.NCI_CODFABRICANTE, m.NACI_LOTE, m.CQ, m.ORGANICO, 
 				            m.QUIMICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 				            m.KIT_CODRADIOFARMACO
-				from 		marcacao m			
+				from 		marcacao m
+				join        eluicao e on (m.CODELUICAO = e.CODELUICAO)
+				JOIN        gerador g on (e.CODGERADOR = g.CODGERADOR)
+				where       g.CODINST = $_SESSION[CODINST]			
 				order by m.DATA desc
 				"
 			);			
