@@ -50,6 +50,7 @@ class EvolucaoModel extends MY_Model {
 				left join   FABRICANTE ffkitfarmaco on (m.KIT_CODRADIOFARMACO = ffkitfarmaco.CODFABRICANTE)
 				left join   FABRICANTE naci on (m.NCI_CODFABRICANTE = naci.CODFABRICANTE)
 				where 		1=1
+				and         g.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	i.CODITFRACIONAMENTO desc"
 			);			

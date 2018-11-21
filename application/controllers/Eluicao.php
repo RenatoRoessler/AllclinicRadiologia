@@ -99,7 +99,7 @@ class Eluicao extends CI_Controller {
 				$this->session->set_userdata('MSG', array( 's', 'Eluição salvo com sucesso' ));
 			}
 			redireciona('editar/' . $codigo);
-		}					
+		}				
 	}
 
 	public function editar()

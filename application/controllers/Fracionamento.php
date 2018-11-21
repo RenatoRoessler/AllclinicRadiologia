@@ -16,6 +16,20 @@ class Fracionamento extends MY_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$dados['js'] = 'js/Fracionamento.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
+		if( !isset($post['FFDATAPESQUISA']) ){
+			$post['FFDATAPESQUISA'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAPESQUISA'] < 1){
+			$post['FFDATAPESQUISA'] = date("d/m/Y");	
+		}
+		if( !isset($post['FFDATAFINALPESQUISA']) ){
+			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAFINALPESQUISA'] < 1){
+			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");	
+		}
 
 		/*Carregando o Fracionamento */
  		$this->load->model('FracionamentoModel');

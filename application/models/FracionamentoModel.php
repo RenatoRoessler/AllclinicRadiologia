@@ -27,8 +27,16 @@ class FracionamentoModel extends MY_Model {
 			if(isset($post['Codigo'])) {
 				$FF .= ( $post['Codigo'] ) ? "and f.CODFRACIONAMENTO = $post[Codigo] " : '';
 			}
-			if(isset($post['CODINST'])) {
-				$FF .= ( $post['CODINST'] ) ? "and f.CODINST = $post[CODINST] " : '';
+			if(isset($post['Lote'])) {
+				$FF .= ( $post['Lote'] ) ? "and m.KIT_LOTE =  $post[Lote] " : '';
+			}
+			if(isset($post['FFDATAPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$data' " : '';
+			}
+			if(isset($post['FFDATAFINALPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
+				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
 			}
 			$this->dados = $this->query(
 				"select 	f.CODFRACIONAMENTO, f.CODMARCACAO, i.CODITFRACIONAMENTO, i.PRONTUARIO,  
@@ -38,7 +46,10 @@ class FracionamentoModel extends MY_Model {
 				left join ITEMFRACIONAMENTO i on (f.CODFRACIONAMENTO = i.CODFRACIONAMENTO)
 				left join PACIENTE p on (i.PRONTUARIO = p.PRONTUARIO)
 				left join MARCACAO m on (f.CODMARCACAO = m.CODMARCACAO)
+				join ELUICAO e on (m.CODELUICAO = e.CODELUICAO)
+				join GERADOR g on (e.CODGERADOR = g.CODGERADOR)
 				where 		1=1
+				and         g.CODINST = $_SESSION[CODINST]
 							$FF
 				"
 			);			
@@ -287,8 +298,7 @@ class FracionamentoModel extends MY_Model {
 	 */
 	public function buscaItemFracionamento( $coditfracionamento ) {
 
-		try {			
-
+		try {	
 			$this->dados = $this->query(
 				"select 	f.CODFRACIONAMENTO, f.HORAINICIO,f.ATIVIDADE,
 							f.ATV_ADMINISTRADA,f.HORA_ADMINISTRADA,

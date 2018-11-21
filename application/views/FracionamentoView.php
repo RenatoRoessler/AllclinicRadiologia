@@ -28,9 +28,31 @@
 		    		<div class="form-group col-main col-sm-2 col-xs-2">
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>"  >
-					</div>	    	
-
-		    	</div>
+					</div>	 	
+		    	
+					<div class="form-group col-main col-sm-2 col-xs-2">
+						<label for="Lote" class="sys-label col-sm-12 col-xs-12">Lote:</label>
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Lote" name="Lote" value="<?php echo $this->input->post("Lote") ?>"  style="text-transform:uppercase"  autocomplete="off">
+					</div> 
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div>
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAFINALPESQUISA' name="FFDATAFINALPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div>
+				</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12">
@@ -45,6 +67,7 @@
 						    					<th>Código</th>
 												<th>Cód. Marcação</th>
 						    					<th>Lote</th>
+												<th>Data</th>
 						    					<th>Editar</th>
 						    					<th >Excluir</th>
 						    				</th>
@@ -58,7 +81,8 @@
 						    				<tr id="<?php echo $v['CODFRACIONAMENTO']; ?>">
 						    					<td><?php echo $v['CODFRACIONAMENTO']; ?></td>
 						    					<td><?php echo $v['CODMARCACAO']; ?></td>
-												<td ><?php echo $v['KIT_LOTE']; ?></td>
+												<td><?php echo $v['KIT_LOTE']; ?></td>
+												<td><?php echo $v['DATA1']; ?></td>
 						    					<td width="10"> 
 						    						<a class="btn btn-default" href=<?php echo base_url() .'/Fracionamento/editar/'. $v['CODFRACIONAMENTO']
 						    						  ?> > 

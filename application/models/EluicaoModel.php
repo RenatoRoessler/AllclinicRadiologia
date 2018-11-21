@@ -34,6 +34,11 @@ class EluicaoModel extends MY_Model {
 			if(isset($post['FFATIVOFILTRO'])) {
 				$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = '$post[FFATIVOFILTRO]' " : '';
 			}
+			if(isset($post['FFATIVOFILTRO'])) {
+				$dataAtual = date("Y-m-d H:i:s");
+				$FF .= ( $post['FFATIVOFILTRO'] == 'S') ? "and e.DATAINATIVO >= '$dataAtual' " : '';
+				$FF .= ( $post['FFATIVOFILTRO'] == 'N') ? "and e.DATAINATIVO < '$dataAtual' " : '';
+			}	
 			$this->dados = $this->query(
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
@@ -55,7 +60,6 @@ class EluicaoModel extends MY_Model {
 		return false;
 	}
 
-
 	/**
 	 * 	Metodo para inserir uma Eluição
 	 *
@@ -68,6 +72,8 @@ class EluicaoModel extends MY_Model {
 		try{
 			//tratando a data
 			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
+			$datahora= $data . ' ' . $post['FFHORA'];
+			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +4 hour'));
 
 			if(isset($post['FFATIVIDADETEORICA'])){
 				$post['FFATIVIDADETEORICA'] = 0;
@@ -97,7 +103,9 @@ class EluicaoModel extends MY_Model {
 								PUREZA_QUIMICA,
 								LIMPIDA,
 								CODGERADOR,
-								LOTE
+								LOTE,
+								DATAINATIVO,
+								DATAHORA
 								) value 
 								('$data',
 								'$post[FFHORA]',
@@ -112,7 +120,9 @@ class EluicaoModel extends MY_Model {
 								'$post[FFPUREZA_QUIMICA]',
 								'$post[FFLIMPIDA]',
 								$post[FFGERADOR],
-								'$post[FFLOTE]'
+								'$post[FFLOTE]',
+								'$datafim',
+								'$datahora'
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -141,6 +151,8 @@ class EluicaoModel extends MY_Model {
 		try{
 			//tratando a data
 			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			$datahora= $data . ' ' . $post['FFHORA'];
+			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +4 hour'));
 			$this->db->trans_begin();
 			$this->db->query(" update eluicao set 
 								DATA ='$data', 
@@ -156,7 +168,9 @@ class EluicaoModel extends MY_Model {
 								PUREZA_QUIMICA = '$post[FFPUREZA_QUIMICA]',
 								LIMPIDA = '$post[FFLIMPIDA]',
 								CODGERADOR = $post[FFGERADOR],
-								LOTE = 	$post[FFLOTE]						
+								LOTE = 	$post[FFLOTE],
+								DATAHORA = '$datahora',
+								DATAINATIVO	= '$datafim'			
 							where  CODELUICAO = $post[FFCODELUICAO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -251,6 +265,7 @@ class EluicaoModel extends MY_Model {
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE			
 				from 		eluicao e				
 				where 		e.ATIVO = 'S'
+				order by e.DATA desc
 				"
 			);			
 			$this->dados = $this->dados->result_array();			
@@ -262,5 +277,4 @@ class EluicaoModel extends MY_Model {
 		}
 		return false;
 	}
-
 }

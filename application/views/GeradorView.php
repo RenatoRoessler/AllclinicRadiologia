@@ -46,8 +46,9 @@
 					<div class="form-group col-main col-sm-1 col-xs-12">
 						<label for="FFATIVOFILTRO" class="sys-label col-sm-12 col-xs-12">Ativo</label>
 						<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVOFILTRO" name="FFATIVOFILTRO">
-							<option <?php if( $this->input->post("FFATIVOFILTRO") == "S") echo "selected"; ?> value="S">Sim</option>	
-							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Não</option>												
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "S") echo "selected"; ?> value="S">Ativos</option>	
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Inativos</option>		
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "T") echo "selected"; ?> value="T">Todos</option>												
 						</select>
 					</div>        	
 
@@ -72,7 +73,7 @@
 						    					<th>Atividade Calibração</th>
 						    					<th>Fabricante</th>
 						    					<th>Usuário</th>
-						    					<th>Status</th>
+						    					<th>Data Validade</th>
 						    					<th>Editar</th>
 						    					<th>Excluir</th>
 						    				</tr>
@@ -91,7 +92,7 @@
 												<td><?php echo $v['ATIVIDADE_CALIBRACAO']; ?></td>
 												<td><?php echo $v['DESCFABRICANTE']; ?></td>
 												<td><?php echo $v['NOME']; ?></td>
-												<td><?php echo $v['DESCATIVO']; ?></td>
+												<td><?php echo $v['DATAFIM']; ?></td>
 						    					<td width="10">
 													<a class="btn btn-default" href=<?php echo base_url() .'/Gerador/editar/'. $v['CODGERADOR']  ?> > 
 						    							<i class="fa fa-edit fa-lg" ></i> 

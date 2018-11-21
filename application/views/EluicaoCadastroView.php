@@ -6,7 +6,7 @@
 					<a href="<?php echo base_url();  ?>">Home</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="<?php echo base_url('ConfiguracoesAgendaView');  ?>">Configurações Agenda</a> / Eluicao
+					<a href="<?php echo base_url('Eluicao');  ?>">Manutenção Eluição </a> / Eluicao
 					<br/>
 				</li>
 			</ol>
