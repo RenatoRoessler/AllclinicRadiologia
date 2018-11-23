@@ -39,12 +39,12 @@ $("document").ready(function(){
  		$("#sidenavToggler").click();
 	});
 
-	$('#FFDATAINCIAL').datepicker({	
+	$('#FFDATAPESQUISA').datepicker({	
 				format: "dd/mm/yyyy",	
 				language: "pt-BR",
 				autoclose: true
 			});
-	$('#FFDATAFINAL').datepicker({	
+	$('#FFDATAFINALPESQUISA').datepicker({	
 				format: "dd/mm/yyyy",	
 				language: "pt-BR",
 				autoclose: true

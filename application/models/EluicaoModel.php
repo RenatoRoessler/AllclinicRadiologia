@@ -256,7 +256,7 @@ class EluicaoModel extends MY_Model {
 	 * 	@return array
 	 */
 	public function buscaEluicoesAtivas( ) {
-
+		$dataAtual = date("Y-m-d H:i:s");
 		try {			
 			$this->dados = $this->query(
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
@@ -264,7 +264,7 @@ class EluicaoModel extends MY_Model {
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE			
 				from 		eluicao e				
-				where 		e.ATIVO = 'S'
+				where 	    e.DATAINATIVO >= '$dataAtual'
 				order by e.DATA desc
 				"
 			);			

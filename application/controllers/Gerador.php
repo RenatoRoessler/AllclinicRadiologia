@@ -26,13 +26,19 @@ class Gerador extends CI_Controller {
 		//dados a serem enviados para o cabecalho
 		$dados['js'] = 'js/Gerador.js';
 		$dados['MSG'] = $this->session->MSG; 
-		// se não existir
+		//se tiver vazio -- criado por causa do Limpar
 		if( !isset($post['FFDATAPESQUISA']) ){
 			$post['FFDATAPESQUISA'] = date("d/m/Y");
 		}
-		//se tiver vazio -- criado por causa do Limpar
 		if($post['FFDATAPESQUISA'] < 1){
 			$post['FFDATAPESQUISA'] = date("d/m/Y");	
+		}
+		if( !isset($post['FFDATAFINALPESQUISA']) ){
+			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAFINALPESQUISA'] < 1){
+			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");	
 		}
 		// se não existir
 		if( !isset($post['FFATIVOFILTRO']) ){

@@ -12,7 +12,6 @@
 			</ol>
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
 
-
 			<?php 
 			echo validation_errors('<div class="alert alert-danger">','</div>');
 			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
@@ -44,7 +43,7 @@
 									foreach ($gerador as $k => $v) {
 									$sel = ($v["CODGERADOR"] == $retorno[0]["CODGERADOR"]  ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODGERADOR'];?>" <?php echo $sel; ?> > <?php echo $v["LOTE"]; ?> </option>
+									<option value="<?php echo $v['CODGERADOR'];?>" <?php echo $sel; ?> > <?php echo 'Lote: ' .$v["LOTE"] . '  /Data: ' .$v["DATA1"]; ?> </option>
 									<?php  
 										}
 									?>									
@@ -91,7 +90,6 @@
 								</select>
 							</div>							
 						</div>	
-
 						<div class="row col-sm-12 col-xs-12" style="visibility: hidden;" id="EFICIENCIA">
 							<div class="row col-sm-3 col-xs-12">	
 								<div class="form-group col-main col-sm-12 col-xs-12">			

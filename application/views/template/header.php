@@ -84,14 +84,16 @@
 							<a href="<?php echo base_url('Paciente');  ?>"> Paciente</a>
 						</li>	
 						<li>
-							<a href="<?php echo base_url('ConfiguracoesAgenda');  ?>"> Configuração Agenda</a>
-						</li>
-						<li>
 							<a href="<?php echo base_url('Procedimentos');  ?>"> Procedimentos</a>
+						</li>
+						<!--
+						<li>
+							<a href="<?php echo base_url('ConfiguracoesAgenda');  ?>"> Configuração Agenda</a>
 						</li>	
 						<li>
 							<a href="<?php echo base_url('Agenda');  ?>"> Agenda</a>
 						</li>
+						-->
 					</ul>
 				</li>
 				<li class="nav-item">

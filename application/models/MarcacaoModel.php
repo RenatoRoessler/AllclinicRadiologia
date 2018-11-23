@@ -32,7 +32,9 @@ class MarcacaoModel extends MY_Model {
 				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA = '$data' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
-				//$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = '$post[FFATIVOFILTRO]' " : '';
+				$dataAtual = date("Y-m-d H:i:s");
+				$FF .= ( $post['FFATIVOFILTRO'] == 'S') ? "and e.DATAINATIVO >= '$dataAtual' " : '';
+				$FF .= ( $post['FFATIVOFILTRO'] == 'N') ? "and e.DATAINATIVO < '$dataAtual' " : '';
 			}
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
@@ -70,6 +72,12 @@ class MarcacaoModel extends MY_Model {
 		try{
 			//tratando a data
 			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			if(isset($post['FFORGANICO'])){
+				$post['FFORGANICO'] = 0;
+			} 
+			if(isset($post['FFQUIMICO'])){
+				$post['FFQUIMICO'] = 0;
+			}
 
 			$this->db->trans_begin();
 			$this->db->query("insert into MARCACAO(
@@ -227,6 +235,7 @@ class MarcacaoModel extends MY_Model {
 	 * 	@return array
 	 */
 	public function buscaTodasMarcacao() {
+		$dataAtual = date("Y-m-d H:i:s");
 
 		try {			
 			$this->dados = $this->query(
@@ -237,7 +246,8 @@ class MarcacaoModel extends MY_Model {
 				from 		marcacao m
 				join        eluicao e on (m.CODELUICAO = e.CODELUICAO)
 				JOIN        gerador g on (e.CODGERADOR = g.CODGERADOR)
-				where       g.CODINST = $_SESSION[CODINST]			
+				where       g.CODINST = $_SESSION[CODINST]	
+				and e.DATAINATIVO >= '$dataAtual'		
 				order by m.DATA desc
 				"
 			);			

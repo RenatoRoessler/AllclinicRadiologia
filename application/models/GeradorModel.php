@@ -32,7 +32,11 @@ class GeradorModel extends MY_Model {
 			}
 			if(isset($post['FFDATAPESQUISA'])) {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and g.DATA = '$data' " : '';
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and g.DATA >= '$data' " : '';
+			}
+			if(isset($post['FFDATAFINALPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
+				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and g.DATA <= '$data' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
 				$dataAtual = date("Y-m-d");
@@ -216,7 +220,7 @@ class GeradorModel extends MY_Model {
 			$FF = '';
 			$dataAtual = date("Y-m-d");
 			$this->dados = $this->query(
-				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO			
+				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO, DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATA1		
 				from 		gerador g				
 				where 		g.DATAINATIVO >=  '$dataAtual'
 				and         g.CODINST = $codinst

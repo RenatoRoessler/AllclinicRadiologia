@@ -41,12 +41,12 @@
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFMARCACAO" class="sys-label col-sm-12 col-xs-12">Marcação:</label>	
 								<select class="form-control form-control-sm" id="FFMARCACAO" name="FFMARCACAO" data-live-search="true">
-								<option <?php if( $retorno[0]["CODMARCACAO"] == "") echo "selected"; ?> value="">Selecione o Gerador</option>
+								<option <?php if( $retorno[0]["CODMARCACAO"] == "") echo "selected"; ?> value="">Selecione a Marcação</option>
 								<?php
 									foreach ($marcacao as $k => $v) {
 									$sel = ($v["CODMARCACAO"] == $retorno[0]["CODMARCACAO"]  ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODMARCACAO'];?>" <?php echo $sel; ?> > <?php echo $v["CODMARCACAO"]; ?> </option>
+									<option value="<?php echo $v['CODMARCACAO'];?>" <?php echo $sel; ?> > <?php echo 'Cód. ' .$v["CODMARCACAO"] .'  /Data' .$v["DATA1"]; ?> </option>
 									<?php  
 										}
 									?>									

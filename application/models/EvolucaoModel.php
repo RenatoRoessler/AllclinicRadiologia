@@ -27,6 +27,14 @@ class EvolucaoModel extends MY_Model {
 			if(isset($post['Codigo'])) {
 				$FF .= ( $post['Codigo'] ) ? "and e.CODELUICAO = $post[Codigo] " : '';
 			}
+			if(isset($post['FFDATAPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$data' " : '';
+			}
+			if(isset($post['FFDATAFINALPESQUISA'])) {
+				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
+				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
+			}
 			$this->dados = $this->query(
 				"select 	i.CODFRACIONAMENTO, g.LOTE as LOTEGERADOR, g.CODGERADOR, m.CODMARCACAO,
 							DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATAGERADOR,
