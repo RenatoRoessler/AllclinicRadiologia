@@ -87,7 +87,7 @@ class GeradorModel extends MY_Model {
 			$this->db->query("insert into gerador(
 								LOTE,DATA,NRO_ELUICAO,DATA_CALIBRACAO,ATIVIDADE_CALIBRACAO,
 								CODINST,APELUSER,CODFABRICANTE, HORA, DATAINATIVO) value 
-								($post[FFLOTE],'$data', $post[FFNROELUICAO],'$dataCa', $post[FFATIVIDADECAL],
+								('$post[FFLOTE]','$data', $post[FFNROELUICAO],'$dataCa', $post[FFATIVIDADECAL],
 								$post[CODINST],'$post[APELUSER]',$post[FFFABRICANTE],'$post[FFHORA]','$dataInativo')"
 			);
 			if( $this->db->trans_status() === false){
@@ -119,7 +119,7 @@ class GeradorModel extends MY_Model {
 			$dataCa = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATACALIBRACAO']))); 
 			$this->db->trans_begin();
 			$this->db->query(" update gerador set 
-				LOTE = $post[FFLOTE],
+				LOTE = '$post[FFLOTE]',
 				DATA = '$data',
 				NRO_ELUICAO = $post[FFNROELUICAO],
 				DATA_CALIBRACAO = '$dataCa',

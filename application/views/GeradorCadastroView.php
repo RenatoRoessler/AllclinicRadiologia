@@ -40,31 +40,32 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off">
 							</div>					
 					        <div class="form-group col-main col-sm-2 col-xs-12">
-					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data:</label>
+					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data de Geração:</label>
 					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATAF"] ?  $retorno[0]["DATAF"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
+					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATAF"] ?  $retorno[0]["DATAF"] :  date ("d/m/Y")  ?>"  autocomplete="off" />
 					                <span class="input-group-addon">
 					                      <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 					            </div>
 					        </div>
-					        <div class="col-main col-sm-1 col-xs-12">
-       							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
-    						</div>
+					       
 					        <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFNROELUICAO" class="sys-label col-sm-12 col-xs-12">Nro. Eluição:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFNROELUICAO" name="FFNROELUICAO" value="<?php echo $retorno[0]["NRO_ELUICAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFNROELUICAO" name="FFNROELUICAO" value="<?php echo $retorno[0]["NRO_ELUICAO"] ? $retorno[0]["NRO_ELUICAO"] : 0 ;  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" readonly>
 							</div>	
 							<div class="form-group col-main col-sm-2 col-xs-12">
 					        	<label for="FFDATACALIBRACAO" class="sys-label col-sm-12 col-xs-12">Data Calibração:</label>
 					            <div class='input-group date' >
-					                <input type='text' class="form-control" id="FFDATACALIBRACAO" name="FFDATACALIBRACAO" value="<?php echo $retorno[0]["DATA_CALIBRACAOF"];  ?>" autocomplete="off"/>
+					                <input type='text' class="form-control" id="FFDATACALIBRACAO" name="FFDATACALIBRACAO" value="<?php echo $retorno[0]["DATAF"] ?  $retorno[0]["DATAF"] :  date ("d/m/Y")  ?>" autocomplete="off"/>
 					                <span class="input-group-addon">
 					                      <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 					            </div>
-					        </div>					        		
+					        </div>
+							<div class="col-main col-sm-2 col-xs-12">
+       							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Calibração:</label>
+        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
+    						</div>					        		
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-1 col-xs-12">
@@ -72,7 +73,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFUSUARIO" name="FFUSUARIO" value="<?php echo $_SESSION['APELUSER'] ?>"  readonly >
 							</div>	
 							<div class="form-group col-main col-sm- col-xs-12">
-								<label for="FFATIVIDADECAL" class="sys-label col-sm-12 col-xs-12">Atividade de Calibração:</label>
+								<label for="FFATIVIDADECAL" class="sys-label col-sm-12 col-xs-12">Atividade Calibração mCi</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADECAL" name="FFATIVIDADECAL" value="<?php echo $retorno[0]["ATIVIDADE_CALIBRACAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 							</div>							
 							<div class="col-main col-sm-2 col-xs-12">
@@ -89,16 +90,7 @@
 									?>
 									
 								</select>
-							</div>
-							<!--
-							<div class="col-main col-sm-1 col-xs-12">
-								<label for="FFATIVO" class="sys-label col-sm-12 col-xs-12">Ativo:</label>
-								<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVO" name="FFATIVO">
-									<option <?php if( $retorno[0]["ATIVO"] == "S") echo "selected"; ?> value="S">Ativo</option>
-									<option <?php if( $retorno[0]["ATIVO"] == "N") echo "selected"; ?> value="N">Inativo</option>
-								</select>
-							</div>	
-							-->						
+							</div>					
 						</div>
 					</div>
 				</div>

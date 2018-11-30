@@ -46,6 +46,7 @@ class Agendamento extends CI_Controller {
 	public function novo()
 	{
 		$dados['js'] = 'js/Agendamento.js';
+		
  		$dados['retorno'] = null; 
  		$dados['MSG'] = $this->session->MSG;
 

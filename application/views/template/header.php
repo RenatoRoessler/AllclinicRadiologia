@@ -59,12 +59,15 @@
 					<ul class="sidenav-second-level collapse"  id="linksCadastros">
 						<li>
 							<a href="<?php echo base_url('Usuarios');  ?>"> Usuários</a>
-						</li>	
+						</li>						
 						<li>
-							<a href="<?php echo base_url('Gerador');  ?>"> Gerador</a>
+							<a href="<?php echo base_url('farmaco');  ?>"> Farmaco</a>
 						</li>
 						<li>
 							<a href="<?php echo base_url('Fabricante');  ?>"> Gerador / Radiofarmaco</a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('Gerador');  ?>"> Gerador</a>
 						</li>
 						<li>
 							<a href="<?php echo base_url('Instituicao');  ?>"> Instituição</a>

@@ -71,9 +71,8 @@ class Gerador extends CI_Controller {
 	public function atualizar(){
 		$post = limpaVariavelArray( $this->input->post());
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFLOTE','Lote','required|min_length[1]|max_length[7]');
+		$this->form_validation->set_rules('FFLOTE','Lote','required|min_length[1]|max_length[10]');
 		$this->form_validation->set_rules('FFDATAHORA','Data e Hora','required');
-		$this->form_validation->set_rules('FFNROELUICAO','Nro. Eluição','required|min_length[1]|max_length[7]');
 		$this->form_validation->set_rules('FFATIVIDADECAL','Atividade de Calibração','required');
 		$this->form_validation->set_rules('FFNROELUICAO','Nro. Eluição','required|min_length[1]|max_length[7]');
 		$this->form_validation->set_rules('FFFABRICANTE','Fabricante','required');

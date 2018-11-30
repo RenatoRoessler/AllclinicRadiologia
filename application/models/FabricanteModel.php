@@ -264,6 +264,41 @@ class FabricanteModel extends MY_Model {
 		}
 		return false;
 	}
+
+	/**
+	 * 	Metodo para pegar os vinculos de fabricante e farmaco 
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $codfabricante integer 
+	 *
+	 * 	@return array
+	 */
+	public function fabricanteFarmaco( $codfabricante ) {
+
+		try {	
+
+		    $FF = '';		
+			
+			$this->dados = $this->query(
+				"select 	f.CODFABRICANTE, ff.CODFARMACO, fa.PH, fa.SOLV_ORGANICO,
+							fa.SOLV_INORGANICO,fa.DESCRICAO as DESCFARMACO
+				from 		fabricante f
+				join        fabricante_farmaco ff on (f.CODFABRICANTE = ff.CODFABRICANTE)
+				join        farmaco fa on (ff.CODFARMACO = fa.CODFARMACO)
+				where 		f.CODFABRICANTE =  $codfabricante 
+							$FF
+				order by 	f.DESCRICAO"
+			);
+			
+			$this->dados = $this->dados->result_array();			
+			return true;
+	
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
 	
 
 }

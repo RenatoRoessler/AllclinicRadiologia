@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Fabricante extends CI_Controller {
+class Fabricante extends MY_Controller {
 
 
 	public function __construct(){
@@ -33,7 +33,13 @@ class Fabricante extends CI_Controller {
 	{
 		$dados['js'] = 'js/Fabricante.js';
  		$dados['retorno'] = null; 
- 		$dados['MSG'] = $this->session->MSG;
+		$dados['MSG'] = $this->session->MSG;
+		$dados['fabricanteFarmaco']  = 0;
+		/*  CARREGANDO OS FARMACOS */
+		$this->load->model('FarmacoModel');
+		$this->FarmacoModel->buscaTodosFarmacos();
+		$dados['farmaco'] = $this->FarmacoModel->dados;
+
 		$this->load->view('template/header',$dados);
 		$this->load->view('FabricanteCadastroView');
 		$this->load->view('template/footer');
@@ -73,8 +79,17 @@ class Fabricante extends CI_Controller {
 		$dados['js'] = 'js/Fabricante.js';
 		/* carregando as instituições */
  		$this->load->model('FabricanteModel');
- 		$this->FabricanteModel->buscaFabricante( $this->uri->segment(3) );
- 		$dados['retorno'] = $this->FabricanteModel->dados;
+		$this->FabricanteModel->buscaFabricante( $this->uri->segment(3) );
+		$dados['retorno'] = $this->FabricanteModel->dados;
+		 /*  Carregando os fabricantesFarmacos*/
+		$this->FabricanteModel->fabricanteFarmaco($this->uri->segment(3));
+		$dados['fabricanteFarmaco'] = $this->FabricanteModel->dados;
+		/*  CARREGANDO OS FARMACOS */
+		$this->load->model('FarmacoModel');
+		$this->FarmacoModel->buscaTodosFarmacos();
+		$dados['farmaco'] = $this->FarmacoModel->dados;
+
+ 		
  		$dados['MSG'] = $this->session->MSG;
  		$this->load->view('template/header',$dados);
 		$this->load->view('FabricanteCadastroView');
@@ -95,6 +110,37 @@ class Fabricante extends CI_Controller {
 			$this->session->set_userdata('MSG', array( 'e', 'Fabricante em uso, Não é permitido a exclusão' ));
 		}
 		$this->index(); 
+	}
+
+	public function vincular(){
+		/*  Limpando variaveis  */
+		$post = limpaVariavelArray( $this->input->post());
+
+		$this->load->model('FabricanteModel');
+		/*
+
+		if($post['CODFRACIONAMENTO']){
+			$codigo = $post['CODFRACIONAMENTO'];
+		}else{
+			$post['CODINST'] = $_SESSION['CODINST'];
+			$codigo = $this->FracionamentoModel->inserir($post);
+		}
+		if( $codigo ){
+			$post['CODFRACIONAMENTO'] = $codigo;
+			$coditem = $this->FracionamentoModel->inserirItemFracionamento($post);
+			if( $coditem ){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso','codfracionamento' => $codigo ) ,  true );	
+			}else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao adicionar 1','codfracionamento' => '1' ) ,  true );	
+			}	
+		}	
+		else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar 2','codfracionamento' => '2' ) ,  true );
+		}
+		*/
+		$codigo = $post['CODFABRICANTE'];
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'teste','codfabricante' => $codigo ) ,  true );	
+		echo jsonEncodeArray( $this->json );  		
 	}
 	
 }

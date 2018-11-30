@@ -31,7 +31,7 @@
 					<div role="tabpanel" class="tab-pane active" id="geral">
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-2 col-xs-12">
-								<label for="FFCODFRABICANTE" class="sys-label col-sm-12 col-xs-12">Código:</label>
+								<label for="FFCODFABRICANTE" class="sys-label col-sm-12 col-xs-12">Código:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODFABRICANTE" name="FFCODFABRICANTE" value="<?php echo $retorno[0]["CODFABRICANTE"]; ?>"  readonly >
 							</div>
 							<div class="form-group col-main col-sm-3 col-xs-12">
@@ -55,6 +55,74 @@
 						</div>
 					</div>
 				</div>
+				<div class="row col-sm-12 col-xs-12">
+					<div class="row col-sm-4 col-xs-12">
+						<div class="col-main col-sm-7 col-xs-12">
+							<label for="FFFARMACO" class="sys-label col-sm-12 col-xs-12">Farmaco:</label>	
+							<select class="form-control form-control-sm" id="FFFARMACO" name="FFFARMACO" data-live-search="true">
+								<option >Selecione o Farmaco</option>
+								<?php
+								foreach ($farmaco as $k => $v) {
+								$sel = ($v["CODFARMACO"] == $retorno[0]["CODFARMACO"]  ) ? 'selected' : '';
+								?>
+								<option value="<?php echo $v['CODFARMACO'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"]  ?> </option>
+								<?php  
+								}
+								?>									
+							</select>
+						</div>
+						<div class="col-xs-2 col-sm-5 pull-right">
+							<label for="btnAdicionar" class="sys-label col-sm-12 col-xs-12">&nbsp; </label>
+							<button type="button" id="btnAdicionar" class="btn btn-primary btn-sm sys-btn-search" ><i class="fa fa-plus"></i> Adicionar Farmaco</button>
+						</div>									
+					</div>
+					
+					<div class="row col-sm-8 col-xs-12" > 	
+						<div class="col-md-12">
+							<div class="panel-group" >	
+								<div class="panel panel-default">		
+									<div class="panel-body table-responsive">
+										<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
+											<thead>
+												<tr>
+													<th>Farmaco</th>
+													<th>PH</th>	
+													<th>Solvente Orgânico</th>	
+													<th>Solvente Inorgânico</th>	
+													<th>Excluir</th>	   					
+												</tr>
+											</thead>
+											<tbody>
+												<?php 
+												if($fabricanteFarmaco){
+												foreach ($fabricanteFarmaco as $k => $v) {  			
+												?>
+												<tr id="<?php echo $v['CODFABRICANTE']; ?>">
+												<td><?php echo $v['DESCRICAO']; ?></td>
+												<td><?php echo $v['PH']; ?></td>
+												<td><?php echo $v['SOLV_ORGANICO']; ?></td>
+												<td><?php echo $v['SOLV_INORGANICO']; ?></td>
+								
+												
+												<td width="10"> 
+													<a href=<?php echo base_url() .'/Fabricante/excluirItem/'. $v['CODFABRICANTE']  ?> > 
+														<i class="fa fa-minus-circle fa-lg" style="color:red;"></i> 
+													</a>
+												</td>
+												</tr>
+												<?php } } ?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>	
+
+			</div>
+					
 				<br/>
 					<div class="col-xs-1 col-sm-1 pull-left">
 		      			<button type="button" id="btnVoltar" class="btn btn-default btn-sm sys-btn-search" ><i class="fa fa-chevron-left"></i> Voltar</button>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Farmaco extends CI_Controller {
+class Farmaco extends MY_Controller {
 
 
 	public function __construct(){
@@ -17,75 +17,73 @@ class Farmaco extends CI_Controller {
 		/*	Limpando variaveis	 */
 		$post = limpaVariavelArray( $this->input->post() );
 		//dados a serem enviados para o cabecalho
-		$dados['js'] = 'js/Fabricante.js';
+		$dados['js'] = 'js/Farmaco.js';
 		/*Carregando os Fabricantes*/
- 		$this->load->model('FabricanteModel');
- 		$this->FabricanteModel->index( $post );
- 		$dados['fabricante'] = $this->FabricanteModel->dados;
+ 		$this->load->model('FarmacoModel');
+ 		$this->FarmacoModel->index( $post );
+		$dados['farmaco'] = $this->FarmacoModel->dados;
 		
 		$this->load->view('template/header',$dados);
-		$this->load->view('FabricanteView');
+		$this->load->view('FarmacoView');
 		$this->load->view('template/footer');
 	}
-
 	public function novo()
 	{
-		$dados['js'] = 'js/Fabricante.js';
+		$dados['js'] = 'js/Farmaco.js';
  		$dados['retorno'] = null; 
- 		$dados['MSG'] = $this->session->MSG;
+ 		$dados['MSG'] = $this->session->MSG; 
+
+ 		$this->load->model('FarmacoModel');
+ 		$this->FarmacoModel->buscaFarmacosAtivos();
+		$dados['farmaco'] = $this->FarmacoModel->dados;
 		$this->load->view('template/header',$dados);
-		$this->load->view('FabricanteCadastroView');
+		$this->load->view('FarmacoCadastroView');
 		$this->load->view('template/footer');
 	}
 
-	public function atualizar()
-	{
+	
+	public function atualizar(){
 		$post = limpaVariavelArray( $this->input->post());
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFDESCRICAO','Descrição','required|min_length[10]|max_length[45]');
-		$this->form_validation->set_rules('FFESPECIFICACAO','Especificação','required|min_length[10]|max_length[45]');
-		$this->form_validation->set_rules('FFTIPO','TIPO','required');
-		$codigo = null;
-		$this->load->model('FabricanteModel');
+		$this->form_validation->set_rules('FFDESCRICAO','Descricao','required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('FFSOLVINORGANICO','Solvente Inorgânico','required');
+		$this->form_validation->set_rules('FFSOLVORGANICO','Solvente Orgânico','required');
+		$this->form_validation->set_rules('FFPH','PH','required');
+		$this->form_validation->set_rules('FFATIVO','Ativo','required');
+		$post['CODINST'] = $_SESSION['CODINST'];
+		$this->load->model('FarmacoModel');
 		if($this->form_validation->run() == FALSE){
 			$this->novo();
 		}else{			
 			if($post){
-				if($post['FFCODFABRICANTE']){
-					$this->FabricanteModel->atualizar($post);
-					$codigo = $post['FFCODFABRICANTE'];
+				if($post['FFCODFARMACO']){
+					$codigo =$this->FarmacoModel->atualizar($post);
 				}else{
-					$codigo = $this->FabricanteModel->inserir($post);
+					//criando a data de inativo
+					$codigo = $this->FarmacoModel->inserir($post);
 				}
 			}
 			if( !$codigo ){
-				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Fabricante. <br/>[' . $this->FabricanteModel->db->error() . ']' ));
+				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Farmaco. <br/>[' . $this->FarmacoModel->db->error() . ']' ));
 			}else{
-				$this->session->set_userdata('MSG', array( 's', 'Fabricante salvo com sucesso' ));
+				$this->session->set_userdata('MSG', array( 's', 'Farmaco salvo com sucesso' ));
 			}
 			redireciona('editar/' . $codigo);
-		}				
-	}
+		}	
+	}	
 
 	public function editar()
 	{
-		$dados['js'] = 'js/Fabricante.js';
-		/* carregando as instituições */
- 		$this->load->model('FabricanteModel');
- 		$this->FabricanteModel->buscaFabricante( $this->uri->segment(3) );
- 		$dados['retorno'] = $this->FabricanteModel->dados;
+		$dados['js'] = 'js/Farmaco.js';
+ 		//caregando o Farmaco
+ 		$this->load->model('FarmacoModel');
+		$this->FarmacoModel->buscaFarmaco($this->uri->segment(3));
+ 		$dados['retorno'] = $this->FarmacoModel->dados;
  		$dados['MSG'] = $this->session->MSG;
- 		$this->load->view('template/header',$dados);
-		$this->load->view('FabricanteCadastroView');
+		$this->load->view('template/header',$dados);
+		$this->load->view('FarmacoCadastroView');
 		$this->load->view('template/footer');
-	}
-
-	public function excluir()
-	{
-		$this->load->model('FabricanteModel');
-		$this->FabricanteModel->excluir($this->uri->segment(3));
-		$this->index();		
-	}
+	}	
 
 	
 }
