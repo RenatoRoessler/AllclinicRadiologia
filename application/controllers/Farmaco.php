@@ -40,7 +40,6 @@ class Farmaco extends MY_Controller {
 		$this->load->view('FarmacoCadastroView');
 		$this->load->view('template/footer');
 	}
-
 	
 	public function atualizar(){
 		$post = limpaVariavelArray( $this->input->post());

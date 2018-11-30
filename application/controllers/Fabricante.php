@@ -87,9 +87,7 @@ class Fabricante extends MY_Controller {
 		/*  CARREGANDO OS FARMACOS */
 		$this->load->model('FarmacoModel');
 		$this->FarmacoModel->buscaTodosFarmacos();
-		$dados['farmaco'] = $this->FarmacoModel->dados;
-
- 		
+		$dados['farmaco'] = $this->FarmacoModel->dados; 		
  		$dados['MSG'] = $this->session->MSG;
  		$this->load->view('template/header',$dados);
 		$this->load->view('FabricanteCadastroView');
@@ -116,31 +114,32 @@ class Fabricante extends MY_Controller {
 		/*  Limpando variaveis  */
 		$post = limpaVariavelArray( $this->input->post());
 
-		$this->load->model('FabricanteModel');
-		/*
-
-		if($post['CODFRACIONAMENTO']){
-			$codigo = $post['CODFRACIONAMENTO'];
-		}else{
-			$post['CODINST'] = $_SESSION['CODINST'];
-			$codigo = $this->FracionamentoModel->inserir($post);
-		}
-		if( $codigo ){
-			$post['CODFRACIONAMENTO'] = $codigo;
-			$coditem = $this->FracionamentoModel->inserirItemFracionamento($post);
-			if( $coditem ){
-				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso','codfracionamento' => $codigo ) ,  true );	
-			}else{
-				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao adicionar 1','codfracionamento' => '1' ) ,  true );	
+		$this->load->model('FabricanteModel');	
+		
+		if($this->FabricanteModel->fabricanteFarmacoJaVinculado( $post['CODFABRICANTE'], $post['CODFARMACO'])){
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Fabricante e Farmaco já vinculados' ) ,  true );	
+		}else {
+			$codigo = $this->FabricanteModel->inserirFabricanteFarmaco($post['CODFABRICANTE'], $post['CODFARMACO']);
+			if( $codigo ){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso' ) ,  true );	
 			}	
-		}	
-		else{
-			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar 2','codfracionamento' => '2' ) ,  true );
-		}
-		*/
-		$codigo = $post['CODFABRICANTE'];
-		echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'teste','codfabricante' => $codigo ) ,  true );	
+			else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
+			}
+		}		
 		echo jsonEncodeArray( $this->json );  		
+	}
+
+	public function excluirVinculo()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('FabricanteModel');
+		if($this->FabricanteModel->excluirVinculo( $post['CODFABRICANTE'], $post['CODFARMACO'] )){
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
+		}
+		echo jsonEncodeArray( $this->json ); 	
 	}
 	
 }

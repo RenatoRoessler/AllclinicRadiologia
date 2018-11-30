@@ -10,7 +10,7 @@
 					<br/>
 				</li>
 			</ol>
-			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
+			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
 			<?php 
 			echo validation_errors('<div class="alert alert-danger">','</div>');
 			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
@@ -75,8 +75,7 @@
 							<label for="btnAdicionar" class="sys-label col-sm-12 col-xs-12">&nbsp; </label>
 							<button type="button" id="btnAdicionar" class="btn btn-primary btn-sm sys-btn-search" ><i class="fa fa-plus"></i> Adicionar Farmaco</button>
 						</div>									
-					</div>
-					
+					</div>					
 					<div class="row col-sm-8 col-xs-12" > 	
 						<div class="col-md-12">
 							<div class="panel-group" >	
@@ -97,17 +96,13 @@
 												if($fabricanteFarmaco){
 												foreach ($fabricanteFarmaco as $k => $v) {  			
 												?>
-												<tr id="<?php echo $v['CODFABRICANTE']; ?>">
-												<td><?php echo $v['DESCRICAO']; ?></td>
+												<tr id="<?php echo $v['CODFABRICANTE'];  ?>" id2="<?php echo $v['CODFARMACO'];  ?>">
+												<td><?php echo $v['DESCFARMACO']; ?></td>
 												<td><?php echo $v['PH']; ?></td>
 												<td><?php echo $v['SOLV_ORGANICO']; ?></td>
-												<td><?php echo $v['SOLV_INORGANICO']; ?></td>
-								
-												
+												<td><?php echo $v['SOLV_INORGANICO']; ?></td>	
 												<td width="10"> 
-													<a href=<?php echo base_url() .'/Fabricante/excluirItem/'. $v['CODFABRICANTE']  ?> > 
-														<i class="fa fa-minus-circle fa-lg" style="color:red;"></i> 
-													</a>
+													<button type="button" id="btnExcluir"  class="btn btn-default" ><i class="fa fa-minus-circle fa-lg" style="color:red;" onclick="teste(<?php echo $v['CODFABRICANTE'] ?>, <?php echo $v['CODFARMACO'] ?>)"></i> </button>
 												</td>
 												</tr>
 												<?php } } ?>
@@ -118,11 +113,8 @@
 							</div>
 						</div>
 					</div>
-
 				</div>	
-
-			</div>
-					
+			</div>					
 				<br/>
 					<div class="col-xs-1 col-sm-1 pull-left">
 		      			<button type="button" id="btnVoltar" class="btn btn-default btn-sm sys-btn-search" ><i class="fa fa-chevron-left"></i> Voltar</button>
@@ -132,11 +124,43 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
+				
 			<?php 
             echo form_close();
             ?>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		function teste(codfabricante,codfarmaco){
+			$.ajax({
+			url : '/AllclinicRadiologia/fabricante/excluirVinculo/',
+			type : 'POST',
+			timeout: 30000,
+			data : {
+				'Codigo' :  '1',
+				'CODFARMACO' : codfarmaco,
+				'CODFABRICANTE' : codfabricante,				
+			},
+			beforeSend: function(){
+				loader('show');
+			},
+			success: function( retorno ){
+				var j = jsonEncode( retorno, 'json' );
+				mensagem(j.content.tipoMsg , j.content.mensagem);				
+				loader('hide');
+				ir('/AllclinicRadiologia/fabricante/editar/' +  codfabricante);
+			},
+			error: function( request, status, error ){ 
+				loader('hide');
+				mensagem( 'e', error )
+			}
+		});	
+		}
+	</script>
+
+
+
 
 
 

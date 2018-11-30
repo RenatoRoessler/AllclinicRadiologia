@@ -10,9 +10,7 @@
 					<br/>
 				</li>
 			</ol>
-
-			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
-
+		    <?php include VIEWPATH . "_includes/_mensagem.php";?> 
 			<?php 
 			echo validation_errors('<div class="alert alert-danger">','</div>');
 			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
@@ -87,8 +85,7 @@
 									<option value="<?php echo $v['CODFABRICANTE'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"]; ?> </option>
 									<?php  
 										}
-									?>
-									
+									?>									
 								</select>
 							</div>					
 						</div>

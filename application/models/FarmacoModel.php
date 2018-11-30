@@ -147,9 +147,8 @@ class FarmacoModel extends MY_Model {
 				$this->db->trans_rollback();
 				return false;
 			}
-
 			$this->db->trans_commit();
-			return $post[FFCODGERADOR];
+			return $post[FFCODFARMACO];
 
 		}catch (Exception $e){
 			log_message('error', $this->db->error());

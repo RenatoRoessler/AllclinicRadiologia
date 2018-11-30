@@ -12,6 +12,7 @@ var Fabricante = function(){
 			mensagem( 'e', 'Selecione o Farmaco');
 			return false;
 		}
+		let codfabricante  = $('#FFCODFABRICANTE').val() 
 		$.ajax({
 			url : '/AllclinicRadiologia/fabricante/vincular/',
 			type : 'POST',
@@ -19,18 +20,16 @@ var Fabricante = function(){
 			data : {
 				'Codigo' :  '1',
 				'CODFARMACO' : $('#FFFARMACO').val(),
-				'CODFABRICANTE' : $('#FFCODFABRICANTE').val(),
-				
+				'CODFABRICANTE' : codfabricante,				
 			},
 			beforeSend: function(){
 				loader('show');
 			},
 			success: function( retorno ){
 				var j = jsonEncode( retorno, 'json' );
-				mensagem(j.content.tipoMsg , j.content.Mensagem);
-				let codigo = j.content.codfabricante;
+				mensagem(j.content.tipoMsg , j.content.mensagem);				
 				loader('hide');
-				ir('/AllclinicRadiologia/fabricante/editar/' +  codigo);
+				ir('/AllclinicRadiologia/fabricante/editar/' +  codfabricante);
 			},
 			error: function( request, status, error ){ 
 				loader('hide');
@@ -39,6 +38,8 @@ var Fabricante = function(){
 		});	
 	
 	}
+
+
 
 }
 
@@ -70,9 +71,15 @@ $("document").ready(function(){
 	.click(function(){
 		$("#formularioCadastro").submit();
 	});
+
 	$("#btnAdicionar")
 	.click(function(){
 		controle.adicionar();
 	});
+
+	
+
+
+	
 
 });

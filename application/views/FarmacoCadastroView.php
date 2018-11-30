@@ -33,7 +33,7 @@
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFCODFARMACO" class="sys-label col-sm-12 col-xs-12">Código:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODFARMACO" name="FFCODGERADOR" value="<?php echo $retorno[0]["CODFARMACO"]; ?>"  readonly >
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODFARMACO" name="FFCODFARMACO" value="<?php echo $retorno[0]["CODFARMACO"]; ?>"  readonly >
 							</div>
                             <div class="form-group col-main col-sm-3 col-xs-12">
 								<label for="FFDESCRICAO" class="sys-label col-sm-12 col-xs-12">Descricao:</label>

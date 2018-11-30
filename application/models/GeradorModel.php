@@ -176,7 +176,7 @@ class GeradorModel extends MY_Model {
 		return false;
 	}
 
-		/**
+	/**
 	 * 	Metodo para excluir um Gerador
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
