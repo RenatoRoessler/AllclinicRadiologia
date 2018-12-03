@@ -134,7 +134,6 @@ class Fracionamento extends MY_Controller {
  		$this->load->model('FracionamentoModel');
  		/* Excluindo Item */
  		$this->FracionamentoModel->excluir( $this->uri->segment(3) );
-
  		$this->index();
 	}
 
@@ -168,8 +167,7 @@ class Fracionamento extends MY_Controller {
 		}else{			
 			if($post){
 				$this->FracionamentoModel->administrar($post);
-				$codigo = $post['FFCODITFRACIONAMENTO'];
-			
+				$codigo = $post['FFCODITFRACIONAMENTO'];			
 			}
 			if( !$codigo ){
 				$this->session->set_userdata('MSG', array( 'e', 'Falha ao Administrar. <br/>[' . $this->FracionamentoModel->db->error() . ']' ));

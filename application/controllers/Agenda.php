@@ -11,8 +11,6 @@ class Agenda extends CI_Controller {
 		}
 	}
 
-
-
 	public function index(){
 		/*  Limpando variaveis  */
 		$post = limpaVariavelArray( $this->input->post());
@@ -79,6 +77,5 @@ class Agenda extends CI_Controller {
 		array_push($HorarioAgenda, $this->mintohora($fim) );
 		return $HorarioAgenda;
 	}
-	
 
 }
