@@ -229,7 +229,65 @@ class FarmacoModel extends MY_Model {
 			log_message('error', $this->db->error());
 		}
 		return false;
-    }
+	}
+	
+
+	/**
+	 *  verifica se o Farmaco pode ser Excluido
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return bollean
+	 */
+	public function FarmacoPodeSerExcluido( $codfarmaco ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from fabricante_farmaco where CODFARMACO = $codfarmaco "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			if ($this->dados[0]['QTD'] > 0 ){
+				return false;
+			}else{
+				return true;
+			}	 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
+	/**
+	 * 	Metodo para excluir um farmaco
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $codfabricante integer - inteiro com o código do fabricante
+	 *	@param $codfarmaco integer - inteiro com o código do farmaco
+	 *
+	 * 	@return array
+	 */
+	public function excluirFarmaco( $codfarmaco ) {
+
+		try {
+			$this->db->trans_begin();
+			/* update na conta corrente*/
+			$this->db->query(
+				"delete from farmaco 
+				where  codfarmaco = $codfarmaco "
+			);
+
+			if( $this->db->trans_status() === false ){
+				$this->db->trans_rollback();
+				return false;
+			}
+	 		$this->db->trans_commit();
+			return true;
+
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
 
 
 }

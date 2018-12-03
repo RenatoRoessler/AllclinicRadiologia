@@ -84,5 +84,21 @@ class Farmaco extends MY_Controller {
 		$this->load->view('template/footer');
 	}	
 
+	public function excluir()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('FarmacoModel');
+		if($this->FarmacoModel->FarmacoPodeSerExcluido( $post['Codigo'] )){
+			if($this->FarmacoModel->excluirFarmaco( $post['Codigo'] )){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );	
+			}else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao excluir. <br/>[' . $this->FarmacoModel->db->error() . ']' ) ,  true );	
+			}				
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Farmaco Vinculado' ) ,  true );	
+		}		
+		echo jsonEncodeArray( $this->json ); 
+	}
+
 	
 }

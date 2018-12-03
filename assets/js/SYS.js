@@ -488,7 +488,7 @@ function dialogoError(){
 	$( "#dialogoError").modal();
 }
 function mensagemError(){
-	$.ajax({url : "/Sys/mensagemClean",type : "post"});
+	//$.ajax({url : "/Sys/mensagemClean",type : "post"});
 }
 function progressoMain(obj,w){
 	var obj = ( typeof obj == "object" ) ? $(obj) : $("#"+obj);

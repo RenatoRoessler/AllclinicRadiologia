@@ -57,7 +57,6 @@
 						    					<th>Solvente Inorgânico</th>
                                                 <th>Ativo</th>
                                                 <th>Editar</th>
-                                                <th>Excluir</th>
 						    				</tr>
 						    			</thead>
 						    			<tbody>
@@ -76,12 +75,6 @@
 						    							<i class="fa fa-edit fa-lg" ></i> 
 						    						</a>		
 						    					</td>
-						    					<td width="10">
-						    						<a class="btn btn-default" href=<?php echo base_url() .'/farmaco/excluir/'. $v['CODFARMACO']  ?> > 
-						    							<i class="fa fa-minus-circle fa-lg"  style="color:red"></i> 
-						    						</a>    
-						    					</td>
-
 						    				</tr>
 						    				<?php } ?>
 						    			</tbody>
