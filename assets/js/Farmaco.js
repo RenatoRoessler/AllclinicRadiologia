@@ -23,8 +23,7 @@ var Farmaco = function(){
 							loader('hide');	
 							if(j.content.tipoMsg == 's'){
 								ir('/AllclinicRadiologia/Farmaco');
-							}
-							
+							}							
 						},
 						error: function( request, status, error ){ 
 							loader('hide');

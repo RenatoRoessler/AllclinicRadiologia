@@ -259,4 +259,25 @@ class GeradorModel extends MY_Model {
 		}
 		return false;
 	}
+
+	/**
+	 *  Pegando a quantidade e eluições geradas com aquele gerador
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return int
+	 */
+	public function qtdEluicoesGerador( $codgerador ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from eluicao where CODGERADOR = $codgerador "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			return $this->dados[0]['QTD'];
+			 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return 0;
+	}
 }

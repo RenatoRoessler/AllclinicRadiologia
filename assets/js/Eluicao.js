@@ -1,6 +1,37 @@
 var Eluicao = function(){
 	var _self = this;
 
+	this.teste = function(){
+		let codgeardor = document.getElementById("FFGERADOR").value;
+		if(codgeardor > 0){
+			$.ajax({
+				url : '/AllclinicRadiologia/Eluicao/gerarLoteEluicao/',
+				type : 'POST',
+				timeout: 30000,
+				data : {
+					'codgerador' : codgeardor,
+				},
+				beforeSend: function(){
+					loader('show');
+				},
+				success: function( retorno ){
+					var j = jsonEncode( retorno, 'json' );	
+					var lote = 	j.content.lote;			
+					$("#FFLOTE").val("E" + j.content.lote );	
+					loader('hide');						
+				},
+				error: function( request, status, error ){ 
+					loader('hide');
+					mensagem( 'e', error )
+				}
+			});
+		}else{
+			document.getElementById("FFLOTE").value = "";	
+		}
+		//console.log('teste');
+		//console.log(lote)
+		
+	}
 	
 
 
@@ -48,7 +79,14 @@ $("document").ready(function(){
 				format: "dd/mm/yyyy",	
 				language: "pt-BR",
 				autoclose: true
-	});		
+	});	
+	
+	$("#FFGERADOR")
+	.change(function(){
+		controle.teste();
+	});
+
+
 
 
 });

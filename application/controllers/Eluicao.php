@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Eluicao extends CI_Controller {
+class Eluicao extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -125,6 +125,18 @@ class Eluicao extends CI_Controller {
 		$this->load->model('EluicaoModel');
 		$this->EluicaoModel->excluir($this->uri->segment(3));
 		$this->index();		
+	}
+
+	public function gerarLoteEluicao()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('GeradorModel');
+		//pegando a quantidade de eluições gerados com o gerador
+		$lote = $this->GeradorModel->qtdEluicoesGerador( $post['codgerador'] );
+        $lote += 1;	
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote) ,  true );	
+		echo jsonEncodeArray( $this->json ); 
+
 	}
 
 }

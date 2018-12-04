@@ -51,7 +51,7 @@
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off">
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off"  readonly>
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
 					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data:</label>
@@ -67,11 +67,11 @@
         						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
     						</div>
     						 <div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume:</label>
+								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume mCi:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 							</div>
 							 <div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade MCI:</label>
+								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 							</div>
 							<div class="col-main col-sm-1 col-xs-12">
@@ -86,7 +86,6 @@
 								<select class="form-control form-control-sm col-sm-12 col-xs-12" id="FFCQ" name="FFCQ" onchange="mostraDiv()">
 									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>
 									<option <?php if( $retorno[0]["CQ"] == "S") echo "selected"; ?> value="S">Sim</option>
-									
 								</select>
 							</div>							
 						</div>	
@@ -98,7 +97,7 @@
 									    	Eficiência da Eluição
 									  	</div>									  	
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFATIVIDADETEORICA" class="sys-label col-sm-12 col-xs-12">Teórica:</label>
+											<label for="FFATIVIDADETEORICA" class="sys-label col-sm-12 col-xs-12">Atividade Teórica:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADETEORICA" name="FFATIVIDADETEORICA" value="<?php echo $retorno[0]["EFI_ATV_TEORICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
@@ -133,6 +132,13 @@
 												<option <?php if( $retorno[0]["LIMPIDA"] == "S") echo "selected"; ?> value="S">Sim</option>									
 											</select>
 										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFPUREZA_QUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica</label>
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZA_QUIMICA" name="FFPUREZA_QUIMICA">
+												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
+												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>						
+											</select>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -146,14 +152,7 @@
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
-										</div>
-										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFPUREZA_QUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZA_QUIMICA" name="FFPUREZA_QUIMICA">
-												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
-												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>						
-											</select>
-										</div>
+										</div>										
 									</div>
 								</div>
 							</div>
@@ -205,6 +204,7 @@
 			return false;  
 		}
 		mostraDiv();
+
 
 	</script>
 

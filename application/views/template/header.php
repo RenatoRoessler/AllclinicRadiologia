@@ -27,8 +27,6 @@
 	<script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.pt-BR.js') ?>" charset="UTF-8"></script>
 	<script src="<?php echo base_url('assets/js/jquery.mask.min.js') ?>" charset="UTF-8"></script>
 
-
-
 	<?php if(isset($js)){ ?>
 		<script src="<?php echo base_url('assets/'. $js .' ') ?>" type="text/javascript"></script>
 	<?php } ?>
@@ -115,6 +113,9 @@
 							<a href="<?php echo base_url('Fracionamento');  ?>"> Fracionamento</a>
 						</li>
 						<li>
+							<a href="<?php echo base_url('Administrar');  ?>"> Administrar</a>
+						</li>
+						<li>
 							<a href="<?php echo base_url('Evolucao');  ?>"> Evolução</a>
 						</li>
 					</ul>
@@ -124,8 +125,7 @@
 						<i class="fa fa-sign-out"></i>
 						<span class="nav-link-text">Sair</span>	
 					</a>
-				</li>				
-				
+				</li>					
 			</ul>
 
 			<ul class="navbar-nav sidenav-toggler">

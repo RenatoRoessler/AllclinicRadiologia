@@ -37,9 +37,8 @@
 								<option <?php if( $this->input->post("FILTRO_ATIVO") == "S") echo "selected"; ?> value="S">Ativo</option>
 								<option <?php if( $this->input->post("FILTRO_ATIVO")  == "N") echo "selected"; ?> value="N">Inativo</option>
 							</select>
-						</div>
+					</div>
 		    	</div>
-
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12">
