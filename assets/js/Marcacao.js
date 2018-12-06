@@ -1,7 +1,44 @@
 var Marcacao = function(){
 	var _self = this;
 
+	this.gerarLote = function(){
+		let codeluicao = document.getElementById("FFELUICAO").value;
+		if(codeluicao > 0){
+			$.ajax({
+				url : '/AllclinicRadiologia/Marcacao/gerarLoteMarcacao/',
+				type : 'POST',
+				timeout: 30000,
+				data : {
+					'codeluicao' : codeluicao,
+				},
+				beforeSend: function(){
+					loader('show');
+				},
+				success: function( retorno ){
+					var j = jsonEncode( retorno, 'json' );	
+					var lote = 	j.content.lote;			
+					$("#FFLOTE").val("E" + j.content.lote );	
+					loader('hide');						
+				},
+				error: function( request, status, error ){ 
+					loader('hide');
+					mensagem( 'e', error )
+				}
+			});
+		}else{
+			document.getElementById("FFLOTE").value = "";	
+		}		
+	}
 	
+	this.salvar = function(){
+
+		if(document.getElementById("FFFARMACO").selectedIndex == ""){
+			mensagem( 'e', 'Selecione o Farmaco');
+			return false;
+		}
+
+		$("#formularioCadastro").submit();
+	}
 
 }
 
@@ -28,7 +65,7 @@ $("document").ready(function(){
 		});
 	$("#btnSalvar")
 	.click(function(){
-		$("#formularioCadastro").submit();
+		controle.salvar();
 	});	
 
 	$('#FFDATAHORA').datepicker({	
@@ -41,6 +78,15 @@ $("document").ready(function(){
 		language: "pt-BR",
 		autoclose: true
 	});	
-		
+	
+	$("#FFELUICAO")
+	.change(function(){
+		controle.gerarLote();
+	});
+
+	$("#FFKITFABRICANTE")
+		.change(function(){
+			selectFill( $('#FFKITFABRICANTE'), function(){ startSelect('refresh') } );
+		});		
 
 });

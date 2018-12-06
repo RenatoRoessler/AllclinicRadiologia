@@ -1,7 +1,7 @@
 var Eluicao = function(){
 	var _self = this;
 
-	this.teste = function(){
+	this.gerarLote = function(){
 		let codgeardor = document.getElementById("FFGERADOR").value;
 		if(codgeardor > 0){
 			$.ajax({
@@ -83,7 +83,7 @@ $("document").ready(function(){
 	
 	$("#FFGERADOR")
 	.change(function(){
-		controle.teste();
+		controle.gerarLote();
 	});
 
 

@@ -280,7 +280,7 @@ class FabricanteModel extends MY_Model {
 				"select 	f.CODFABRICANTE, ff.CODFARMACO, fa.PH, fa.SOLV_ORGANICO,
 							fa.SOLV_INORGANICO,fa.DESCRICAO as DESCFARMACO
 				from 		fabricante f
-				join        fabricante_farmaco ff on (f.CODFABRICANTE = ff.CODFABRICANTE)
+				join        fabricantefarmaco ff on (f.CODFABRICANTE = ff.CODFABRICANTE)
 				join        farmaco fa on (ff.CODFARMACO = fa.CODFARMACO)
 				where 		f.CODFABRICANTE =  $codfabricante 
 							$FF
@@ -308,7 +308,7 @@ class FabricanteModel extends MY_Model {
 	public function inserirFabricanteFarmaco( $codfabricante, $codfarmaco ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into fabricante_farmaco (CODFABRICANTE, CODFARMACO) 
+			$this->db->query("insert into fabricantefarmaco (CODFABRICANTE, CODFARMACO) 
 							value ( $codfabricante, $codfarmaco)"
 			);
 			if( $this->db->trans_status() === false){
@@ -332,7 +332,7 @@ class FabricanteModel extends MY_Model {
 	public function fabricanteFarmacoJaVinculado( $codfabricante, $codfarmaco ){
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from fabricante_farmaco 
+				" select count(*) as QTD from fabricantefarmaco 
 				   where CODFABRICANTE = $codfabricante
 				   and   CODFARMACO    = $codfarmaco "
 			);
@@ -365,7 +365,7 @@ class FabricanteModel extends MY_Model {
 			$this->db->trans_begin();
 			/* update na conta corrente*/
 			$this->db->query(
-				"delete from fabricante_Farmaco 
+				"delete from fabricanteFarmaco 
 				where codfabricante = $codfabricante 
 				and codfarmaco = $codfarmaco "
 			);

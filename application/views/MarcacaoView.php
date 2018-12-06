@@ -60,12 +60,14 @@
 						    			<thead>
 						    				<tr>
 						    					<th>Código</th>	
+												<th>Lote</th>	
 						    					<th>Data</th>
 						    					<th>Hora</th>
 						    					<th>Usuário</th>
 						    					<th>KIT Fabricante</th>
 						    					<th>KIT Fármaco</th>
 						    					<th>KIT Lote</th>
+												<th>PH</th>
 						    					<th>Editar</th>
 						    					<th>Excluir</th>
 						    				</tr>
@@ -76,12 +78,14 @@
 						    				?>
 						    				<tr id="<?php echo $v['CODMARCACAO']; ?>">
 						    					<td><?php echo $v['CODMARCACAO']; ?></td>
+												<td><?php echo $v['LOTE']; ?></td>
 						    					<td><?php echo $v['DATA1']; ?></td>
 												<td><?php echo $v['HORA']; ?></td>
 												<td><?php echo $v['NOME']; ?></td>
 												<td><?php echo $v['DESCKITFABRICANTE']; ?></td>
 												<td><?php echo $v['DESCKITFARMACO']; ?></td>
 												<td><?php echo $v['KIT_LOTE']; ?></td>
+												<td><?php echo $v['PH']; ?></td>
 						    					<td width="10"> 
 						    						<a href=<?php echo base_url() .'/Marcacao/editar/'. $v['CODMARCACAO']  ?> > 
 						    							<i class="fa fa-edit fa-lg"></i> 

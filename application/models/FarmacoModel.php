@@ -198,7 +198,7 @@ class FarmacoModel extends MY_Model {
 		return false;
 	}
 
-	  /**
+	/**
 	 * 	Metodo Farmaco 
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
@@ -240,7 +240,7 @@ class FarmacoModel extends MY_Model {
 	public function FarmacoPodeSerExcluido( $codfarmaco ){
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from fabricante_farmaco where CODFARMACO = $codfarmaco "
+				" select count(*) as QTD from fabricantefarmaco where CODFARMACO = $codfarmaco "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

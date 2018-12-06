@@ -262,8 +262,9 @@ class EluicaoModel extends MY_Model {
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
-							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE			
-				from 		eluicao e				
+							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, g.LOTE AS LOTEGERADOR			
+				from 		eluicao e	
+				join        gerador g on (e.CODGERADOR = g.CODGERADOR)			
 				where 	    e.DATAINATIVO >= '$dataAtual'
 				order by e.DATA desc
 				"
@@ -276,5 +277,26 @@ class EluicaoModel extends MY_Model {
 			log_message('error', $this->db->error());
 		}
 		return false;
+	}
+
+		/**
+	 *  Pegando a quantidade e marcações gerado a partir da eluição
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return int
+	 */
+	public function qtdMarcacaoGerador( $codeluicao ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from marcacao where CODELUICAO = $codeluicao "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			return $this->dados[0]['QTD'];
+			 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return 0;
 	}
 }

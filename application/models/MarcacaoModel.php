@@ -40,11 +40,12 @@ class MarcacaoModel extends MY_Model {
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
 							m.NCI_CODFABRICANTE, m.NACI_LOTE, m.CQ, m.ORGANICO, m.QUIMICO, m.APELUSER,
 							m.KIT_CODRADIOFARMACO	,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
-							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO
+							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO,
+							m.PH, m.CODFARMACO, m.LOTE
 				from 		marcacao m
 				left join usuario u on (m.apeluser = u.apeluser)
 				left join fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
-				left join fabricante fa on (m.KIT_CODRADIOFARMACO = fa.CODFABRICANTE)
+				left join farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
 				join      eluicao e on (m.CODELUICAO = e.CODELUICAO)
 				join      gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 	  g.CODINST = $_SESSION[CODINST]
@@ -85,27 +86,25 @@ class MarcacaoModel extends MY_Model {
 								DATA,
 								HORA,
 								KIT_CODFABRICANTE,
-								KIT_CODRADIOFARMACO,
 								KIT_LOTE,
-								NCI_CODFABRICANTE,
-								NACI_LOTE,
 								CQ,
 								ORGANICO,
 								QUIMICO,
-								APELUSER
+								APELUSER,
+								LOTE,
+								CODFARMACO
 								) value 
 								($post[FFELUICAO],
 								'$data',
 								'$post[FFHORA]',
 								$post[FFKITFABRICANTE],
-								$post[FFKITRADIOFARMACO],
 								$post[FFKITLOTE],
-								$post[FFNACIFABRICANTE],
-								$post[FFNACILOTE],
 								'$post[FFCQ]',
 								$post[FFORGANICO],
 								$post[FFQUIMICO],
-								'$post[APELUSER]'
+								'$post[APELUSER]',
+								$post[FFPH],
+								$post[FFFARMACO]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -141,13 +140,12 @@ class MarcacaoModel extends MY_Model {
 								HORA = '$post[FFHORA]',
 								CODELUICAO = $post[FFELUICAO],
 								KIT_CODFABRICANTE = $post[FFKITFABRICANTE],
-								KIT_CODRADIOFARMACO = $post[FFKITRADIOFARMACO],
 								KIT_LOTE = $post[FFKITLOTE],
-								NCI_CODFABRICANTE  = $post[FFNACIFABRICANTE],
-								NACI_LOTE = $post[FFNACILOTE],
 								CQ = '$post[FFCQ]',
 								ORGANICO = $post[FFORGANICO],
-								QUIMICO = $post[FFQUIMICO]
+								QUIMICO = $post[FFQUIMICO],
+								PH = $post[FFPH],
+								CODFARMACO =  $post[FFFARMACO]
 															
 							where  	CODMARCACAO = $post[FFCODMARCACAO]"
 			);
@@ -180,7 +178,7 @@ class MarcacaoModel extends MY_Model {
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
 				            m.KIT_LOTE,	m.NCI_CODFABRICANTE, m.NACI_LOTE, m.CQ, m.ORGANICO, 
 				            m.QUIMICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
-				            m.KIT_CODRADIOFARMACO
+				            m.KIT_CODRADIOFARMACO,m.PH, m.CODFARMACO, m.LOTE
 				from 		marcacao m			
 				where 		m.codmarcacao = $codmarcacao
 				"
@@ -242,7 +240,7 @@ class MarcacaoModel extends MY_Model {
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
 				            m.KIT_LOTE,	m.NCI_CODFABRICANTE, m.NACI_LOTE, m.CQ, m.ORGANICO, 
 				            m.QUIMICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
-				            m.KIT_CODRADIOFARMACO
+				            m.KIT_CODRADIOFARMACO, m.CODFARMACO
 				from 		marcacao m
 				join        eluicao e on (m.CODELUICAO = e.CODELUICAO)
 				JOIN        gerador g on (e.CODGERADOR = g.CODGERADOR)

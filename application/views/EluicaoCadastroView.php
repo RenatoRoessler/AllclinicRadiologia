@@ -142,7 +142,6 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="row col-sm-3 col-xs-12" style="visibility: hidden;" id="PH">	
 								<div class="form-group col-main col-sm-12 col-xs-12">					
 									<div class="card">

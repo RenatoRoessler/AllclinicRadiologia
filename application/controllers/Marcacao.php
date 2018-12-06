@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Marcacao extends CI_Controller {
+class Marcacao extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -51,6 +51,11 @@ class Marcacao extends CI_Controller {
 		$this->EluicaoModel->buscaEluicoesAtivas();
 		$dados['eluicao'] = $this->EluicaoModel->dados;
 
+		/*carregando os farmacos */ 
+		$this->load->model('FarmacoModel');
+		$this->FarmacoModel->buscaTodosFarmacos();
+		$dados['farmaco'] = $this->FarmacoModel->dados;
+
 		/*carregando os Fabricantes  */ 
 		$this->load->model('FabricanteModel');
 		$this->FabricanteModel->buscaFabricantePeloTipo( 1 );
@@ -71,11 +76,9 @@ class Marcacao extends CI_Controller {
 		$this->form_validation->set_rules('FFELUICAO','Eluição','required');
 		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
 		$this->form_validation->set_rules('FFHORA','Hora','required');
-		$this->form_validation->set_rules('FFNACIFABRICANTE','NaCI Fabricante ','required');
-		$this->form_validation->set_rules('FFNACILOTE','NaCI lote','required');	
-		$this->form_validation->set_rules('FFKITFABRICANTE','Kit Fabricnte','required');
-		$this->form_validation->set_rules('FFKITRADIOFARMACO','Kit Radiofarmaco','required');	
+		$this->form_validation->set_rules('FFKITFABRICANTE','Kit Fabricnte','required');	
 		$this->form_validation->set_rules('FFKITLOTE','Kit lote','required');		
+		$this->form_validation->set_rules('FFPH','PH','required');	
 		if($post['FFCQ'] == 'S'){
 			$this->form_validation->set_rules('FFORGANICO','Eficiência Organico','required');
 			$this->form_validation->set_rules('FFQUIMICO','Eficiência Quimico','required');
@@ -115,9 +118,13 @@ class Marcacao extends CI_Controller {
 		$this->load->model('FabricanteModel');
 		$this->FabricanteModel->buscaFabricantePeloTipo( 1 );
 		$dados['fabricantes'] = $this->FabricanteModel->dados;
+		/*carregando os farmacos */ 
+		$this->load->model('FarmacoModel');
+		$this->FarmacoModel->buscaTodosFarmacos();
+		$dados['farmaco'] = $this->FarmacoModel->dados;
  		/* Radiofarmacos */
-		$this->FabricanteModel->buscaFabricantePeloTipo( 2 );
-		$dados['radiofarmacos'] = $this->FabricanteModel->dados;
+		//$this->FabricanteModel->buscaFabricantePeloTipo( 2 );
+		//$dados['radiofarmacos'] = $this->FabricanteModel->dados;
 		/* carregando a marcação */ 
 		$this->load->model('MarcacaoModel');
 		$this->MarcacaoModel->buscaMarcacao( $this->uri->segment(3) );
@@ -128,11 +135,22 @@ class Marcacao extends CI_Controller {
 		$this->load->view('MarcacaoCadastroView');
 		$this->load->view('template/footer');
 	}
-
 	public function excluir()
 	{
 		$this->load->model('MarcacaoModel');
 		$this->MarcacaoModel->excluir($this->uri->segment(3));
 		$this->index();		
+	}
+
+	public function gerarLoteMarcacao()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('EluicaoModel');
+		//pegando a quantidade de eluições gerados com o gerador
+		$lote = $this->EluicaoModel->qtdMarcacaoGerador( $post['codeluicao'] );
+        $lote += 1;	
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote) ,  true );	
+		echo jsonEncodeArray( $this->json ); 
+
 	}
 }

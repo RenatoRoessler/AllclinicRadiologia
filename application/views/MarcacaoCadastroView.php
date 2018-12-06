@@ -35,7 +35,7 @@
 								<label for="FFCODMARCACAO" class="sys-label col-sm-12 col-xs-12">Código:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODMARCACAO" name="FFCODMARCACAO" value="<?php echo $retorno[0]["CODMARCACAO"]; ?>"  readonly >
 							</div>
-							<div class="col-main col-sm-2 col-xs-12">
+							<div class="col-main col-sm-3 col-xs-12">
 								<label for="FFELUICAO" class="sys-label col-sm-12 col-xs-12">Eluição:</label>	
 								<select class="form-control form-control-sm" id="FFELUICAO" name="FFELUICAO" data-live-search="true">
 								<option <?php if( $retorno[0]["CODELUICAO"] == "") echo "selected"; ?> value="">Selecione a Eluição</option>
@@ -43,16 +43,20 @@
 									foreach ($eluicao as $k => $v) {
 									$sel = ($v["CODELUICAO"] == $retorno[0]["CODELUICAO"]  ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODELUICAO'];?>" <?php echo $sel; ?> > <?php echo $v["CODELUICAO"]  .'  -  ' .$v["DATA1"] . ' - ' .$v["HORA"]; ?> </option>
+									<option value="<?php echo $v['CODELUICAO'];?>" <?php echo $sel; ?> > <?php echo 'Gerador: ' . $v["LOTEGERADOR"] .' /Eluição: ' . $v["LOTE"]  .'  -  ' .$v["DATA1"] . ' - ' .$v["HORA"]; ?> </option>
 									<?php  
 										}
 									?>									
 								</select>
 							</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>" autocomplete="off" readonly>
+							</div>
 							 <div class="form-group col-main col-sm-2 col-xs-12">
 					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data Controle:</label>
 					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"];  ?>"  autocomplete="off"/>
+					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
 					                <span class="input-group-addon">
 					                      <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
@@ -60,33 +64,21 @@
 					        </div>
 					        <div class="col-main col-sm-2 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Controle</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]["HORA"];  ?>" />
+        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
     						</div>
-    						<div class="col-main col-sm-2 col-xs-12">
-								<label for="FFNACIFABRICANTE" class="sys-label col-sm-12 col-xs-12">NaCI Fabricante:</label>	
-								<select class="form-control form-control-sm" id="FFNACIFABRICANTE" name="FFNACIFABRICANTE" data-live-search="true">
-								<option <?php if( $retorno[0]["NCI_CODFABRICANTE"] == "") echo "selected"; ?> value="">Selecione o Fabricante</option>
-								<?php
-									foreach ($fabricantes as $k => $v) {
-									$sel = ($v["CODFABRICANTE"] == $retorno[0]["NCI_CODFABRICANTE"]  ) ? 'selected' : '';
-								?>
-									<option value="<?php echo $v['CODFABRICANTE'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"]  ?> </option>
-									<?php  
-										}
-									?>									
-								</select>
-							</div>
-							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFNACILOTE" class="sys-label col-sm-12 col-xs-12">NaCI Lote:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFNACILOTE" name="FFNACILOTE" value="<?php echo $retorno[0]["NACI_LOTE"];  ?>" autocomplete="off">
-							</div>
 											        		
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFKITFABRICANTE" class="sys-label col-sm-12 col-xs-12">KIT Fabricante:</label>	
-								<select class="form-control form-control-sm" id="FFKITFABRICANTE" name="FFKITFABRICANTE" data-live-search="true">
-								<option <?php if( $retorno[0]["KIT_CODFABRICANTE"] == "") echo "selected"; ?> value="">Selecione o Fabricante</option>
+								<select class="form-control form-control-sm" id="FFKITFABRICANTE" name="FFKITFABRICANTE" data-live-search="true"
+								data-sfa='FFFARMACO' 
+								data-sft="<?php echo criptLow( 'FARMACO' );?>" 
+								data-sfci="<?php echo criptLow( 'CODFARMACO' );?>" 
+								data-sfcl="<?php echo criptLow( 'DESCRICAO' );?>" 
+								data-sfw="<?php echo criptLow( "where  CODFARMACO  in(select CODFARMACO from FABRICANTEFARMACO where CODFABRICANTE = {V}) " );?>" 
+								data-sfwa="<?php echo criptLow( "where 1 = 1 " );?> ">
+								<option <?php if(  $retorno[0]["KIT_CODFABRICANTE"] == '' ) echo "selected"; ?> value="">Selecione o Fabricante</option>
 								<?php
 									foreach ($fabricantes as $k => $v) {
 									$sel = ($v["CODFABRICANTE"] == $retorno[0]["KIT_CODFABRICANTE"]  ) ? 'selected' : '';
@@ -98,22 +90,27 @@
 								</select>
 							</div>
 							<div class="col-main col-sm-2 col-xs-12">
-								<label for="FFKITRADIOFARMACO" class="sys-label col-sm-12 col-xs-12">KIT Radiofarmaco:</label>	
-								<select class="form-control form-control-sm" id="FFKITRADIOFARMACO" name="FFKITRADIOFARMACO" data-live-search="true">
-								<option <?php if( $retorno[0]["KIT_CODRADIOFARMACO"] == "") echo "selected"; ?> value="">Selecione o Fabricante</option>
+								<label for="FFFARMACO" class="sys-label col-sm-12 col-xs-12">Farmaco:</label>	
+								<select class="form-control form-control-sm" id="FFFARMACO" name="FFFARMACO" >
+								<option <?php if( $retorno[0]["CODFARMACO"] == "") echo "selected"; ?> value="">Selecione o Farmaco</option>
 								<?php
-									foreach ($radiofarmacos as $k => $v) {
-									$sel = ($v["CODFABRICANTE"] == $retorno[0]["KIT_CODRADIOFARMACO"]  ) ? 'selected' : '';
+									foreach ($farmaco as $k => $v) {
+									$sel = ( $v["CODFARMACO"] == $retorno[0]["CODFARMACO"] ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODFABRICANTE'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"]  ?> </option>
+									<option value="<?php echo $v['CODFARMACO'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"]  ?> </option>
 									<?php  
 										}
 									?>									
 								</select>
 							</div>
+																				
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFKITLOTE" class="sys-label col-sm-12 col-xs-12">KIT Lote:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFKITLOTE" name="FFKITLOTE" value="<?php echo $retorno[0]["KIT_LOTE"];  ?>" >
+							</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" >
 							</div>
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>

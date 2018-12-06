@@ -948,7 +948,7 @@ function selectFill( ob, call ){
 		});
 		var abj = $('#'+o.sfa);
 		$.ajax({
-			url : '/Sys/selectFill',
+			url : '/AllclinicRadiologia/Sys/selectFill',
 			type : 'POST',
 			data : o,
 			timeout: 30000,
@@ -984,7 +984,7 @@ function selectFill( ob, call ){
 function selectFillLD( o, a ){
 	if( a ){
 		o.prop('disabled',true);
-		o.after( '<img id="sfld'+o.prop('id')+'" class="sys-sf-loader" src="/assets/images/loader-sf.gif"/>' );
+		o.after( '<img id="sfld'+o.prop('id')+'" class="sys-sf-loader" src="/AllclinicRadiologia/assets/images/loader-sf.gif"/>' );
 	}else{
 		o.prop('disabled',false);
 		$('#sfld'+o.prop('id')).remove();
