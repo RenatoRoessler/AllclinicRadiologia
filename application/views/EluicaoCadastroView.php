@@ -73,13 +73,6 @@
 							 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
-							</div>
-							<div class="col-main col-sm-1 col-xs-12">
-								<label for="FFATIVO" class="sys-label col-sm-12 col-xs-12">Ativo:</label>
-								<select class="form-control form-control-sm col-sm-12 col-xs-12" id="FFATIVO" name="FFATIVO">
-									<option <?php if( $retorno[0]["ATIVO"] == "S") echo "selected"; ?> value="S">Ativo</option>
-									<option <?php if( $retorno[0]["ATIVO"] == "N") echo "selected"; ?> value="N">Inativo</option>
-								</select>
 							</div>	
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
