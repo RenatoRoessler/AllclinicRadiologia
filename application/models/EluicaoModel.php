@@ -255,8 +255,15 @@ class EluicaoModel extends MY_Model {
 	 *
 	 * 	@return array
 	 */
-	public function buscaEluicoesAtivas( ) {
-		$dataAtual = date("Y-m-d H:i:s");
+	public function buscaEluicoes( $ativo = true, $codeluicao = 0 ) {
+		$FF = '';
+		if($ativo =='S'){
+			$dataAtual = date("Y-m-d H:i:s");
+			$FF .= " and e.DATAINATIVO >= '$dataAtual'";
+		}
+		if($codeluicao > 0){
+			$FF .= " and  e.CODELUICAO = $codeluicao "; 
+		}		
 		try {			
 			$this->dados = $this->query(
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
@@ -265,7 +272,8 @@ class EluicaoModel extends MY_Model {
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, g.LOTE AS LOTEGERADOR			
 				from 		eluicao e	
 				join        gerador g on (e.CODGERADOR = g.CODGERADOR)			
-				where 	    e.DATAINATIVO >= '$dataAtual'
+				where 	   1 =1 
+				$FF
 				order by e.DATA desc
 				"
 			);			
@@ -284,10 +292,10 @@ class EluicaoModel extends MY_Model {
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
 	 * 	@return int
 	 */
-	public function qtdMarcacaoGerador( $codeluicao ){
+	public function qtdMarcacaoGerador( $codeluicao, $codmarcacao = 0 ){
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from marcacao where CODELUICAO = $codeluicao "
+				" select count(*) as QTD from marcacao where CODELUICAO = $codeluicao and CODMARCACAO  <> $codmarcacao "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

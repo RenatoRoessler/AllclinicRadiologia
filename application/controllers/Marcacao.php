@@ -48,7 +48,7 @@ class Marcacao extends MY_Controller {
 
  		/*carregando as Eluições */ 
 		$this->load->model('EluicaoModel');
-		$this->EluicaoModel->buscaEluicoesAtivas();
+		$this->EluicaoModel->buscaEluicoes();
 		$dados['eluicao'] = $this->EluicaoModel->dados;
 
 		/*carregando os farmacos */ 
@@ -108,12 +108,8 @@ class Marcacao extends MY_Controller {
 
 	public function editar()
 	{
-		$dados['js'] = 'js/Marcacao.js';
+		$dados['js'] = 'js/Marcacao.js';	
 		
-		/*carregando as Eluições */ 
-		$this->load->model('EluicaoModel');
-		$this->EluicaoModel->buscaEluicoesAtivas();
-		$dados['eluicao'] = $this->EluicaoModel->dados;
 		/*carregando os Fabricantes  */ 
 		$this->load->model('FabricanteModel');
 		$this->FabricanteModel->buscaFabricantePeloTipo( 1 );
@@ -122,18 +118,22 @@ class Marcacao extends MY_Controller {
 		$this->load->model('FarmacoModel');
 		$this->FarmacoModel->buscaTodosFarmacos();
 		$dados['farmaco'] = $this->FarmacoModel->dados;
- 		/* Radiofarmacos */
-		//$this->FabricanteModel->buscaFabricantePeloTipo( 2 );
-		//$dados['radiofarmacos'] = $this->FabricanteModel->dados;
+
 		/* carregando a marcação */ 
 		$this->load->model('MarcacaoModel');
 		$this->MarcacaoModel->buscaMarcacao( $this->uri->segment(3) );
- 		$dados['retorno'] = $this->MarcacaoModel->dados;
+		$dados['retorno'] = $this->MarcacaoModel->dados;
+		 
+		 /*carregando as Eluições */ 
+		$this->load->model('EluicaoModel');
+		$this->EluicaoModel->buscaEluicoes( false, $dados['retorno'][0]['CODELUICAO']);
+		$dados['eluicao'] = $this->EluicaoModel->dados;
 
  		$dados['MSG'] = $this->session->MSG;
  		$this->load->view('template/header',$dados);
 		$this->load->view('MarcacaoCadastroView');
 		$this->load->view('template/footer');
+		
 	}
 	public function excluir()
 	{
@@ -147,7 +147,7 @@ class Marcacao extends MY_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$this->load->model('EluicaoModel');
 		//pegando a quantidade de eluições gerados com o gerador
-		$lote = $this->EluicaoModel->qtdMarcacaoGerador( $post['codeluicao'] );
+		$lote = $this->EluicaoModel->qtdMarcacaoGerador( $post['codeluicao'], $post['codmarcacao']  );
         $lote += 1;	
 		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote) ,  true );	
 		echo jsonEncodeArray( $this->json ); 

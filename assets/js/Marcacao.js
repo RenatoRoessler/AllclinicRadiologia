@@ -3,6 +3,7 @@ var Marcacao = function(){
 
 	this.gerarLote = function(){
 		let codeluicao = document.getElementById("FFELUICAO").value;
+		let codmarcaco = document.getElementById("FFCODMARCACAO").value;
 		if(codeluicao > 0){
 			$.ajax({
 				url : '/AllclinicRadiologia/Marcacao/gerarLoteMarcacao/',
@@ -10,6 +11,7 @@ var Marcacao = function(){
 				timeout: 30000,
 				data : {
 					'codeluicao' : codeluicao,
+					'codmarcacao' : codmarcaco,
 				},
 				beforeSend: function(){
 					loader('show');
