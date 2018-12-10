@@ -291,8 +291,12 @@ class EluicaoModel extends MY_Model {
 	 */
 	public function qtdMarcacaoGerador( $codeluicao, $codmarcacao = 0 ){
 		try {
+			$FF = "";
+			if($codmarcacao  > 0){
+				$FF .= " and CODMARCACAO  <> $codmarcacao  ";
+			}
 			$this->dados =  $this->query(
-				" select count(*) as QTD from marcacao where CODELUICAO = $codeluicao and CODMARCACAO  <> $codmarcacao "
+				" select count(*) as QTD from marcacao where CODELUICAO = $codeluicao $FF "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

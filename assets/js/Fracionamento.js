@@ -18,11 +18,8 @@ var Fracionamento = function(){
 			type : 'POST',
 			timeout: 30000,
 			data : {
-				'Codigo' :  '1',
 				'CODMARCACAO' : $('#FFMARCACAO').val(),
-				'CODFRACIONAMENTO' : $('#FFCODFRACIONAMENTO').val(),
 				'CODAGTOEXA' : $('#FFCODAGTOEXA1').val(),
-				'ATIVIDADE' : $('#FFATIVIDADE').val() > 0 ? $('#FFATIVIDADE').val() : 0,
 			},
 			beforeSend: function(){
 				loader('show');
@@ -30,7 +27,7 @@ var Fracionamento = function(){
 			success: function( retorno ){
 				var j = jsonEncode( retorno, 'json' );
 				mensagem(j.content.tipoMsg , j.content.Mensagem);
-				let codigo = j.content.codfracionamento;
+				let codigo = j.content.codmarcacao;
 				loader('hide');
 				ir('/AllclinicRadiologia/Fracionamento/editar/' +  codigo);
 			},

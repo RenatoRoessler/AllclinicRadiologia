@@ -19,7 +19,7 @@
 			$action  =  base_url() .'Fracionamento/atualizar';
             echo form_open($action , $attributes);
             ?>
-            	<input type="hidden" id="FFCODFRACIONAMENTO1" name="FFCODFRACIONAMENTO1" value="<?php echo $retorno[0]["CODFRACIONAMENTO"]; ?>" >	
+            	<input type="hidden" id="FFCODMARCACAO1" name="FFCODMARCACAO1" value="<?php echo $marcacao[0]["CODMARCACAO"]; ?>" >	
             	<input type="hidden" class="col-sm-12 col-xs-12 form-control" id="FFPRONTUARIO" name="FFPRONTUARIO" value="" >	
 				<input type="hidden"  id="FFCODAGTOEXA1" name="FFCODAGTOEXA1" value="" >	
 					
@@ -35,23 +35,37 @@
 					<div role="tabpanel" class="tab-pane active" id="geral">
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFCODFRACIONAMENTO" class="sys-label col-sm-12 col-xs-12">Código:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODFRACIONAMENTO" name="FFCODFRACIONAMENTO" value="<?php echo $retorno[0]["CODFRACIONAMENTO"]; ?>"  readonly >
+								<label for="FFMARCACAO" class="sys-label col-sm-12 col-xs-12">Código:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFMARCACAO" name="FFMARCACAO" value="<?php echo $marcacao[0]["CODMARCACAO"]; ?>"  readonly >
 							</div>
-							<div class="col-main col-sm-2 col-xs-12">
-								<label for="FFMARCACAO" class="sys-label col-sm-12 col-xs-12">Marcação:</label>	
-								<select class="form-control form-control-sm" id="FFMARCACAO" name="FFMARCACAO" data-live-search="true">
-								<option <?php if( $retorno[0]["CODMARCACAO"] == "") echo "selected"; ?> value="">Selecione a Marcação</option>
-								<?php
-									foreach ($marcacao as $k => $v) {
-									$sel = ($v["CODMARCACAO"] == $retorno[0]["CODMARCACAO"]  ) ? 'selected' : '';
-								?>
-									<option value="<?php echo $v['CODMARCACAO'];?>" <?php echo $sel; ?> > <?php echo 'Cód. ' .$v["CODMARCACAO"] .'  /Data' .$v["DATA1"]; ?> </option>
-									<?php  
-										}
-									?>									
-								</select>
-							</div>	
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $marcacao[0]["LOTE"]; ?>"  readonly >
+							</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFDATA" class="sys-label col-sm-12 col-xs-12">Data:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFDATA" name="FFDATA" value="<?php echo $marcacao[0]["DATA1"]; ?>"  readonly >
+							</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFHORA" name="FFHORA" value="<?php echo $marcacao[0]["HORAMINUTO"]; ?>"  readonly >
+							</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFUSER" class="sys-label col-sm-12 col-xs-12">Usuário:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFUSER" name="FFUSER" value="<?php echo $marcacao[0]["APELUSER"]; ?>"  readonly >
+							</div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFFABRICANTE" class="sys-label col-sm-12 col-xs-12">Kit Fabricante:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFFABRICANTE" name="FFFABRICANTE" value="<?php echo $marcacao[0]["DESCRICAO"]; ?>"  readonly >
+							</div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFFARMACO" class="sys-label col-sm-12 col-xs-12">Farmaco:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFFARMACO" name="FFFARMACO" value="<?php echo $marcacao[0]["DESCFARMACO"]; ?>"  readonly >
+							</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFPH" class="sys-label col-sm-12 col-xs-12">Farmaco:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $marcacao[0]["PH"]; ?>"  readonly >
+							</div>						
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-4 col-xs-12">
@@ -71,19 +85,13 @@
 						<div class="row col-sm-12 col-xs-12">	
 							<div class="col-md-12">
 								<div class="panel-group" >	
-									<div class="panel panel-default">
-									
+									<div class="panel panel-default">									
 								    	<div class="panel-body table-responsive">
 								    		<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
 								    			<thead>
 								    				<tr>
 						    							<th>Nome</th>
 						    							<th>Procedimento</th>
-						    							<th>Atividade Inicial</th>
-														<th>Hora Inicial</th>
-														<th>Atividade Administrada</th>
-														<th>Hora Administrada</th>
-						    							<th>Administrar</th>
 						    							<th>Excluir</th>
 						    						</tr>
 						    					</thead>
@@ -95,15 +103,6 @@
 								    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 								    					<td><?php echo $v['NOME']; ?></td>
 								    					<td><?php echo $v['NOMEPROCEDIMENTO']; ?></td>
-								    					<td><?php echo $v['ATIVIDADE']; ?></td>
-														<td><?php echo $v['HORAINICIO']; ?></td>
-														<td><?php echo $v['ATV_ADMINISTRADA']; ?></td>
-														<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
-								    					<td width="10"> 
-								    						<a href=<?php echo base_url() .'/Fracionamento/administrarIndex/'. $v['CODITFRACIONAMENTO']  ?> > 
-								    							<i class="fa fa-stethoscope fa-lg"></i>
-								    						</a>
-								    					</td>
 								    					<td width="10"> 
 								    						<a href=<?php echo base_url() .'/Fracionamento/excluirItem/'. $v['CODITFRACIONAMENTO']  ?> > 
 								    							<i class="fa fa-minus-circle fa-lg" style="color:red;"></i> 

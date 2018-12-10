@@ -16,6 +16,7 @@ class Fracionamento extends MY_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$dados['js'] = 'js/Fracionamento.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
+
 		if( !isset($post['FFDATAPESQUISA']) ){
 			$post['FFDATAPESQUISA'] = date("d/m/Y");
 		}
@@ -41,50 +42,23 @@ class Fracionamento extends MY_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function novo()
-	{
-		$dados['js'] = 'js/Fracionamento.js';
- 		$dados['retorno'] = null; 
- 		$dados['MSG'] = $this->session->MSG;
- 			/*  Carregando as marcação */
-		$this->load->model('MarcacaoModel');
-		$this->MarcacaoModel->buscaTodasMarcacao();
-		$dados['marcacao'] = $this->MarcacaoModel->dados;
-		/* Carregando os Pacientes */ 
-		$this->load->model('PacienteModel');
-		$this->PacienteModel->buscaTodosPaciente();
-		$dados['paciente'] = $this->PacienteModel->dados;
-
-		$dados['pacientesAdicionados'] = '';
-
-		$this->load->view('template/header',$dados);
-		$this->load->view('FracionamentoCadastroView');
-		$this->load->view('template/footer');
-	}
-
 	public function adicionar(){
 		/*  Limpando variaveis  */
 		$post = limpaVariavelArray( $this->input->post());
 
 		$this->load->model('FracionamentoModel');
 
-		if($post['CODFRACIONAMENTO']){
-			$codigo = $post['CODFRACIONAMENTO'];
-		}else{
-			$post['CODINST'] = $_SESSION['CODINST'];
-			$codigo = $this->FracionamentoModel->inserir($post);
-		}
-		if( $codigo ){
-			$post['CODFRACIONAMENTO'] = $codigo;
+		if( $post['CODMARCACAO'] ){
+			$codigo = $post['CODMARCACAO'];
 			$coditem = $this->FracionamentoModel->inserirItemFracionamento($post);
 			if( $coditem ){
-				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso','codfracionamento' => $codigo ) ,  true );	
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso','codmarcacao' => $codigo ) ,  true );	
 			}else{
-				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao adicionar 1','codfracionamento' => '1' ) ,  true );	
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao adicionar ','codmarcacao' => $codigo ) ,  true );	
 			}	
 		}	
 		else{
-			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar 2','codfracionamento' => '2' ) ,  true );
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar ','codfracionamento' => $codigo ) ,  true );
 		}
 		echo jsonEncodeArray( $this->json );  		
 	}
@@ -92,23 +66,21 @@ class Fracionamento extends MY_Controller {
 	public function editar( $cod = null)
 	{
 		$dados['js'] = 'js/Fracionamento.js';
-		/*  Carregando as marcação */
-		$this->load->model('MarcacaoModel');
-		$this->MarcacaoModel->buscaTodasMarcacao();
-		$dados['marcacao'] = $this->MarcacaoModel->dados;
+		$codmarcacao = $cod > 0 ? $cod : $this->uri->segment(3);
 		/* Carregando os Pacientes */ 
 		$this->load->model('PacienteModel');
 		$this->PacienteModel->buscaTodosPaciente();
 		$dados['paciente'] = $this->PacienteModel->dados;
-		
-		$codfracionamento = $cod > 0 ? $cod : $this->uri->segment(3);
-		/* carregando o fracionamento */
- 		$this->load->model('FracionamentoModel');
- 		$this->FracionamentoModel->buscaFracionamento( $codfracionamento );
- 		$dados['retorno'] = $this->FracionamentoModel->dados;
- 		/* carregando os Pacientes Fracionados */
- 		$this->FracionamentoModel->buscaItensFracionamento( $codfracionamento );
- 		$dados['pacientesAdicionados'] =  $this->FracionamentoModel->dados;
+
+		/*  Carregando as marcação */
+		$this->load->model('MarcacaoModel');
+		$this->MarcacaoModel->buscaMarcacao($codmarcacao);
+		$dados['marcacao'] = $this->MarcacaoModel->dados;
+		 
+		 // carregando os Pacientes Fracionados 
+		$this->load->model('FracionamentoModel');
+ 		$this->FracionamentoModel->buscaItensFracionamento( $codmarcacao );
+		$dados['pacientesAdicionados'] =  $this->FracionamentoModel->dados;		
 
  		$dados['MSG'] = $this->session->MSG;
  		$this->load->view('template/header',$dados);

@@ -25,10 +25,10 @@ class FracionamentoModel extends MY_Model {
 		try {			
 			$FF = '';
 			if(isset($post['Codigo'])) {
-				$FF .= ( $post['Codigo'] ) ? "and f.CODFRACIONAMENTO = $post[Codigo] " : '';
+				$FF .= ( $post['Codigo'] ) ? "and m.CODMARCACAO = $post[Codigo] " : '';
 			}
 			if(isset($post['Lote'])) {
-				$FF .= ( $post['Lote'] ) ? "and m.KIT_LOTE =  $post[Lote] " : '';
+				$FF .= ( $post['Lote'] ) ? "and m.LOTE =  '$post[Lote]' " : '';
 			}
 			if(isset($post['FFDATAPESQUISA'])) {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
@@ -39,19 +39,23 @@ class FracionamentoModel extends MY_Model {
 				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
 			}
 			$this->dados = $this->query(
-				"select 	f.CODFRACIONAMENTO, f.CODMARCACAO, i.CODITFRACIONAMENTO, i.PRONTUARIO,  
-							i.ATIVIDADE, p.NOME , p.CPF, m.Data, m.HORA, m.KIT_LOTE,
-							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1
-				from 		FRACIONAMENTO f
-				left join ITEMFRACIONAMENTO i on (f.CODFRACIONAMENTO = i.CODFRACIONAMENTO)
-				left join PACIENTE p on (i.PRONTUARIO = p.PRONTUARIO)
-				left join MARCACAO m on (f.CODMARCACAO = m.CODMARCACAO)
-				join ELUICAO e on (m.CODELUICAO = e.CODELUICAO)
-				join GERADOR g on (e.CODGERADOR = g.CODGERADOR)
-				where 		1=1
-				and         g.CODINST = $_SESSION[CODINST]
+				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
+							m.CQ, m.ORGANICO, m.QUIMICO, m.APELUSER,
+							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
+							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO,
+							m.PH, m.CODFARMACO, m.LOTE
+				from 		marcacao m
+				left join usuario u on (m.apeluser = u.apeluser)
+				left join fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
+				left join farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
+				join      eluicao e on (m.CODELUICAO = e.CODELUICAO)
+				join      gerador g on (e.CODGERADOR = g.CODGERADOR)
+				where 	  g.CODINST = $_SESSION[CODINST]
 							$FF
+				order by 	m.CODMARCACAO desc
 				"
+
+				
 			);			
 			$this->dados = $this->dados->result_array();			
 			return true;
@@ -107,11 +111,11 @@ class FracionamentoModel extends MY_Model {
 	public function inserirItemFracionamento( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into ITEMFRACIONAMENTO(
-								CODFRACIONAMENTO,
+			$this->db->query("insert into ITFRACIONAMENTO(
+								CODMARCACAO,
 								CODAGTOEXA
 								) value 
-								($post[CODFRACIONAMENTO],
+								($post[CODMARCACAO],
 								$post[CODAGTOEXA]
 								)"
 			);
@@ -119,7 +123,7 @@ class FracionamentoModel extends MY_Model {
 				$this->db->trans_rollback();				
 			}
 			//pegando o id
-			$id = $this->retornaMaxColuna('itemfracionamento', 'coditfracionamento');
+			$id = $this->retornaMaxColuna('itfracionamento', 'coditfracionamento');
 
 			$this->db->trans_commit();
 			return $id[0]['coditfracionamento'];
@@ -165,20 +169,19 @@ class FracionamentoModel extends MY_Model {
 	 *
 	 * 	@return array
 	 */
-	public function buscaItensFracionamento( $codfracionamento ) {
+	public function buscaItensFracionamento( $codmarcacao ) {
 
 		try {
 			$this->dados = $this->query(
-				"select 	f.CODFRACIONAMENTO, f.CODMARCACAO, i.CODITFRACIONAMENTO, i.PRONTUARIO,  
-							i.ATIVIDADE, p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
-							i.ATIVIDADE, i.HORAINICIO, i.ATV_ADMINISTRADA, i.HORA_ADMINISTRADA
-				from 		FRACIONAMENTO f
-				join ITEMFRACIONAMENTO i on (f.CODFRACIONAMENTO = i.CODFRACIONAMENTO)
+				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO, p.PRONTUARIO,  
+							p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
+							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA
+				from 		ITFRACIONAMENTO i 
 				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
 				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
 				left join PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
 				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
-				where  f.CODFRACIONAMENTO = 	$codfracionamento
+				where  i.CODMARCACAO = 	$codmarcacao
 				"
 			);			
 			$this->dados = $this->dados->result_array();			
@@ -203,13 +206,13 @@ class FracionamentoModel extends MY_Model {
 
 		try {
 			$this->dados = $this->query(
-				"select 	f.CODFRACIONAMENTO
-				from 		ITEMFRACIONAMENTO f
+				"select 	f.CODMARCACAO
+				from 		ITFRACIONAMENTO f
 				where  f.CODITFRACIONAMENTO = 	$coditfracionamento
 				"
 			);			
 			$this->dados = $this->dados->result_array();			
-			return $this->dados[0]['CODFRACIONAMENTO'];
+			return $this->dados[0]['CODMARCACAO'];
 	
 		} catch (Exception $e) {
 			/*	Criando Log*/
@@ -231,7 +234,7 @@ class FracionamentoModel extends MY_Model {
 		try {
 			$this->db->trans_begin();
 			$this->db->query(
-				"delete from itemfracionamento where coditfracionamento = $coditfracionamento "
+				"delete from itfracionamento where coditfracionamento = $coditfracionamento "
 			);
 			if( $this->db->trans_status() === false ){
 				$this->db->trans_rollback();
@@ -247,48 +250,8 @@ class FracionamentoModel extends MY_Model {
 		return false;
 	}
 
-	/**
-	 * 	Metodo para excluir um fracionamento
-	 *
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $codfracionamento integer - integer  fracionamento
-	 *
-	 * 	@return array
-	 */
-	public function excluir( $codfracionamento ) {
 
-		try {
-			$this->db->trans_begin();
-			$this->db->query(
-				"delete from itemfracionamento where codfracionamento = $codfracionamento;
-				 "
-			);
-
-			if( $this->db->trans_status() === false ){
-				$this->db->trans_rollback();
-				return false;
-			}
-	 		$this->db->trans_commit();
-	 		$this->db->trans_begin();
-			$this->db->query(
-				" delete from fracionamento where codfracionamento = $codfracionamento; "
-			);
-
-			if( $this->db->trans_status() === false ){
-				$this->db->trans_rollback();
-				return false;
-			}
-	 		$this->db->trans_commit();
-			return true;
-
-		} catch (Exception $e) {
-			/*	Criando Log*/
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-	/**
+	/**  FALTA VALIDAR
 	 * 	Metodo para pegar um ITEMfracionamento 
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
@@ -300,10 +263,10 @@ class FracionamentoModel extends MY_Model {
 
 		try {	
 			$this->dados = $this->query(
-				"select 	f.CODFRACIONAMENTO, f.HORAINICIO,f.ATIVIDADE,
+				"select 	f.CODMARCACAO, f.HORA_INICIAL,f.ATIVIDADE,
 							f.ATV_ADMINISTRADA,f.HORA_ADMINISTRADA,
 							f.CODITFRACIONAMENTO
-				from 		ITEMFRACIONAMENTO f
+				from 		ITFRACIONAMENTO f
 				where       f.CODITFRACIONAMENTO = 	$coditfracionamento
 				"
 			);			
@@ -317,7 +280,7 @@ class FracionamentoModel extends MY_Model {
 		return false;
 	}
 
-	/**
+	/** FALTA
 	 * 	Metodo para administar
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>

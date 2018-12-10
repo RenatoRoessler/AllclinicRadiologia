@@ -109,7 +109,7 @@ class MarcacaoModel extends MY_Model {
 								'$post[APELUSER]',
 								'$post[FFLOTE]',
 								$post[FFFARMACO],
-								$post[PH]
+								$post[FFPH]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -184,8 +184,12 @@ class MarcacaoModel extends MY_Model {
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
 				            m.KIT_LOTE, m.CQ, m.ORGANICO, 
 				            m.QUIMICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
-				            m.PH, m.CODFARMACO, m.LOTE
-				from 		marcacao m			
+							m.PH, m.CODFARMACO, m.LOTE,
+							DATE_FORMAT(m.HORA,'%H:%i') AS HORAMINUTO, f.DESCRICAO,
+							fa.DESCRICAO AS DESCFARMACO
+				from 		marcacao m
+				join        fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)	
+				left join  	farmaco fa on (m.CODFARMACO = fa.CODFARMACO)	
 				where 		m.codmarcacao = $codmarcacao
 				"
 			);			

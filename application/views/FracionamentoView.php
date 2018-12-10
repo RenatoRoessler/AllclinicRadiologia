@@ -18,10 +18,7 @@
 	      			</div>	  
 	      			<div class="col-xs-1 col-sm-1 pull-right">
 		      			<button type="button" id="btnLimpar" class="btn btn-default btn-sm sys-btn-search" ><i class="fa fa-eraser"></i> Limpar</button>
-	      			</div>
-					<div class="col-md-2 col-xs-2 col-sm-2 pull-right">
-		      			<button type="button" id="btnNovo" class="btn btn-info btn-sm sys-btn-search" ><i class="fa fa-file"></i> Novo Fracionamento</button>
-	      			</div>	      		
+	      			</div>    		
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
@@ -64,12 +61,16 @@
 						    		<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
 						    			<thead>
 						    				<tr>
-						    					<th>Código</th>
-												<th>Cód. Marcação</th>
-						    					<th>Lote</th>
-												<th>Data</th>
-						    					<th>Editar</th>
-						    					<th >Excluir</th>
+											<th>Código</th>	
+												<th>Lote</th>	
+						    					<th>Data</th>
+						    					<th>Hora</th>
+						    					<th>Usuário</th>
+						    					<th>KIT Fabricante</th>
+						    					<th>KIT Fármaco</th>
+						    					<th>KIT Lote</th>
+												<th>PH</th>
+												<th>Fracionar</th>
 						    				</th>
 						    			</thead>
 						    			<tbody>
@@ -78,20 +79,20 @@
 						    				$true =  '<i class="fa fa-check-circle fa-2x">';
 						    				$false =  '<i class="fa fa-times-circle fa-2x">';				
 						    				?>
-						    				<tr id="<?php echo $v['CODFRACIONAMENTO']; ?>">
-						    					<td><?php echo $v['CODFRACIONAMENTO']; ?></td>
+						    				<tr id="<?php echo $v['CODMARCACAO']; ?>">
 						    					<td><?php echo $v['CODMARCACAO']; ?></td>
+												<td><?php echo $v['LOTE']; ?></td>
+						    					<td><?php echo $v['DATA1']; ?></td>
+												<td><?php echo $v['HORA']; ?></td>
+												<td><?php echo $v['NOME']; ?></td>
+												<td><?php echo $v['DESCKITFABRICANTE']; ?></td>
+												<td><?php echo $v['DESCKITFARMACO']; ?></td>
 												<td><?php echo $v['KIT_LOTE']; ?></td>
-												<td><?php echo $v['DATA1']; ?></td>
+												<td><?php echo $v['PH']; ?></td>
 						    					<td width="10"> 
-						    						<a class="btn btn-default" href=<?php echo base_url() .'/Fracionamento/editar/'. $v['CODFRACIONAMENTO']
+						    						<a class="btn btn-default" href=<?php echo base_url() .'/Fracionamento/editar/'. $v['CODMARCACAO']
 						    						  ?> > 
 						    							<i class="fa fa-edit fa-lg" ></i> 
-						    						</a>
-						    					</td>
-						    					<td width="10"> 
-						    						<a class="btn btn-default" href=<?php echo base_url() .'/Fracionamento/excluir/'. $v['CODFRACIONAMENTO']  ?> > 
-						    							<i class="fa fa-minus-circle fa-lg" style="color:red"></i> 
 						    						</a>
 						    					</td>
 
