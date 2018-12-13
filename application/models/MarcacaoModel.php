@@ -212,7 +212,7 @@ class MarcacaoModel extends MY_Model {
 	 *
 	 * 	@return array
 	 */
-	public function excluir( $codmarcacao ) {
+	public function excluirMarcacao( $codmarcacao ) {
 
 		try {
 			$this->db->trans_begin();
@@ -262,6 +262,30 @@ class MarcacaoModel extends MY_Model {
 			$this->dados = $this->dados->result_array();			
 			return true;
 	
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
+	/**
+	 *  verifica se a marcação pode ser Excluida
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return bollean
+	 */
+	public function MarcacaoPodeSerExcluido( $codmarcacao ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from itfracionamento where CODMARCACAO = $codmarcacao "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			if ($this->dados[0]['QTD'] > 0 ){
+				return false;
+			}else{
+				return true;
+			}	 
 		} catch (Exception $e) {
 			/*	Criando Log*/
 			log_message('error', $this->db->error());

@@ -32,9 +32,9 @@ class Administrar extends MY_Controller {
 		$coditfracionamento = $cod > 0 ? $cod : $this->uri->segment(3);
 		 
 		// carregando os Pacientes Fracionados 
-		$this->load->model('FracionamentoModel');
- 		$this->FracionamentoModel->buscaItemFracionamento( $coditfracionamento );
-		$dados['itfracionamento'] =  $this->FracionamentoModel->dados;		
+		$this->load->model('AdministrarModel');
+ 		$this->AdministrarModel->buscaItemFracionamento( $coditfracionamento );
+		$dados['itfracionamento'] =  $this->AdministrarModel->dados;		
 
  		$dados['MSG'] = $this->session->MSG;
  		$this->load->view('template/header',$dados);
@@ -66,10 +66,6 @@ class Administrar extends MY_Controller {
 				$this->session->set_userdata('MSG', array( 's', 'Administrado com sucesso' ));
 			}
 			$this->administracao( $post['FFCODITFRACIONAMENTO'] );
-		}	
-		
+		}			
 	}
-
-
-
 }

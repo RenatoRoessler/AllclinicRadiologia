@@ -108,45 +108,6 @@ class Fracionamento extends MY_Controller {
  		$this->FracionamentoModel->excluir( $this->uri->segment(3) );
  		$this->index();
 	}
-
-	public function administrarIndex($cod = null) 
-	{
-		$dados['js'] = 'js/Fracionamento.js';
-		$codfracionamento = $cod > 0 ? $cod : $this->uri->segment(3);
-		/* carregando o fracionamento */
- 		$this->load->model('FracionamentoModel');
- 		$this->FracionamentoModel->buscaItemFracionamento( $codfracionamento );
- 		$dados['retorno'] = $this->FracionamentoModel->dados;
-
-		$dados['MSG'] = $this->session->MSG;
- 		$this->load->view('template/header',$dados);
-		$this->load->view('FracionamentoAdministrarCadastroView');
-		$this->load->view('template/footer');
-	}
-
-	public function administrar() 
-	{
-		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFATIVIDADE','Atividade','required');
-		$this->form_validation->set_rules('FFHORAINICIO','Hora Inicio','required');
-		$this->form_validation->set_rules('FFATVADMINISTRADA','Atividade Administrada','required|decimal');
-		$this->form_validation->set_rules('FFHORAADMINISTRADA','Hora Administrada','required');
-		$this->load->model('FracionamentoModel');
-		$codigo = null;  
-		if($this->form_validation->run() == FALSE){
-			$this->administrarIndex($post['FFCODITFRACIONAMENTO']);
-		}else{			
-			if($post){
-				$this->FracionamentoModel->administrar($post);
-				$codigo = $post['FFCODITFRACIONAMENTO'];			
-			}
-			if( !$codigo ){
-				$this->session->set_userdata('MSG', array( 'e', 'Falha ao Administrar. <br/>[' . $this->FracionamentoModel->db->error() . ']' ));
-			}else{
-				$this->session->set_userdata('MSG', array( 's', 'Administrado com sucesso' ));
-			}
-			$this->administrarIndex( $post['FFCODITFRACIONAMENTO'] );
-		}	
-	}
 }
+
+

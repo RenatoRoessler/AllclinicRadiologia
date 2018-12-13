@@ -135,12 +135,6 @@ class Marcacao extends MY_Controller {
 		$this->load->view('template/footer');
 		
 	}
-	public function excluir()
-	{
-		$this->load->model('MarcacaoModel');
-		$this->MarcacaoModel->excluir($this->uri->segment(3));
-		$this->index();		
-	}
 
 	public function gerarLoteMarcacao()
 	{
@@ -152,5 +146,20 @@ class Marcacao extends MY_Controller {
 		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote) ,  true );	
 		echo jsonEncodeArray( $this->json ); 
 
+	}
+	public function excluir()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('MarcacaoModel');
+		if($this->MarcacaoModel->MarcacaoPodeSerExcluido( $post['Codigo'] )){
+			if($this->MarcacaoModel->excluirMarcacao( $post['Codigo'] )){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );	
+			}else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao excluir. <br/>[' . $this->MarcacaoModel->db->error() . ']' ) ,  true );	
+			}				
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Fracionameto Gerado' ) ,  true );	
+		}		
+		echo jsonEncodeArray( $this->json ); 
 	}
 }

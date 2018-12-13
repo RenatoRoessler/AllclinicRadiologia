@@ -250,41 +250,4 @@ class FracionamentoModel extends MY_Model {
 		return false;
 	}
 
-
-	/**  FALTA VALIDAR
-	 * 	Metodo para pegar um ITEMfracionamento 
-	 *
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $coditemfracionamento integer 
-	 *
-	 * 	@return array
-	 */
-	public function buscaItemFracionamento( $coditfracionamento ) {
-
-		try {	
-			$this->dados = $this->query(
-				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO, p.PRONTUARIO,  
-							p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
-							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
-							DATE_FORMAT(ag.DATA, '%d/%c/%Y') as DATA1, ag.HORA
-				from 		ITFRACIONAMENTO i 
-				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
-				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
-				left join PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
-				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
-				where  i.CODMARCACAO = 		$coditfracionamento
-				"
-			);			
-			$this->dados = $this->dados->result_array();			
-			return true;
-	
-		} catch (Exception $e) {
-			/*	Criando Log*/
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-
-
 }

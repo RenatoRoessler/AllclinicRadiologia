@@ -69,7 +69,6 @@
 						    					<th>KIT Lote</th>
 												<th>PH</th>
 						    					<th>Editar</th>
-						    					<th>Excluir</th>
 						    				</tr>
 						    			</thead>
 						    			<tbody>
@@ -90,12 +89,7 @@
 						    						<a href=<?php echo base_url() .'/Marcacao/editar/'. $v['CODMARCACAO']  ?> > 
 						    							<i class="fa fa-edit fa-lg"></i> 
 						    						</a>
-						    					</td>
-						    					<td width="10"> 
-						    						<a href=<?php echo base_url() .'/Marcacao/excluir/'. $v['CODMARCACAO']  ?> > 
-						    							<i class="fa fa-minus-circle fa-lg" style="color:red;"></i> 
-						    						</a>
-						    					</td>
+						    					</td>					    				
 						    				</tr>
 						    				<?php } ?>
 						    			</tbody>

@@ -49,8 +49,8 @@
 						    		<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
 						    			<thead>
 						    				<tr>
-						    					<th>Código <br />Gerador</th>	
-						    					<th>Código <br />Marcação</th>
+						    					<th>Lote <br />Gerador</th>	
+						    					<th>Lote <br />Marcação</th>
 						    					<th>Calibração <br />Gerador</th>
 						    					<th>Controle <br />Marcação</th>
 						    					<th>Nome do <br />Paciente</th>
@@ -68,8 +68,6 @@
 						    					<th>KIT<br />Fabricante</th>
 						    					<th>KIT<br />Fármaco</th>
 						    					<th>KIT<br />Lote</th>
-						    					<th>NaCI<br />Fabricante</th>
-						    					<th>NaCI<br />Lote</th>
 						    					<th>Sol<br />Orgânico</th>
 						    					<th>Sol<br />Químico</th>
 						    					<th>Responsável<br />pela Marcação</th>
@@ -79,31 +77,29 @@
 						    				<?php 
 						    				foreach ($evolucao as $k => $v) {  			
 						    				?>
-						    				<tr id="<?php echo $v['CODFRACIONAMENTO']; ?>">
-						    					<td><?php echo $v['CODGERADOR']; ?></td>
-						    					<td><?php echo $v['CODMARCACAO']; ?></td>
+						    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
+						    					<td><?php echo $v['LOTEGERADOR']; ?></td>
+						    					<td><?php echo $v['LOTEMARCACAO']; ?></td>
 						    					<td><?php echo $v['DATAGERADOR']; ?></td>
 						    					<td><?php echo $v['DATAMARCACAO']; ?></td>
-						    					<td><?php echo $v['PACIENTE']; ?></td>
-						    					<td><?php echo $v['ATIVIDADE']; ?></td>
-						    					<td><?php echo $v['HORAINICIO']; ?></td>
-						    					<td><?php echo $v['ATV_ADMINISTRADA']; ?></td>
+						    					<td><?php echo $v['NOME']; ?></td>
+						    					<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>
+						    					<td><?php echo $v['HORA_INICIAL']; ?></td>
+						    					<td><?php echo $v['ATIVIDADE_ADMINISTRADA']; ?></td>
 						    					<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
 						    					<td><?php echo $v['LOTEGERADOR']; ?></td>
-						    					<td><?php echo $v['LOTEELUICAO']; ?></td>
+						    					<td><?php echo $v['LOTEMARCACAO']; ?></td>
 						    					<td><?php echo $v['PUREZA_RADIONUCLIDICA']; ?></td>
 						    					<td><?php echo $v['LIMPIDA']; ?></td>
 						    					<td><?php echo $v['PH']; ?></td>
 						    					<td><?php echo $v['PUREZA_QUIMICA']; ?></td>
 						    					<td><?php echo $v['APELUSER']; ?></td>
-						    					<td><?php echo $v['D_KIT_FABRICANTE']; ?></td>
-						    					<td><?php echo $v['D_KIT_FARMACO']; ?></td>
+						    					<td><?php echo $v['KITFABRICANTE']; ?></td>
+						    					<td><?php echo $v['DFARMACO']; ?></td>
 						    					<td><?php echo $v['KIT_LOTE']; ?></td>
-						    					<td><?php echo $v['NACI_DESCRICAO']; ?></td>
-						    					<td><?php echo $v['NACI_LOTE']; ?></td>
 						    					<td><?php echo $v['ORGANICO']; ?></td>
 						    					<td><?php echo $v['QUIMICO']; ?></td>
-						    					<td><?php echo $v['USERMARCACAO']; ?></td>
+						    					<td><?php echo $v['USEMARCACAO']; ?></td>
 						    				</tr>
 						    				<?php } ?>
 						    			</tbody>

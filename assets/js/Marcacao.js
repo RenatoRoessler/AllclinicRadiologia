@@ -19,7 +19,7 @@ var Marcacao = function(){
 				success: function( retorno ){
 					var j = jsonEncode( retorno, 'json' );	
 					var lote = 	j.content.lote;			
-					$("#FFLOTE").val("E" + j.content.lote );	
+					$("#FFLOTE").val("M" + j.content.lote );	
 					loader('hide');						
 				},
 				error: function( request, status, error ){ 
@@ -33,15 +33,49 @@ var Marcacao = function(){
 	}
 	
 	this.salvar = function(){
-
 		if(document.getElementById("FFFARMACO").selectedIndex == ""){
 			mensagem( 'e', 'Selecione o Farmaco');
 			return false;
 		}
-
 		$("#formularioCadastro").submit();
 	}
 
+	this.excluir = function(a){
+		if(document.getElementById("FFCODMARCACAO").value > 0){
+			dialogo({
+				"titulo":'Excluir Maracação',
+				"texto":'Deseja Excluir',
+				"fnc1":function(){
+					$.ajax({
+						url : '/AllclinicRadiologia/Marcacao/excluir/',
+						type : 'POST',
+						timeout: 30000,
+						data : {
+							'Codigo' : $('#FFCODMARCACAO').val(),
+						},
+						beforeSend: function(){
+							loader('show');
+						},
+						success: function( retorno ){
+							var j = jsonEncode( retorno, 'json' );
+							mensagem(j.content.tipoMsg , j.content.Mensagem);
+							loader('hide');	
+							if(j.content.tipoMsg == 's'){
+								ir('/AllclinicRadiologia/Marcacao');
+							}							
+						},
+						error: function( request, status, error ){ 
+							loader('hide');
+							mensagem( 'e', error )
+						}
+					});
+				},
+				"tipo":'p',
+				"b1":'Confirmar',
+				"b2":'Cancelar' 
+			});
+		}
+	}
 }
 
 $("document").ready(function(){
@@ -89,6 +123,11 @@ $("document").ready(function(){
 	$("#FFKITFABRICANTE")
 		.change(function(){
 			selectFill( $('#FFKITFABRICANTE'), function(){ startSelect('refresh') } );
-		});		
+		});	
+		
+		$("#btnExcluirMarcacao")
+		.click(function(){
+			controle.excluir();
+		});
 
 });

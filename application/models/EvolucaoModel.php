@@ -36,27 +36,40 @@ class EvolucaoModel extends MY_Model {
 				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
 			}
 			$this->dados = $this->query(
-				"select 	i.CODFRACIONAMENTO, g.LOTE as LOTEGERADOR, g.CODGERADOR, m.CODMARCACAO,
-							DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATAGERADOR,
-							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATAMARCACAO, p.NOME as PACIENTE,
-							i.ATIVIDADE, i.HORAINICIO, i.ATV_ADMINISTRADA, i.HORA_ADMINISTRADA,
-							e.LOTE as LOTEELUICAO, e.PUREZA_RADIONUCLIDICA, e.LIMPIDA,
-							e.PH, e.PUREZA_QUIMICA, g.APELUSER, m.KIT_CODFABRICANTE,
-							m.KIT_CODRADIOFARMACO, m.KIT_LOTE, m.NCI_CODFABRICANTE,
-							m.NACI_LOTE, ffkitfabricante.DESCRICAO as D_KIT_FABRICANTE,
-							ffkitfarmaco.DESCRICAO as D_KIT_FARMACO, 
-							naci.DESCRICAO as NACI_DESCRICAO, m.ORGANICO, m.QUIMICO,
-							m.APELUSER as USERMARCACAO
+				"select 	i.CODITFRACIONAMENTO, 
+							g.LOTE as LOTEGERADOR,  
+							e.LOTE AS LOTEELUICAO,
+							DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATAGERADOR, 
+							m.LOTE as LOTEMARCACAO,
+							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATAMARCACAO,
+							p.NOME,
+							i.ATIVIDADE_INICIAL,
+							i.HORA_INICIAL,
+							i.ATIVIDADE_ADMINISTRADA,
+							i.HORA_ADMINISTRADA,
+							e.PUREZA_RADIONUCLIDICA,
+							e.LIMPIDA,
+							e.PH,
+							e.PUREZA_QUIMICA,
+							g.APELUSER,
+							f.DESCRICAO as KITFABRICANTE,
+							fa.DESCRICAO as DFARMACO,
+							m.KIT_LOTE,
+							m.ORGANICO,
+							m.QUIMICO,
+							m.APELUSER as USEMARCACAO
 
-				from 	    ITEMFRACIONAMENTO i
-				join        FRACIONAMENTO f on (i.CODFRACIONAMENTO = f.CODFRACIONAMENTO)
-				join        MARCACAO m on (f.CODMARCACAO = m.CODMARCACAO)
+
+				from 	    ITFRACIONAMENTO i
+				join        MARCACAO m on (i.CODMARCACAO = m.CODMARCACAO)
 				join        ELUICAO e on (m.CODELUICAO = e.CODELUICAO)
 				join        GERADOR g on (e.CODGERADOR = g.CODGERADOR)
-				join        PACIENTE p on (i.PRONTUARIO = p.PRONTUARIO)
-				left join   FABRICANTE ffkitfabricante on (m.KIT_CODFABRICANTE = ffkitfabricante.CODFABRICANTE)
-				left join   FABRICANTE ffkitfarmaco on (m.KIT_CODRADIOFARMACO = ffkitfarmaco.CODFABRICANTE)
-				left join   FABRICANTE naci on (m.NCI_CODFABRICANTE = naci.CODFABRICANTE)
+				join        AGTOEXAME ae on (i.CODAGTOEXA = ae.CODAGTOEXA)
+				join        AGENDAMENTO ag on (ae.CODAGTO = ag.CODAGTO)
+				join        PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
+				join        FABRICANTE f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
+				join        FARMACO    fa on (m.CODFARMACO = fa.CODFARMACO)
+				
 				where 		1=1
 				and         g.CODINST = $_SESSION[CODINST]
 							$FF
