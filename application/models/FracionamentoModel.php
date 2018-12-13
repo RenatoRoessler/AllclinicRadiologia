@@ -165,7 +165,7 @@ class FracionamentoModel extends MY_Model {
 	 * 	Metodo para pegar os item de um fracionamento 
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $codfracionamento integer 
+	 *	@param $codmarcacao integer 
 	 *
 	 * 	@return array
 	 */
@@ -263,11 +263,16 @@ class FracionamentoModel extends MY_Model {
 
 		try {	
 			$this->dados = $this->query(
-				"select 	f.CODMARCACAO, f.HORA_INICIAL,f.ATIVIDADE,
-							f.ATV_ADMINISTRADA,f.HORA_ADMINISTRADA,
-							f.CODITFRACIONAMENTO
-				from 		ITFRACIONAMENTO f
-				where       f.CODITFRACIONAMENTO = 	$coditfracionamento
+				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO, p.PRONTUARIO,  
+							p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
+							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
+							DATE_FORMAT(ag.DATA, '%d/%c/%Y') as DATA1, ag.HORA
+				from 		ITFRACIONAMENTO i 
+				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
+				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
+				left join PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
+				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
+				where  i.CODMARCACAO = 		$coditfracionamento
 				"
 			);			
 			$this->dados = $this->dados->result_array();			
@@ -280,39 +285,6 @@ class FracionamentoModel extends MY_Model {
 		return false;
 	}
 
-	/** FALTA
-	 * 	Metodo para administar
-	 *
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $post Array - array com dados do $_POST
-	 *
-	 * 	@return array
-	 */
-	public function administrar( $post ){
-		try{
-			$this->db->trans_begin();
-			$this->db->query("update  ITEMFRACIONAMENTO set 
-								ATIVIDADE = $post[FFATIVIDADE],
-								HORAINICIO = '$post[FFHORAINICIO]',
-								ATV_ADMINISTRADA = $post[FFATVADMINISTRADA],
-								HORA_ADMINISTRADA = '$post[FFHORAADMINISTRADA]'
-								where CODITFRACIONAMENTO =  $post[FFCODITFRACIONAMENTO]"
-			);
-			if( $this->db->trans_status() === false){
-				$this->db->trans_rollback();				
-			}
-			//pegando o id
-			$id = $this->retornaMaxColuna('itemfracionamento', 'coditfracionamento');
 
-			$this->db->trans_commit();
-			return $id[0]['coditfracionamento'];
-		} catch (Exception $e) {
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-
-	
 
 }

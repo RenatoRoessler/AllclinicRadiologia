@@ -123,11 +123,13 @@
 					<div class="col-xs-1 col-sm-1 pull-left">
 		      			<button type="button" id="btnVoltar" class="btn btn-default btn-sm sys-btn-search" ><i class="fa fa-chevron-left"></i> Voltar</button>
 	      			</div>
+				<!--
 				<div class="col-xs-12 col-md-12 col-sm-12">
 					<div class="col-xs-2 col-sm-2 pull-right">
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Confirmar</button>
 	      			</div>
 		    	</div>
+				-->
 			<?php 
             echo form_close();
             ?>
