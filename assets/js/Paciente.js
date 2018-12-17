@@ -1,6 +1,43 @@
 var Paciente = function(){
 	var _self = this;
 
+	this.excluir = function(a){
+		if(document.getElementById("FFPRONTUARIO").value > 0){
+			dialogo({
+				"titulo":'Excluir Paciente',
+				"texto":'Deseja Excluir',
+				"fnc1":function(){
+					$.ajax({
+						url : '/AllclinicRadiologia/Paciente/excluir/',
+						type : 'POST',
+						timeout: 30000,
+						data : {
+							'Codigo' : $('#FFPRONTUARIO').val(),
+						},
+						beforeSend: function(){
+							loader('show');
+						},
+						success: function( retorno ){
+							var j = jsonEncode( retorno, 'json' );
+							mensagem(j.content.tipoMsg , j.content.Mensagem);
+							loader('hide');	
+							if(j.content.tipoMsg == 's'){
+								ir('/AllclinicRadiologia/Paciente');
+							}							
+						},
+						error: function( request, status, error ){ 
+							loader('hide');
+							mensagem( 'e', error )
+						}
+					});
+				},
+				"tipo":'p',
+				"b1":'Confirmar',
+				"b2":'Cancelar' 
+			});
+		}
+	}
+
 	
 
 }
@@ -40,6 +77,11 @@ $("document").ready(function(){
 		format: "dd/mm/yyyy",	
 		language: "pt-BR",
 		autoclose: true
+	});
+
+	$("#btnExcluirPaciente")
+	.click(function(){
+		controle.excluir();
 	});
 		
 

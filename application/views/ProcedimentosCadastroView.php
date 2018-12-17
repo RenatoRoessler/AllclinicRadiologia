@@ -43,7 +43,7 @@
 							</div>
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFATIVO" class="sys-label col-sm-12 col-xs-12">Ativo:</label>
-								<select class="form-control form-control-sm col-sm-12 col-xs-12 selectpicker" id="FFATIVO" name="FFATIVO">
+								<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVO" name="FFATIVO">
 									<option <?php if( $retorno[0]["ATIVO"] == "S") echo "selected"; ?> value="S">Ativo</option>
 									<option <?php if( $retorno[0]["ATIVO"] == "N") echo "selected"; ?> value="N">Inativo</option>
 								</select>

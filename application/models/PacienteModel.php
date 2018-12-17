@@ -225,4 +225,29 @@ class PacienteModel extends MY_Model {
 		return false;
 	}
 
+
+		/**
+	 *  verifica se o Paciente pode ser Excluido
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return bollean
+	 */
+	public function pacientePodeSerExcluido( $prontuario ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from agendamento where PRONTUARIO = $prontuario "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			if ($this->dados[0]['QTD'] > 0 ){
+				return false;
+			}else{
+				return true;
+			}	 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
 }

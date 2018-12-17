@@ -83,9 +83,18 @@ class Paciente extends MY_Controller {
 
 		public function excluir()
 	{
+		$post = limpaVariavelArray( $this->input->post());
 		$this->load->model('PacienteModel');
- 		$this->PacienteModel->excluir($this->uri->segment(3));	
-		$this->index();
+		if($this->PacienteModel->PacientePodeSerExcluido( $post['Codigo'] )){
+			if($this->PacienteModel->excluir( $post['Codigo'] )){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );	
+			}else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao excluir. <br/>[' . $this->PacienteModel->db->error() . ']' ) ,  true );	
+			}				
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Paciente com agendamento Gerado' ) ,  true );	
+		}		
+		echo jsonEncodeArray( $this->json ); 
 	}
 
 

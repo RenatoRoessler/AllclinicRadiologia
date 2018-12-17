@@ -14,7 +14,7 @@ class Administrar extends MY_Controller {
 	public function index(){
 		/*  Limpando variaveis  */
 		$post = limpaVariavelArray( $this->input->post());
-		$dados['js'] = 'js/Fracionamento.js'; 
+		$dados['js'] = 'js/Administrar.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
 		
 		//se tiver vazio -- criado por causa do Limpar

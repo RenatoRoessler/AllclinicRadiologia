@@ -24,6 +24,7 @@ $("document").ready(function(){
 			$("input").val('');
 			$('#btnSearch').trigger('click')
 	});	
+	
 
 	$("#btnVoltar")
 	.click(function(){
@@ -63,10 +64,9 @@ $("document").ready(function(){
 		language: "pt-BR",
 		autoclose: true
 	});	
+
 	$(document).ready(function(){
 		$("#sidenavToggler").click();
-   });
-
-	startTooltip();
+    });
 
 });
