@@ -26,12 +26,23 @@ class AdministrarModel extends MY_Model {
 			$FF = '';
 			if(isset($post['FILTROPRONTUARIO'])) {
 				$FF .= ( $post['FILTROPRONTUARIO'] ) ? "and p.PRONTUARIO = $post[FILTROPRONTUARIO] " : '';
+			}			
+			if(isset($post['FILTROLOTE'])) {
+				$FF .= ( $post['FILTROLOTE'] ) ? "and m.LOTE = '$post[FILTROLOTE]' " : '';
+			}
+			//só filtra por data se não tiver prontuario ou lote
+			if( empty($FF)){
+				if(isset($post['FFDATAPESQUISA'])) {
+					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+					$FF .= ( $post['FFDATAPESQUISA'] ) ? "and a.DATA >= '$data' " : '';
+				}
+				if(isset($post['FFDATAFINALPESQUISA'])) {
+					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
+					$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and a.DATA <= '$data' " : '';
+				}
 			}
 			if(isset($post['FILTRONOME'])) {
 				$FF .= ( $post['FILTRONOME'] ) ? "and p.NOME LIKE '%$post[FILTRONOME]%' " : '';
-			}
-			if(isset($post['FILTROLOTE'])) {
-				$FF .= ( $post['FILTROLOTE'] ) ? "and m.LOTE = '$post[FILTROLOTE]' " : '';
 			}
 		
 		

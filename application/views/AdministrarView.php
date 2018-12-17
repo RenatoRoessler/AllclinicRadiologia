@@ -24,16 +24,34 @@
 		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
 		    		<div class="form-group col-main col-sm-1 col-xs-2">
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Prontuario:</label>
-						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTROPRONTUARIO" name="FILTROPRONTUARIO" value="<?php echo $this->input->post("FILTROPRONTUARIO") ?>"  >
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTROPRONTUARIO" name="FILTROPRONTUARIO" value="<?php echo $this->input->post("FILTROPRONTUARIO") ?>" autocomplete="off" >
 					</div>	
-					<div class="form-group col-main col-sm-2 col-xs-2">
+					<div class="form-group col-main col-sm-3 col-xs-2">
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Nome Paciente:</label>
-						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTRONOME" name="FILTRONOME" value="<?php echo $this->input->post("FILTRONOME") ?>"  >
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTRONOME" name="FILTRONOME" value="<?php echo $this->input->post("FILTRONOME") ?>" autocomplete="off" >
 					</div>			    	
 					<div class="form-group col-main col-sm-2 col-xs-2">
 						<label for="FILTROLOTE" class="sys-label col-sm-12 col-xs-12">Lote Marcação:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTROLOTE" name="FILTROLOTE" value="<?php echo $this->input->post("FILTROLOTE") ?>"  style="text-transform:uppercase"  autocomplete="off">
-					</div> 					
+					</div> 		
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div>
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAFINALPESQUISA' name="FFDATAFINALPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div> 			
 				</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
