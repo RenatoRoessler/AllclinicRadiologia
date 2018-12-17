@@ -187,7 +187,7 @@ class AgendamentoModel extends MY_Model {
 	public function agendamentoPodeSerExcluido( $codagto ){
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from itemfracionamento 
+				" select count(*) as QTD from itfracionamento 
 						where CODAGTOEXA in(select CODAGTOEXA FROM agtoexame where CODAGTO = $codagto ) "
 			);
 			$this->dados = $this->dados->result_array();

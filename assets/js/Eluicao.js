@@ -29,8 +29,7 @@ var Eluicao = function(){
 			document.getElementById("FFLOTE").value = "";	
 		}
 		//console.log('teste');
-		//console.log(lote)
-		
+		//console.log(lote)		
 	}
 	
 

@@ -32,9 +32,6 @@ class EluicaoModel extends MY_Model {
 				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA = '$data' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
-				$FF .= ( $post['FFATIVOFILTRO'] ) ? "and e.ATIVO = '$post[FFATIVOFILTRO]' " : '';
-			}
-			if(isset($post['FFATIVOFILTRO'])) {
 				$dataAtual = date("Y-m-d H:i:s");
 				$FF .= ( $post['FFATIVOFILTRO'] == 'S') ? "and e.DATAINATIVO >= '$dataAtual' " : '';
 				$FF .= ( $post['FFATIVOFILTRO'] == 'N') ? "and e.DATAINATIVO < '$dataAtual' " : '';

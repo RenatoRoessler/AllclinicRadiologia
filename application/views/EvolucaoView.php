@@ -17,7 +17,6 @@
 	      			</div>	      		
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
-		    	
 		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
 				<div class="form-group col-main col-sm-2 col-xs-12">
 						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial</label>
@@ -37,8 +36,7 @@
 					        </span>
 					    </div>
 			        </div>  	
-		    	</div>
-		    
+		    	</div>		    
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12">

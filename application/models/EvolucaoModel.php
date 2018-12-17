@@ -59,7 +59,6 @@ class EvolucaoModel extends MY_Model {
 							m.QUIMICO,
 							m.APELUSER as USEMARCACAO
 
-
 				from 	    ITFRACIONAMENTO i
 				join        MARCACAO m on (i.CODMARCACAO = m.CODMARCACAO)
 				join        ELUICAO e on (m.CODELUICAO = e.CODELUICAO)

@@ -63,6 +63,9 @@ $("document").ready(function(){
 		language: "pt-BR",
 		autoclose: true
 	});	
+	$(document).ready(function(){
+		$("#sidenavToggler").click();
+   });
 
 	startTooltip();
 
