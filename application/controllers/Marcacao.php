@@ -28,6 +28,14 @@ class Marcacao extends MY_Controller {
 		if( !isset($post['FFATIVOFILTRO']) ){
 			$post['FFATIVOFILTRO'] = 'S';
 		}
+		// se não existir
+		if( !isset($post['FFDATAFINAL']) ){
+			$post['FFDATAFINAL'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAFINAL'] < 1){
+			$post['FFDATAFINAL'] = date("d/m/Y");	
+		}
 		/*carregando as Marcações */ 
 		$this->load->model('MarcacaoModel');
 		$this->MarcacaoModel->index( $post );

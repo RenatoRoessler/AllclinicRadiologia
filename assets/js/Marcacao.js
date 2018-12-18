@@ -119,13 +119,18 @@ $("document").ready(function(){
 	.change(function(){
 		controle.gerarLote();
 	});
+	$('#FFDATAFINAL').datepicker({	
+		format: "dd/mm/yyyy",	
+		language: "pt-BR",
+		autoclose: true
+	});	
 
 	$("#FFKITFABRICANTE")
 		.change(function(){
 			selectFill( $('#FFKITFABRICANTE'), function(){ startSelect('refresh') } );
 		});	
 		
-		$("#btnExcluirMarcacao")
+	$("#btnExcluirMarcacao")
 		.click(function(){
 			controle.excluir();
 		});

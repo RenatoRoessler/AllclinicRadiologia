@@ -79,6 +79,11 @@ $("document").ready(function(){
 				language: "pt-BR",
 				autoclose: true
 	});	
+	$('#FFDATAFINAL').datepicker({	
+		format: "dd/mm/yyyy",	
+		language: "pt-BR",
+		autoclose: true
+	});	
 	
 	$("#FFGERADOR")
 	.change(function(){

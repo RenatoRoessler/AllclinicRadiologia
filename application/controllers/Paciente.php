@@ -81,7 +81,7 @@ class Paciente extends MY_Controller {
 		$this->load->view('template/footer');
 	}
 
-		public function excluir()
+	public function excluir()
 	{
 		$post = limpaVariavelArray( $this->input->post());
 		$this->load->model('PacienteModel');

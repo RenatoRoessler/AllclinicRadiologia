@@ -30,9 +30,18 @@
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>"  >
 					</div>
 					<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data</label>
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Início</label>
 					    <div class='input-group date' >
 					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
+					        <span class="input-group-addon">
+					        	<span class="glyphicon glyphicon-calendar"></span>
+					        </span>
+					    </div>
+			        </div>	
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAFINAL" class="sys-label col-sm-12 col-xs-12">Data Final</label>
+					    <div class='input-group date' >
+					    	<input type='text' class="form-control" id='FFDATAFINAL' name="FFDATAFINAL"   autocomplete="off" value="<?php echo $this->input->post("FFDATAFINAL") ? $this->input->post("FFDATAFINAL") : date('d/m/Y');  ?>"/>
 					        <span class="input-group-addon">
 					        	<span class="glyphicon glyphicon-calendar"></span>
 					        </span>

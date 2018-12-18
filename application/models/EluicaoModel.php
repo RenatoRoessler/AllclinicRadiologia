@@ -29,7 +29,11 @@ class EluicaoModel extends MY_Model {
 			}
 			if(isset($post['FFDATAPESQUISA'])) {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA = '$data' " : '';
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA >= '$data' " : '';
+			}
+			if(isset($post['FFDATAFINAL'])) {
+				$dataf = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINAL']))); 
+				$FF .= ( $post['FFDATAFINAL'] ) ? "and e.DATA <= '$dataf' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
 				$dataAtual = date("Y-m-d H:i:s");
@@ -124,7 +128,7 @@ class EluicaoModel extends MY_Model {
 				$this->db->trans_rollback();				
 			}
 			//pegando o id
-			$id = $this->retornaMaxColuna('eluicao', 'codeluicao');
+			$id = $this->retornaMaxColuna('eluicao', 'codeluicao');		
 
 			$this->db->trans_commit();
 			return $id[0]['codeluicao'];
@@ -132,7 +136,7 @@ class EluicaoModel extends MY_Model {
 			log_message('error', $this->db->error());
 		}
 		return false;
-	}
+	}	
 
 	/**
 	 * 	Metodo para atulizar uma Eluição
@@ -304,5 +308,32 @@ class EluicaoModel extends MY_Model {
 			log_message('error', $this->db->error());
 		}
 		return 0;
+	}
+
+	/**
+	 * 	Metodo para aumentar o contador de eluições
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $post Array - array com dados do $_POST
+	 *
+	 * 	@return array
+	 */
+	public function updateNroEluicao( $post ){
+		try{
+			$this->db->trans_begin();
+			$this->db->query("update gerador g set  g.NRO_ELUICAO = (select count(*) from eluicao e  where e.CODGERADOR = 								g.CODGERADOR )
+							where g.CODGERADOR =  $post[FFGERADOR]
+								"
+			);
+			if( $this->db->trans_status() === false){
+				$this->db->trans_rollback();				
+			}			
+
+			$this->db->trans_commit();
+			return true;
+		} catch (Exception $e) {
+			log_message('error', $this->db->error());
+		}
+		return false;
 	}
 }

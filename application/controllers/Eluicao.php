@@ -25,6 +25,14 @@ class Eluicao extends MY_Controller {
 			$post['FFDATAPESQUISA'] = date("d/m/Y");	
 		}
 		// se não existir
+		if( !isset($post['FFDATAFINAL']) ){
+			$post['FFDATAFINAL'] = date("d/m/Y");
+		}
+		//se tiver vazio -- criado por causa do Limpar
+		if($post['FFDATAFINAL'] < 1){
+			$post['FFDATAFINAL'] = date("d/m/Y");	
+		}
+		// se não existir
 		if( !isset($post['FFATIVOFILTRO']) ){
 			$post['FFATIVOFILTRO'] = 'S';
 		}
@@ -91,6 +99,7 @@ class Eluicao extends MY_Controller {
 					$codigo = $post['FFCODELUICAO'];
 				}else{
 					$codigo = $this->EluicaoModel->inserir($post);
+					$this->EluicaoModel->updateNroEluicao( $post );
 				}
 			}
 			if( !$codigo ){

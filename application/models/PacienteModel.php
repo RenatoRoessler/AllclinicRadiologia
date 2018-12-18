@@ -155,7 +155,7 @@ class PacienteModel extends MY_Model {
 	}
 
 
-			/**
+	/**
 	 * 	Metodo para excluir um Paciente
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
@@ -225,8 +225,7 @@ class PacienteModel extends MY_Model {
 		return false;
 	}
 
-
-		/**
+	/**
 	 *  verifica se o Paciente pode ser Excluido
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
 	 * 	@return bollean

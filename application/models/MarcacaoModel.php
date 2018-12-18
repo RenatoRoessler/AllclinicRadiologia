@@ -29,7 +29,11 @@ class MarcacaoModel extends MY_Model {
 			}
 			if(isset($post['FFDATAPESQUISA'])) {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA = '$data' " : '';
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$data' " : '';
+			}
+			if(isset($post['FFDATAFINAL'])) {
+				$dataf = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINAL']))); 
+				$FF .= ( $post['FFDATAFINAL'] ) ? "and m.DATA <= '$dataf' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
 				$dataAtual = date("Y-m-d H:i:s");
