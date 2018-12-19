@@ -31,6 +31,43 @@ var Eluicao = function(){
 		//console.log('teste');
 		//console.log(lote)		
 	}
+
+	this.excluir = function(a){
+		if(document.getElementById("FFCODELUICAO").value > 0){
+			dialogo({
+				"titulo":'Excluir Eluição',
+				"texto":'Deseja Excluir',
+				"fnc1":function(){
+					$.ajax({
+						url : '/AllclinicRadiologia/Eluicao/excluir/',
+						type : 'POST',
+						timeout: 30000,
+						data : {
+							'Codigo' : $('#FFCODELUICAO').val(),
+						},
+						beforeSend: function(){
+							loader('show');
+						},
+						success: function( retorno ){
+							var j = jsonEncode( retorno, 'json' );
+							mensagem(j.content.tipoMsg , j.content.Mensagem);
+							loader('hide');	
+							if(j.content.tipoMsg == 's'){
+								ir('/AllclinicRadiologia/Eluicao');
+							}							
+						},
+						error: function( request, status, error ){ 
+							loader('hide');
+							mensagem( 'e', error )
+						}
+					});
+				},
+				"tipo":'p',
+				"b1":'Confirmar',
+				"b2":'Cancelar' 
+			});
+		}
+	}
 	
 
 
@@ -88,6 +125,11 @@ $("document").ready(function(){
 	$("#FFGERADOR")
 	.change(function(){
 		controle.gerarLote();
+	});
+
+	$("#btnExcluirEluicao")
+	.click(function(){
+		controle.excluir();
 	});
 
 

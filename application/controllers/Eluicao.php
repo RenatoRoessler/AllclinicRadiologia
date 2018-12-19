@@ -131,9 +131,22 @@ class Eluicao extends MY_Controller {
 
 	public function excluir()
 	{
+		//$this->load->model('EluicaoModel');
+		//$this->EluicaoModel->excluir($this->uri->segment(3));
+		//$this->index();	
+		
+		$post = limpaVariavelArray( $this->input->post());
 		$this->load->model('EluicaoModel');
-		$this->EluicaoModel->excluir($this->uri->segment(3));
-		$this->index();		
+		if($this->EluicaoModel->EluicaoPodeSerExcluido( $post['Codigo'] )){
+			if($this->EluicaoModel->excluir( $post['Codigo'] )){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );	
+			}else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao excluir. <br/>[' . $this->EluicaoModel->db->error() . ']' ) ,  true );	
+			}				
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Eluicao Vinculado na marcação' ) ,  true );	
+		}		
+		echo jsonEncodeArray( $this->json ); 
 	}
 
 	public function gerarLoteEluicao()
@@ -144,8 +157,6 @@ class Eluicao extends MY_Controller {
 		$lote = $this->GeradorModel->qtdEluicoesGerador( $post['codgerador'] );
         $lote += 1;	
 		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote) ,  true );	
-		echo jsonEncodeArray( $this->json ); 
-
+		echo jsonEncodeArray( $this->json );
 	}
-
 }

@@ -22,6 +22,9 @@
 			
 		    	<!-- ABAS -->
 				<div class="col-sm-12 col-md-12 col-xs-12">
+					<div class="col-xs-1 col-sm-1 pull-right">
+		      			<button type="button" id="btnExcluirEluicao" class="btn btn-danger btn-sm sys-btn-search" ><i class="fa fa-trash"></i> Excluir</button>
+	      			</div>
 	    			<ul class="nav nav-tabs col-sm-12 col-md-12 col-xs-12" role="tablist">
 	    				<li role="presentation" class="active"><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a></li>
 					</ul>
