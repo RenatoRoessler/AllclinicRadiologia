@@ -76,15 +76,14 @@ class MarcacaoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
-			if(isset($post['FFORGANICO'])){
-				$post['FFORGANICO'] = 0;
-			} 
-			if(isset($post['FFQUIMICO'])){
-				$post['FFQUIMICO'] = 0;
-			}
-			if(isset($post['FFPH'])){
-				$post['FFPH'] = 0;
+			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
+			if($post['FFCQ'] == 'N'){
+				if(isset($post['FFORGANICO'])){
+					$post['FFORGANICO'] = 0;
+				} 
+				if(isset($post['FFQUIMICO'])){
+					$post['FFQUIMICO'] = 0;
+				}
 			}
 
 			$this->db->trans_begin();

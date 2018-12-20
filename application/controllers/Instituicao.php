@@ -53,8 +53,8 @@ class Instituicao extends CI_Controller {
 		$this->load->model('InstituicaoModel');
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFFantasia','Fantasia','required|min_length[10]');
-		$this->form_validation->set_rules('FFRazao','Razão','required|min_length[10]');
+		$this->form_validation->set_rules('FFFantasia','Fantasia','required|min_length[5]');
+		$this->form_validation->set_rules('FFRazao','Razão','required|min_length[5]');
 		$this->form_validation->set_rules('FFCNPJ','CNPJ','required|min_length[9]');
 		if($this->form_validation->run() == FALSE){
 			$this->novo();

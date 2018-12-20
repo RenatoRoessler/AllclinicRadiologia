@@ -224,7 +224,7 @@ class GeradorModel extends MY_Model {
 				from 		gerador g				
 				where 		g.DATAINATIVO >=  '$dataAtual'
 				and         g.CODINST = $codinst
-				order by 	g.LOTE"
+				order by 	g.DATA desc"
 			);			
 			$this->dados = $this->dados->result_array();			
 			return true;

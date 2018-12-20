@@ -42,7 +42,7 @@
 							<div class="form-group col-main col-sm-3 col-xs-12">
 								<label for="FFNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFNOME" name="FFNOME" value="<?php echo $retorno[0]["NOME"]; ?>" 
-								minlength="10" maxlength="70"  placeholder="Informe o Nome" style="text-transform:uppercase">
+								minlength="10" maxlength="70"  placeholder="Informe o Nome" style="text-transform:uppercase" autocomplete="off">
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFCPF" class="sys-label col-sm-12 col-xs-12">CPF:</label>

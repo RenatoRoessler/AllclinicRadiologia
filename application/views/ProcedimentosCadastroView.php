@@ -39,7 +39,7 @@
 							<div class="form-group col-main col-sm-5 col-xs-12">
 								<label for="FFDESCRICAO" class="sys-label col-sm-12 col-xs-12">Descrição:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFDESCRICAO" name="FFDESCRICAO" value="<?php echo $retorno[0]["DESCRICAO"]; ?>" 
-								minlength="10" maxlength="150"  required style="text-transform:uppercase">
+								minlength="10" maxlength="150"  required style="text-transform:uppercase" autocomplete="off">
 							</div>
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFATIVO" class="sys-label col-sm-12 col-xs-12">Ativo:</label>

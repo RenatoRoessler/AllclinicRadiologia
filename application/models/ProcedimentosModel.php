@@ -36,7 +36,7 @@ class ProcedimentosModel extends MY_Model {
 								 when p.ATIVO = 'N' then 'Inativo' end DESCATIVO
 				
 				from 		PROCEDIMENTOS p
-				where 		1=1
+				where 		p.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	p.DESCRICAO"
 			);			
@@ -61,8 +61,8 @@ class ProcedimentosModel extends MY_Model {
 	public function inserir( $post) {
 		try{
 			$this->db->trans_begin();
-			$this->db->query(" insert into PROCEDIMENTOS (DESCRICAO, ATIVO) value (
-							 	upper('$post[FFDESCRICAO]'),'$post[FFATIVO]') "
+			$this->db->query(" insert into PROCEDIMENTOS (DESCRICAO, ATIVO, CODINST) value (
+							 	upper('$post[FFDESCRICAO]'),'$post[FFATIVO]' , $_SESSION[CODINST]) "
 							 );
 			if( $this->db->trans_status() === false){
 				$this->db->trans_roolback();

@@ -55,7 +55,7 @@
 							</div>	
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade Inicial:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $itfracionamento[0]["ATIVIDADE_INICIAL"]; ?>"  onkeyup="somenteNumeros(this); " >
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $itfracionamento[0]["ATIVIDADE_INICIAL"]; ?>"  onkeyup="somenteNumeros(this); " autocomplete="off">
 							</div>							
 						    <div class="col-main col-sm-1 col-xs-12">
        							<label  for="FFHORAINICIO" class="sys-label col-sm-12 col-xs-12">Hora Inicio:</label>
@@ -63,7 +63,7 @@
     						</div>
     						<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFATVADMINISTRADA" class="sys-label col-sm-12 col-xs-12">Atividade Administrada:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATVADMINISTRADA" name="FFATVADMINISTRADA" value="<?php echo $itfracionamento[0]["ATIVIDADE_ADMINISTRADA"]; ?>"  onkeyup="somenteNumeros(this); " >
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATVADMINISTRADA" name="FFATVADMINISTRADA" value="<?php echo $itfracionamento[0]["ATIVIDADE_ADMINISTRADA"]; ?>"  onkeyup="somenteNumeros(this); " autocomplete="off" >
 							</div>
     						 <div class="col-main col-sm-2 col-xs-12">
        							<label  for="FFHORAADMINISTRADA" class="sys-label col-sm-12 col-xs-12">Hora Administrada:</label>

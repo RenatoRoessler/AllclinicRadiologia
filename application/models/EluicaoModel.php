@@ -44,7 +44,7 @@ class EluicaoModel extends MY_Model {
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA, e.LOTE,
-							DATE_FORMAT(e.DATA, '%d/%c/%Y') as DATA1
+							DATE_FORMAT(e.DATA, '%d/%c/%Y') as DATA1, e.PUREZA_RADIOQUIMICA
 				from 		Eluicao e
 				join        Gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 		g.CODINST =  $_SESSION[CODINST]
@@ -74,20 +74,29 @@ class EluicaoModel extends MY_Model {
 			//tratando a data
 			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
 			$datahora= $data . ' ' . $post['FFHORA'];
-			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +4 hour'));
-
-			if(isset($post['FFATIVIDADETEORICA'])){
-				$post['FFATIVIDADETEORICA'] = 0;
-			} 
-			if(isset($post['FFATIVIDADE_MEDIDA'])){
-				$post['FFATIVIDADE_MEDIDA'] = 0;
+			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +15 hour'));
+			
+			if($post['FFCQ'] == 'N'){
+				if(isset($post['FFATIVIDADETEORICA'])){
+					$post['FFATIVIDADETEORICA'] = 0;
+				} 
+				if(isset($post['FFATIVIDADE_MEDIDA'])){
+					$post['FFATIVIDADE_MEDIDA'] = 0;
+				}
+				if(isset($post['FFRESULTADO'])){
+					$post['FFRESULTADO'] = 0;
+				} 
+				if(isset($post['FFPUREZA_RADIONUCLIDICA'])){
+					$post['FFPUREZA_RADIONUCLIDICA'] = 0;
+				}  
+				if(isset($post['FFPUREZARADIOQUIMICA'])){
+					$post['FFPUREZARADIOQUIMICA'] = 0;
+				} 
+				if(isset($post['FFPH'])){
+					$post['FFPH'] = 0;
+				} 
 			}
-			if(isset($post['FFRESULTADO'])){
-				$post['FFRESULTADO'] = 0;
-			} 
-			if(isset($post['FFPUREZA_RADIONUCLIDICA'])){
-				$post['FFPUREZA_RADIONUCLIDICA'] = 0;
-			}  
+			
 
 			$this->db->trans_begin();
 			$this->db->query("insert into ELUICAO(
@@ -100,12 +109,14 @@ class EluicaoModel extends MY_Model {
 								EFI_ATV_MEDIDA,
 								EFI_RESULTADO,
 								PUREZA_RADIONUCLIDICA,
+								PUREZA_RADIOQUIMICA,
 								PUREZA_QUIMICA,
 								LIMPIDA,
 								CODGERADOR,
 								LOTE,
 								DATAINATIVO,
-								DATAHORA
+								DATAHORA,
+								PH
 								) value 
 								('$data',
 								'$post[FFHORA]',
@@ -116,12 +127,14 @@ class EluicaoModel extends MY_Model {
 								$post[FFATIVIDADE_MEDIDA],
 								$post[FFRESULTADO],
 								$post[FFPUREZA_RADIONUCLIDICA],
+								$post[FFPUREZARADIOQUIMICA],
 								'$post[FFPUREZA_QUIMICA]',
 								'$post[FFLIMPIDA]',
 								$post[FFGERADOR],
 								'$post[FFLOTE]',
 								'$datafim',
-								'$datahora'
+								'$datahora',
+								$post[FFPH]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -163,12 +176,14 @@ class EluicaoModel extends MY_Model {
 								EFI_ATV_MEDIDA = $post[FFATIVIDADE_MEDIDA],
 								EFI_RESULTADO = $post[FFRESULTADO],
 								PUREZA_RADIONUCLIDICA = $post[FFPUREZA_RADIONUCLIDICA],
+								PUREZA_RADIOQUIMICA = $post[FFPUREZARADIOQUIMICA],
 								PUREZA_QUIMICA = '$post[FFPUREZA_QUIMICA]',
 								LIMPIDA = '$post[FFLIMPIDA]',
 								CODGERADOR = $post[FFGERADOR],
-								LOTE = 	$post[FFLOTE],
+								LOTE = 	'$post[FFLOTE]',
 								DATAHORA = '$datahora',
-								DATAINATIVO	= '$datafim'			
+								DATAINATIVO	= '$datafim',
+								PH = $post[FFPH]			
 							where  CODELUICAO = $post[FFCODELUICAO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -200,7 +215,7 @@ class EluicaoModel extends MY_Model {
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
-							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE			
+							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, e.PUREZA_RADIOQUIMICA		
 				from 		eluicao e				
 				where 		e.codeluicao = $codeluicao
 				"
@@ -271,6 +286,7 @@ class EluicaoModel extends MY_Model {
 				from 		eluicao e	
 				join        gerador g on (e.CODGERADOR = g.CODGERADOR)			
 				where 	   1 =1 
+				and        g.CODINST  = $_SESSION[CODINST]
 				$FF
 				order by e.DATA desc
 				"

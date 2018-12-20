@@ -33,7 +33,6 @@
 						    					<th>Razão</th>
 						    					<th>CNPJ</th>
 						    					<th>Editar</th>	
-						    					<th>Excluir</th>	
 						    				</tr>
 						    			</thead>
 						    			<tbody>
@@ -49,9 +48,6 @@
 						    						<a href=<?php echo base_url() .'/Instituicao/editar/'. $v['CODINST']  ?> > 
 						    							<i class="fa fa-edit fa-lg "></i> 
 						    						</a>
-						    					</td>
-						    					<td width="10">
-						    						<a href=<?php echo base_url() .'/Instituicao/excluir/'. $v['CODINST']  ?> > <i class="fa fa-minus-circle fa-lg" style="color:red;"></i> </a>    
 						    					</td>
 
 						    				</tr>

@@ -48,7 +48,7 @@ class Procedimentos extends CI_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		//echo var_dump($post);				
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFDESCRICAO','Desrição','required|min_length[10]|max_length[69]');
+		$this->form_validation->set_rules('FFDESCRICAO','Desrição','required|min_length[5]|max_length[69]');
 		$this->form_validation->set_rules('FFATIVO','Ativo','required');
 		$this->load->model('ProcedimentosModel');
 		if($this->form_validation->run() == FALSE){

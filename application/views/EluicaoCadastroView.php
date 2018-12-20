@@ -118,8 +118,8 @@
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPUREZA_RADIONUCLIDICA" name="FFPUREZA_RADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFPUREZA_QUIMICA" class="sys-label col-sm-12 col-xs-12">Radioquimica:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPUREZA_QUIMICA" name="FFPUREZA_QUIMICA" value="<?php echo $retorno[0]["PUREZA_QUIMICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+											<label for="FFPUREZARADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Radioquimica:</label>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPUREZARADIOQUIMICA" name="FFPUREZARADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIOQUIMICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Limpida</label>
