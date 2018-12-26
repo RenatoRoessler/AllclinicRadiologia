@@ -6,12 +6,10 @@
 					<a href="index.html">Home</a>
 				</li>
 				<li class="breadcrumb-item">
-					Pagina em branco
+					Principal
 				</li>
 			</ol>
 			<div class="row">
-				<div class="col-12">
-					<h1>titulo da pagina</h1>
 					<p>	</p>
 				</div>
 			</div>

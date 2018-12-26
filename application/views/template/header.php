@@ -70,6 +70,9 @@
 						<li>
 							<a href="<?php echo base_url('Instituicao');  ?>"> Instituição</a>
 						</li>
+						<li>
+							<a href="<?php echo base_url('Convenio');  ?>"> Convênio</a>
+						</li>
 					</ul>
 				</li>
 				<li class="nav-item">
