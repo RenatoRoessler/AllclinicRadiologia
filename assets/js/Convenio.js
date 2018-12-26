@@ -65,6 +65,17 @@ $("document").ready(function(){
 		controle.excluir();
     });
 
+    $("#btnSearch")
+	.click(function(){
+		$("#formulario").submit();
+    });
+    
+    $("#btnLimpar")
+		.click(function(){
+			$("input").val('');
+			$('#btnSearch').trigger('click')
+	});	
+
 
 
 });

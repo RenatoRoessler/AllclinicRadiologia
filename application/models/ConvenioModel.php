@@ -23,13 +23,20 @@ class ConvenioModel extends MY_Model {
 	public function index( $post ) {
 
 		try {			
-			$FF = '';
+            $FF = '';
+            if(isset($post['FFCodigo'])){
+                $FF .= ( $post['FFCodigo'] ) ? "and c.CODCONV = $post[FFCodigo] " : '';
+            }
+            if(isset($post['FFFiltroDescricao'])){
+                $FF .= ( $post['FFFiltroDescricao'] ) ? "and c.DESCRICAO LIKE upper('%$post[FFFiltroDescricao]%') " : '';
+            }
 
 			$this->dados = $this->query(
                 "Select c.CODCONV, c.DESCRICAO, c.CODINST, i.RAZAO, i.FANTASIA
                 from CONVENIO c 
                 join  INSTITUICAO i on (c.CODINST = i.CODINST)
-                where c.codinst =  $post[CODINST] "
+                where c.codinst =  $post[CODINST] 
+                $FF "
 			);			
 			$this->dados = $this->dados->result_array();			
 			return true;

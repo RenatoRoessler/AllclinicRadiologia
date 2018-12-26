@@ -72,7 +72,7 @@ class Convenio extends MY_Controller {
         $this->load->model('ConvenioModel');
         $this->ConvenioModel->buscaConvenio( $this->uri->segment(3));
         $dados['retorno'] = $this->ConvenioModel->dados;
-         
+        $dados['MSG'] = $this->session->MSG;         
  		$this->load->view('template/header',$dados);
 		$this->load->view('ConvenioCadastroView');
 		$this->load->view('template/footer');

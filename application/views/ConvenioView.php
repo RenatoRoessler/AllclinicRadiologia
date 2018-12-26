@@ -30,9 +30,9 @@
 						<label for="FFCodigo" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCodigo" name="FFCodigo" value="<?php echo $this->input->post("FFCodigo") ?>"  autocomplete="off">
 					</div>
-                    <div class="form-group col-main col-sm-2 col-xs-2">
-						<label for="FFCodigo" class="sys-label col-sm-12 col-xs-12">Descrição:</label>
-						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFDescricao" name="FFDescricao" value="<?php echo $this->input->post("FFDescricao") ?>"  autocomplete="off">
+                    <div class="form-group col-main col-sm-4 col-xs-4">
+						<label for="FFFiltroDescricao" class="sys-label col-sm-12 col-xs-12">Descrição:</label>
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFFiltroDescricao" name="FFFiltroDescricao" value="<?php echo $this->input->post("FFFiltroDescricao") ?>"  autocomplete="off">
 					</div>		
                     
 		    	</div>
@@ -47,7 +47,8 @@
 						    			<thead>
 						    				<tr>
 						    					<th>Código</th>	
-						    					<th>Descriçãoo</th>
+						    					<th>Descrição</th>
+                                                <th>Editar</th>
 						    				</tr>
 						    			</thead>
 						    			<tbody>
