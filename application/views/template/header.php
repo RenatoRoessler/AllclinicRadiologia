@@ -83,14 +83,14 @@
 					<ul class="sidenav-second-level collapse"  id="linksAgenda">
 						<li>
 							<a href="<?php echo base_url('Agendamento');  ?>"> Agendamento</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url('Paciente');  ?>"> Paciente</a>
-						</li>	
+						</li>						
 						<li>
 							<a href="<?php echo base_url('Procedimentos');  ?>"> Procedimentos</a>
 						</li>
 						<!--
+						<li>
+							<a href="<?php echo base_url('Paciente');  ?>"> Paciente</a>
+						</li>	
 						<li>
 							<a href="<?php echo base_url('ConfiguracoesAgenda');  ?>"> Configuração Agenda</a>
 						</li>	

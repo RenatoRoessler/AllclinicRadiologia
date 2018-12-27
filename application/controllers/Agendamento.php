@@ -57,7 +57,12 @@ class Agendamento extends CI_Controller {
  			/* Carregnado os Procedimentos */
  		$this->load->model('ProcedimentosModel');
  		$this->ProcedimentosModel->buscaTodosProcedimento();
- 		$dados['procedimento'] = $this->ProcedimentosModel->dados;
+		$dados['procedimento'] = $this->ProcedimentosModel->dados;
+		 
+		/* Carregando os Convênios*/
+		$this->load->model('ConvenioModel');
+		$this->ConvenioModel->buscaTodosConvenios( $_SESSION['CODINST']  );
+		$dados['convenio'] = $this->ConvenioModel->dados;
 
 		$this->load->view('template/header',$dados);
 		$this->load->view('AgendamentoCadastroView');
@@ -71,7 +76,12 @@ class Agendamento extends CI_Controller {
 		$this->form_validation->set_rules('FFHORA','Hora','required');
 		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
 		$this->form_validation->set_rules('FFPROCEDIMENTO','Procedimento','required');
-		$this->form_validation->set_rules('FFPRONTUARIO','Paciente','required');	
+		$this->form_validation->set_rules('FFNOMEPAC','Nome do Paciente','required|min_length[3]|max_length[99]');	
+		$this->form_validation->set_rules('FFSOBRENOMEPAC','Sobrenome do Paciente','required|min_length[3]|max_length[99]');
+		$this->form_validation->set_rules('FFCPF','CPF','required');	
+		$this->form_validation->set_rules('FFDATANASCIMENTO','Nascimento','required');	
+		$this->form_validation->set_rules('FFPESO','Peso','required');
+		$this->form_validation->set_rules('FFCONVENIO','Convênio','required');		
 	
 		$codigo = null;
 		$this->load->model('AgendamentoModel');
@@ -102,10 +112,14 @@ class Agendamento extends CI_Controller {
  		$this->load->model('PacienteModel');
  		$this->PacienteModel->buscaTodosPaciente();
  		$dados['paciente'] = $this->PacienteModel->dados;
- 			/* Carregnado os Procedimentos */
+ 		/* Carregnado os Procedimentos */
  		$this->load->model('ProcedimentosModel');
  		$this->ProcedimentosModel->buscaTodosProcedimento();
- 		$dados['procedimento'] = $this->ProcedimentosModel->dados;
+		$dados['procedimento'] = $this->ProcedimentosModel->dados;
+		 /* Carregando os Convênios*/
+		$this->load->model('ConvenioModel');
+		$this->ConvenioModel->buscaTodosConvenios( $_SESSION['CODINST']  );
+		$dados['convenio'] = $this->ConvenioModel->dados;
  		/* Carregnado o Atendimento */
  		$this->load->model('AgendamentoModel');
  		$this->AgendamentoModel->buscaAgendamento( $this->uri->segment(3) );

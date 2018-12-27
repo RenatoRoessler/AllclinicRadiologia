@@ -31,21 +31,18 @@ class AgendamentoModel extends MY_Model {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['Data'])));  
 				$FF .= ( $post['Data'] ) ? "and a.DATA = '$data'  " : '';
 			}
-			if(isset($post['FFPRONTUARIO'])) {
-				$FF .= ( $post['FFPRONTUARIO'] ) ? "and a.PRONTUARIO =  $post[FFPRONTUARIO]  " : '';
-			}
 			if(isset($post['FFPROCEDIMENTO'])) {
 				$FF .= ( $post['FFPROCEDIMENTO'] ) ? "and ae.CODPROCEDIMENTO =  $post[FFPROCEDIMENTO]  " : '';
 			}
 	
 			$this->dados = $this->query(
-				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, p.NOME ,p.CPF, a.PRONTUARIO, a.HORA, a.DATA, DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1
+				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF , a.HORA, a.DATA, 
+				DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
+				a.PESO, a.ALTURA
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
-				join PACIENTE p on (a.PRONTUARIO = p.PRONTUARIO)
-				where 		1=1
-				and     a.CODINST = $_SESSION[CODINST]
+				where   a.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	a.DATA, a.hora DESC"
 			);			
@@ -71,18 +68,31 @@ class AgendamentoModel extends MY_Model {
 		try{
 			//tratando a data
 			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO'])));  
 
 			$this->db->trans_begin();
 			$this->db->query("insert into AGENDAMENTO(
 								DATA,
 								HORA,
-								PRONTUARIO,
-								CODINST								
+								NOME,
+								SOBRENOME,
+								CPF,
+								NASCIMENTO,
+								CODINST,
+								PESO,
+								ALTURA,
+								CODCONV							
 								) value 
 								('$data',
 								'$post[FFHORA]',
-								$post[FFPRONTUARIO],
-								$_SESSION[CODINST]							
+								'$post[FFNOMEPAC]',
+								'$post[FFSOBRENOMEPAC]',
+								'$post[FFCPF]',
+								'$dataNascimento',
+								$_SESSION[CODINST],
+								$post[FFPESO],
+								$post[FFALTURA],
+								$post[FFCONVENIO]				
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -122,11 +132,19 @@ class AgendamentoModel extends MY_Model {
 		try{
 			//tratando a data
 			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO']))); 
 			$this->db->trans_begin();
 			$this->db->query(" update AGENDAMENTO set 
 								DATA ='$data', 
 								HORA = '$post[FFHORA]',
-								PRONTUARIO = $post[FFPRONTUARIO]								
+								NOME = '$post[FFNOMEPAC]',	
+								SOBRENOME = '$post[FFSOBRENOMEPAC]',
+								CPF = '$post[FFCPF]',
+								NASCIMENTO = '$dataNascimento',
+								PESO = $post[FFPESO],
+								ALTURA = $post[FFALTURA],
+								CODCONV = $post[FFCONVENIO]
+					
 							where  CODAGTO = $post[FFCODAGTO];
 							"
 			);
@@ -160,12 +178,12 @@ class AgendamentoModel extends MY_Model {
 		try {			
 			
 			$this->dados = $this->query(
-				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, p.NOME ,p.CPF, a.PRONTUARIO, a.HORA, a.DATA,
-							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1
+				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,
+							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
+							a.PESO, a.ALTURA, a.CODCONV
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
-				join PACIENTE p on (a.PRONTUARIO = p.PRONTUARIO)
 				where 		a.CODAGTO = $codagto
 				"
 			);			
@@ -259,12 +277,11 @@ class AgendamentoModel extends MY_Model {
 			}
 			
 			$this->dados = $this->query(
-				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, p.NOME ,p.CPF, a.PRONTUARIO, a.HORA, a.DATA,
-							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA
+				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME ,p.CPF, a.PRONTUARIO, a.HORA, a.DATA,
+							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA, a.SOBRENOME
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
-				join PACIENTE p on (a.PRONTUARIO = p.PRONTUARIO)
 				where 		1 = 1
 				$FF
 				order by a.DATA, a.HORA desc

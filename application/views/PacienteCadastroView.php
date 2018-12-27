@@ -69,7 +69,7 @@
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFPESO" class="sys-label col-sm-12 col-xs-12">Peso:</label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPESO" name="FFPESO" value="<?php echo $retorno[0]["PESO"]; ?>" 
-								 placeholder="Peso.: 000.000" ">
+								 placeholder="Peso.: 000.000" >
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12">Altura:</label>

@@ -38,8 +38,6 @@ var Convenio = function(){
 		}
 	}
 
-
-
 }
 
 $("document").ready(function(){

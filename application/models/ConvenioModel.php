@@ -150,6 +150,34 @@ class ConvenioModel extends MY_Model {
 			log_message('error', $this->db->error());
 		}
 		return false;
-    }
+	}
+	
+		/**
+	 * 	Metodo para buscar os Convênios  
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *
+	 * 	@return array
+	 */
+	public function buscaTodosConvenios( $codinst) {
+	
+		try {			
+			$this->dados = $this->query(
+				"select 	c.CODCONV, c.DESCRICAO		
+				from 		convenio c 		
+				where 	   1 =1 
+				and        c.CODINST  = $codinst
+				order by c.DESCRICAO 
+				"
+			);			
+			$this->dados = $this->dados->result_array();			
+			return true;
+	
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
 
 }
