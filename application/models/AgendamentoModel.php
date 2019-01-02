@@ -85,8 +85,8 @@ class AgendamentoModel extends MY_Model {
 								) value 
 								('$data',
 								'$post[FFHORA]',
-								'$post[FFNOMEPAC]',
-								'$post[FFSOBRENOMEPAC]',
+								upper('$post[FFNOMEPAC]'),
+								upper('$post[FFSOBRENOMEPAC]'),
 								'$post[FFCPF]',
 								'$dataNascimento',
 								$_SESSION[CODINST],
@@ -135,10 +135,10 @@ class AgendamentoModel extends MY_Model {
 			$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO']))); 
 			$this->db->trans_begin();
 			$this->db->query(" update AGENDAMENTO set 
-								DATA ='$data', 
+								DATA = '$data', 
 								HORA = '$post[FFHORA]',
-								NOME = '$post[FFNOMEPAC]',	
-								SOBRENOME = '$post[FFSOBRENOMEPAC]',
+								NOME = upper('$post[FFNOMEPAC]'),	
+								SOBRENOME = upper('$post[FFSOBRENOMEPAC]'),
 								CPF = '$post[FFCPF]',
 								NASCIMENTO = '$dataNascimento',
 								PESO = $post[FFPESO],

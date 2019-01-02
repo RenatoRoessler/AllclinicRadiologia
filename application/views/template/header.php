@@ -6,14 +6,16 @@
 	<title>Allclinic</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/font-awesome/css/font-awesome.min.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-select.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/sb-admin.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/sysmain.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/sys.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-datepicker.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-datetimepicker.min.css') ?>" />
+	
 
 	<script src="<?php echo base_url('assets/bibliotecas/jquery/jquery.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/bootstrap-select.min.js') ?>" ></script>
+	<script src="<?php echo base_url('assets/js/plugins/bootstrap-select.min.js') ?>" ></script>
 	<script src="<?php echo base_url('assets/js/tablesorter/dist/js/jquery.tablesorter.min.js') ?>" ></script>
 	<script src="<?php echo base_url('assets/js/tablesorter/dist/js/jquery.tablesorter.widgets.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/parsley.js') ?>" ></script>

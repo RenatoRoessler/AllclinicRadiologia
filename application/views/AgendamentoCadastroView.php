@@ -20,16 +20,14 @@
             	<input type="hidden" id="FFCODAGTO1" name="FFCODAGTO1" value="<?php echo $retorno[0]["CODAGTO"]; ?>" >
 					
 		    	<input type="hidden" class="col-sm-12 col-xs-12 form-control" id="FFPROCEDIMENTO" name="FFPROCEDIMENTO" value= "<?php echo $retorno[0]['CODPROCEDIMENTO'] ?>" >		
-		    	<!-- ABAS -->
 				<div class="col-sm-12 col-md-12 col-xs-12">
-	    			<ul class="nav nav-tabs col-sm-12 col-md-12 col-xs-12" role="tablist">
-	    				<li role="presentation" class="active"><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a></li>
-					</ul>
+					<div class="col-xs-1 col-sm-1 pull-right">
+		      			<button type="button" id="btnExcluirAgendamento" class="btn btn-danger btn-sm sys-btn-search" ><i class="fa fa-trash"></i> Excluir</button>
+	      			</div>
 				</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;' ></div>
 				<div class="tab-content">
 					<br/>
-					<div role="tabpanel" class="tab-pane active" id="geral">
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFCODAGTO" class="sys-label col-sm-12 col-xs-12">Código:</label>
@@ -85,10 +83,10 @@
 								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12">Altura:</label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFALTURA" name="FFALTURA" value="<?php echo $retorno[0]["ALTURA"]; ?>" 
 								 placeholder="Altura.: 0.000" >
-							</div>	
+							</div>							
 							<div class="col-main col-sm-4 col-xs-12">
 								<label for="FFCONVENIO" class="sys-label col-sm-12 col-xs-12">Convênio:</label>	
-								<select class="form-control form-control-sm" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
+								<select class=" col-sm-12 col-xs-12 selectpicker" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
 								<option <?php if( $retorno[0]["CODCONV"] == "") echo "selected"; ?> value="">Selecione o Convênio</option>
 								<?php
 									foreach ($convenio as $k => $v) {
@@ -99,6 +97,7 @@
 										}
 									?>									
 								</select>
+								
 							</div>
 						</div>
 						<div class="row col-sm-12 col-xs-12">
@@ -112,7 +111,6 @@
 								</div>								
 							</div>		
 						</div>			
-					</div>
 				</div>
 				<br/>
 					<div class="col-xs-1 col-sm-1 pull-left">
@@ -128,6 +126,8 @@
             ?>
 		</div>
 	</div>
+
+
 
 	<?php include VIEWPATH . "_includes/_pesquisaPaciente.php"; ?>
 	<?php include VIEWPATH . "_includes/_pesquisaExame.php"; ?>

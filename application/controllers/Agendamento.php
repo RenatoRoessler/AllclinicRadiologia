@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Agendamento extends CI_Controller {
+class Agendamento extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -130,6 +130,7 @@ class Agendamento extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	/*
 	public function excluir()
 	{
 		$id = $this->uri->segment(3);
@@ -142,6 +143,22 @@ class Agendamento extends CI_Controller {
 			$this->session->set_userdata('MSG', array( 'e', 'Agendamento Fracionado, Não é permitido a exclusão' ));
 		}
 		$this->index(); 		
+	}
+	*/
+	public function excluir()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('AgendamentoModel');
+		if($this->AgendamentoModel->agendamentoPodeSerExcluido( $post['Codigo'] )){
+			if($this->AgendamentoModel->excluir( $post['Codigo'] )){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );	
+			}else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao excluir. <br/>[' . $this->AgendamentoModel->db->error() . ']' ) ,  true );	
+			}				
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Agendamento Fracionado, Não é permitido a exclusão' ) ,  true );	
+		}		
+		echo jsonEncodeArray( $this->json ); 
 	}
 
 	/**
