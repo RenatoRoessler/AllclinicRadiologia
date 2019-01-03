@@ -104,11 +104,11 @@ class Usuarios extends CI_Controller {
 		$dados['titulo'] = 'Página Inicial';
 		$dados['subtitulo'] = 'Postagens Recentes';
 		
-		$this->load->view('template/html-header', $dados);
-		$this->load->view('template/header');
+		//$this->load->view('template/html-header');
+		$this->load->view('template/header', $dados);
 		$this->load->view('manutencaoUsuarioIndex');
 		$this->load->view('template/footer');
-		$this->load->view('template/html-footer');
+		//$this->load->view('template/html-footer');
 		
 	}
 

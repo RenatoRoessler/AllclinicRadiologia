@@ -86,7 +86,7 @@
 							</div>							
 							<div class="col-main col-sm-4 col-xs-12">
 								<label for="FFCONVENIO" class="sys-label col-sm-12 col-xs-12">Convênio:</label>	
-								<select class=" col-sm-12 col-xs-12 selectpicker" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
+								<select class="selectpicker  form-control" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
 								<option <?php if( $retorno[0]["CODCONV"] == "") echo "selected"; ?> value="">Selecione o Convênio</option>
 								<?php
 									foreach ($convenio as $k => $v) {

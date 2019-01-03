@@ -6,29 +6,28 @@
 	<title>Allclinic</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/font-awesome/css/font-awesome.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-select.min.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap-select.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/sb-admin.min.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/sysmain.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/sys.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-datepicker.css') ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-datetimepicker.min.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap-datepicker.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap-datetimepicker.min.css') ?>" />
 	
 
 	<script src="<?php echo base_url('assets/bibliotecas/jquery/jquery.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/plugins/bootstrap-select.min.js') ?>" ></script>
+	
 	<script src="<?php echo base_url('assets/js/tablesorter/dist/js/jquery.tablesorter.min.js') ?>" ></script>
 	<script src="<?php echo base_url('assets/js/tablesorter/dist/js/jquery.tablesorter.widgets.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/parsley.js') ?>" ></script>
-	<script src="<?php echo base_url('assets/js/parsley-pt-br.js') ?>" ></script>
-	
-	<script src="<?php echo base_url('assets/bibliotecas/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/parsley-pt-br.js') ?>" ></script>	
+	<script src="<?php echo base_url('assets/bibliotecas/bootstrap/js//bootstrap.bundle.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/bibliotecas/jquery-easing/jquery.easing.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-datepicker.min.js') ?>"></script> 
 	<script src="<?php echo base_url('assets/js/bootstrap-datepicker.pt-BR.min.js') ?>" charset="UTF-8"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.min.js') ?>"></script> 
 	<script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.pt-BR.js') ?>" charset="UTF-8"></script>
 	<script src="<?php echo base_url('assets/js/jquery.mask.min.js') ?>" charset="UTF-8"></script>
-
+	<script src="<?php echo base_url('assets/bibliotecas/bootstrap/js/bootstrap-select.min.js') ?>" ></script>
 	<?php if(isset($js)){ ?>
 		<script src="<?php echo base_url('assets/'. $js .' ') ?>" type="text/javascript"></script>
 	<?php } ?>
@@ -37,6 +36,7 @@
 	<script src="<?php echo base_url('assets/js/PesquisarPaciente.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/PesquisaExame.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/PesquisaAgendamento.js') ?>"></script>
+	
 	
 </head>
 <body class="bg-light fixed-nav sticky-footer" id="page-top"> 
@@ -155,4 +155,6 @@
 			</ul>
 		</div>
 	</nav>
+
+	
 
