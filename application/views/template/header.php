@@ -65,7 +65,10 @@
 							<a href="<?php echo base_url('farmaco');  ?>"> Farmaco</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url('Fabricante');  ?>"> Gerador / Radiofarmaco</a>
+							<a href="<?php echo base_url('Fabricante');  ?>"> Fabricante</a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('Radioisotopo');  ?>"> Radioisótopo</a>
 						</li>
 						<li>
 							<a href="<?php echo base_url('Gerador');  ?>"> Gerador</a>
