@@ -34,7 +34,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODAGTO" name="FFCODAGTO" value="<?php echo $retorno[0]["CODAGTO"]; ?>"  readonly >
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
-					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data&nbsp;Agendamento:</label>
+					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data:</label>
 					            <div class='input-group date' >
 					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
 					                <span class="input-group-addon">
@@ -66,7 +66,7 @@
 								minlength="19" maxlength="15" placeholder="CPF.: 000.000.000-00" autocomplete="off">
 							</div>								
 							<div class="form-group col-main col-sm-1 col-xs-12">
-					        	<label for="FFDATANASCIMENTO" class="sys-label col-sm-12 col-xs-12">Data Nascimento:</label>
+					        	<label for="FFDATANASCIMENTO" class="sys-label col-sm-12 col-xs-12">Nascimento:</label>
 					            <div class='input-group date' >
 					                <input type='text' class="form-control" id='FFDATANASCIMENTO' name="FFDATANASCIMENTO" value="<?php   echo $retorno[0]["DNASCIMENTO"]   ?>"  autocomplete="off" placeholder="Data de Nascimento" />
 					                <span class="input-group-addon">
@@ -110,7 +110,23 @@
 								  </div>
 								</div>								
 							</div>		
-						</div>			
+						</div>	
+						<div class="row col-sm-12 col-xs-12">
+							<div class="form-group col-main col-sm-5 col-xs-12">
+							<label for="FFRADIOISOTOPO" class="sys-label col-sm-12 col-xs-12">Radioisótopo:</label>	
+								<select class="selectpicker  form-control" id="FFRADIOISOTOPO" name="FFRADIOISOTOPO" data-live-search="true">
+								<option <?php if( $retorno[0]["CODRADIOISOTOPO"] == "") echo "selected"; ?> value="">Selecione o Radioisótopo</option>
+								<?php
+									foreach ($radioisotopos as $k => $v) {
+									$sel = ($v["CODRADIOISOTOPO"] == $retorno[0]["CODRADIOISOTOPO"]  ) ? 'selected' : '';
+								?>
+									<option value="<?php echo $v['CODRADIOISOTOPO'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"] ?> </option>
+									<?php  
+										}
+									?>									
+								</select>								
+							</div>		
+						</div>		
 				</div>
 				<br/>
 					<div class="col-xs-1 col-sm-1 pull-left">

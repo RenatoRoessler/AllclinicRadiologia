@@ -45,7 +45,7 @@
 						    			<thead>
 						    				<tr>
 						    					<th>Código</th>	
-						    					<th>Lote</th>
+						    					<th>Descrição</th>
 						    					<th>Editar</th>
 						    				</tr>
 						    			</thead>

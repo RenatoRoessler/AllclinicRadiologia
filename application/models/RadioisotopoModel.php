@@ -197,5 +197,33 @@ class RadioisotopoModel extends MY_Model {
 	}
 
 
+		/**
+	 * 	Metodo para buscar todos os  Radioisotopos  
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *
+	 * 	@return array
+	 */
+	public function buscaTodosRadioisotopos( ) {
+
+		try {			
+			$FF = '';			
+			$this->dados = $this->query(
+				"select 	r.CODRADIOISOTOPO,r.DESCRICAO			
+				from 		RADIOISOTOPO r	
+				where       r.CODINST = $_SESSION[CODINST]			
+				order by 	r.DESCRICAO"
+			);			
+			$this->dados = $this->dados->result_array();			
+			return true;
+	
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
+
 
 }

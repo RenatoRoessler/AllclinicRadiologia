@@ -64,6 +64,11 @@ class Agendamento extends MY_Controller {
 		$this->ConvenioModel->buscaTodosConvenios( $_SESSION['CODINST']  );
 		$dados['convenio'] = $this->ConvenioModel->dados;
 
+		/**carregando os Radioisótopos */
+		$this->load->model('RadioisotopoModel');
+		$this->RadioisotopoModel->buscaTodosRadioisotopos();
+		$dados['radioisotopos'] = $this->RadioisotopoModel->dados;
+
 		$this->load->view('template/header',$dados);
 		$this->load->view('AgendamentoCadastroView');
 		$this->load->view('template/footer');
@@ -111,7 +116,11 @@ class Agendamento extends MY_Controller {
 		/* Carregnado os Pacientes */
  		$this->load->model('PacienteModel');
  		$this->PacienteModel->buscaTodosPaciente();
- 		$dados['paciente'] = $this->PacienteModel->dados;
+		$dados['paciente'] = $this->PacienteModel->dados;
+		 /**carregando os Radioisótopos */
+		$this->load->model('RadioisotopoModel');
+		$this->RadioisotopoModel->buscaTodosRadioisotopos();
+		$dados['radioisotopos'] = $this->RadioisotopoModel->dados;
  		/* Carregnado os Procedimentos */
  		$this->load->model('ProcedimentosModel');
  		$this->ProcedimentosModel->buscaTodosProcedimento();
