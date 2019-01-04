@@ -32,7 +32,7 @@
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="number" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>" autocomplete="off" >
 					</div>   
-					<div class="form-group col-main col-sm-2 col-xs-12">
+					<div class="form-group col-main col-sm-1 col-xs-12">
 					    <label for="Data" class="sys-label col-sm-12 col-xs-12">Data:</label>
 					    <div class='input-group date' >
 							<input type='text' class="form-control" id='Data' name="Data" value="<?php echo $this->input->post("Data") ?  $this->input->post("Data") :  date ("d/m/Y")  ?>"  autocomplete="off"/>
@@ -41,14 +41,13 @@
 					        </span>
 					    </div>
 					</div>
-					<div class="form-group col-main col-sm-4 col-xs-12">
-						<label for="FFNOMEPAC" class="sys-label col-sm-12 col-xs-12">Paciente:</label>
-						<div class="input-group mb-3">
-						    <input type="text" class="form-control" placeholder="Nome do Paciente" aria-label="Nome do Paciente" aria-describedby="basic-addon2" name="FFNOMEPAC" id="FFNOMEPAC" value= "<?php echo $this->input->post("FFNOMEPAC") ?>" readonly>
-						    <div class="input-group-append">
-							    <button class="btn btn-outline-secondary fa fa-search"  id="btnPesquisaPac" type="button" ></button>
-							 </div>
-						</div>								
+					<div class="form-group col-main col-sm-3 col-xs-12">
+						<label for="FILTERNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTERNOME" name="FILTERNOME" value="<?php echo $this->input->post("FILTERNOME") ?>" autocomplete="off" >							
+					</div>
+					<div class="form-group col-main col-sm-3 col-xs-12">
+						<label for="FILTERSOBRENOME" class="sys-label col-sm-12 col-xs-12">Sobrenome:</label>
+						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTERSOBRENOME" name="FILTERSOBRENOME" value="<?php echo $this->input->post("FILTERSOBRENOME") ?>" autocomplete="off" >							
 					</div>
 					<div class="form-group col-main col-sm-4 col-xs-12">
 						<label for="FFNOMEPROCEDIMENTOTELA" class="sys-label col-sm-12 col-xs-12">Procedimento:</label>
@@ -77,6 +76,7 @@
 						    					<th>Hora</th>
 						    					<th>Paciente</th>
 						    					<th>Exame</th>
+												<th>Sobrenome</th>
 						    					<th>Editar</th>
 						    				</tr>
 						    			</thead>
@@ -91,6 +91,7 @@
 						    					<td><?php echo $v['DATA1']; ?></td>
 						    					<td><?php echo $v['HORA']; ?></td>
 												<td><?php echo $v['NOME']; ?></td>
+												<td><?php echo $v['SOBRENOME']; ?></td>
 												<td><?php echo $v['DESCRICAO']; ?></td>
 						    					<td width="10"> 
 						    						<a href=<?php echo base_url() .'/Agendamento/editar/'. $v['CODAGTO']  ?> > 
@@ -110,7 +111,6 @@
 		</div>
 	</div>
 
-	<?php include VIEWPATH . "_includes/_pesquisaPaciente.php"; ?>
 	<?php include VIEWPATH . "_includes/_pesquisaExame.php"; ?>
 
 

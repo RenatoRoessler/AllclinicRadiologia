@@ -34,6 +34,12 @@ class AgendamentoModel extends MY_Model {
 			if(isset($post['FFPROCEDIMENTO'])) {
 				$FF .= ( $post['FFPROCEDIMENTO'] ) ? "and ae.CODPROCEDIMENTO =  $post[FFPROCEDIMENTO]  " : '';
 			}
+			if(isset($post['FILTERNOME'])) {
+				$FF .= ( $post['FILTERNOME'] ) ? "and a.NOME like  '%$post[FILTERNOME]%'  " : '';
+			}
+			if(isset($post['FILTERSOBRENOME'])) {
+				$FF .= ( $post['FILTERSOBRENOME'] ) ? "and a.SOBRENOME like  '%$post[FILTERSOBRENOME]%'  " : '';
+			}
 	
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF , a.HORA, a.DATA, 

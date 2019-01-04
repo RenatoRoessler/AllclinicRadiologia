@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap-datepicker.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bibliotecas/bootstrap/css/bootstrap-datetimepicker.min.css') ?>" />
 	
+	
 
 	<script src="<?php echo base_url('assets/bibliotecas/jquery/jquery.min.js') ?>"></script>
 	
