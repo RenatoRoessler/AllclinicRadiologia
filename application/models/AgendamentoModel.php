@@ -90,7 +90,8 @@ class AgendamentoModel extends MY_Model {
 								CODINST,
 								PESO,
 								ALTURA,
-								CODCONV					
+								CODCONV	,
+								ATIVIDADE				
 								) value 
 								('$data',
 								'$post[FFHORA]',
@@ -101,7 +102,8 @@ class AgendamentoModel extends MY_Model {
 								$_SESSION[CODINST],
 								$post[FFPESO],
 								$post[FFALTURA],
-								$post[FFCONVENIO]												
+								$post[FFCONVENIO],
+								$post[FFATIVIDADE]												
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -159,7 +161,8 @@ class AgendamentoModel extends MY_Model {
 								NASCIMENTO = '$dataNascimento',
 								PESO = $post[FFPESO],
 								ALTURA = $post[FFALTURA],
-								CODCONV = $post[FFCONVENIO]							
+								CODCONV = $post[FFCONVENIO],
+								ATIVIDADE = $post[FFATIVIDADE]						
 					
 							where  CODAGTO = $post[FFCODAGTO];
 							"
@@ -197,7 +200,7 @@ class AgendamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,
 							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
-							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO
+							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)

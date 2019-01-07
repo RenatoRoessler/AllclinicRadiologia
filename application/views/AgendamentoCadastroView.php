@@ -96,9 +96,9 @@
 									<?php  
 										}
 									?>									
-								</select>
-								
+								</select>								
 							</div>
+							
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-5 col-xs-12">
@@ -109,12 +109,17 @@
 								    <button class="btn btn-outline-secondary fa fa-search"  id="btnPesquisaProcedimento" type="button" ></button>
 								  </div>
 								</div>								
+							</div>	
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $retorno[0]["ATIVIDADE"];  ?>"  onkeyup="somenteNumeros(this)"
+								 placeholder="Atividade em mCi" >
 							</div>		
 						</div>	
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-5 col-xs-12">
-							<label for="FFRADIOISOTOPO" class="sys-label col-sm-12 col-xs-12">Radioisótopo:</label>	
-								<select class="selectpicker  form-control" id="FFRADIOISOTOPO" name="FFRADIOISOTOPO" data-live-search="true">
+							<label for="FFRADIOISOTOPO " class="sys-label col-sm-12 col-xs-12">Radioisótopo:</label>	
+								<select class="form-control selectpicker"  id="FFRADIOISOTOPO" name="FFRADIOISOTOPO" data-live-search="true">
 								<option <?php if( $retorno[0]["CODRADIOISOTOPO"] == "") echo "selected"; ?> value="">Selecione o Radioisótopo</option>
 								<?php
 									foreach ($radioisotopos as $k => $v) {
@@ -125,7 +130,8 @@
 										}
 									?>									
 								</select>								
-							</div>		
+							</div>
+								
 						</div>		
 				</div>
 				<br/>
@@ -143,10 +149,24 @@
 		</div>
 	</div>
 
+	<script type="text/javascript">
+	    function somenteNumeros(num) {
+	    	//campo.value.replace(',','.');
+	        var er = /[^0-9.]/;
+	        er.lastIndex = 0;
+	        var campo = num;
+	    	campo.value =  campo.value.replace(',','.');        
+	        
+	        if (er.test(campo.value)) {
+	          campo.value = "";
+	      	 }		 
+   		}
+	</script>
 
 
 	<?php include VIEWPATH . "_includes/_pesquisaPaciente.php"; ?>
 	<?php include VIEWPATH . "_includes/_pesquisaExame.php"; ?>
+
 
 
 
