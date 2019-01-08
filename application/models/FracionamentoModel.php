@@ -53,9 +53,7 @@ class FracionamentoModel extends MY_Model {
 				where 	  g.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	m.CODMARCACAO desc
-				"
-
-				
+				"				
 			);			
 			$this->dados = $this->dados->result_array();			
 			return true;
@@ -173,13 +171,12 @@ class FracionamentoModel extends MY_Model {
 
 		try {
 			$this->dados = $this->query(
-				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO, p.PRONTUARIO,  
-							p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
+				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO,   
+							ag.NOME , ag.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
 							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA
 				from 		ITFRACIONAMENTO i 
 				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
 				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
-				left join PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
 				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
 				where  i.CODMARCACAO = 	$codmarcacao
 				"

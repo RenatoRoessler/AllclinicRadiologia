@@ -112,16 +112,12 @@
 								<label for="FFKITLOTE" class="sys-label col-sm-12 col-xs-12">KIT Lote:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFKITLOTE" name="FFKITLOTE" value="<?php echo $retorno[0]["KIT_LOTE"];  ?>" autocomplete="off">
 							</div>
-							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" autocomplete="off">
-							</div>
+							
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
 								<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFCQ" name="FFCQ" onchange="mostraDiv()">
-									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>
 									<option <?php if( $retorno[0]["CQ"] == "S") echo "selected"; ?> value="S">Sim</option>
-									
+									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>						
 								</select>
 							</div>														
 						</div>
@@ -131,7 +127,11 @@
 									<div class="card">
 									  	<div class="card-header">
 									    	Eficiência da Marcaçao
-									  	</div>									  	
+									  	</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" autocomplete="off">
+										</div>									  	
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFORGANICO" class="sys-label col-sm-12 col-xs-12">Organico:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFORGANICO" name="FFORGANICO" value="<?php echo $retorno[0]["ORGANICO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">

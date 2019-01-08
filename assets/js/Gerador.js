@@ -17,6 +17,14 @@ var Gerador = function(){
 
 	}	
 
+	this.salvar = function (a) {
+		if($('#FFFABRICANTE').val() == ""){
+			mensagem( 'e', 'Selecione um Fabricante');
+		}else{
+			$("#formularioCadastro").submit();
+		}
+	}
+
 }
 
 $("document").ready(function(){
@@ -45,7 +53,8 @@ $("document").ready(function(){
 
 	$("#btnSalvar")
 	.click(function(){
-		$("#formularioCadastro").submit();
+		//$("#formularioCadastro").submit();
+		controle.salvar();
 	});
 	$('#FFDATAHORA').datepicker({	
 				format: "dd/mm/yyyy",	

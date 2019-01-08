@@ -85,11 +85,11 @@ class Marcacao extends MY_Controller {
 		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
 		$this->form_validation->set_rules('FFHORA','Hora','required');
 		$this->form_validation->set_rules('FFKITFABRICANTE','Kit Fabricnte','required');	
-		$this->form_validation->set_rules('FFKITLOTE','Kit lote','required');		
-		$this->form_validation->set_rules('FFPH','PH','required');	
+		$this->form_validation->set_rules('FFKITLOTE','Kit lote','required');	
 		if($post['FFCQ'] == 'S'){
 			$this->form_validation->set_rules('FFORGANICO','Eficiência Organico','required');
 			$this->form_validation->set_rules('FFQUIMICO','Eficiência Quimico','required');
+			$this->form_validation->set_rules('FFPH','PH','required');
 		}		
 		$codigo = null;
 		$post['APELUSER'] = $_SESSION['APELUSER'];

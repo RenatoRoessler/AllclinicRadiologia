@@ -84,6 +84,9 @@ class MarcacaoModel extends MY_Model {
 				if(isset($post['FFQUIMICO'])){
 					$post['FFQUIMICO'] = 0;
 				}
+				if(isset($post['FFPH'])){
+					$post['FFPH'] = 0;
+				}
 			}
 
 			$this->db->trans_begin();
