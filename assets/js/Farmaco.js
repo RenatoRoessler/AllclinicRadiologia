@@ -38,7 +38,45 @@ var Farmaco = function(){
 		}
 	}
 
+	this.adicionar = function(a){
 
+		if(document.getElementById("FFCODFARMACO").value == ""){
+			mensagem( 'e', 'Salve o Farmaco Primeiro');
+			return false;
+
+		}		
+		if(document.getElementById("FFFABRICANTE").selectedIndex == ""){
+			mensagem( 'e', 'Selecione o Farmaco');
+			return false;
+		}
+		let codfarmaco  = $('#FFCODFARMACO').val() 
+		$.ajax({
+			url : '/AllclinicRadiologia/farmaco/vincular/',
+			type : 'POST',
+			timeout: 30000,
+			data : {
+				'Codigo' :  '1',
+				'CODFABRICANTE' : $('#FFFABRICANTE').val(),
+				'CODFARMACO' : codfarmaco,				
+			},
+			beforeSend: function(){
+				loader('show');
+			},
+			success: function( retorno ){
+				var j = jsonEncode( retorno, 'json' );
+				mensagem(j.content.tipoMsg , j.content.Mensagem);	
+				if(j.content.tipoMsg == 's'){
+					ir('/AllclinicRadiologia/farmaco/editar/' +  codfarmaco);
+				}
+				loader('hide');	
+			},
+			error: function( request, status, error ){ 
+				loader('hide');
+				mensagem( 'e', error )
+			}
+		});	
+	}
+	
 }
 
 $("document").ready(function(){
@@ -74,5 +112,11 @@ $("document").ready(function(){
 	.click(function(){
 		controle.excluir();
 	});
+
+	$("#btnAdicionar")
+	.click(function(){
+		controle.adicionar();
+	});
+
 
 });

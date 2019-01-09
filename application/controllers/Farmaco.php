@@ -31,10 +31,12 @@ class Farmaco extends MY_Controller {
 	{
 		$dados['js'] = 'js/Farmaco.js';
  		$dados['retorno'] = null; 
- 		$dados['MSG'] = $this->session->MSG; 
-
+		$dados['MSG'] = $this->session->MSG; 
+		 
  		$this->load->model('FarmacoModel');
- 		$this->FarmacoModel->buscaFarmacosAtivos();
+		$this->FarmacoModel->buscaFarmacosAtivos();
+		 /*  Carregando os fabricantesFarmacos*/
+		$dados['farmacoFabricante'] = null;
 		$dados['farmaco'] = $this->FarmacoModel->dados;
 		$this->load->view('template/header',$dados);
 		$this->load->view('FarmacoCadastroView');
@@ -75,7 +77,17 @@ class Farmaco extends MY_Controller {
 	{
 		$dados['js'] = 'js/Farmaco.js';
  		//caregando o Farmaco
- 		$this->load->model('FarmacoModel');
+ 		$this->load->model('FarmacoModel');		
+
+		/*  Carregando os fabricantesFarmacos*/
+		$this->FarmacoModel->farmacoFabricante($this->uri->segment(3));
+		$dados['farmacoFabricante'] = $this->FarmacoModel->dados;
+
+		/** Carregando os Fabricantes */
+		$this->load->model('FabricanteModel');
+		$this->FabricanteModel->buscaTodosFabricante();
+		$dados['fabricante'] = $this->FabricanteModel->dados;
+
 		$this->FarmacoModel->buscaFarmaco($this->uri->segment(3));
  		$dados['retorno'] = $this->FarmacoModel->dados;
  		$dados['MSG'] = $this->session->MSG;
@@ -95,9 +107,41 @@ class Farmaco extends MY_Controller {
 				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao excluir. <br/>[' . $this->FarmacoModel->db->error() . ']' ) ,  true );	
 			}				
 		}else{
-			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Farmaco Vinculado' ) ,  true );	
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Farmaco Vinculado - Remova primeiro os Vinculos' ) ,  true );	
 		}		
 		echo jsonEncodeArray( $this->json ); 
+	}
+
+	public function vincular(){
+		/*  Limpando variaveis  */
+		$post = limpaVariavelArray( $this->input->post());
+
+		$this->load->model('FarmacoModel');	
+		
+		if($this->FarmacoModel->farmacoFabricanteJaVinculado( $post['CODFABRICANTE'], $post['CODFARMACO'])){
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Fabricante e Farmaco ja vinculados' ) ,  true );	
+		}else {
+			$codigo = $this->FarmacoModel->inserirFarmacoFabricante($post['CODFABRICANTE'], $post['CODFARMACO']);
+			if( $codigo ){
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso' ) ,  true );	
+			}	
+			else{
+				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
+			}
+		}		
+		echo jsonEncodeArray( $this->json );		
+	}
+
+	public function excluirVinculo()
+	{
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('FarmacoModel');
+		if($this->FarmacoModel->excluirVinculo( $post['CODFABRICANTE'], $post['CODFARMACO'] )){
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
+		}
+		echo jsonEncodeArray( $this->json ); 	
 	}
 
 	

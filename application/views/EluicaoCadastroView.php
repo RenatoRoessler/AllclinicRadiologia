@@ -70,8 +70,8 @@
         						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
     						</div>
     						 <div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume mCi:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume(ml) :</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" placeholder="Volume em ml">
 							</div>
 							 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
@@ -80,8 +80,8 @@
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
 								<select class="form-control form-control-sm col-sm-12 col-xs-12" id="FFCQ" name="FFCQ" onchange="mostraDiv()">
-									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>
 									<option <?php if( $retorno[0]["CQ"] == "S") echo "selected"; ?> value="S">Sim</option>
+									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>
 								</select>
 							</div>							
 						</div>	
@@ -171,17 +171,7 @@
 	</div>
 
 		<script type="text/javascript">
-	    function somenteNumeros(num) {
-	    	//campo.value.replace(',','.');
-	        var er = /[^0-9.]/;
-	        er.lastIndex = 0;
-	        var campo = num;
-	    	campo.value =  campo.value.replace(',','.');        
-	        
-	        if (er.test(campo.value)) {
-	          campo.value = "";
-	      	 }		 
-   		}
+
 
    		function mostraDiv()
 		{

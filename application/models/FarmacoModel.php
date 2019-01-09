@@ -240,7 +240,7 @@ class FarmacoModel extends MY_Model {
 	public function FarmacoPodeSerExcluido( $codfarmaco ){
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from fabricantefarmaco where CODFARMACO = $codfarmaco "
+				" select count(*) as QTD from farmacoFabricante where CODFARMACO = $codfarmaco "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir
@@ -289,5 +289,125 @@ class FarmacoModel extends MY_Model {
 		return false;
 	}
 
+	/**
+	 * 	Metodo para pegar os vinculos de fabricante e farmaco 
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $codfabricante integer 
+	 *
+	 * 	@return array
+	 */
+	public function farmacoFabricante( $codfarmaco ) {
+
+		try {	
+		    $FF = '';				
+			$this->dados = $this->query(
+				"select 	f.CODFABRICANTE, ff.CODFARMACO, fa.PH, fa.SOLV_ORGANICO,
+							fa.SOLV_INORGANICO,fa.DESCRICAO as DESCFARMACO,
+							f.DESCRICAO as DESCFABRICANTE
+				from 		fabricante f
+				join        farmacoFabricante ff on (f.CODFABRICANTE = ff.CODFABRICANTE)
+				join        farmaco fa on (ff.CODFARMACO = fa.CODFARMACO)
+				where 		fa.CODFARMACO =  $codfarmaco 
+							$FF
+				order by 	f.DESCRICAO"
+			);
+			
+			$this->dados = $this->dados->result_array();			
+			return true;
+	
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
+	/**
+	 *  verifica se o farmacoFabricante já está vinculado
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return bollean
+	 */
+	public function farmacoFabricanteJaVinculado( $codfabricante, $codfarmaco ){
+		try {
+			$this->dados =  $this->query(
+				" select count(*) as QTD from farmacoFabricante 
+				   where CODFABRICANTE = $codfabricante
+				   and   CODFARMACO    = $codfarmaco "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero já está vinculadp
+			if ($this->dados[0]['QTD'] > 0 ){
+				return true;
+			}else{
+				return false;
+			}	 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
+	/**
+	 * 	Metodo para inserir o farmacoFabricante
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $post Array - array com dados do $_POST
+	 *
+	 * 	@return array
+	 */
+	public function inserirFarmacoFabricante( $codfabricante, $codfarmaco ){
+		try{
+			$this->db->trans_begin();
+			$this->db->query("insert into farmacofabricante (CODFABRICANTE, CODFARMACO) 
+							value ( $codfabricante, $codfarmaco)"
+			);
+			if( $this->db->trans_status() === false){
+				$this->db->trans_rollback();
+			}
+			$this->db->trans_commit();
+			return true;
+
+
+		} catch (Exception $e) {
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
+
+	/**
+	 * 	Metodo para excluir o farmacofabricante
+	 *
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 *	@param $codfabricante integer - inteiro com o código do fabricante
+	 *	@param $codfarmaco integer - inteiro com o código do farmaco
+	 *
+	 * 	@return array
+	 */
+	public function excluirVinculo( $codfabricante, $codfarmaco ) {
+
+		try {
+			$this->db->trans_begin();
+			/* update na conta corrente*/
+			$this->db->query(
+				"delete from farmacoFabricante 
+				where codfabricante = $codfabricante 
+				and codfarmaco = $codfarmaco "
+			);
+
+			if( $this->db->trans_status() === false ){
+				$this->db->trans_rollback();
+				return false;
+			}
+	 		$this->db->trans_commit();
+			return true;
+
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return false;
+	}
 
 }
