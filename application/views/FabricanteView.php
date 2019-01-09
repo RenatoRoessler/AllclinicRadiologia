@@ -50,7 +50,6 @@
 						    					<th>Código</th>	
 						    					<th>Descrição</th>
 						    					<th>Especificação</th>
-						    					<th>Tipo</th>
 						    					<th>Editar</th>
 						    					<th>Excluir</th>
 						    				</tr>
@@ -63,7 +62,6 @@
 						    					<td><?php echo $v['CODFABRICANTE']; ?></td>
 						    					<td><?php echo $v['DESCRICAO']; ?></td>
 												<td><?php echo $v['ESPECIFICACAO']; ?></td>
-												<td><?php echo $v['TIPODESC']; ?></td>
 						    					<td width="10"> 
 						    						<a  href=<?php echo base_url() .'/Fabricante/editar/'. $v['CODFABRICANTE']  ?> > 
 						    							<i class="fa fa-edit fa-lg"></i> 

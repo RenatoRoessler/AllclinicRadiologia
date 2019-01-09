@@ -64,7 +64,7 @@ class FabricanteModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into fabricante(DESCRICAO,ESPECIFICACAO,TIPO,CODINST) value ( '$post[FFDESCRICAO]','$post[FFESPECIFICACAO]','$post[FFTIPO]',$_SESSION[CODINST])"
+			$this->db->query("insert into fabricante(DESCRICAO,ESPECIFICACAO,TIPO,CODINST) value ( '$post[FFDESCRICAO]','$post[FFESPECIFICACAO]','2',$_SESSION[CODINST])"
 			);
 			if( $this->db->trans_status() === false){
 				$this->db->trans_rollback();
@@ -96,7 +96,7 @@ class FabricanteModel extends MY_Model {
 			$this->db->query(" update fabricante set 
 				DESCRICAO = '$post[FFDESCRICAO]',
 				ESPECIFICACAO = '$post[FFESPECIFICACAO]',
-				TIPO = '$post[FFTIPO]'
+				TIPO = '2'
 				where  CODFABRICANTE = $post[FFCODFABRICANTE]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -264,126 +264,5 @@ class FabricanteModel extends MY_Model {
 		return false;
 	}
 
-	/**
-	 * 	Metodo para pegar os vinculos de fabricante e farmaco 
-	 *
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $codfabricante integer 
-	 *
-	 * 	@return array
-	 */
-	public function fabricanteFarmaco( $codfabricante ) {
-
-		try {	
-		    $FF = '';				
-			$this->dados = $this->query(
-				"select 	f.CODFABRICANTE, ff.CODFARMACO, fa.PH, fa.SOLV_ORGANICO,
-							fa.SOLV_INORGANICO,fa.DESCRICAO as DESCFARMACO
-				from 		fabricante f
-				join        fabricantefarmaco ff on (f.CODFABRICANTE = ff.CODFABRICANTE)
-				join        farmaco fa on (ff.CODFARMACO = fa.CODFARMACO)
-				where 		f.CODFABRICANTE =  $codfabricante 
-							$FF
-				order by 	f.DESCRICAO"
-			);
-			
-			$this->dados = $this->dados->result_array();			
-			return true;
-	
-		} catch (Exception $e) {
-			/*	Criando Log*/
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-	/**
-	 * 	Metodo para inserir o fabricanteFarmaco
-	 *
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $post Array - array com dados do $_POST
-	 *
-	 * 	@return array
-	 */
-	public function inserirFabricanteFarmaco( $codfabricante, $codfarmaco ){
-		try{
-			$this->db->trans_begin();
-			$this->db->query("insert into fabricantefarmaco (CODFABRICANTE, CODFARMACO) 
-							value ( $codfabricante, $codfarmaco)"
-			);
-			if( $this->db->trans_status() === false){
-				$this->db->trans_rollback();
-			}
-			$this->db->trans_commit();
-			return true;
-
-
-		} catch (Exception $e) {
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-	/**
-	 *  verifica se o gerador pode ser Excluido
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 * 	@return bollean
-	 */
-	public function fabricanteFarmacoJaVinculado( $codfabricante, $codfarmaco ){
-		try {
-			$this->dados =  $this->query(
-				" select count(*) as QTD from fabricantefarmaco 
-				   where CODFABRICANTE = $codfabricante
-				   and   CODFARMACO    = $codfarmaco "
-			);
-			$this->dados = $this->dados->result_array();
-			//se a quantidade for maior que zero já está vinculadp
-			if ($this->dados[0]['QTD'] > 0 ){
-				return true;
-			}else{
-				return false;
-			}	 
-		} catch (Exception $e) {
-			/*	Criando Log*/
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-	/**
-	 * 	Metodo para excluir o fabricanteFarmaco
-	 *
-	 *	@author Renato Roessler <renatoroessler@gmail.com>
-	 *	@param $codfabricante integer - inteiro com o código do fabricante
-	 *	@param $codfarmaco integer - inteiro com o código do farmaco
-	 *
-	 * 	@return array
-	 */
-	public function excluirVinculo( $codfabricante, $codfarmaco ) {
-
-		try {
-			$this->db->trans_begin();
-			/* update na conta corrente*/
-			$this->db->query(
-				"delete from fabricanteFarmaco 
-				where codfabricante = $codfabricante 
-				and codfarmaco = $codfarmaco "
-			);
-
-			if( $this->db->trans_status() === false ){
-				$this->db->trans_rollback();
-				return false;
-			}
-	 		$this->db->trans_commit();
-			return true;
-
-		} catch (Exception $e) {
-			/*	Criando Log*/
-			log_message('error', $this->db->error());
-		}
-		return false;
-	}
-
-	
 
 }

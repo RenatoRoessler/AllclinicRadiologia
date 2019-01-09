@@ -51,11 +51,10 @@ class Fabricante extends MY_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('FFDESCRICAO','Descrição','required|min_length[5]|max_length[45]');
 		$this->form_validation->set_rules('FFESPECIFICACAO','Especificação','required|min_length[5]|max_length[45]');
-		$this->form_validation->set_rules('FFTIPO','TIPO','required');
 		$codigo = null;
 		$this->load->model('FabricanteModel');
 		if($this->form_validation->run() == FALSE){
-			$this->novo();
+			$this->editar($post['FFCODFABRICANTE']);
 		}else{			
 			if($post){
 				if($post['FFCODFABRICANTE']){
@@ -74,16 +73,15 @@ class Fabricante extends MY_Controller {
 		}				
 	}
 
-	public function editar()
+	public function editar( $cod = null )
 	{
 		$dados['js'] = 'js/Fabricante.js';
+		$codmarcacao = $cod > 0 ? $cod : $this->uri->segment(3);
 		/* carregando as instituições */
  		$this->load->model('FabricanteModel');
-		$this->FabricanteModel->buscaFabricante( $this->uri->segment(3) );
+		$this->FabricanteModel->buscaFabricante( $codmarcacao );
 		$dados['retorno'] = $this->FabricanteModel->dados;
-		 /*  Carregando os fabricantesFarmacos*/
-		$this->FabricanteModel->fabricanteFarmaco($this->uri->segment(3));
-		$dados['fabricanteFarmaco'] = $this->FabricanteModel->dados;
+
 		/*  CARREGANDO OS FARMACOS */
 		$this->load->model('FarmacoModel');
 		$this->FarmacoModel->buscaTodosFarmacos();
@@ -110,36 +108,8 @@ class Fabricante extends MY_Controller {
 		$this->index(); 
 	}
 
-	public function vincular(){
-		/*  Limpando variaveis  */
-		$post = limpaVariavelArray( $this->input->post());
 
-		$this->load->model('FabricanteModel');	
-		
-		if($this->FabricanteModel->fabricanteFarmacoJaVinculado( $post['CODFABRICANTE'], $post['CODFARMACO'])){
-			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Fabricante e Farmaco já vinculados' ) ,  true );	
-		}else {
-			$codigo = $this->FabricanteModel->inserirFabricanteFarmaco($post['CODFABRICANTE'], $post['CODFARMACO']);
-			if( $codigo ){
-				echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Adicionado com Sucesso' ) ,  true );	
-			}	
-			else{
-				echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
-			}
-		}		
-		echo jsonEncodeArray( $this->json );  		
-	}
 
-	public function excluirVinculo()
-	{
-		$post = limpaVariavelArray( $this->input->post());
-		$this->load->model('FabricanteModel');
-		if($this->FabricanteModel->excluirVinculo( $post['CODFABRICANTE'], $post['CODFARMACO'] )){
-			echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'Mensagem' => 'Excluido com Sucesso' ) ,  true );
-		}else{
-			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
-		}
-		echo jsonEncodeArray( $this->json ); 	
-	}
+
 	
 }
