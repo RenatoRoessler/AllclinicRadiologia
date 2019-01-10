@@ -66,11 +66,12 @@ class Marcacao extends MY_Controller {
 
 		/*carregando os Fabricantes  */ 
 		$this->load->model('FabricanteModel');
-		$this->FabricanteModel->buscaFabricantePeloTipo( 1 );
+		$this->FabricanteModel->buscaTodosFabricante(  );
 		$dados['fabricantes'] = $this->FabricanteModel->dados;
- 		/* Radiofarmacos */
+ 		/* Radiofarmacos 
 		$this->FabricanteModel->buscaFabricantePeloTipo( 2 );
 		$dados['radiofarmacos'] = $this->FabricanteModel->dados;
+		*/
 
 		$this->load->view('template/header',$dados);
 		$this->load->view('MarcacaoCadastroView');
@@ -120,7 +121,7 @@ class Marcacao extends MY_Controller {
 		
 		/*carregando os Fabricantes  */ 
 		$this->load->model('FabricanteModel');
-		$this->FabricanteModel->buscaFabricantePeloTipo( 1 );
+		$this->FabricanteModel->buscaTodosFabricante(  );
 		$dados['fabricantes'] = $this->FabricanteModel->dados;
 		/*carregando os farmacos */ 
 		$this->load->model('FarmacoModel');

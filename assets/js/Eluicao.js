@@ -68,7 +68,31 @@ var Eluicao = function(){
 			});
 		}
 	}
-	
+
+	this.salvar = function(){
+		if($('#FFGERADOR').val() == ""){
+			mensagem( 'e', 'Selecione um Gerador');
+			return false;
+		}
+		if($('#FFDATAHORA').val() == ""){
+			mensagem( 'e', 'Informe a data');
+			return false;
+		}
+		if($('#FFHORA').val() == ""){
+			mensagem( 'e', 'Informe a Hora');
+			return false;
+		}
+		if($('#FFVOLUME').val() == ""){
+			mensagem( 'e', 'Informe o Volume');
+			return false;
+		}
+		if($('#FFATIVIDADE_MCI').val() == ""){
+			mensagem( 'e', 'Informe a Atividade');
+			return false;
+		}		
+		$("#formularioCadastro").submit();
+	}
+
 
 
 }
@@ -99,7 +123,7 @@ $("document").ready(function(){
 
 	$("#btnSalvar")
 	.click(function(){
-		$("#formularioCadastro").submit();
+		controle.salvar();
 	});
 
 	$(document).ready(function(){

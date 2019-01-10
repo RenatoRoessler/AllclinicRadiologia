@@ -33,10 +33,28 @@ var Marcacao = function(){
 	}
 	
 	this.salvar = function(){
-		if(document.getElementById("FFFARMACO").selectedIndex == ""){
+		
+		if($("#FFELUICAO").val() == ""){
+			mensagem( 'e', 'Selecione a Eluição');
+			return false;
+		}
+		if($("#FFKITFABRICANTE").val() == ""){
+			mensagem( 'e', 'Selecione o Fabricante');
+			return false;
+		}
+		if($("#FFFARMACO").val() == ""){
 			mensagem( 'e', 'Selecione o Farmaco');
 			return false;
 		}
+		if($("#FFKITLOTE").val() == ""){
+			mensagem( 'e', 'informe o kit Lote');
+			return false;
+		}
+		if($("#FFFARMACO").val() == ""){
+			mensagem( 'e', 'Selecione o Farmaco');
+			return false;
+		}		
+		
 		$("#formularioCadastro").submit();
 	}
 

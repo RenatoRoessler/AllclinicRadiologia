@@ -11,7 +11,6 @@ class Fabricante extends MY_Controller {
 		}
 	}
 
-
 	public function index()
 	{		
 		/*	Limpando variaveis	 */
@@ -107,9 +106,5 @@ class Fabricante extends MY_Controller {
 		}
 		$this->index(); 
 	}
-
-
-
-
 	
 }

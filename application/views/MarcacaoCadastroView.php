@@ -72,6 +72,7 @@
     						</div>
 											        		
 						</div>
+						
 						<div class="row col-sm-12 col-xs-12">
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFKITFABRICANTE" class="sys-label col-sm-12 col-xs-12">KIT Fabricante:</label>	
@@ -80,7 +81,7 @@
 								data-sft="<?php echo criptLow( 'FARMACO' );?>" 
 								data-sfci="<?php echo criptLow( 'CODFARMACO' );?>" 
 								data-sfcl="<?php echo criptLow( 'DESCRICAO' );?>" 
-								data-sfw="<?php echo criptLow( "where  CODFARMACO  in(select CODFARMACO from FABRICANTEFARMACO where CODFABRICANTE = {V}) " );?>" 
+								data-sfw="<?php echo criptLow( "where  CODFARMACO  in(select CODFARMACO from FARMACOFABRICANTE where CODFABRICANTE = {V}) " );?>" 
 								data-sfwa="<?php echo criptLow( "where 1 = 1 " );?> ">
 								<option <?php if(  $retorno[0]["KIT_CODFABRICANTE"] == '' ) echo "selected"; ?> value="">Selecione o Fabricante</option>
 								<?php
@@ -106,7 +107,7 @@
 										}
 									?>									
 								</select>
-							</div>
+							</div>					
 																				
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFKITLOTE" class="sys-label col-sm-12 col-xs-12">KIT Lote:</label>
