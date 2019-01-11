@@ -84,5 +84,4 @@ class Administrar extends MY_Controller {
 		}			
 	}
 
-
 }

@@ -48,7 +48,7 @@ class AdministrarModel extends MY_Model {
 		
 			$this->dados = $this->query(
                 "select  i.CODITFRACIONAMENTO, i.CODMARCACAO, i.CODAGTOEXA, i.ATIVIDADE_INICIAL, 				i.HORA_INICIAL,
-                         i.ATIVIDADE_ADMINISTRADA , i.HORA_ADMINISTRADA,p.NOME as NOMEPACIENTE,
+                         i.ATIVIDADE_ADMINISTRADA , i.HORA_ADMINISTRADA,a.NOME as NOMEPACIENTE,
                          pr.DESCRICAO,DATE_FORMAT(a.DATA, '%d/%c/%Y') as DATA1, a.HORA,
 						 pr.DESCRICAO,DATE_FORMAT(a.HORA,'%H:%i') AS HORAMINUTO,
 						 m.LOTE as LOTEMARCACAO, e.LOTE as LOTEELUICAO,
@@ -58,7 +58,6 @@ class AdministrarModel extends MY_Model {
                 from 	itfracionamento i
                 join    agtoexame ag on (i.CODAGTOEXA = ag.CODAGTOEXA)  
                 join    agendamento a on (ag.codagto = a.codagto)
-                join    paciente   p on (a.prontuario = p.prontuario)	
 				join    procedimentos pr on (ag.codprocedimento = pr.codprocedimento)
 				join    marcacao m on (i.CODMARCACAO =  m.CODMARCACAO)
 				join    eluicao e on (m.CODELUICAO = e.CODELUICAO)
@@ -123,14 +122,13 @@ class AdministrarModel extends MY_Model {
 
 		try {	
 			$this->dados = $this->query(
-				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO, p.PRONTUARIO,  
-							p.NOME , p.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
+				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO, 
+							ag.NOME , ag.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
 							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
 							DATE_FORMAT(ag.DATA, '%d/%c/%Y') as DATA1, ag.HORA
 				from 		ITFRACIONAMENTO i 
 				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
 				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
-				left join PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
 				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
 				where  i.CODITFRACIONAMENTO = 		$coditfracionamento
 				"

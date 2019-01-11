@@ -49,6 +49,7 @@
 						    				<tr>
 						    					<th>Lote <br />Gerador</th>	
 						    					<th>Lote <br />Marcação</th>
+												<th>Lote <br />Eluição</th>
 						    					<th>Calibração <br />Gerador</th>
 						    					<th>Controle <br />Marcação</th>
 						    					<th>Nome do <br />Paciente</th>
@@ -56,8 +57,6 @@
 						    					<th>Hóraio <br />Incial</th>
 						    					<th>Atividade<br />Administrada</th>
 						    					<th>Horáriao<br />Administração</th>
-						    					<th>Lote<br />Gerador</th>
-						    					<th>Lote<br />Eluição</th>
 						    					<th>Pureza<br />Radionuclídica</th>
 						    					<th>Aparência<br />solução Limpida</th>
 						    					<th>PH</th>
@@ -78,15 +77,14 @@
 						    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 						    					<td><?php echo $v['LOTEGERADOR']; ?></td>
 						    					<td><?php echo $v['LOTEMARCACAO']; ?></td>
+												<td><?php echo $v['LOTEELUICAO']; ?></td>
 						    					<td><?php echo $v['DATAGERADOR']; ?></td>
 						    					<td><?php echo $v['DATAMARCACAO']; ?></td>
-						    					<td><?php echo $v['NOME']; ?></td>
+						    					<td><?php echo $v['NOME'] .' ' . $v['SOBRENOME'] ; ?></td>
 						    					<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>
 						    					<td><?php echo $v['HORA_INICIAL']; ?></td>
 						    					<td><?php echo $v['ATIVIDADE_ADMINISTRADA']; ?></td>
 						    					<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
-						    					<td><?php echo $v['LOTEGERADOR']; ?></td>
-						    					<td><?php echo $v['LOTEMARCACAO']; ?></td>
 						    					<td><?php echo $v['PUREZA_RADIONUCLIDICA']; ?></td>
 						    					<td><?php echo $v['LIMPIDA']; ?></td>
 						    					<td><?php echo $v['PH']; ?></td>

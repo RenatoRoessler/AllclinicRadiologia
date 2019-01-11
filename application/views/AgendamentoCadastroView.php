@@ -80,13 +80,13 @@
 								 placeholder="Peso.: 000.000" >
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12">Altura:</label>
+								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12 ">Altura:</label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFALTURA" name="FFALTURA" value="<?php echo $retorno[0]["ALTURA"]; ?>" 
 								 placeholder="Altura.: 0.000" >
 							</div>							
 							<div class="col-main col-sm-4 col-xs-12">
 								<label for="FFCONVENIO" class="sys-label col-sm-12 col-xs-12">Convênio:</label>	
-								<select class="selectpicker  form-control" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
+								<select class="form-control selectpicker" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
 								<option <?php if( $retorno[0]["CODCONV"] == "") echo "selected"; ?> value="">Selecione o Convênio</option>
 								<?php
 									foreach ($convenio as $k => $v) {
@@ -113,7 +113,7 @@
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $retorno[0]["ATIVIDADE"];  ?>"  onkeyup="somenteNumeros(this)"
-								 placeholder="Atividade em mCi" >
+								 placeholder="Atividade em mCi" autocomplete="off">
 							</div>		
 						</div>	
 						<div class="row col-sm-12 col-xs-12">

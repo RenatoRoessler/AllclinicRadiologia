@@ -111,10 +111,16 @@ class FracionamentoModel extends MY_Model {
 			$this->db->trans_begin();
 			$this->db->query("insert into ITFRACIONAMENTO(
 								CODMARCACAO,
-								CODAGTOEXA
+								CODAGTOEXA,
+								ATIVIDADE_INICIAL,
+								HORA_INICIAL,
+								VOLUME
 								) value 
 								($post[CODMARCACAO],
-								$post[CODAGTOEXA]
+								$post[CODAGTOEXA],
+								$post[ATIVIDADE],
+								'$post[HORAINICIO]',
+								$post[VOLUME]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -173,7 +179,8 @@ class FracionamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO,   
 							ag.NOME , ag.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
-							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA
+							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
+							i.VOLUME
 				from 		ITFRACIONAMENTO i 
 				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
 				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)

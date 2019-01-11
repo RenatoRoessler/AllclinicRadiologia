@@ -8,8 +8,20 @@ var Fracionamento = function(){
 			document.getElementById("FFMARCACAO").focus();
 			return false;
 		}
-		if(document.getElementById("FFAGENDAMENTO").value == ""){
+		if($("#FFAGENDAMENTO").val()== ""){
 			mensagem( 'e', 'Selecione o Agendamento');
+			return false;
+		}
+		if($("#FFATIVIDADE").val()== ""){
+			mensagem( 'e', 'Informe a Atividade');
+			return false;
+		}
+		if($("#FFHORAINICIO").val()== ""){
+			mensagem( 'e', 'Informe a Hora');
+			return false;
+		}
+		if($("#FFVOLUME").val()== ""){
+			mensagem( 'e', 'Informe o Volume');
 			return false;
 		}
 
@@ -20,6 +32,9 @@ var Fracionamento = function(){
 			data : {
 				'CODMARCACAO' : $('#FFMARCACAO').val(),
 				'CODAGTOEXA' : $('#FFCODAGTOEXA1').val(),
+				'ATIVIDADE' : $("#FFATIVIDADE").val(),
+				'HORAINICIO' : $("#FFHORAINICIO").val(),
+				'VOLUME' : $("#FFVOLUME").val(),
 			},
 			beforeSend: function(){
 				loader('show');

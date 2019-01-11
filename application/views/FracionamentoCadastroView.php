@@ -63,7 +63,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFFARMACO" name="FFFARMACO" value="<?php echo $marcacao[0]["DESCFARMACO"]; ?>"  readonly >
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFPH" class="sys-label col-sm-12 col-xs-12">Farmaco:</label>
+								<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $marcacao[0]["PH"]; ?>"  readonly >
 							</div>						
 						</div>
@@ -76,6 +76,18 @@
 								    <button class="btn btn-outline-secondary fa fa-search"  id="btnAgendamento" type="button" >Pesquisar</button>
 								  </div>
 								</div>								
+							</div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade Inicial:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value=""  onkeyup="somenteNumeros(this);" autocomplete="off" >
+							</div>							
+						    <div class="col-main col-sm-1 col-xs-12">
+       							<label  for="FFHORAINICIO" class="sys-label col-sm-12 col-xs-12">Hora Inicio:</label>
+        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORAINICIO" name="FFHORAINICIO" min="00:00" max="24:00" required value="" />
+    						</div>
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value=""  onkeyup="somenteNumeros(this);"  autocomplete="off" >
 							</div>
 							<div class="col-xs-2 col-sm-2 pull-right">
 								<label for="btnAdicionar" class="sys-label col-sm-12 col-xs-12">&nbsp; </label>
@@ -92,6 +104,9 @@
 								    				<tr>
 						    							<th>Nome</th>
 						    							<th>Procedimento</th>
+														<th>Atividade Inicial</th>
+														<th>Hora Inciail</th>
+														<th>Volume</th>
 						    							<th>Excluir</th>
 						    						</tr>
 						    					</thead>
@@ -103,6 +118,9 @@
 								    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 								    					<td><?php echo $v['NOME']; ?></td>
 								    					<td><?php echo $v['NOMEPROCEDIMENTO']; ?></td>
+														<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>
+														<td><?php echo $v['HORA_INICIAL']; ?></td>
+														<td><?php echo $v['VOLUME']; ?></td>
 								    					<td width="10"> 
 								    						<a href=<?php echo base_url() .'/Fracionamento/excluirItem/'. $v['CODITFRACIONAMENTO']  ?> > 
 								    							<i class="fa fa-minus-circle fa-lg" style="color:red;"></i> 
@@ -139,19 +157,6 @@
 	<?php include VIEWPATH . "_includes/_pesquisaPaciente.php"; ?>
 	<?php include VIEWPATH . "_includes/_pesquisaAgendamento.php"; ?>
 
-	<script type="text/javascript">
-	    function somenteNumeros(num) {
-	    	//campo.value.replace(',','.');
-	        var er = /[^0-9.]/;
-	        er.lastIndex = 0;
-	        var campo = num;
-	    	campo.value =  campo.value.replace(',','.');        
-	        
-	        if (er.test(campo.value)) {
-	          campo.value = "";
-	      	 }		 
-   		}
-	</script>
 
 
 

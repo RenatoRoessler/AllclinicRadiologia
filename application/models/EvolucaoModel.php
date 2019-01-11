@@ -41,8 +41,9 @@ class EvolucaoModel extends MY_Model {
 							e.LOTE AS LOTEELUICAO,
 							DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATAGERADOR, 
 							m.LOTE as LOTEMARCACAO,
+							e.LOTE AS LOTEELUICAO,
 							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATAMARCACAO,
-							p.NOME,
+							ag.NOME,
 							i.ATIVIDADE_INICIAL,
 							i.HORA_INICIAL,
 							i.ATIVIDADE_ADMINISTRADA,
@@ -57,7 +58,8 @@ class EvolucaoModel extends MY_Model {
 							m.KIT_LOTE,
 							m.ORGANICO,
 							m.QUIMICO,
-							m.APELUSER as USEMARCACAO
+							m.APELUSER as USEMARCACAO,
+							ag.SOBRENOME
 
 				from 	    ITFRACIONAMENTO i
 				join        MARCACAO m on (i.CODMARCACAO = m.CODMARCACAO)
@@ -65,10 +67,8 @@ class EvolucaoModel extends MY_Model {
 				join        GERADOR g on (e.CODGERADOR = g.CODGERADOR)
 				join        AGTOEXAME ae on (i.CODAGTOEXA = ae.CODAGTOEXA)
 				join        AGENDAMENTO ag on (ae.CODAGTO = ag.CODAGTO)
-				join        PACIENTE p on (ag.PRONTUARIO = p.PRONTUARIO)
 				join        FABRICANTE f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
-				join        FARMACO    fa on (m.CODFARMACO = fa.CODFARMACO)
-				
+				join        FARMACO    fa on (m.CODFARMACO = fa.CODFARMACO)				
 				where 		1=1
 				and         g.CODINST = $_SESSION[CODINST]
 							$FF
