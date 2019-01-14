@@ -74,40 +74,28 @@ class Agendamento extends MY_Controller {
 		$this->load->view('template/footer');
 	}
 
-		public function atualizar()
+	public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');		
-		$this->form_validation->set_rules('FFHORA','Hora','required');
-		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
-		$this->form_validation->set_rules('FFPROCEDIMENTO','Procedimento','required');
-		$this->form_validation->set_rules('FFNOMEPAC','Nome do Paciente','required|min_length[3]|max_length[99]');	
-		$this->form_validation->set_rules('FFSOBRENOMEPAC','Sobrenome do Paciente','required|min_length[3]|max_length[99]');
-		$this->form_validation->set_rules('FFCPF','CPF','required');	
-		$this->form_validation->set_rules('FFDATANASCIMENTO','Nascimento','required');	
-		$this->form_validation->set_rules('FFPESO','Peso','required');
-		$this->form_validation->set_rules('FFCONVENIO','Convênio','required');		
-	
 		$codigo = null;
 		$this->load->model('AgendamentoModel');
-		if($this->form_validation->run() == FALSE){
-			$this->novo();
-		}else{			
-			if($post){
-				if( $post['FFCODAGTO'] ){
-					$this->AgendamentoModel->atualizar($post);
-					$codigo = $post['FFCODAGTO'];
-				}else{
-					$codigo = $this->AgendamentoModel->inserir($post);
-				}
-			}
-			if( !$codigo ){
-				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Agendamento. <br/>[' . $this->AgendamentoModel->db->error() . ']' ));
+				
+		if($post){
+			if( $post['FFCODAGTO'] ){
+				$this->AgendamentoModel->atualizar($post);
+				$codigo = $post['FFCODAGTO'];
 			}else{
-				$this->session->set_userdata('MSG', array( 's', 'Agendamento salvo com sucesso' ));
+				$codigo = $this->AgendamentoModel->inserir($post);
 			}
-			redireciona('editar/' . $codigo);
-		}					
+		}
+		if( !$codigo ){
+			$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Agendamento. <br/>[' . $this->AgendamentoModel->db->error() . ']' ));
+		}else{
+			$this->session->set_userdata('MSG', array( 's', 'Agendamento salvo com sucesso' ));
+		}
+		redireciona('editar/' . $codigo);
+			
+						
 	}
 
 	public function editar()
@@ -139,21 +127,6 @@ class Agendamento extends MY_Controller {
 		$this->load->view('template/footer');
 	}
 
-	/*
-	public function excluir()
-	{
-		$id = $this->uri->segment(3);
-		$this->load->model('AgendamentoModel');
-		//validando se o agendamento já foi fracionado
-		if($this->AgendamentoModel->agendamentoPodeSerExcluido( $id )){
-			$this->AgendamentoModel->excluir( $id );	
-			$this->session->set_userdata('MSG', array( 's', 'Excluido com Sucesso' ));			
-		}else{
-			$this->session->set_userdata('MSG', array( 'e', 'Agendamento Fracionado, Não é permitido a exclusão' ));
-		}
-		$this->index(); 		
-	}
-	*/
 	public function excluir()
 	{
 		$post = limpaVariavelArray( $this->input->post());

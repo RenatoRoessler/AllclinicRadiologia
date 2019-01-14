@@ -221,12 +221,13 @@ li>a>ul>li:hover {
 	padding: 5px 20px 20px 20px !important;
 }
 
-.parsley-errors-list li.parsley-required {
-	color: red;
-	list-style: none;
-	padding: 0;
-  	margin-top: 5px;
+.divisor {
+	background-color: #0B0B3B;
+	color: white;
+	margin-top: 6px;
+	padding: 3px;
 }
+
 
 
 

@@ -110,12 +110,6 @@ $("document").ready(function(){
  		$("#sidenavToggler").click();
 	});
 
-	$('#FFDATAHORA').datepicker({	
-				format: "dd/mm/yyyy",	
-				language: "pt-BR",
-				autoclose: true
-	});
-
 	$("#FFNOMEPROCEDIMENTOTELA")
 	.click(function(){
 		controle.pesquisaExame();
@@ -126,18 +120,6 @@ $("document").ready(function(){
 		controle.pesquisaExame();
 	});
 
-	$('#Data').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-	});
-
-	$('#FFDATANASCIMENTO').datepicker({	
-				format: "dd/mm/yyyy",	
-				language: "pt-BR",
-				autoclose: true
-	
-	});
 
 	$('#FFCPF').mask('000.000.000-00');
 

@@ -12,7 +12,7 @@
 			</ol>
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
 		
-			<form id="formularioCadastro" name="formulario" action="<?php echo base_url() .'Radioisotopo/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >		
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Radioisotopo/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >		
 			
             	<input type="hidden" id="FFCODRADIOISOTOPO1" name="FFCODRADIOISOTOPO1" value="<?php echo $radioisotopo[0]["CODRADIOISOTOPO"]; ?>" >
 			
@@ -45,9 +45,9 @@
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFMEIAVIDA" class="sys-label col-sm-12 col-xs-12">Meia Vida: </label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFMEIAVIDA" name="FFMEIAVIDA" value="<?php echo $radioisotopo[0]["MEIAVIDA"] ? $radioisotopo[0]["MEIAVIDA"] : 0 ;  ?>"  autocomplete="off" required min="0" max="36" >
-								<small id="emailHelp" class="form-text text-muted">Em Horas</small>																	
-							</div>								       
-										
+								<small id="" class="form-text text-muted">Em Horas</small>											
+							</div>
+														       	
 						</div>	
 					</div>
 				</div>
@@ -59,11 +59,8 @@
 					<div class="col-xs-1 col-sm-1 pull-right">
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
-				</div>
-		
+				</div>		
 			</form>
-			
-
 		</div>
 	</div>
 

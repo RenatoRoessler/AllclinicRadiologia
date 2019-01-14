@@ -73,8 +73,8 @@ class AgendamentoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
-			$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO']))); 
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			//$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO']))); 
 			if(!$post['FFRADIOISOTOPO'] > 0 ){
 				$post['FFRADIOISOTOPO'] = 'NULL';
 			}  
@@ -93,12 +93,12 @@ class AgendamentoModel extends MY_Model {
 								CODCONV	,
 								ATIVIDADE				
 								) value 
-								('$data',
+								('$post[FFDATAHORA]',
 								'$post[FFHORA]',
 								upper('$post[FFNOMEPAC]'),
 								upper('$post[FFSOBRENOMEPAC]'),
 								'$post[FFCPF]',
-								'$dataNascimento',
+								'$post[FFDATANASCIMENTO]',
 								$_SESSION[CODINST],
 								$post[FFPESO],
 								$post[FFALTURA],
@@ -144,8 +144,8 @@ class AgendamentoModel extends MY_Model {
 	public function atualizar( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
-			$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO']))); 
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			//$dataNascimento = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATANASCIMENTO']))); 
 
 			if(!$post['FFRADIOISOTOPO'] > 0 ){
 				$post['FFRADIOISOTOPO'] = 'NULL';
@@ -153,12 +153,12 @@ class AgendamentoModel extends MY_Model {
 			
 			$this->db->trans_begin();
 			$this->db->query(" update AGENDAMENTO set 
-								DATA = '$data', 
+								DATA = '$post[FFDATAHORA]', 
 								HORA = '$post[FFHORA]',
 								NOME = upper('$post[FFNOMEPAC]'),	
 								SOBRENOME = upper('$post[FFSOBRENOMEPAC]'),
 								CPF = '$post[FFCPF]',
-								NASCIMENTO = '$dataNascimento',
+								NASCIMENTO = '$post[FFDATANASCIMENTO]',
 								PESO = $post[FFPESO],
 								ALTURA = $post[FFALTURA],
 								CODCONV = $post[FFCONVENIO],
@@ -200,7 +200,7 @@ class AgendamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,
 							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
-							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE
+							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE,a.NASCIMENTO
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)

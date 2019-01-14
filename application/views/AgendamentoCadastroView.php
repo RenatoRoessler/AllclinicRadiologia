@@ -11,20 +11,21 @@
 				</li>
 			</ol>
 			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Agendamento/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+		
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Agendamento/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >	
             	<input type="hidden" id="FFCODAGTO1" name="FFCODAGTO1" value="<?php echo $retorno[0]["CODAGTO"]; ?>" >
 					
-		    	<input type="hidden" class="col-sm-12 col-xs-12 form-control" id="FFPROCEDIMENTO" name="FFPROCEDIMENTO" value= "<?php echo $retorno[0]['CODPROCEDIMENTO'] ?>" >		
+				<input type="hidden" class="col-sm-12 col-xs-12 form-control" id="FFPROCEDIMENTO" name="FFPROCEDIMENTO" value= "<?php echo $retorno[0]['CODPROCEDIMENTO'] ?>" >
+					
+				
+				<div class="divisor" >
+					CADASTRO 
+				</div>
 				<div class="col-sm-12 col-md-12 col-xs-12">
 					<div class="col-xs-1 col-sm-1 pull-right">
 		      			<button type="button" id="btnExcluirAgendamento" class="btn btn-danger btn-sm sys-btn-search" ><i class="fa fa-trash"></i> Excluir</button>
 	      			</div>
-				</div>
+				</div>	
 				<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;' ></div>
 				<div class="tab-content">
 					<br/>
@@ -33,29 +34,24 @@
 								<label for="FFCODAGTO" class="sys-label col-sm-12 col-xs-12">Código:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODAGTO" name="FFCODAGTO" value="<?php echo $retorno[0]["CODAGTO"]; ?>"  readonly >
 							</div>
-							<div class="form-group col-main col-sm-1 col-xs-12">
-					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data:</label>
-					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
-					                <span class="input-group-addon">
-					                      <span class="glyphicon glyphicon-calendar"></span>
-					                </span>
-					            </div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Date</label>
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
 					        </div>
-					        <div class="col-main col-sm-1 col-xs-12">
-       							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
-    						</div> 							
+							<div class="col-main col-sm-1 col-xs-12">
+								<label for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
+								<input class="col-sm-12 col-xs-12 form-control" type="time" value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" id="FFHORA" name="FFHORA" required >
+							</div> 							
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFNOMEPAC" class="sys-label col-sm-12 col-xs-12">Nome Paciente:</label>
 								<div class="input-group mb-3">
-								  <input type="text" class="form-control" placeholder="Nome do Paciente" aria-label="Nome do Paciente" aria-describedby="basic-addon2" id="FFNOMEPAC" name="FFNOMEPAC" value= "<?php echo $retorno[0]['NOME'] ?>" autocomplete="off" >
+								  <input type="text" class="form-control" placeholder="Nome do Paciente" aria-label="Nome do Paciente" aria-describedby="basic-addon2" id="FFNOMEPAC" name="FFNOMEPAC" value= "<?php echo $retorno[0]['NOME'] ?>" autocomplete="off"  required min="3" max="99">
 								</div>								
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFSOBRENOMEPAC" class="sys-label col-sm-12 col-xs-12">Sobrenome Paciente:</label>
 								<div class="input-group mb-3">
-								  <input type="text" class="form-control" placeholder="Sobrenome do Paciente" aria-label="Sobrenome do Paciente" aria-describedby="basic-addon2" id="FFSOBRENOMEPAC" name="FFSOBRENOMEPAC" value= "<?php echo $retorno[0]['SOBRENOME'] ?>" autocomplete="off">
+								  <input type="text" class="form-control" placeholder="Sobrenome do Paciente" aria-label="Sobrenome do Paciente" aria-describedby="basic-addon2" id="FFSOBRENOMEPAC" name="FFSOBRENOMEPAC" value= "<?php echo $retorno[0]['SOBRENOME'] ?>" autocomplete="off" required min="3" max="99"> 
 								</div>								
 							</div>							
 						</div>
@@ -63,30 +59,25 @@
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFCPF" class="sys-label col-sm-12 col-xs-12">CPF:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCPF" name="FFCPF" value="<?php echo $retorno[0]["CPF"]; ?>" 
-								minlength="19" maxlength="15" placeholder="CPF.: 000.000.000-00" autocomplete="off">
+								minlength="0" maxlength="15" placeholder="CPF.: 000.000.000-00" autocomplete="off" required>
 							</div>								
-							<div class="form-group col-main col-sm-1 col-xs-12">
-					        	<label for="FFDATANASCIMENTO" class="sys-label col-sm-12 col-xs-12">Nascimento:</label>
-					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATANASCIMENTO' name="FFDATANASCIMENTO" value="<?php   echo $retorno[0]["DNASCIMENTO"]   ?>"  autocomplete="off" placeholder="Data de Nascimento" />
-					                <span class="input-group-addon">
-					                      <span class="glyphicon glyphicon-calendar"></span>
-					                </span>
-					            </div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFDATANASCIMENTO" class="sys-label col-sm-12 col-xs-12">Date</label>
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["NASCIMENTO"]   ?>" id="FFDATANASCIMENTO" name="FFDATANASCIMENTO" required> 								
 					        </div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFPESO" class="sys-label col-sm-12 col-xs-12">Peso(Kg):</label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPESO" name="FFPESO" value="<?php echo $retorno[0]["PESO"]; ?>" 
-								 placeholder="Peso.: 000.000" >
+								 placeholder="Peso.: 000.000" min="0" max="299.999" step="any"  >
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12 ">Altura:</label>
+								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12 ">Altura (M):</label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFALTURA" name="FFALTURA" value="<?php echo $retorno[0]["ALTURA"]; ?>" 
-								 placeholder="Altura.: 0.000" >
+								 placeholder="Altura.: 0.000" min="0" max="2.99" step="any">
 							</div>							
 							<div class="col-main col-sm-4 col-xs-12">
 								<label for="FFCONVENIO" class="sys-label col-sm-12 col-xs-12">Convênio:</label>	
-								<select class="form-control selectpicker" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true">
+								<select class="form-control selectpicker" id="FFCONVENIO" name="FFCONVENIO" data-live-search="true" required>
 								<option <?php if( $retorno[0]["CODCONV"] == "") echo "selected"; ?> value="">Selecione o Convênio</option>
 								<?php
 									foreach ($convenio as $k => $v) {
@@ -97,8 +88,10 @@
 										}
 									?>									
 								</select>								
-							</div>
-							
+							</div>							
+						</div>
+						<div class="divisor" >
+							ÁREA TÉCNICA
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-5 col-xs-12">
@@ -110,11 +103,7 @@
 								  </div>
 								</div>								
 							</div>	
-							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $retorno[0]["ATIVIDADE"];  ?>"  onkeyup="somenteNumeros(this)"
-								 placeholder="Atividade em mCi" autocomplete="off">
-							</div>		
+								
 						</div>	
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-5 col-xs-12">
@@ -131,8 +120,15 @@
 									?>									
 								</select>								
 							</div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFATIVIDADE" class="sys-label col-sm-12 col-xs-12">Atividade mCI:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $retorno[0]["ATIVIDADE"];  ?>"  onkeyup="somenteNumeros(this)"
+								 placeholder="Atividade em mCi" autocomplete="off">
+								 
+							</div>	
+												
+						</div>	
 								
-						</div>		
 				</div>
 				<br/>
 					<div class="col-xs-1 col-sm-1 pull-left">
@@ -143,9 +139,7 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 		</div>
 	</div>
 
