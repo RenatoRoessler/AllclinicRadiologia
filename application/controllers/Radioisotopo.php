@@ -45,13 +45,17 @@ class Radioisotopo extends MY_Controller {
     {
 		$post = limpaVariavelArray( $this->input->post());
 		//biblioteca de validação do codegineter
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFDESCRICAO', 'Descrição' , 'required|min_length[3]|max_length[99]') ;
+		
+		//$this->load->library('form_validation');
+		//$this->form_validation->set_rules('FFDESCRICAO', 'Descrição' , 'required|min_length[3]|max_length[99]') ;
 		$codigo =  null;
 		$this->load->model('RadioisotopoModel');
-		if($this->form_validation->run() == FALSE ){
-			$this->novo();
-		}else{
+		//if($this->form_validation->run() == FALSE ){
+		//	$this->novo();
+		//}else{
+			/*
+		if($post['Codcc'])
+			
 			if($post){
 				$post['CODINST'] = $_SESSION['CODINST'];
 				if( $post['FFCODRADIOISOTOPO'] ) {
@@ -67,7 +71,23 @@ class Radioisotopo extends MY_Controller {
 				$this->session->set_userdata('MSG', array( 's', 'Radioisotopo salvo com sucesso' ));
 			}
 			redireciona('editar/' . $codigo);
+		}*/
+
+		if( $post ){
+			$post['CODINST'] = $_SESSION['CODINST'];
+			if( $post['FFCODRADIOISOTOPO'] ){		
+				$id = $this->RadioisotopoModel->atualizar( $post ) ;
+			}else{				
+				$id = $this->RadioisotopoModel->inserir( $post ) ;
+				$post['FFCODRADIOISOTOPO'] = $id;
+			}			
+			if( !$id ){
+				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Radioisotopo. <br/>[' . $this->RadioisotopoModel->db->error() . ']' ));
+			}else{
+				$this->session->set_userdata('MSG', array( 's', 'Radioisotopo salvo com sucesso' ));
+			}
 		}
+		redireciona('editar/' . $post['FFCODRADIOISOTOPO']);
 	}
 	
 	public function editar(){

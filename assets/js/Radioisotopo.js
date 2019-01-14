@@ -38,6 +38,15 @@ var Radioisotopo = function(){
 		}
 	}
 
+	this.salvar  = function() {
+		if($('#FFDESCRICAO').value() == ""){
+			mensagem( 'e', 'Informe a desrcição');
+			return false;
+		}
+		$("#formularioCadastro").submit();
+
+	}
+
 }
 
 $("document").ready(function(){
@@ -62,6 +71,7 @@ $("document").ready(function(){
 	
 	$("#btnSalvar")
 	.click(function(){
+		//this.salvar();
 		$("#formularioCadastro").submit();
 	});
 

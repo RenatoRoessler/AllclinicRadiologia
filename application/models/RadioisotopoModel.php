@@ -31,7 +31,7 @@ class RadioisotopoModel extends MY_Model {
 				$FF .= ( $post['FILTRODESCRICAO'] ) ? "and p.DESCRICAO like '%$post[FILTRODESCRICAO]%' " : '';
 			}
 			$this->dados = $this->query(
-                "select 	p.CODRADIOISOTOPO, p.DESCRICAO
+                "select 	p.CODRADIOISOTOPO, p.DESCRICAO, p.GAMAO, p.MEIAVIDA
 				
 				from 		radioisotopo p
 				where 		p.CODINST = $_SESSION[CODINST]
@@ -62,10 +62,14 @@ class RadioisotopoModel extends MY_Model {
 			$this->db->trans_begin();
 			$this->db->query("insert into RADIOISOTOPO(
 								DESCRICAO,
-								CODINST
+								CODINST,
+								GAMAO,
+								MEIAVIDA
 								) value 
 								(upper('$post[FFDESCRICAO]'),
-								$post[CODINST]
+								$post[CODINST],
+								$post[FFGAMAO],
+								$post[FFMEIAVIDA]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -94,7 +98,7 @@ class RadioisotopoModel extends MY_Model {
 
 		try {			
 			$this->dados = $this->query(
-				"select 	p.CODRADIOISOTOPO, p.DESCRICAO		
+				"select 	p.CODRADIOISOTOPO, p.DESCRICAO, p.GAMAO, p.MEIAVIDA
 				from 		RADIOISOTOPO p				
 				where 		p.CODRADIOISOTOPO = $codradioisotopo
 				"
@@ -122,7 +126,9 @@ class RadioisotopoModel extends MY_Model {
 
 			$this->db->trans_begin();
 			$this->db->query(" update RADIOISOTOPO set 
-								DESCRICAO = upper('$post[FFDESCRICAO]')
+								DESCRICAO = upper('$post[FFDESCRICAO]'),
+								GAMAO = $post[FFGAMAO],
+								MEIAVIDA =$post[FFMEIAVIDA]
 											
 							where  CODRADIOISOTOPO = $post[FFCODRADIOISOTOPO]"
 			);
@@ -209,7 +215,7 @@ class RadioisotopoModel extends MY_Model {
 		try {			
 			$FF = '';			
 			$this->dados = $this->query(
-				"select 	r.CODRADIOISOTOPO,r.DESCRICAO			
+				"select 	r.CODRADIOISOTOPO,r.DESCRICAO		
 				from 		RADIOISOTOPO r	
 				where       r.CODINST = $_SESSION[CODINST]			
 				order by 	r.DESCRICAO"
