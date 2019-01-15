@@ -11,12 +11,8 @@
 				</li>
 			</ol>
 		    <?php include VIEWPATH . "_includes/_mensagem.php";?> 
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Gerador/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Gerador/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
+
             	<input type="hidden" id="FFCODGERADOR1" name="FFCODGERADOR1" value="<?php echo $retorno[0]["CODGERADOR"]; ?>" >			
 		    	<!-- ABAS -->
 				<div class="col-sm-12 col-md-12 col-xs-12">
@@ -35,35 +31,24 @@
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off">
-							</div>					
-					        <div class="form-group col-main col-sm-2 col-xs-12">
-					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data de Geração:</label>
-					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATAF"] ?  $retorno[0]["DATAF"] :  date ("d/m/Y")  ?>"  autocomplete="off" />
-					                <span class="input-group-addon">
-					                      <span class="glyphicon glyphicon-calendar"></span>
-					                </span>
-					            </div>
-					        </div>
-					       
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off" required maxlength="11" >
+							</div>	
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data de Geração:</label>
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
+					        </div>		
 					        <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFNROELUICAO" class="sys-label col-sm-12 col-xs-12">Nro. Eluição:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFNROELUICAO" name="FFNROELUICAO" value="<?php echo $retorno[0]["NRO_ELUICAO"] ? $retorno[0]["NRO_ELUICAO"] : 0 ;  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" readonly>
 							</div>	
 							<div class="form-group col-main col-sm-2 col-xs-12">
-					        	<label for="FFDATACALIBRACAO" class="sys-label col-sm-12 col-xs-12">Data Calibração:</label>
-					            <div class='input-group date' >
-					                <input type='text' class="form-control" id="FFDATACALIBRACAO" name="FFDATACALIBRACAO" value="<?php echo $retorno[0]["DATAF"] ?  $retorno[0]["DATAF"] :  date ("d/m/Y")  ?>" autocomplete="off"/>
-					                <span class="input-group-addon">
-					                      <span class="glyphicon glyphicon-calendar"></span>
-					                </span>
-					            </div>
+								<label for="FFDATACALIBRACAO" class="sys-label col-sm-12 col-xs-12">Data Calibração:</label>
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA_CALIBRACAO"] ?  $retorno[0]["DATA_CALIBRACAO"] :  date ("Y-m-d")  ?>" id="FFDATACALIBRACAO" name="FFDATACALIBRACAO" required> 								
 					        </div>
 							<div class="col-main col-sm-2 col-xs-12">
-       							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Calibração:</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
-    						</div>					        		
+								<label for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Calibração:</label>
+								<input class="col-sm-12 col-xs-12 form-control" type="time" value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" id="FFHORA" name="FFHORA" required >
+							</div> 					        		
 						</div>
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-1 col-xs-12">
@@ -72,11 +57,11 @@
 							</div>	
 							<div class="form-group col-main col-sm- col-xs-12">
 								<label for="FFATIVIDADECAL" class="sys-label col-sm-12 col-xs-12">Atividade Calibração mCi</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADECAL" name="FFATIVIDADECAL" value="<?php echo $retorno[0]["ATIVIDADE_CALIBRACAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADECAL" name="FFATIVIDADECAL" value="<?php echo $retorno[0]["ATIVIDADE_CALIBRACAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off"  required>
 							</div>							
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFFABRICANTE" class="sys-label col-sm-12 col-xs-12">Fabricante:</label>	
-								<select class="form-control form-control-sm" id="FFFABRICANTE" name="FFFABRICANTE" data-live-search="true">
+								<select class="form-control form-control-sm" id="FFFABRICANTE" name="FFFABRICANTE" data-live-search="true" required>
 								<option <?php if( $fabricante[0]["CODFABRICANTE"] == "") echo "selected"; ?> value="">Selecione o Fabricante</option>
 								<?php
 									foreach ($fabricante as $k => $v) {
@@ -100,9 +85,7 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 
 		</div>
 	</div>

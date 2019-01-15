@@ -17,14 +17,6 @@ var Gerador = function(){
 
 	}	
 
-	this.salvar = function (a) {
-		if($('#FFFABRICANTE').val() == ""){
-			mensagem( 'e', 'Selecione um Fabricante');
-		}else{
-			$("#formularioCadastro").submit();
-		}
-	}
-
 }
 
 $("document").ready(function(){
@@ -53,25 +45,16 @@ $("document").ready(function(){
 
 	$("#btnSalvar")
 	.click(function(){
-		//$("#formularioCadastro").submit();
-		controle.salvar();
+		$("#formularioCadastro").submit();
 	});
-	$('#FFDATAHORA').datepicker({	
-				format: "dd/mm/yyyy",	
-				language: "pt-BR",
-				autoclose: true
-			});
+
 	$('#FFDATAHORA2').datetimepicker({
                     locale: 'pt',
                     format: "dd/mm/yyyy hh:i",
                     language: "pt-BR"
 
     });
-    $('#FFDATACALIBRACAO').datepicker({	
-				format: "dd/mm/yyyy",	
-				language: "pt-BR",
-				autoclose: true
-	});
+
 	$('#FFDATAPESQUISA').datepicker({	
 		format: "dd/mm/yyyy",	
 		language: "pt-BR",

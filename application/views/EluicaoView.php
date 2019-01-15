@@ -20,7 +20,7 @@
 		      			<button type="button" id="btnLimpar" class="btn btn-default btn-sm sys-btn-search" ><i class="fa fa-eraser"></i> Limpar</button>
 	      			</div>
 					<div class="col-md-2 col-xs-2 col-sm-2 pull-right">
-		      			<button type="button" id="btnNovo" class="btn btn-info btn-sm sys-btn-search" ><i class="fa fa-file"></i> Novo Eluição</button>
+		      			<button type="button" id="btnNovo" class="btn btn-info btn-sm sys-btn-search" ><i class="fa fa-file"></i> Nova Eluição</button>
 	      			</div>	      		
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>

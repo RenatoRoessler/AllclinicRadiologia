@@ -79,16 +79,16 @@ class GeradorModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			//tratando a dara
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAHORA'])));  
-			$dataCa = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATACALIBRACAO']))); 
-			$dataInativo = date("Y-m-d",strtotime(str_replace('/','-',$post['DATAINATIVO']))); 
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAHORA'])));  
+			//$dataCa = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATACALIBRACAO']))); 
+			//$dataInativo = date("Y-m-d",strtotime(str_replace('/','-',$post['DATAINATIVO']))); 
 
 			$this->db->trans_begin();
 			$this->db->query("insert into gerador(
 								LOTE,DATA,NRO_ELUICAO,DATA_CALIBRACAO,ATIVIDADE_CALIBRACAO,
 								CODINST,APELUSER,CODFABRICANTE, HORA, DATAINATIVO) value 
-								('$post[FFLOTE]','$data', $post[FFNROELUICAO],'$dataCa', $post[FFATIVIDADECAL],
-								$post[CODINST],'$post[APELUSER]',$post[FFFABRICANTE],'$post[FFHORA]','$dataInativo')"
+								('$post[FFLOTE]','$post[FFDATAHORA]', $post[FFNROELUICAO],'$post[FFDATACALIBRACAO]', $post[FFATIVIDADECAL],
+								$post[CODINST],'$post[APELUSER]',$post[FFFABRICANTE],'$post[FFHORA]','$post[DATAINATIVO]')"
 			);
 			if( $this->db->trans_status() === false){
 				$this->db->trans_rollback();				
@@ -115,14 +115,14 @@ class GeradorModel extends MY_Model {
 	public function atualizar( $post ){
 		try{
 			//tratando a dara
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
-			$dataCa = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATACALIBRACAO']))); 
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			//$dataCa = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATACALIBRACAO']))); 
 			$this->db->trans_begin();
 			$this->db->query(" update gerador set 
 				LOTE = '$post[FFLOTE]',
-				DATA = '$data',
+				DATA = '$post[FFDATAHORA]',
 				NRO_ELUICAO = $post[FFNROELUICAO],
-				DATA_CALIBRACAO = '$dataCa',
+				DATA_CALIBRACAO = '$post[FFDATACALIBRACAO]',
 				ATIVIDADE_CALIBRACAO = $post[FFATIVIDADECAL],
 				CODINST = $post[CODINST],
 				APELUSER = '$post[APELUSER]',
@@ -220,7 +220,8 @@ class GeradorModel extends MY_Model {
 			$FF = '';
 			$dataAtual = date("Y-m-d");
 			$this->dados = $this->query(
-				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO, DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATA1		
+				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO, DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATA1,
+							DATE_FORMAT(g.DATA_CALIBRACAO, '%d/%c/%Y') as DATACALIBRACAO
 				from 		gerador g				
 				where 		g.DATAINATIVO >=  '$dataAtual'
 				and         g.CODINST = $codinst

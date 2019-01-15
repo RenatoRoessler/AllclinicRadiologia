@@ -46,7 +46,7 @@
 									foreach ($gerador as $k => $v) {
 									$sel = ($v["CODGERADOR"] == $retorno[0]["CODGERADOR"]  ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODGERADOR'];?>" <?php echo $sel; ?> > <?php echo 'Lote: ' .$v["LOTE"] . '  /Data: ' .$v["DATA1"]; ?> </option>
+									<option value="<?php echo $v['CODGERADOR'];?>" <?php echo $sel; ?> > <?php echo 'Lote: ' .$v["LOTE"] . '  /Calibração: ' .$v["DATACALIBRACAO"]; ?> </option>
 									<?php  
 										}
 									?>									
@@ -94,7 +94,7 @@
 									  	</div>									  	
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADETEORICA" class="sys-label col-sm-12 col-xs-12">Atividade Teórica:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADETEORICA" name="FFATIVIDADETEORICA" value="<?php echo $retorno[0]["EFI_ATV_TEORICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADETEORICA" name="FFATIVIDADETEORICA" value="<?php echo $retorno[0]["EFI_ATV_TEORICA"];  ?>" readonly>
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADE_MEDIDA" class="sys-label col-sm-12 col-xs-12">Medida:</label>
