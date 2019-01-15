@@ -74,9 +74,9 @@
 						    					<th>Código</th>	
 						    					<th>Data</th>
 						    					<th>Hora</th>
-						    					<th>Paciente</th>
-						    					<th>Exame</th>
+						    					<th>Paciente</th>						    					
 												<th>Sobrenome</th>
+												<th>Exame</th>
 						    					<th>Editar</th>
 						    				</tr>
 						    			</thead>

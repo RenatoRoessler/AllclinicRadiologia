@@ -44,7 +44,7 @@ class AgendamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF , a.HORA, a.DATA, 
 				DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
-				a.PESO, a.ALTURA, ae.CODRADIOISOTOPO
+				a.PESO, a.ALTURA, ae.CODRADIOISOTOPO, ae.PERMANENCIA, ae.REPETICAO
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
@@ -78,6 +78,24 @@ class AgendamentoModel extends MY_Model {
 			if(!$post['FFRADIOISOTOPO'] > 0 ){
 				$post['FFRADIOISOTOPO'] = 'NULL';
 			}  
+			if(!$post['FFPESO'] > 0 ){
+				$post['FFPESO'] = 'NULL';
+			}
+			if(!$post['FFALTURA'] > 0 ){
+				$post['FFALTURA'] = 'NULL';
+			}  
+			if(!$post['FFATIVIDADE'] > 0 ){
+				$post['FFATIVIDADE'] = 'NULL';
+			}  
+			if(!$post['FFPROCEDIMENTO'] > 0 ){
+				$post['FFPROCEDIMENTO'] = 'NULL';
+			} 
+			if($post['FFREPETICAO'] == '' ){
+				$post['FFREPETICAO'] = 'S';
+			} 
+			if(!$post['FFPERMANENCIA'] > 0 ){
+				$post['FFPERMANENCIA'] = 'NULL';
+			} 
 
 			$this->db->trans_begin();
 			$this->db->query("insert into AGENDAMENTO(
@@ -118,11 +136,15 @@ class AgendamentoModel extends MY_Model {
 			$this->db->query("insert into AGTOEXAME(
 								CODPROCEDIMENTO,
 								CODAGTO,
-								CODRADIOISOTOPO								
+								CODRADIOISOTOPO,
+								REPETICAO,
+								PERMANENCIA								
 								) value 
 								($post[FFPROCEDIMENTO],
 								$codagto,
-								$post[FFRADIOISOTOPO]		
+								$post[FFRADIOISOTOPO],
+								'$post[FFREPETICAO]',	
+								'$post[FFPERMANENCIA]'			
 								)"
 			);
 			$this->db->trans_commit();
@@ -149,6 +171,24 @@ class AgendamentoModel extends MY_Model {
 
 			if(!$post['FFRADIOISOTOPO'] > 0 ){
 				$post['FFRADIOISOTOPO'] = 'NULL';
+			}  
+			if(!$post['FFPESO'] > 0 ){
+				$post['FFPESO'] = 'NULL';
+			}
+			if(!$post['FFALTURA'] > 0 ){
+				$post['FFALTURA'] = 'NULL';
+			}  
+			if(!$post['FFATIVIDADE'] > 0 ){
+				$post['FFATIVIDADE'] = 'NULL';
+			}  
+			if(!$post['FFPROCEDIMENTO'] > 0 ){
+				$post['FFPROCEDIMENTO'] = 'NULL';
+			} 
+			if($post['FFREPETICAO'] == '' ){
+				$post['FFREPETICAO'] = 'S';
+			} 
+			if(!$post['FFPERMANENCIA'] > 0 ){
+				$post['FFPERMANENCIA'] = 'NULL';
 			} 
 			
 			$this->db->trans_begin();
@@ -162,14 +202,17 @@ class AgendamentoModel extends MY_Model {
 								PESO = $post[FFPESO],
 								ALTURA = $post[FFALTURA],
 								CODCONV = $post[FFCONVENIO],
-								ATIVIDADE = $post[FFATIVIDADE]						
+								ATIVIDADE = $post[FFATIVIDADE]
+													
 					
 							where  CODAGTO = $post[FFCODAGTO];
 							"
 			);
 			$this->db->query(" update AGTOEXAME set 
 								CODPROCEDIMENTO = $post[FFPROCEDIMENTO],
-								CODRADIOISOTOPO = $post[FFRADIOISOTOPO]
+								CODRADIOISOTOPO = $post[FFRADIOISOTOPO],
+								PERMANENCIA = '$post[FFPERMANENCIA]',
+								REPETICAO = '$post[FFREPETICAO]'	
 							where CODAGTO = $post[FFCODAGTO]; "
 				);
 			if( $this->db->trans_status() === false ){
@@ -200,7 +243,8 @@ class AgendamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,
 							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
-							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE,a.NASCIMENTO
+							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE,a.NASCIMENTO,
+							ae.PERMANENCIA, ae.REPETICAO
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)

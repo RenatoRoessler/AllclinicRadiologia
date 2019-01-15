@@ -103,7 +103,17 @@
 								  </div>
 								</div>								
 							</div>	
-								
+							<div class="col-main col-sm-1 col-xs-12">
+								<label for="FFPERMANENCIA" class="sys-label col-sm-12 col-xs-12">Permanecia(H):</label>
+								<input class="col-sm-12 col-xs-12 form-control" type="time" value="<?php echo $retorno[0]['PERMANENCIA']  ?>" id="FFPERMANENCIA" name="FFPERMANENCIA"  >
+							</div> 	
+							<div class="col-main col-sm-1 col-xs-12">
+								<label for="FFREPETICAO" class="sys-label col-sm-12 col-xs-12">Repetição:</label>
+								<select class="form-control form-control-sm col-sm-12 col-xs-12" id="FFREPETICAO" name="FFREPETICAO" >
+									<option <?php if( $retorno[0]["REPETICAO"] == "N") echo "selected"; ?> value="N">Não</option>
+									<option <?php if( $retorno[0]["REPETICAO"] == "S") echo "selected"; ?> value="S">Sim</option>
+								</select>
+							</div>							
 						</div>	
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-5 col-xs-12">
@@ -125,8 +135,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE" name="FFATIVIDADE" value="<?php echo $retorno[0]["ATIVIDADE"];  ?>"  onkeyup="somenteNumeros(this)"
 								 placeholder="Atividade em mCi" autocomplete="off">
 								 
-							</div>	
-												
+							</div>													
 						</div>	
 								
 				</div>
