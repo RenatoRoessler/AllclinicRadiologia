@@ -17,6 +17,8 @@ var Eluicao = function(){
 				success: function( retorno ){
 					var j = jsonEncode( retorno, 'json' );	
 					var lote = 	j.content.lote;			
+					var atividade = j.content.atividade;
+					$('#FFATIVIDADETEORICA').val(atividade);
 					$("#FFLOTE").val("E" + j.content.lote );	
 					loader('hide');						
 				},
@@ -92,6 +94,14 @@ var Eluicao = function(){
 		}		
 		$("#formularioCadastro").submit();
 	}
+	this.calcEficiencia = function (a){
+		let teorica = $('#FFATIVIDADETEORICA').val();
+		let medida = $('#FFATIVIDADE_MEDIDA').val();
+		if(teorica > 0 && medida > 0){
+			resultado =  ( 100 * medida) / teorica;
+			$('#FFRESULTADO').val(resultado.toFixed(2) +'%')  ;
+		}
+	};
 
 
 
@@ -154,6 +164,11 @@ $("document").ready(function(){
 	$("#btnExcluirEluicao")
 	.click(function(){
 		controle.excluir();
+	});
+
+	$("#FFATIVIDADE_MEDIDA")
+	.blur(function(){
+		controle.calcEficiencia();
 	});
 
 

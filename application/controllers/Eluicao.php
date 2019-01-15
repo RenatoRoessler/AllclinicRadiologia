@@ -155,8 +155,12 @@ class Eluicao extends MY_Controller {
 		$this->load->model('GeradorModel');
 		//pegando a quantidade de eluições gerados com o gerador
 		$lote = $this->GeradorModel->qtdEluicoesGerador( $post['codgerador'] );
-        $lote += 1;	
-		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote) ,  true );	
+		$lote += 1;	
+		$this->GeradorModel->buscaGerador( $post['codgerador'] );
+		$dados = $this->GeradorModel->dados;
+		$atividade = $dados[0]['ATIVIDADE_CALIBRACAO'];
+		
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade) ,  true );	
 		echo jsonEncodeArray( $this->json );
 	}
 }

@@ -102,7 +102,7 @@
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRESULTADO" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRESULTADO" name="FFRESULTADO" value="<?php echo $retorno[0]["EFI_RESULTADO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRESULTADO" name="FFRESULTADO" value="<?php echo $retorno[0]["EFI_RESULTADO"];  ?>" readonly>
 										</div>
 									</div>
 								</div>
