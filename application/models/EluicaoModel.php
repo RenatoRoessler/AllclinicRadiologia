@@ -85,12 +85,27 @@ class EluicaoModel extends MY_Model {
 				}
 				if(isset($post['FFRESULTADO'])){
 					$post['FFRESULTADO'] = 0;
+				}
+				if(isset($post['FFSUPERIOR'])){
+					$post['FFSUPERIOR'] = 0;
+				}
+				if(isset($post['FFINFERIOR'])){
+					$post['FFINFERIOR'] = 0;
+				}
+				if(isset($post['FFRADIOQUIMICA'])){
+					$post['FFRADIOQUIMICA'] = 0;
+				}
+				if(isset($post['FFATV'])){
+					$post['FFATV'] = 0;
 				} 
-				if(isset($post['FFPUREZA_RADIONUCLIDICA'])){
-					$post['FFPUREZA_RADIONUCLIDICA'] = 0;
-				}  
-				if(isset($post['FFPUREZARADIOQUIMICA'])){
-					$post['FFPUREZARADIOQUIMICA'] = 0;
+				if(isset($post['FFATVTECNEZIO'])){
+					$post['FFATVTECNEZIO'] = 0;
+				} 
+				if(isset($post['FFATVFUNDO'])){
+					$post['FFATVFUNDO'] = 0;
+				} 
+				if(isset($post['FFRADIOQUIMICA'])){
+					$post['FFRADIOQUIMICA'] = 0;
 				} 
 				if(isset($post['FFPH'])){
 					$post['FFPH'] = 0;
@@ -110,13 +125,20 @@ class EluicaoModel extends MY_Model {
 								EFI_RESULTADO,
 								PUREZA_RADIONUCLIDICA,
 								PUREZA_RADIOQUIMICA,
-								PUREZA_QUIMICA,
-								LIMPIDA,
+								EFI_RESULTADO,
+								SUPERIOR,
+								INFERIOR,
+								PUREZA_RADIOQUIMICA,
+								ATV,
+								ATVTECNEZIO,
+								ATVFUNDO,
+								PUREZA_RADIONUCLIDICA,
+								PH,
+								LIMPIDA,								
 								CODGERADOR,
 								LOTE,
 								DATAINATIVO,
-								DATAHORA,
-								PH
+								DATAHORA								
 								) value 
 								('$data',
 								'$post[FFHORA]',
@@ -126,15 +148,20 @@ class EluicaoModel extends MY_Model {
 								$post[FFATIVIDADETEORICA],
 								$post[FFATIVIDADE_MEDIDA],
 								$post[FFRESULTADO],
-								$post[FFPUREZA_RADIONUCLIDICA],
-								$post[FFPUREZARADIOQUIMICA],
-								'$post[FFPUREZA_QUIMICA]',
+								$post[FFSUPERIOR],
+								$post[FFINFERIOR],
+								$post[FFRADIOQUIMICA],
+								$post[FFATV],
+								$post[FFATVTECNEZIO],
+								$post[FFATVFUNDO],
+								$post[FFRADIOQUIMICA],
+								$post[FFPH],
 								'$post[FFLIMPIDA]',
 								$post[FFGERADOR],
 								'$post[FFLOTE]',
 								'$datafim',
 								'$datahora',
-								$post[FFPH]
+								
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -215,7 +242,8 @@ class EluicaoModel extends MY_Model {
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
-							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, e.PUREZA_RADIOQUIMICA		
+							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, e.PUREZA_RADIOQUIMICA,
+							e.SUPERIOR, e.INFERIOR, e.RADIOQUIMICA, e.TV, e.ATVTECNEZIO, e.ATVFUNDO
 				from 		eluicao e				
 				where 		e.codeluicao = $codeluicao
 				"

@@ -98,10 +98,29 @@ var Eluicao = function(){
 		let teorica = $('#FFATIVIDADETEORICA').val();
 		let medida = $('#FFATIVIDADE_MEDIDA').val();
 		if(teorica > 0 && medida > 0){
-			resultado =  ( 100 * medida) / teorica;
+			let resultado =  ( 100 * medida) / teorica;
 			$('#FFRESULTADO').val(resultado.toFixed(2) +'%')  ;
 		}
 	};
+
+	this.calcPurezaRadioquimica = function(a) {
+		let superior =  $('#FFSUPERIOR').val();
+		let inferior =  $('#FFINFERIOR').val();
+		if(superior >0 && inferior > 0){
+			let resultado = superior / (superior + inferior )
+			resultado = resultado  * 100;
+			if(resultado > 95){
+				$('#FFRADIOQUIMICA').val(resultado.toFixed(2) +'% Aprovado')  ;	
+				$('#FFRADIOQUIMICA').css("color","grenn");
+			}else{
+				$('#FFRADIOQUIMICA').val(resultado.toFixed(2) +'% Reprovado')  ;
+				$('#FFRADIOQUIMICA').css("color","red");	
+			}
+		}else{
+			$('#FFRADIOQUIMICA').val("0")  ;	
+			$('#FFRADIOQUIMICA').css("color","black");
+		}
+	}
 
 
 
@@ -133,18 +152,14 @@ $("document").ready(function(){
 
 	$("#btnSalvar")
 	.click(function(){
-		controle.salvar();
+		//controle.salvar();
+		$("#formularioCadastro").submit();
 	});
 
 	$(document).ready(function(){
  		$("#sidenavToggler").click();
 	});
 
-	$('#FFDATAHORA').datepicker({	
-				format: "dd/mm/yyyy",	
-				language: "pt-BR",
-				autoclose: true
-	});
 	$('#FFDATAPESQUISA').datepicker({	
 				format: "dd/mm/yyyy",	
 				language: "pt-BR",
@@ -170,6 +185,17 @@ $("document").ready(function(){
 	.blur(function(){
 		controle.calcEficiencia();
 	});
+
+	$("#FFINFERIOR")
+	.blur(function(){
+		controle.calcPurezaRadioquimica();
+	});
+
+	$("#FFSUPERIOR")
+	.blur(function(){
+		controle.calcPurezaRadioquimica();
+	});
+
 
 
 

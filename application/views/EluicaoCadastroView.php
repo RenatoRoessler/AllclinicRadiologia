@@ -12,12 +12,7 @@
 			</ol>
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
 
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Eluicao/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Eluicao/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
             	<input type="hidden" id="FFCODELUICAO1" name="FFCODELUICAO1" value="<?php echo $retorno[0]["CODELUICAO"]; ?>" >
 			
 		    	<!-- ABAS -->
@@ -40,7 +35,7 @@
 							</div>
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFGERADOR" class="sys-label col-sm-12 col-xs-12">Gerador:</label>	
-								<select class="form-control form-control-sm" id="FFGERADOR" name="FFGERADOR" data-live-search="true">
+								<select class="form-control form-control-sm" id="FFGERADOR" name="FFGERADOR" data-live-search="true" required>
 								<option <?php if( $retorno[0]["CODGERADOR"] == "") echo "selected"; ?> value="">Selecione o Gerador</option>
 								<?php
 									foreach ($gerador as $k => $v) {
@@ -57,14 +52,9 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off"  readonly>
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
-					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data:</label>
-					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
-					                <span class="input-group-addon">
-					                      <span class="glyphicon glyphicon-calendar"></span>
-					                </span>
-					            </div>
-					        </div>					       
+								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data :</label>
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
+					        </div>						       
 					        <div class="col-main col-sm-1 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
         						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
@@ -75,7 +65,7 @@
 							</div>
 							 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" required>
 							</div>	
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
@@ -85,8 +75,9 @@
 								</select>
 							</div>							
 						</div>	
-						<div class="row col-sm-12 col-xs-12" style="visibility: hidden;" id="EFICIENCIA">
-							<div class="row col-sm-3 col-xs-12">	
+
+						<div class="row col-sm-12 col-xs-12" style="visibility: hidden;" id="CQ">
+							<div class="row col-sm-2 col-xs-12"><!-- eficiencia da eluicao -->
 								<div class="form-group col-main col-sm-12 col-xs-12">			
 									<div class="card">
 									  	<div class="card-header">
@@ -101,12 +92,60 @@
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MEDIDA" name="FFATIVIDADE_MEDIDA" value="<?php echo $retorno[0]["EFI_ATV_MEDIDA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFRESULTADO" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
+											<label for="FFRESULTADO" class="sys-label col-sm-12 col-xs-12">Resultado(%):</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRESULTADO" name="FFRESULTADO" value="<?php echo $retorno[0]["EFI_RESULTADO"];  ?>" readonly>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div><!-- eficiencia da eluicao -->
+
+							<div class="row col-sm-2 col-xs-12"><!-- Pureza Radioquímica -->
+								<div class="form-group col-main col-sm-12 col-xs-12">			
+									<div class="card">
+									  	<div class="card-header">
+										  Pureza Radioquímica
+									  	</div>							  	
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior: </label>
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFSUPERIOR" name="FFSUPERIOR" value="<?php echo $retorno[0]["SUPERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFINFERIOR" class="sys-label col-sm-12 col-xs-12">Parte Inferior: </label>
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINFERIOR" name="FFINFERIOR" value="<?php echo $retorno[0]["INFERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFRADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIOQUIMICA" name="FFRADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIOQUIMICA"];  ?>" readonly>
+										</div>
+									</div>
+								</div>
+							</div><!-- Pureza Radionuclídica -->
+							<div class="row col-sm-2 col-xs-12"><!-- Pureza Radionuclídica -->
+								<div class="form-group col-main col-sm-12 col-xs-12">			
+									<div class="card">
+									  	<div class="card-header">
+										  Pureza Radionuclídica
+									  	</div>							  	
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de 99mo: </label>
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>"  autocomplete="off"  min="0" max="999.99" >		
+										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de tecnezio: </label>
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFATVFUNDO" class="sys-label col-sm-12 col-xs-12">Atividade de fundo de 99mo: </label>
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFRADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIOQUIMICA" name="FFRADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly>
+										</div>
+									</div>
+								</div>
+							</div><!-- Pureza Radionuclídica -->
+							<!-- OLD
 							<div class="row col-sm-3 col-xs-12" style="visibility: hidden;" id="PUREZA">	
 								<div class="form-group col-main col-sm-12 col-xs-12">					
 									<div class="card">
@@ -138,17 +177,26 @@
 									</div>
 								</div>
 							</div>
-							<div class="row col-sm-3 col-xs-12" style="visibility: hidden;" id="PH">	
-								<div class="form-group col-main col-sm-12 col-xs-12">					
+							-->
+						
+							<div class="row col-sm-2 col-xs-12"><!-- OUTROS -->
+								<div class="form-group col-main col-sm-12 col-xs-12">						
 									<div class="card">
 									  	<div class="card-header">
-									    	PH
+									    	outros
 									  	</div>
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+										</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Limpida</label>
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFLIMPIDA" name="FFLIMPIDA">
+												<option <?php if( $retorno[0]["LIMPIDA"] == "N") echo "selected"; ?> value="N">Não</option>
+												<option <?php if( $retorno[0]["LIMPIDA"] == "S") echo "selected"; ?> value="S">Sim</option>
+											</select>
 										</div>										
-									</div>
+									</div>							
 								</div>
 							</div>
 						</div>
@@ -163,9 +211,7 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 
 		</div>
 	</div>
@@ -178,13 +224,11 @@
 			var e = document.getElementById("FFCQ");
 			var itemSelecionado = e.options[e.selectedIndex].value;
 			if(itemSelecionado != 'S'){
-				document.getElementById('PUREZA').style.visibility = "hidden"; 
-				document.getElementById('EFICIENCIA').style.visibility = "hidden"; 
-				document.getElementById('PH').style.visibility = "hidden"; 
+				document.getElementById('CQ').style.visibility = "hidden"; 
+				
 			}else{
-				document.getElementById('PUREZA').style.visibility = "visible"; 
-				document.getElementById('EFICIENCIA').style.visibility = "visible"
-				document.getElementById('PH').style.visibility = "visible"
+				document.getElementById('CQ').style.visibility = "visible"; 
+				
 			}
 			return false;  
 		}
