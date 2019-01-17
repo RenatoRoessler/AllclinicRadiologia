@@ -71,28 +71,28 @@ class Eluicao extends MY_Controller {
 	public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');
+		//$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('FFHORA','Hora','required');
-		$this->form_validation->set_rules('FFLOTE','LOTE','required');	
-		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
-		$this->form_validation->set_rules('FFGERADOR','Gerador','required');
-		$this->form_validation->set_rules('FFVOLUME','Volume','required');	
-		$this->form_validation->set_rules('FFATIVIDADE_MCI','Atividade Mci','required');	
-		if($post['FFCQ'] == 'S'){
-			$this->form_validation->set_rules('FFATIVIDADETEORICA','Eficiência Teórica','required');
-			$this->form_validation->set_rules('FFATIVIDADE_MEDIDA','Medida','required');
-			$this->form_validation->set_rules('FFRESULTADO','Resultado','required');	
-			$this->form_validation->set_rules('FFPUREZA_RADIONUCLIDICA','Pureza Radionuclidica','required');
-			$this->form_validation->set_rules('FFPUREZA_QUIMICA','Pureza Quimica','required');	
-			$this->form_validation->set_rules('FFCQ','PH','required');	
-		}
+		//$this->form_validation->set_rules('FFHORA','Hora','required');
+		//$this->form_validation->set_rules('FFLOTE','LOTE','required');	
+		//$this->form_validation->set_rules('FFDATAHORA','Data','required');	
+		//$this->form_validation->set_rules('FFGERADOR','Gerador','required');
+		//$this->form_validation->set_rules('FFVOLUME','Volume','required');	
+		//$this->form_validation->set_rules('FFATIVIDADE_MCI','Atividade Mci','required');	
+		//if($post['FFCQ'] == 'S'){
+			//$this->form_validation->set_rules('FFATIVIDADETEORICA','Eficiência Teórica','required');
+			//$this->form_validation->set_rules('FFATIVIDADE_MEDIDA','Medida','required');
+			//$this->form_validation->set_rules('FFRESULTADO','Resultado','required');	
+			//$this->form_validation->set_rules('FFPUREZA_RADIONUCLIDICA','Pureza Radionuclidica','required');
+			//$this->form_validation->set_rules('FFPUREZA_QUIMICA','Pureza Quimica','required');	
+			//$this->form_validation->set_rules('FFCQ','PH','required');	
+		//}
 		
 		$codigo = null;
 		$this->load->model('EluicaoModel');
-		if($this->form_validation->run() == FALSE){
-			$this->novo();
-		}else{			
+		//if($this->form_validation->run() == FALSE){
+		//	$this->novo();
+		//}else{			
 			if($post){
 				if( $post['FFCODELUICAO'] ){
 					$this->EluicaoModel->atualizar($post);
@@ -108,7 +108,7 @@ class Eluicao extends MY_Controller {
 				$this->session->set_userdata('MSG', array( 's', 'Eluição salvo com sucesso' ));
 			}
 			redireciona('editar/' . $codigo);
-		}				
+		//}				
 	}
 
 	public function editar()

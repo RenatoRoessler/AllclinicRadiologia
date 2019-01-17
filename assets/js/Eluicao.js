@@ -95,18 +95,21 @@ var Eluicao = function(){
 		$("#formularioCadastro").submit();
 	}
 	this.calcEficiencia = function (a){
-		let teorica = $('#FFATIVIDADETEORICA').val();
-		let medida = $('#FFATIVIDADE_MEDIDA').val();
+		let teorica = parseFloat($('#FFATIVIDADETEORICA').val());
+		let medida = parseFloat($('#FFATIVIDADE_MEDIDA').val());
 		if(teorica > 0 && medida > 0){
 			let resultado =  ( 100 * medida) / teorica;
 			$('#FFRESULTADO').val(resultado.toFixed(2) +'%')  ;
+		}else{
+			$('#FFRESULTADO').val("0") ;
 		}
 	};
 
 	this.calcPurezaRadioquimica = function(a) {
-		let superior =  $('#FFSUPERIOR').val();
-		let inferior =  $('#FFINFERIOR').val();
-		if(superior >0 && inferior > 0){
+		let superior =  parseFloat($('#FFSUPERIOR').val());
+		let inferior =  parseFloat($('#FFINFERIOR').val());
+
+		if(superior > 0 && inferior > 0){
 			let resultado = superior / (superior + inferior )
 			resultado = resultado  * 100;
 			if(resultado > 95){
@@ -121,9 +124,6 @@ var Eluicao = function(){
 			$('#FFRADIOQUIMICA').css("color","black");
 		}
 	}
-
-
-
 }
 
 $("document").ready(function(){
@@ -174,6 +174,7 @@ $("document").ready(function(){
 	$("#FFGERADOR")
 	.change(function(){
 		controle.gerarLote();
+		controle.calcEficiencia();
 	});
 
 	$("#btnExcluirEluicao")
@@ -196,8 +197,7 @@ $("document").ready(function(){
 		controle.calcPurezaRadioquimica();
 	});
 
-
-
-
+	controle.calcPurezaRadioquimica();
+	controle.calcEficiencia();
 
 });

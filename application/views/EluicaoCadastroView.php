@@ -35,7 +35,7 @@
 							</div>
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFGERADOR" class="sys-label col-sm-12 col-xs-12">Gerador:</label>	
-								<select class="form-control form-control-sm" id="FFGERADOR" name="FFGERADOR" data-live-search="true" required>
+								<select class="form-control form-control-sm" id="FFGERADOR" name="FFGERADOR" data-live-search="true" required  <?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?> >
 								<option <?php if( $retorno[0]["CODGERADOR"] == "") echo "selected"; ?> value="">Selecione o Gerador</option>
 								<?php
 									foreach ($gerador as $k => $v) {
@@ -53,7 +53,7 @@
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data :</label>
-								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
 					        </div>						       
 					        <div class="col-main col-sm-1 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
@@ -128,7 +128,7 @@
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de 99mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>"  autocomplete="off"  min="0" max="999.99" >		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="999.99" >		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de tecnezio: </label>
@@ -139,8 +139,8 @@
 											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFRADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIOQUIMICA" name="FFRADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly>
+											<label for="FFRADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIONUCLIDICA" name="FFRADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly>
 										</div>
 									</div>
 								</div>

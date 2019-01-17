@@ -72,9 +72,14 @@ class EluicaoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
-			$datahora= $data . ' ' . $post['FFHORA'];
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
+			$datahora= $post['FFDATAHORA'] . ' ' . $post['FFHORA'];
 			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +15 hour'));
+			$post['FFRESULTADO'] =  str_replace('%' , '' , $post['FFRESULTADO'] );
+			$post['FFRADIOQUIMICA'] =  str_replace('% Reprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIOQUIMICA'] =  str_replace('% Aprovado' , '' , $post['FFRADIOQUIMICA'] );
+
+			$post['FFRADIONUCLIDICA'] = 0;
 			
 			if($post['FFCQ'] == 'N'){
 				if(isset($post['FFATIVIDADETEORICA'])){
@@ -86,6 +91,7 @@ class EluicaoModel extends MY_Model {
 				if(isset($post['FFRESULTADO'])){
 					$post['FFRESULTADO'] = 0;
 				}
+					
 				if(isset($post['FFSUPERIOR'])){
 					$post['FFSUPERIOR'] = 0;
 				}
@@ -110,6 +116,9 @@ class EluicaoModel extends MY_Model {
 				if(isset($post['FFPH'])){
 					$post['FFPH'] = 0;
 				} 
+				if(isset($post['FFRADIONUCLIDICA'])){
+					$post['FFRADIONUCLIDICA'] = 0;
+				}
 			}
 			
 
@@ -123,16 +132,16 @@ class EluicaoModel extends MY_Model {
 								EFI_ATV_TEORICA,
 								EFI_ATV_MEDIDA,
 								EFI_RESULTADO,
-								PUREZA_RADIONUCLIDICA,
-								PUREZA_RADIOQUIMICA,
-								EFI_RESULTADO,
+
 								SUPERIOR,
 								INFERIOR,
 								PUREZA_RADIOQUIMICA,
+
 								ATV,
 								ATVTECNEZIO,
 								ATVFUNDO,
 								PUREZA_RADIONUCLIDICA,
+
 								PH,
 								LIMPIDA,								
 								CODGERADOR,
@@ -140,7 +149,7 @@ class EluicaoModel extends MY_Model {
 								DATAINATIVO,
 								DATAHORA								
 								) value 
-								('$data',
+								('$post[FFDATAHORA]',
 								'$post[FFHORA]',
 								$post[FFVOLUME],
 								$post[FFATIVIDADE_MCI],
@@ -148,19 +157,22 @@ class EluicaoModel extends MY_Model {
 								$post[FFATIVIDADETEORICA],
 								$post[FFATIVIDADE_MEDIDA],
 								$post[FFRESULTADO],
+
 								$post[FFSUPERIOR],
 								$post[FFINFERIOR],
 								$post[FFRADIOQUIMICA],
+
 								$post[FFATV],
 								$post[FFATVTECNEZIO],
 								$post[FFATVFUNDO],
-								$post[FFRADIOQUIMICA],
+								$post[FFRADIONUCLIDICA],
+
 								$post[FFPH],
 								'$post[FFLIMPIDA]',
 								$post[FFGERADOR],
 								'$post[FFLOTE]',
 								'$datafim',
-								'$datahora',
+								'$datahora'
 								
 								)"
 			);
@@ -189,12 +201,15 @@ class EluicaoModel extends MY_Model {
 	public function atualizar( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
-			$datahora= $data . ' ' . $post['FFHORA'];
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			$datahora= $post['FFDATAHORA'] . ' ' . $post['FFHORA'];
 			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +4 hour'));
+			$post['FFRESULTADO'] =  str_replace('%' , '' , $post['FFRESULTADO'] );
+			$post['FFRADIOQUIMICA'] =  str_replace('% Reprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIOQUIMICA'] =  str_replace('% Aprovado' , '' , $post['FFRADIOQUIMICA'] );
 			$this->db->trans_begin();
 			$this->db->query(" update eluicao set 
-								DATA ='$data', 
+								DATA ='$post[FFDATAHORA]', 
 								HORA = '$post[FFHORA]',
 								VOLUME = $post[FFVOLUME],
 								ATIVIDADE_MCI = $post[FFATIVIDADE_MCI],
@@ -202,9 +217,13 @@ class EluicaoModel extends MY_Model {
 								EFI_ATV_TEORICA = $post[FFATIVIDADETEORICA],
 								EFI_ATV_MEDIDA = $post[FFATIVIDADE_MEDIDA],
 								EFI_RESULTADO = $post[FFRESULTADO],
-								PUREZA_RADIONUCLIDICA = $post[FFPUREZA_RADIONUCLIDICA],
-								PUREZA_RADIOQUIMICA = $post[FFPUREZARADIOQUIMICA],
-								PUREZA_QUIMICA = '$post[FFPUREZA_QUIMICA]',
+								SUPERIOR = $post[FFSUPERIOR],
+								INFERIOR = $post[FFINFERIOR],	
+								PUREZA_RADIONUCLIDICA = $post[FFRADIONUCLIDICA],
+								ATV = $post[FFATV],
+								ATVTECNEZIO = $post[FFATVTECNEZIO],
+								ATVFUNDO = $post[FFATVFUNDO],
+								PUREZA_RADIONUCLIDICA = $post[FFRADIONUCLIDICA],
 								LIMPIDA = '$post[FFLIMPIDA]',
 								CODGERADOR = $post[FFGERADOR],
 								LOTE = 	'$post[FFLOTE]',
@@ -243,7 +262,7 @@ class EluicaoModel extends MY_Model {
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, e.PUREZA_RADIOQUIMICA,
-							e.SUPERIOR, e.INFERIOR, e.RADIOQUIMICA, e.TV, e.ATVTECNEZIO, e.ATVFUNDO
+							e.SUPERIOR, e.INFERIOR, e.ATV, e.ATVTECNEZIO, e.ATVFUNDO
 				from 		eluicao e				
 				where 		e.codeluicao = $codeluicao
 				"
