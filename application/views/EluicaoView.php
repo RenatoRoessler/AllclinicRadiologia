@@ -29,6 +29,7 @@
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>"  >
 					</div>
+					
 					<div class="form-group col-main col-sm-2 col-xs-12">
 						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Início</label>
 					    <div class='input-group date' >
@@ -46,13 +47,13 @@
 					        	<span class="glyphicon glyphicon-calendar"></span>
 					        </span>
 					    </div>
-			        </div>	
+			        </div>					
 					<div class="form-group col-main col-sm-1 col-xs-12">
 						<label for="FFATIVOFILTRO" class="sys-label col-sm-12 col-xs-12">Ativo</label>
 						<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVOFILTRO" name="FFATIVOFILTRO">
 							<option <?php if( $this->input->post("FFATIVOFILTRO") == "S") echo "selected"; ?> value="S">Ativos</option>	
 							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Inativos</option>		
-							<option <?php if( $this->input->post("FFATIVOFILTRO") == "T") echo "selected"; ?> value="T">Todos</option>												
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "T") echo "selected"; ?> value="T">Todos</option>
 						</select>
 					</div>   	
 		    	</div>
@@ -68,18 +69,16 @@
 						    			<thead>
 						    				<tr>
 						    					<th>Código</th>	
-						    					<th>Lote</th>	
+						    					<th>Lote</th>
+												<th>Gerador</th>	
 						    					<th>Data</th>
 						    					<th>Hora</th>
 						    					<th>Volume</th>
 						    					<th>Atividade MCI</th>
-						    					<th>Ativo</th>
 						    					<th>CQ</th>
-						    					<th>EFI Atividade_Teorica</th>
-						    					<th>EFI Medida</th>
-						    					<th>Pureza Radionuclidica</th>
-						    					<th>Pureza Quimica</th>
-						    					<th>Gerador</th>
+												<th>Data Inativo</th>
+						    					
+						    					
 						    					<th>Editar</th>
 						    				</tr>
 						    			</thead>
@@ -92,17 +91,14 @@
 						    				<tr id="<?php echo $v['CODELUICAO']; ?>">
 						    					<td><?php echo $v['CODELUICAO']; ?></td>
 						    					<td><?php echo $v['LOTE']; ?></td>
+												<td><?php echo $v['LOTEGERADOR']; ?></td>
 						    					<td><?php echo $v['DATA1']; ?></td>
 												<td><?php echo $v['HORA']; ?></td>
 												<td><?php echo $v['VOLUME']; ?></td>
 												<td><?php echo $v['ATIVIDADE_MCI']; ?></td>
-												<td><?php echo $v['ATIVO']; ?></td>
-												<td><?php echo $v['CQ']; ?></td>
-												<td><?php echo $v['EFI_ATV_TEORICA']; ?></td>
-												<td><?php echo $v['EFI_ATV_MEDIDA']; ?></td>
-												<td><?php echo $v['PUREZA_RADIONUCLIDICA']; ?></td>
-												<td><?php echo $v['PUREZA_QUIMICA']; ?></td>
-												<td><?php echo $v['CODGERADOR']; ?></td>
+												<td><?php echo $v['CQDESC']; ?></td>
+												<td><?php echo $v['DATAINATIVO1']; ?></td>											
+												
 						    					<td width="10"> 
 						    						<a href=<?php echo base_url() .'/Eluicao/editar/'. $v['CODELUICAO']  ?> > 
 						    							<i class="fa fa-edit fa-lg"></i> 

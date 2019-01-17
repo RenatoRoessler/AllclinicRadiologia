@@ -127,15 +127,15 @@
 										  Pureza Radionuclídica
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de 99mo: </label>
+											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99</SUP>Mo: </label>
 											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="999.99" >		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de tecnezio: </label>
+											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99m</SUP>Tc: </label>
 											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFATVFUNDO" class="sys-label col-sm-12 col-xs-12">Atividade de fundo de 99mo: </label>
+											<label for="FFATVFUNDO" class="sys-label col-sm-12 col-xs-12">Atividade de fundo de <SUP>99</SUP>Mo: </label>
 											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
@@ -144,41 +144,7 @@
 										</div>
 									</div>
 								</div>
-							</div><!-- Pureza Radionuclídica -->
-							<!-- OLD
-							<div class="row col-sm-3 col-xs-12" style="visibility: hidden;" id="PUREZA">	
-								<div class="form-group col-main col-sm-12 col-xs-12">					
-									<div class="card">
-									  	<div class="card-header">
-									    	Pureza
-									  	</div>
-									  	<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFPUREZA_RADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Radionuclidica:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPUREZA_RADIONUCLIDICA" name="FFPUREZA_RADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
-										</div>
-										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFPUREZARADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Radioquimica:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPUREZARADIOQUIMICA" name="FFPUREZARADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIOQUIMICA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
-										</div>
-										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Limpida</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFLIMPIDA" name="FFLIMPIDA">
-												<option <?php if( $retorno[0]["LIMPIDA"] == "N") echo "selected"; ?> value="N">Não</option>
-												<option <?php if( $retorno[0]["LIMPIDA"] == "S") echo "selected"; ?> value="S">Sim</option>									
-											</select>
-										</div>
-										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFPUREZA_QUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZA_QUIMICA" name="FFPUREZA_QUIMICA">
-												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
-												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>						
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							-->
-						
+							</div><!-- Pureza Radionuclídica -->						
 							<div class="row col-sm-2 col-xs-12"><!-- OUTROS -->
 								<div class="form-group col-main col-sm-12 col-xs-12">						
 									<div class="card">

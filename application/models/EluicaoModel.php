@@ -41,10 +41,14 @@ class EluicaoModel extends MY_Model {
 				$FF .= ( $post['FFATIVOFILTRO'] == 'N') ? "and e.DATAINATIVO < '$dataAtual' " : '';
 			}	
 			$this->dados = $this->query(
-				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
+				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA, e.LOTE,
-							DATE_FORMAT(e.DATA, '%d/%c/%Y') as DATA1, e.PUREZA_RADIOQUIMICA
+							DATE_FORMAT(e.DATA, '%d/%c/%Y') as DATA1, e.PUREZA_RADIOQUIMICA,
+							g.LOTE as LOTEGERADOR, e.DATAINATIVO,
+							DATE_FORMAT(e.DATAINATIVO, '%d/%c/%Y %H:%i') as DATAINATIVO1,
+							DATE_FORMAT(e.HORA, '%H:%i') as HORA,
+							case when e.CQ = 'S' then 'Sim' else 'Não' end CQDESC
 				from 		Eluicao e
 				join        Gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 		g.CODINST =  $_SESSION[CODINST]
@@ -79,7 +83,8 @@ class EluicaoModel extends MY_Model {
 			$post['FFRADIOQUIMICA'] =  str_replace('% Reprovado' , '' , $post['FFRADIOQUIMICA'] );
 			$post['FFRADIOQUIMICA'] =  str_replace('% Aprovado' , '' , $post['FFRADIOQUIMICA'] );
 
-			$post['FFRADIONUCLIDICA'] = 0;
+			$post['FFRADIONUCLIDICA'] = str_replace(' Aprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Reprovado' , '' , $post['FFRADIOQUIMICA'] );
 			
 			if($post['FFCQ'] == 'N'){
 				if(isset($post['FFATIVIDADETEORICA'])){
@@ -132,16 +137,13 @@ class EluicaoModel extends MY_Model {
 								EFI_ATV_TEORICA,
 								EFI_ATV_MEDIDA,
 								EFI_RESULTADO,
-
 								SUPERIOR,
 								INFERIOR,
 								PUREZA_RADIOQUIMICA,
-
 								ATV,
 								ATVTECNEZIO,
 								ATVFUNDO,
 								PUREZA_RADIONUCLIDICA,
-
 								PH,
 								LIMPIDA,								
 								CODGERADOR,
@@ -203,10 +205,12 @@ class EluicaoModel extends MY_Model {
 			//tratando a data
 			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
 			$datahora= $post['FFDATAHORA'] . ' ' . $post['FFHORA'];
-			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +4 hour'));
+			$datafim = date('Y-m-d H:i:s', strtotime($datahora .' +12 hour'));
 			$post['FFRESULTADO'] =  str_replace('%' , '' , $post['FFRESULTADO'] );
 			$post['FFRADIOQUIMICA'] =  str_replace('% Reprovado' , '' , $post['FFRADIOQUIMICA'] );
 			$post['FFRADIOQUIMICA'] =  str_replace('% Aprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Aprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Reprovado' , '' , $post['FFRADIOQUIMICA'] );
 			$this->db->trans_begin();
 			$this->db->query(" update eluicao set 
 								DATA ='$post[FFDATAHORA]', 
@@ -225,7 +229,6 @@ class EluicaoModel extends MY_Model {
 								ATVFUNDO = $post[FFATVFUNDO],
 								PUREZA_RADIONUCLIDICA = $post[FFRADIONUCLIDICA],
 								LIMPIDA = '$post[FFLIMPIDA]',
-								CODGERADOR = $post[FFGERADOR],
 								LOTE = 	'$post[FFLOTE]',
 								DATAHORA = '$datahora',
 								DATAINATIVO	= '$datafim',
@@ -258,7 +261,7 @@ class EluicaoModel extends MY_Model {
 
 		try {			
 			$this->dados = $this->query(
-				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
+				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, e.PUREZA_RADIOQUIMICA,
@@ -326,7 +329,7 @@ class EluicaoModel extends MY_Model {
 		}		
 		try {			
 			$this->dados = $this->query(
-				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI,e.ATIVO, e.CQ,
+				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI, e.CQ,
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, g.LOTE AS LOTEGERADOR			

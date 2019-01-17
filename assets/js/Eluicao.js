@@ -91,7 +91,58 @@ var Eluicao = function(){
 		if($('#FFATIVIDADE_MCI').val() == ""){
 			mensagem( 'e', 'Informe a Atividade');
 			return false;
-		}		
+		}	
+		
+		if($('#FFCQ').val() == "S"){
+			if($('#FFATIVIDADETEORICA').val() == ""){
+				mensagem( 'e', 'Informe a ');
+				return false;
+			}
+			if($('#FFATIVIDADETEORICA').val() == ""){
+				mensagem( 'e', 'Informe a Atividade Teórica');
+				return false;
+			}
+			if($('#FFATIVIDADE_MEDIDA').val() == ""){
+				mensagem( 'e', 'Informe a Atividade Medida ');
+				return false;
+			}
+			if($('#FFRESULTADO').val() == ""){
+				mensagem( 'e', 'Informe o Resultado da Eficiência ');
+				return false;
+			}
+			if($('#FFSUPERIOR').val() == ""){
+				mensagem( 'e', 'Informe a parte Superior ');
+				return false;
+			}
+			if($('#FFINFERIOR').val() == ""){
+				mensagem( 'e', 'Informe a parte Inferior');
+				return false;
+			}
+			if($('#FFRADIOQUIMICA').val() == ""){
+				mensagem( 'e', 'Informe O resultado da Pureza Radioquímica');
+				return false;
+			}
+			if($('#FFATV').val() == ""){
+				mensagem( 'e', 'Informe a Atividade');
+				return false;
+			}
+			if($('#FFATVTECNEZIO').val() == ""){
+				mensagem( 'e', 'Informe a Atividade de 99m Tc ');
+				return false;
+			}
+			if($('#FFATVFUNDO').val() == ""){
+				mensagem( 'e', 'Informe a Atividade de Fundo');
+				return false;
+			}
+			if($('#FFRADIONUCLIDICA').val() == ""){
+				mensagem( 'e', 'Informe o Resultado da Pureza Radionuclídica ');
+				return false;
+			}
+			if($('#FFPH').val() == ""){
+				mensagem( 'e', 'Informe o PH');
+				return false;
+			}
+		}
 		$("#formularioCadastro").submit();
 	}
 	this.calcEficiencia = function (a){
@@ -114,7 +165,7 @@ var Eluicao = function(){
 			resultado = resultado  * 100;
 			if(resultado > 95){
 				$('#FFRADIOQUIMICA').val(resultado.toFixed(2) +'% Aprovado')  ;	
-				$('#FFRADIOQUIMICA').css("color","grenn");
+				$('#FFRADIOQUIMICA').css("color","green");
 			}else{
 				$('#FFRADIOQUIMICA').val(resultado.toFixed(2) +'% Reprovado')  ;
 				$('#FFRADIOQUIMICA').css("color","red");	
@@ -122,6 +173,25 @@ var Eluicao = function(){
 		}else{
 			$('#FFRADIOQUIMICA').val("0")  ;	
 			$('#FFRADIOQUIMICA').css("color","black");
+		}
+	}
+
+	this.calcPurezaRadionuclidica = function() {
+		let bg =  parseFloat($('#FFATVFUNDO').val());
+		let b = parseFloat($('#FFATV').val());
+		let c = parseFloat($('#FFATVTECNEZIO').val());
+		if(bg > 0 && b > 0 && c > 0 ){
+			let y, z, a = 0;
+			y = b - bg;
+			z = y * 3.4;
+			a = z / c; 			
+			if(a > 0.15){
+				$('#FFRADIONUCLIDICA').val( a.toFixed(2) + ' Reprovado' );
+				$('#FFRADIONUCLIDICA').css("color","red");
+			}else {
+				$('#FFRADIONUCLIDICA').val( a.toFixed(2) + ' Aprovado' );
+				$('#FFRADIONUCLIDICA').css("color","green");
+			}			
 		}
 	}
 }
@@ -152,8 +222,8 @@ $("document").ready(function(){
 
 	$("#btnSalvar")
 	.click(function(){
-		//controle.salvar();
-		$("#formularioCadastro").submit();
+		controle.salvar();
+		//$("#formularioCadastro").submit();
 	});
 
 	$(document).ready(function(){
@@ -197,7 +267,21 @@ $("document").ready(function(){
 		controle.calcPurezaRadioquimica();
 	});
 
+	$("#FFATV")
+	.blur(function(){
+		controle.calcPurezaRadionuclidica();
+	});
+	$("#FFATVTECNEZIO")
+	.blur(function(){
+		controle.calcPurezaRadionuclidica();
+	});
+	$("#FFATVFUNDO")
+	.blur(function(){
+		controle.calcPurezaRadionuclidica();
+	});
+
 	controle.calcPurezaRadioquimica();
 	controle.calcEficiencia();
+	controle.calcPurezaRadionuclidica();
 
 });
