@@ -1118,7 +1118,19 @@ function somenteNumeros(num) {
 	if (er.test(campo.value)) {
 	  campo.value = "";
 	   }		 
-   }
+}
+
+function apenasNumeroPontoVirgula(str){
+	let arrayStr = str.split('');
+	let result = '';
+	arrayStr.forEach(e => {
+		if( (['0', '1', '2', '3' , '4', '5', '6', '7', '8', '9', '.', ','].indexOf(e) > -1)) {
+			result = result + e;
+		} 
+	});
+	return result;
+}
+
 $("document").ready( function () {
 	startTooltip();
 	startSelect();
@@ -1145,3 +1157,4 @@ $("document").ready( function () {
 		$(this).removeData('bs.modal');
 	});
 })
+

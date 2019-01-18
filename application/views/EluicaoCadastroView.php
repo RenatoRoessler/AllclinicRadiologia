@@ -53,7 +53,7 @@
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data :</label>
-								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required  >  								
 					        </div>						       
 					        <div class="col-main col-sm-1 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
@@ -61,11 +61,11 @@
     						</div>
     						 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume(ml) :</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" placeholder="Volume em ml" required>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" placeholder="Volume em ml" required />
 							</div>
 							 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" required>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" required />
 							</div>	
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
@@ -85,15 +85,15 @@
 									  	</div>									  	
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADETEORICA" class="sys-label col-sm-12 col-xs-12">Atividade Teórica:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADETEORICA" name="FFATIVIDADETEORICA" value="<?php echo $retorno[0]["EFI_ATV_TEORICA"];  ?>" readonly>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADETEORICA" name="FFATIVIDADETEORICA" value="<?php echo $retorno[0]["EFI_ATV_TEORICA"];  ?>" readonly />
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADE_MEDIDA" class="sys-label col-sm-12 col-xs-12">Medida:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MEDIDA" name="FFATIVIDADE_MEDIDA" value="<?php echo $retorno[0]["EFI_ATV_MEDIDA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MEDIDA" name="FFATIVIDADE_MEDIDA" value="<?php echo $retorno[0]["EFI_ATV_MEDIDA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" />
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRESULTADO" class="sys-label col-sm-12 col-xs-12">Resultado(%):</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRESULTADO" name="FFRESULTADO" value="<?php echo $retorno[0]["EFI_RESULTADO"];  ?>" readonly>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRESULTADO" name="FFRESULTADO" value="<?php echo $retorno[0]["EFI_RESULTADO"];  ?>" readonly />
 										</div>
 									</div>
 								</div>
@@ -107,15 +107,15 @@
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFSUPERIOR" name="FFSUPERIOR" value="<?php echo $retorno[0]["SUPERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFSUPERIOR" name="FFSUPERIOR" value="<?php echo $retorno[0]["SUPERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFINFERIOR" class="sys-label col-sm-12 col-xs-12">Parte Inferior: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINFERIOR" name="FFINFERIOR" value="<?php echo $retorno[0]["INFERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINFERIOR" name="FFINFERIOR" value="<?php echo $retorno[0]["INFERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIOQUIMICA" name="FFRADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIOQUIMICA"];  ?>" readonly>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIOQUIMICA" name="FFRADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIOQUIMICA"];  ?>" readonly />
 										</div>
 									</div>
 								</div>
@@ -128,19 +128,19 @@
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99</SUP>Mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="999.99" >		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="999.99" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99m</SUP>Tc: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVFUNDO" class="sys-label col-sm-12 col-xs-12">Atividade de fundo de <SUP>99</SUP>Mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" >		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIONUCLIDICA" name="FFRADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIONUCLIDICA" name="FFRADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly />
 										</div>
 									</div>
 								</div>

@@ -72,6 +72,7 @@ var Eluicao = function(){
 	}
 
 	this.salvar = function(){
+		
 		if($('#FFGERADOR').val() == ""){
 			mensagem( 'e', 'Selecione um Gerador');
 			return false;
@@ -95,10 +96,6 @@ var Eluicao = function(){
 		
 		if($('#FFCQ').val() == "S"){
 			if($('#FFATIVIDADETEORICA').val() == ""){
-				mensagem( 'e', 'Informe a ');
-				return false;
-			}
-			if($('#FFATIVIDADETEORICA').val() == ""){
 				mensagem( 'e', 'Informe a Atividade Teórica');
 				return false;
 			}
@@ -106,7 +103,8 @@ var Eluicao = function(){
 				mensagem( 'e', 'Informe a Atividade Medida ');
 				return false;
 			}
-			if($('#FFRESULTADO').val() == ""){
+			let eficienciaEluicao = $('#FFRESULTADO');
+			if(eficienciaEluicao.val() == ""){
 				mensagem( 'e', 'Informe o Resultado da Eficiência ');
 				return false;
 			}
@@ -118,7 +116,8 @@ var Eluicao = function(){
 				mensagem( 'e', 'Informe a parte Inferior');
 				return false;
 			}
-			if($('#FFRADIOQUIMICA').val() == ""){
+			let purezaRadioquimica = $('#FFRADIOQUIMICA');
+			if(purezaRadioquimica.val() == ""){
 				mensagem( 'e', 'Informe O resultado da Pureza Radioquímica');
 				return false;
 			}
@@ -134,7 +133,8 @@ var Eluicao = function(){
 				mensagem( 'e', 'Informe a Atividade de Fundo');
 				return false;
 			}
-			if($('#FFRADIONUCLIDICA').val() == ""){
+			let purezaRadionuclidica = $('#FFRADIONUCLIDICA')
+			if(purezaRadionuclidica.val() == ""){
 				mensagem( 'e', 'Informe o Resultado da Pureza Radionuclídica ');
 				return false;
 			}
@@ -142,6 +142,39 @@ var Eluicao = function(){
 				mensagem( 'e', 'Informe o PH');
 				return false;
 			}
+			
+			let eficienciaEluicaoVal = eficienciaEluicao.val();
+			eficienciaEluicaoVal = apenasNumeroPontoVirgula(eficienciaEluicaoVal);
+
+			if(eficienciaEluicaoVal > 95){
+				mensagem( 'e', 'Eficiência da Eluição Maior que 95% ');
+				return false;
+			}				
+			if(eficienciaEluicaoVal <= 0 ){
+				mensagem( 'e', 'Eficiência da Eluição igual a 0 ' );
+				return false;
+			}
+
+			let purezaRadioquimicaVal = purezaRadioquimica.val();
+			purezaRadioquimicaVal = apenasNumeroPontoVirgula(purezaRadioquimicaVal);
+			if(purezaRadioquimicaVal < 95){
+				mensagem( 'e', 'Pureza Quimica Menor que 95% ');
+				return false;
+			}				
+			if(purezaRadioquimicaVal <= 0 ){
+				mensagem( 'e', 'Pureza Quimica igual a 0 ' );
+				return false;
+			}
+			let purezaRadionuclidicaVal =  purezaRadionuclidica.val();
+			purezaRadionuclidicaVal = apenasNumeroPontoVirgula(purezaRadionuclidicaVal);
+			if(purezaRadionuclidicaVal > 0.15){
+				mensagem( 'e', 'Pureza Radionuclídica Maior que 0.15 ');
+				return false;
+			}				
+			if(purezaRadionuclidicaVal <= 0 ){
+				mensagem( 'e', ' Não é Permitido Pureza Radionuclídica igual a 0 ' );
+				return false;
+			}			
 		}
 		$("#formularioCadastro").submit();
 	}
@@ -194,6 +227,8 @@ var Eluicao = function(){
 			}			
 		}
 	}
+
+
 }
 
 $("document").ready(function(){
