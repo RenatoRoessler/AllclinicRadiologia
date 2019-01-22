@@ -128,15 +128,15 @@
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99</SUP>Mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="999.99" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="9999.99" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99m</SUP>Tc: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVFUNDO" class="sys-label col-sm-12 col-xs-12">Atividade de fundo de <SUP>99</SUP>Mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
@@ -155,6 +155,14 @@
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
 										</div>
+										
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFPUREZAQUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica:</label>
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZAQUIMICA" name="FFPUREZAQUIMICA">
+												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
+												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>
+											</select>
+										</div>	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Limpida</label>
 											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFLIMPIDA" name="FFLIMPIDA">

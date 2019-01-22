@@ -71,7 +71,7 @@
 								 placeholder="Peso.: 000.000" min="0" max="299.999" step="any"  >
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12 ">Altura (M):</label>
+								<label for="FFALTURA" class="sys-label col-sm-12 col-xs-12 ">Altura (m):</label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFALTURA" name="FFALTURA" value="<?php echo $retorno[0]["ALTURA"]; ?>" 
 								 placeholder="Altura.: 0.000" min="0" max="2.99" step="any">
 							</div>							

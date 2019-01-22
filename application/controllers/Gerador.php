@@ -70,27 +70,28 @@ class Gerador extends CI_Controller {
 
 	public function atualizar(){
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFLOTE','Lote','required|min_length[1]|max_length[10]');
-		$this->form_validation->set_rules('FFDATAHORA','Data e Hora','required');
-		$this->form_validation->set_rules('FFATIVIDADECAL','Atividade de Calibração','required');
-		$this->form_validation->set_rules('FFNROELUICAO','Nro. Eluição','required|min_length[1]|max_length[7]');
-		$this->form_validation->set_rules('FFFABRICANTE','Fabricante','required');
+		//$this->load->library('form_validation');
+		//$this->form_validation->set_rules('FFLOTE','Lote','required|min_length[1]|max_length[10]');
+		//$this->form_validation->set_rules('FFDATAHORA','Data e Hora','required');
+		//$this->form_validation->set_rules('FFATIVIDADECAL','Atividade de Calibração','required');
+		//$this->form_validation->set_rules('FFNROELUICAO','Nro. Eluição','required|min_length[1]|max_length[7]');
+		//$this->form_validation->set_rules('FFFABRICANTE','Fabricante','required');
 		//$this->form_validation->set_rules('FFATIVO','Ativo','required');
-		$this->form_validation->set_rules('FFHORA','Hora','required');
+		//$this->form_validation->set_rules('FFHORA','Hora','required');
 		$post['CODINST'] = $_SESSION['CODINST'];
 		$post['APELUSER'] = $_SESSION['APELUSER'];
 		$this->load->model('GeradorModel');
-		if($this->form_validation->run() == FALSE){
-			$this->novo();
-		}else{			
+		//if($this->form_validation->run() == FALSE){
+			//$this->novo();
+		//}else{		
 			if($post){
 				if($post['FFCODGERADOR']){
 					$codigo =$this->GeradorModel->atualizar($post);
 				}else{
 					//criando a data de inativo
-					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAHORA']))); 
-					$post['DATAINATIVO'] = date('d/m/Y', strtotime("+15 days",strtotime($data)));
+					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATACALIBRACAO']))); 
+					$post['DATAINATIVO'] = date('Y-m-d', strtotime("+15 days",strtotime($data)));
+					//$post['DATAINATIVO'] =  strtotime("+15 days",strtotime($data));
 					$codigo = $this->GeradorModel->inserir($post);
 				}
 			}
@@ -100,7 +101,8 @@ class Gerador extends CI_Controller {
 				$this->session->set_userdata('MSG', array( 's', 'Gerador salvo com sucesso' ));
 			}
 			redireciona('editar/' . $codigo);
-		}			
+			
+		//}			
 	}
 
 	public function editar()

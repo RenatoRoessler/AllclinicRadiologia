@@ -1,5 +1,6 @@
 var Eluicao = function(){
 	var _self = this;
+	var _atvTeoria = 0;
 
 	this.gerarLote = function(){
 		let codgeardor = document.getElementById("FFGERADOR").value;
@@ -18,7 +19,8 @@ var Eluicao = function(){
 					var j = jsonEncode( retorno, 'json' );	
 					var lote = 	j.content.lote;			
 					var atividade = j.content.atividade;
-					$('#FFATIVIDADETEORICA').val(atividade);
+					_atvTeoria = 	atividade;			
+					//$('#FFATIVIDADETEORICA').val(atividade);
 					$("#FFLOTE").val("E" + j.content.lote );	
 					loader('hide');						
 				},
@@ -30,6 +32,7 @@ var Eluicao = function(){
 		}else{
 			document.getElementById("FFLOTE").value = "";	
 		}
+
 		//console.log('teste');
 		//console.log(lote)		
 	}
@@ -228,6 +231,16 @@ var Eluicao = function(){
 		}
 	}
 
+	this.atividadeTeorica = function(){
+		let nroEluicao = 1;
+		let atvMO =  0.01050223;
+		let tempo =  24;
+		let resultado = 0;
+		let exponencial  = -atvMO * tempo;
+		resultado = Math.pow( 2.71, exponencial);
+		resultado = _atvTeoria * resultado;
+		$('#FFATIVIDADETEORICA').val(resultado.toFixed(2));
+	}
 
 }
 
@@ -279,7 +292,9 @@ $("document").ready(function(){
 	$("#FFGERADOR")
 	.change(function(){
 		controle.gerarLote();
-		controle.calcEficiencia();
+		//controle.calcEficiencia();
+		controle.atividadeTeorica();
+
 	});
 
 	$("#btnExcluirEluicao")

@@ -149,7 +149,9 @@ class EluicaoModel extends MY_Model {
 								CODGERADOR,
 								LOTE,
 								DATAINATIVO,
-								DATAHORA								
+								DATAHORA,
+								PUREZA_QUIMICA
+
 								) value 
 								('$post[FFDATAHORA]',
 								'$post[FFHORA]',
@@ -174,7 +176,8 @@ class EluicaoModel extends MY_Model {
 								$post[FFGERADOR],
 								'$post[FFLOTE]',
 								'$datafim',
-								'$datahora'
+								'$datahora',
+								'$post[PUREZA_QUIMICA]'
 								
 								)"
 			);
@@ -232,7 +235,8 @@ class EluicaoModel extends MY_Model {
 								LOTE = 	'$post[FFLOTE]',
 								DATAHORA = '$datahora',
 								DATAINATIVO	= '$datafim',
-								PH = $post[FFPH]			
+								PH = $post[FFPH],
+								PUREZA_QUIMICA = '$post[PUREZA_QUIMICA]'		
 							where  CODELUICAO = $post[FFCODELUICAO]"
 			);
 			if( $this->db->trans_status() === false ){
