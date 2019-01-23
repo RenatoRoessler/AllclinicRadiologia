@@ -70,29 +70,10 @@ class Eluicao extends MY_Controller {
 
 	public function atualizar()
 	{
-		$post = limpaVariavelArray( $this->input->post());
-		//$this->load->library('form_validation');
-		
-		//$this->form_validation->set_rules('FFHORA','Hora','required');
-		//$this->form_validation->set_rules('FFLOTE','LOTE','required');	
-		//$this->form_validation->set_rules('FFDATAHORA','Data','required');	
-		//$this->form_validation->set_rules('FFGERADOR','Gerador','required');
-		//$this->form_validation->set_rules('FFVOLUME','Volume','required');	
-		//$this->form_validation->set_rules('FFATIVIDADE_MCI','Atividade Mci','required');	
-		//if($post['FFCQ'] == 'S'){
-			//$this->form_validation->set_rules('FFATIVIDADETEORICA','Eficiência Teórica','required');
-			//$this->form_validation->set_rules('FFATIVIDADE_MEDIDA','Medida','required');
-			//$this->form_validation->set_rules('FFRESULTADO','Resultado','required');	
-			//$this->form_validation->set_rules('FFPUREZA_RADIONUCLIDICA','Pureza Radionuclidica','required');
-			//$this->form_validation->set_rules('FFPUREZA_QUIMICA','Pureza Quimica','required');	
-			//$this->form_validation->set_rules('FFCQ','PH','required');	
-		//}
-		
+		$post = limpaVariavelArray( $this->input->post());	
 		$codigo = null;
 		$this->load->model('EluicaoModel');
-		//if($this->form_validation->run() == FALSE){
-		//	$this->novo();
-		//}else{			
+			
 			if($post){
 				if( $post['FFCODELUICAO'] ){
 					$this->EluicaoModel->atualizar($post);
@@ -107,8 +88,7 @@ class Eluicao extends MY_Controller {
 			}else{
 				$this->session->set_userdata('MSG', array( 's', 'Eluição salvo com sucesso' ));
 			}
-			redireciona('editar/' . $codigo);
-		//}				
+			redireciona('editar/' . $codigo);			
 	}
 
 	public function editar()
@@ -158,9 +138,38 @@ class Eluicao extends MY_Controller {
 		$lote += 1;	
 		$this->GeradorModel->buscaGerador( $post['codgerador'] );
 		$dados = $this->GeradorModel->dados;
-		$atividade = $dados[0]['ATIVIDADE_CALIBRACAO'];
-		
-		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade) ,  true );	
+		$atividadeGerador = $dados[0]['ATIVIDADE_CALIBRACAO'];
+		$atvEluicao =  $this->GeradorModel->atividadeUltimaEluicao( $post['codgerador'] );
+		$atividade = 0;
+		$diferencaHoras = 0;
+		if($atvEluicao['EFI_ATV_TEORICA'] > 0){
+			$atividade = $atvEluicao['EFI_ATV_TEORICA'];		
+			$dataEluicao = $atvEluicao['DATA'] . ' ' .$atvEluicao['HORA']; 
+			$diferencaHoras = Eluicao::horasDiferenca( $dataEluicao);
+		}else {
+			$atividade = $atividadeGerador ;
+		}		
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,'horasDiferenca' => $diferencaHoras ) ,  true );	
 		echo jsonEncodeArray( $this->json );
 	}
+
+
+	public function horasDiferenca($datahora){
+		date_default_timezone_set('America/Sao_Paulo');
+		$dateAtual = date('Y-m-d H:i');
+		$datatime1 = new DateTime($dateAtual);
+		$datatime2 = new DateTime($datahora);
+
+		$data1  = $datatime1->format('Y-m-d H:i:s');
+		$data2  = $datatime2->format('Y-m-d H:i:s');
+
+		$diff = $datatime1->diff($datatime2);
+		$horas = $diff->h + ($diff->days * 24);
+
+		return $horas;
+	}
+
+	
+	
+
 }

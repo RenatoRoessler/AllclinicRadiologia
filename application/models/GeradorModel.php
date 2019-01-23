@@ -281,4 +281,29 @@ class GeradorModel extends MY_Model {
 		}
 		return 0;
 	}
+
+	/**
+	 *  Pegando a ultima eluição
+	 *	@author Renato Roessler <renatoroessler@gmail.com>
+	 * 	@return int
+	 */
+	public function atividadeUltimaEluicao( $codgerador ){
+		try {
+			$this->dados =  $this->query(
+				" select e.EFI_ATV_TEORICA, e.DATA, e.HORA from eluicao e where e.CODGERADOR = $codgerador order by 1 desc "
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero não pode excluir
+			if(isset($this->dados[0]['EFI_ATV_TEORICA'])) {
+				return $this->dados[0];
+			}else{
+				return 0;
+			}
+			 
+		} catch (Exception $e) {
+			/*	Criando Log*/
+			log_message('error', $this->db->error());
+		}
+		return 0;
+	}
 }

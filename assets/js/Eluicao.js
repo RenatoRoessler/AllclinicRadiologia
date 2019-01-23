@@ -1,9 +1,22 @@
 var Eluicao = function(){
 	var _self = this;
-	var _atvTeoria = 0;
+
+	function atividadeTeorica(AtvMo = 0.01050223, tempo = 24, atv = 1500 ){
+		let resultado = 0;
+		let exponencial  = -AtvMo * tempo;
+		resultado = Math.pow( 2.71, exponencial);
+		resultado = atv * resultado;
+		console.log('AtvMo:', AtvMo);
+		console.log('tempo:', tempo);
+		console.log('atv:', atv);
+		return resultado.toFixed(2) ; 
+
+	}
 
 	this.gerarLote = function(){
-		let codgeardor = document.getElementById("FFGERADOR").value;
+		let codgeardor = $("#FFGERADOR").val();
+		let atvTeorica = 0;
+		let horasDif = 0;
 		if(codgeardor > 0){
 			$.ajax({
 				url : '/AllclinicRadiologia/Eluicao/gerarLoteEluicao/',
@@ -17,11 +30,10 @@ var Eluicao = function(){
 				},
 				success: function( retorno ){
 					var j = jsonEncode( retorno, 'json' );	
-					var lote = 	j.content.lote;			
-					var atividade = j.content.atividade;
-					_atvTeoria = 	atividade;			
-					//$('#FFATIVIDADETEORICA').val(atividade);
-					$("#FFLOTE").val("E" + j.content.lote );	
+					var nroEluicao = 	j.content.lote;			
+					atvTeorica = j.content.atividade;
+					horasDif = j.content.horasDiferenca;					
+					$("#FFLOTE").val("E" + nroEluicao);	
 					loader('hide');						
 				},
 				error: function( request, status, error ){ 
@@ -29,12 +41,15 @@ var Eluicao = function(){
 					mensagem( 'e', error )
 				}
 			});
+			setTimeout(function(){ 
+				let res = atividadeTeorica( 0.01050223, horasDif, atvTeorica);
+				$('#FFATIVIDADETEORICA').val(res);
+			}, 500);		
+			
 		}else{
-			document.getElementById("FFLOTE").value = "";	
-		}
-
-		//console.log('teste');
-		//console.log(lote)		
+			$("#FFLOTE").val("") ;	
+			$("#FFATIVIDADETEORICA").val("") ;
+		}	
 	}
 
 	this.excluir = function(a){
@@ -231,16 +246,7 @@ var Eluicao = function(){
 		}
 	}
 
-	this.atividadeTeorica = function(){
-		let nroEluicao = 1;
-		let atvMO =  0.01050223;
-		let tempo =  24;
-		let resultado = 0;
-		let exponencial  = -atvMO * tempo;
-		resultado = Math.pow( 2.71, exponencial);
-		resultado = _atvTeoria * resultado;
-		$('#FFATIVIDADETEORICA').val(resultado.toFixed(2));
-	}
+	
 
 }
 
@@ -266,7 +272,12 @@ $("document").ready(function(){
 	$("#btnVoltar")
 	.click(function(){
 		ir('/AllclinicRadiologia/Eluicao');
-	});		
+	});	
+	
+	$("#FFATIVIDADE_MCI").change(function() {
+		$("#FFATIVIDADE_MEDIDA").val($("#FFATIVIDADE_MCI").val());
+		controle.calcEficiencia();
+	});
 
 	$("#btnSalvar")
 	.click(function(){
@@ -292,8 +303,8 @@ $("document").ready(function(){
 	$("#FFGERADOR")
 	.change(function(){
 		controle.gerarLote();
-		//controle.calcEficiencia();
-		controle.atividadeTeorica();
+		controle.calcEficiencia();
+		//controle.atividadeTeorica();
 
 	});
 

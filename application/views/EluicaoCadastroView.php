@@ -89,7 +89,7 @@
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADE_MEDIDA" class="sys-label col-sm-12 col-xs-12">Medida:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MEDIDA" name="FFATIVIDADE_MEDIDA" value="<?php echo $retorno[0]["EFI_ATV_MEDIDA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" />
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MEDIDA" name="FFATIVIDADE_MEDIDA" value="<?php echo $retorno[0]["EFI_ATV_MEDIDA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" readonly/>
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRESULTADO" class="sys-label col-sm-12 col-xs-12">Resultado(%):</label>
