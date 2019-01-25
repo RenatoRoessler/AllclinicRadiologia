@@ -12,13 +12,7 @@
 			</ol>
 
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
-
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Marcacao/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Marcacao/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
             	<input type="hidden" id="FFCODMARCACAO1" name="FFCODMARCACAO1" value="<?php echo $retorno[0]["CODMARCACAO"]; ?>" >			
 		    	<!-- ABAS -->
 				<div class="col-sm-12 col-md-12 col-xs-12">
@@ -57,20 +51,14 @@
 								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>" autocomplete="off" readonly>
 							</div>
-							 <div class="form-group col-main col-sm-2 col-xs-12">
-					        	<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data Controle:</label>
-					            <div class='input-group date' >
-					                <input type='text' class="form-control" id='FFDATAHORA' name="FFDATAHORA" value="<?php echo $retorno[0]["DATA1"] ?  $retorno[0]["DATA1"] :  date ("d/m/Y")  ?>"  autocomplete="off"/>
-					                <span class="input-group-addon">
-					                      <span class="glyphicon glyphicon-calendar"></span>
-					                </span>
-					            </div>
-					        </div>
+							<div class="form-group col-main col-sm-2 col-xs-12">
+								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data :</label>
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required  >  								
+					        </div>	
 					        <div class="col-main col-sm-2 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Controle</label>
         						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
-    						</div>
-											        		
+    						</div>											        		
 						</div>
 						
 						<div class="row col-sm-12 col-xs-12">
@@ -122,30 +110,75 @@
 								</select>
 							</div>														
 						</div>
-						<div class="row col-sm-12 col-xs-12" style="visibility: hidden;" id="EFICIENCIA">
-							<div class="row col-sm-3 col-xs-12">	
+					
+						<div class="row col-sm-12 col-xs-12" style="visibility: hidden;" id="EFICIENCIA">	
+							<div class="row col-sm-4 col-xs-12"><!--inicio card -->
+								<div class="form-group col-main col-sm-12 col-xs-12">
+									<div class="card border-light mb-3">
+										<div class="row col-sm-12 col-xs-12">
+											<div class="form-group col-main col-sm-6 col-xs-12">
+												<div class="card ">
+													<div class="card-header">
+														Eficiência Inorgânico
+													</div>
+													<div class="form-group col-main col-sm-12 col-xs-12">
+														<label for="FFORGANICOSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior:</label>
+														<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFORGANICOSUPERIOR" name="FFORGANICOSUPERIOR" value="<?php echo $retorno[0]["ORGANICO_SUPERIOR"];  ?>" min="0" max="9999.99" step="0.01" />
+													</div>									  	
+													<div class="form-group col-main col-sm-12 col-xs-12">
+														<label for="FFORGANICOINFERIOR" class="sys-label col-sm-12 col-xs-12">Parte Inferior:</label>
+														<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFORGANICOINFERIOR" name="FFORGANICOINFERIOR" value="<?php echo $retorno[0]["ORGANICO_INFERIOR"];  ?>" min="0" max="9999.99" step="0.01" />
+													</div>
+													<div class="form-group col-main col-sm-12 col-xs-12">
+														<label for="FFORGANICO" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
+														<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFORGANICO" name="FFORGANICO" value="<?php echo $retorno[0]["ORGANICO"];  ?>"  autocomplete="off" readonly  step="0.01" />
+													</div>
+												</div>
+											</div>									
+											<div class="form-group col-main col-sm-6 col-xs-12">
+												<div class="card">
+													<div class="card-header">
+														Eficiência Inorgânico
+													</div>
+													<div class="form-group col-main col-sm-12 col-xs-12">
+														<label for="FFINORGANICOSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior:</label>
+														<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINORGANICOSUPERIOR" name="FFINORGANICOSUPERIOR" value="<?php echo $retorno[0]["INORGANICO_SUPERIOR"];  ?>" min="0" max="9999.99" step="0.01" />
+													</div>									  	
+													<div class="form-group col-main col-sm-12 col-xs-12">
+														<label for="FFINORGANICOINFERIOR" class="sys-label col-sm-12 col-xs-12">Parte Inferior:</label>
+														<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINORGANICOINFERIOR" name="FFINORGANICOINFERIOR" value="<?php echo $retorno[0]["INORGANICO_INFERIOR"];  ?>" min="0" max="9999.99" step="0.01" />
+													</div>
+													<div class="form-group col-main col-sm-12 col-xs-12">
+														<label for="FFINORGANICO" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
+														<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINORGANICO" name="FFINORGANICO" value="<?php echo $retorno[0]["INORGANICO"];  ?>" min="0" max="9999.99" step="0.01"  readonly />
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-main col-sm-12 col-xs-12">
+												<label for="FFMEDIA" class="sys-label col-sm-12 col-xs-12">Média:</label>
+												<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFMEDIA" name="FFMEDIA" value="<?php echo $retorno[0]["EFICIENCIA_MEDIA"];  ?>" min="0" max="9999.99" step="0.01" readonly />
+											</div>	
+										</div>									
+									</div>
+								</div>
+							</div><!-- fim card -->
+							<div class="row col-sm-2 col-xs-12">	
 								<div class="form-group col-main col-sm-12 col-xs-12">			
 									<div class="card">
 									  	<div class="card-header">
-									    	Eficiência da Marcaçao
+									    	PH
 									  	</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" autocomplete="off">
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>"  />
 										</div>									  	
-									  	<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFORGANICO" class="sys-label col-sm-12 col-xs-12">Organico:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFORGANICO" name="FFORGANICO" value="<?php echo $retorno[0]["ORGANICO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
-										</div>
-										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFQUIMICO" class="sys-label col-sm-12 col-xs-12">Quimico:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFQUIMICO" name="FFQUIMICO" value="<?php echo $retorno[0]["QUIMICO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
-										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						
 					</div>
+					
 				</div>
 				<br/>
 					<div class="col-xs-1 col-sm-1 pull-left">
@@ -156,26 +189,13 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 
 		</div>
 	</div>
 	
 	
 	<script type="text/javascript">
-	    function somenteNumeros(num) {
-	    	//campo.value.replace(',','.');
-	        var er = /[^0-9.]/;
-	        er.lastIndex = 0;
-	        var campo = num;
-	    	campo.value =  campo.value.replace(',','.');        
-	        
-	        if (er.test(campo.value)) {
-	          campo.value = "";
-	      	 }		 
-   		}
 
    		function mostraDiv()
 		{

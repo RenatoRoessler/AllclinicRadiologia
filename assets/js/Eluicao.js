@@ -156,8 +156,14 @@ var Eluicao = function(){
 				mensagem( 'e', 'Informe o Resultado da Pureza Radionuclídica ');
 				return false;
 			}
-			if($('#FFPH').val() == ""){
+			let ph = $('#FFPH');
+			if(ph.val() == ""){
 				mensagem( 'e', 'Informe o PH');
+				
+				return false;
+			}
+			if(ph.val() != 7){
+				mensagem( 'e', 'PH tem que ser 7');
 				return false;
 			}
 			
@@ -304,8 +310,7 @@ $("document").ready(function(){
 	.change(function(){
 		controle.gerarLote();
 		controle.calcEficiencia();
-		//controle.atividadeTeorica();
-
+		controle.atividadeTeorica();
 	});
 
 	$("#btnExcluirEluicao")

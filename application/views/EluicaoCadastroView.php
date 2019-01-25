@@ -153,7 +153,7 @@
 									  	</div>
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
-											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off">
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"] ; ?>"  autocomplete="off"  min="0" max="99" required/>					
 										</div>
 										
 										<div class="form-group col-main col-sm-12 col-xs-12">

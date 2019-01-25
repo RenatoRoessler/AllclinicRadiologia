@@ -42,7 +42,7 @@ class MarcacaoModel extends MY_Model {
 			}
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
-							m.CQ, m.ORGANICO, m.QUIMICO, m.APELUSER,
+							m.CQ, m.ORGANICO, m.INORGANICO, m.APELUSER,
 							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO,
 							m.PH, m.CODFARMACO, m.LOTE
@@ -76,18 +76,40 @@ class MarcacaoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
 			if($post['FFCQ'] == 'N'){
 				if(isset($post['FFORGANICO'])){
 					$post['FFORGANICO'] = 0;
 				} 
-				if(isset($post['FFQUIMICO'])){
-					$post['FFQUIMICO'] = 0;
+				if(isset($post['FFINORGANICO'])){
+					$post['FFINORGANICO'] = 0;
 				}
 				if(isset($post['FFPH'])){
 					$post['FFPH'] = 0;
 				}
 			}
+			if(isset($post['ORGANICO_SUPERIOR'])){
+				$post['ORGANICO_SUPERIOR'] = 0;
+			}
+			if(isset($post['ORGANICO'])){
+				$post['ORGANICO'] = 0;
+			}
+			if(isset($post['INORGANICO'])){
+				$post['INORGANICO'] = 0;
+			}
+			if(isset($post['ORGANICO_INFERIOR'])){
+				$post['ORGANICO_INFERIOR'] = 0;
+			}
+			if(isset($post['INORGANICO_SUPERIOR'])){
+				$post['INORGANICO_SUPERIOR'] = 0;
+			}
+			if(isset($post['INORGANICO_INFERIOR'])){
+				$post['INORGANICO_INFERIOR'] = 0;
+			}
+			if(isset($post['EFICIENCIA_MEDIA'])){
+				$post['EFICIENCIA_MEDIA'] = 0;
+			}
+			
 
 			$this->db->trans_begin();
 			$this->db->query("insert into MARCACAO(
@@ -98,24 +120,34 @@ class MarcacaoModel extends MY_Model {
 								KIT_LOTE,
 								CQ,
 								ORGANICO,
-								QUIMICO,
+								INORGANICO,
 								APELUSER,
 								LOTE,
 								CODFARMACO,
-								PH
+								PH,
+								ORGANICO_SUPERIOR,
+								ORGANICO_INFERIOR,
+								INORGANICO_SUPERIOR,
+								INORGANICO_INFERIOR,
+								EFICIENCIA_MEDIA
 								) value 
 								($post[FFELUICAO],
-								'$data',
+								'$post[FFDATAHORA]',
 								'$post[FFHORA]',
 								$post[FFKITFABRICANTE],
 								'$post[FFKITLOTE]',
 								'$post[FFCQ]',
 								$post[FFORGANICO],
-								$post[FFQUIMICO],
+								$post[FFINORGANICO],
 								'$post[APELUSER]',
 								'$post[FFLOTE]',
 								$post[FFFARMACO],
-								$post[FFPH]
+								$post[FFPH],
+								$post[FFORGANICOSUPERIOR],
+								$post[FFORGANICOINFERIOR],
+								$post[FFINORGANICOSUPERIOR],
+								$post[FFINORGANICOINFERIOR],
+								$post[FFMEDIA]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -144,21 +176,48 @@ class MarcacaoModel extends MY_Model {
 	public function atualizar( $post ){
 		try{
 			//tratando a data
-			$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
+
+			if(isset($post['ORGANICO_SUPERIOR'])){
+				$post['ORGANICO_SUPERIOR'] = 0;
+			}
+			if(isset($post['ORGANICO'])){
+				$post['ORGANICO'] = 0;
+			}
+			if(isset($post['INORGANICO'])){
+				$post['INORGANICO'] = 0;
+			}
+			if(isset($post['ORGANICO_INFERIOR'])){
+				$post['ORGANICO_INFERIOR'] = 0;
+			}
+			if(isset($post['INORGANICO_SUPERIOR'])){
+				$post['INORGANICO_SUPERIOR'] = 0;
+			}
+			if(isset($post['INORGANICO_INFERIOR'])){
+				$post['INORGANICO_INFERIOR'] = 0;
+			}
+			if(isset($post['EFICIENCIA_MEDIA'])){
+				$post['EFICIENCIA_MEDIA'] = 0;
+			}
+
 			$this->db->trans_begin();
 			$this->db->query(" update marcacao set 
-								DATA ='$data', 
+								DATA = '$post[FFDATAHORA]', 
 								HORA = '$post[FFHORA]',
 								CODELUICAO = $post[FFELUICAO],
 								KIT_CODFABRICANTE = $post[FFKITFABRICANTE],
 								KIT_LOTE = '$post[FFKITLOTE]',
 								CQ = '$post[FFCQ]',
 								ORGANICO = $post[FFORGANICO],
-								QUIMICO = $post[FFQUIMICO],
+								INORGANICO = $post[FFINORGANICO],
 								PH = $post[FFPH],
 								CODFARMACO =  $post[FFFARMACO],
-								LOTE = '$post[FFLOTE]'
-															
+								LOTE = '$post[FFLOTE]',
+								ORGANICO_SUPERIOR = $post[FFORGANICOSUPERIOR],
+								ORGANICO_INFERIOR = $post[FFORGANICOINFERIOR],
+								INORGANICO_SUPERIOR = $post[FFINORGANICOSUPERIOR],
+								INORGANICO_INFERIOR = $post[FFINORGANICOINFERIOR],	
+								EFICIENCIA_MEDIA = $post[FFMEDIA]										
 							where  	CODMARCACAO = $post[FFCODMARCACAO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -189,10 +248,12 @@ class MarcacaoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
 				            m.KIT_LOTE, m.CQ, m.ORGANICO, 
-				            m.QUIMICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
+				            m.INORGANICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 							m.PH, m.CODFARMACO, m.LOTE,
 							DATE_FORMAT(m.HORA,'%H:%i') AS HORAMINUTO, f.DESCRICAO,
-							fa.DESCRICAO AS DESCFARMACO
+							fa.DESCRICAO AS DESCFARMACO,m.ORGANICO_SUPERIOR,
+							m.ORGANICO_INFERIOR,m.INORGANICO_SUPERIOR,
+							m.INORGANICO_INFERIOR, m.EFICIENCIA_MEDIA
 				from 		marcacao m
 				join        fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)	
 				left join  	farmaco fa on (m.CODFARMACO = fa.CODFARMACO)	
@@ -255,7 +316,7 @@ class MarcacaoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
 				            m.KIT_LOTE, m.CQ, m.ORGANICO, 
-				            m.QUIMICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
+				            m.INORGANICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 				            m.CODFARMACO
 				from 		marcacao m
 				join        eluicao e on (m.CODELUICAO = e.CODELUICAO)

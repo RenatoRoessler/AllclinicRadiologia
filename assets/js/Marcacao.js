@@ -94,6 +94,33 @@ var Marcacao = function(){
 			});
 		}
 	}
+
+
+	this.calcEficiencia = function(superior, inferior , campo) {
+
+		if(superior > 0 && inferior > 0){
+			let resultado = superior / (superior + inferior )
+			resultado = resultado  * 100;
+			campo.val(resultado.toFixed(2))  ;	
+		}else{
+			campo.val("0")  ;	
+		}
+	}
+	
+	this.calcMedia = function() {
+		let m1 = parseFloat($("#FFORGANICO").val());
+		let m2 = parseFloat($("#FFINORGANICO").val());
+		let resultado =0;
+
+		if(m1 > 0 && m2 > 0){
+			resultado = ((m1 + m2) / 2);
+		}else if(m1 > 0 && m2 <= 0){
+			resultado = m1;
+		}else if(m1 <= 0 && m2 > 0){
+			resultado = m2;
+		}
+		$("#FFMEDIA").val(resultado.toFixed(2));
+	}
 }
 
 $("document").ready(function(){
@@ -122,11 +149,6 @@ $("document").ready(function(){
 		controle.salvar();
 	});	
 
-	$('#FFDATAHORA').datepicker({	
-			format: "dd/mm/yyyy",	
-			language: "pt-BR",
-			autoclose: true
-	});
 	$('#FFDATAPESQUISA').datepicker({	
 		format: "dd/mm/yyyy",	
 		language: "pt-BR",
@@ -146,11 +168,36 @@ $("document").ready(function(){
 	$("#FFKITFABRICANTE")
 		.change(function(){
 			selectFill( $('#FFKITFABRICANTE'), function(){ startSelect('refresh') } );
-		});	
+	});	
 		
 	$("#btnExcluirMarcacao")
 		.click(function(){
 			controle.excluir();
-		});
+	});
+	$("#FFORGANICOSUPERIOR").change(function(){
+		let superior = parseFloat($("#FFORGANICOSUPERIOR").val());
+		let inferior = parseFloat($("#FFORGANICOINFERIOR").val());
+		controle.calcEficiencia(superior, inferior  ,$("#FFORGANICO"));
+		controle.calcMedia();
+	});
+	$("#FFORGANICOINFERIOR").change(function(){
+		let superior = parseFloat($("#FFORGANICOSUPERIOR").val());
+		let inferior = parseFloat($("#FFORGANICOINFERIOR").val());
+		controle.calcEficiencia(superior, inferior  ,$("#FFORGANICO"));
+		controle.calcMedia();
+	});
+	$("#FFINORGANICOSUPERIOR").change(function(){
+		let superior = parseFloat($("#FFINORGANICOSUPERIOR").val());
+		let inferior = parseFloat($("#FFINORGANICOINFERIOR").val());
+		controle.calcEficiencia(superior, inferior  ,$("#FFINORGANICO"));
+		controle.calcMedia();
+	});
+	$("#FFINORGANICOINFERIOR").change(function(){
+		let superior = parseFloat($("#FFINORGANICOSUPERIOR").val());
+		let inferior = parseFloat($("#FFINORGANICOINFERIOR").val());
+		controle.calcEficiencia(superior, inferior  ,$("#FFINORGANICO"));
+		controle.calcMedia();
+	});
+
 
 });

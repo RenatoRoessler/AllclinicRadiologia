@@ -81,6 +81,7 @@ class Marcacao extends MY_Controller {
 	public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
+		/*		
 		$this->load->library('form_validation');		
 		$this->form_validation->set_rules('FFELUICAO','Eluição','required');
 		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
@@ -92,12 +93,11 @@ class Marcacao extends MY_Controller {
 			$this->form_validation->set_rules('FFQUIMICO','Eficiência Quimico','required');
 			$this->form_validation->set_rules('FFPH','PH','required');
 		}		
+		*/
 		$codigo = null;
 		$post['APELUSER'] = $_SESSION['APELUSER'];
 		$this->load->model('MarcacaoModel');
-		if($this->form_validation->run() == FALSE){
-			$this->novo();
-		}else{			
+					
 			if($post){
 				if( $post['FFCODMARCACAO'] ){
 					$this->MarcacaoModel->atualizar($post);
@@ -111,8 +111,7 @@ class Marcacao extends MY_Controller {
 			}else{
 				$this->session->set_userdata('MSG', array( 's', 'Marcação salvo com sucesso' ));
 			}
-			redireciona('editar/' . $codigo);
-		}					
+			redireciona('editar/' . $codigo);					
 	}
 
 	public function editar()
