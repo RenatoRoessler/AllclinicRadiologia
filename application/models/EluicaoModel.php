@@ -150,8 +150,8 @@ class EluicaoModel extends MY_Model {
 								LOTE,
 								DATAINATIVO,
 								DATAHORA,
-								PUREZA_QUIMICA
-
+								PUREZA_QUIMICA,
+								APROVADO 
 								) value 
 								('$post[FFDATAHORA]',
 								'$post[FFHORA]',
@@ -177,8 +177,8 @@ class EluicaoModel extends MY_Model {
 								'$post[FFLOTE]',
 								'$datafim',
 								'$datahora',
-								'$post[PUREZA_QUIMICA]'
-								
+								'$post[FFPUREZAQUIMICA]',
+								'$post[FFAPROVADO]'								
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -236,7 +236,8 @@ class EluicaoModel extends MY_Model {
 								DATAHORA = '$datahora',
 								DATAINATIVO	= '$datafim',
 								PH = $post[FFPH],
-								PUREZA_QUIMICA = '$post[PUREZA_QUIMICA]'		
+								PUREZA_QUIMICA = '$post[FFPUREZAQUIMICA]',
+								APROVADO       = '$post[FFAPROVADO]'	
 							where  CODELUICAO = $post[FFCODELUICAO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -269,7 +270,7 @@ class EluicaoModel extends MY_Model {
 							e.EFI_ATV_TEORICA, e.EFI_ATV_MEDIDA, e.EFI_VOLUME, e.PUREZA_RADIONUCLIDICA,	
 							e.PUREZA_QUIMICA, e.CODGERADOR,e.EFI_RESULTADO,e.LIMPIDA,e.PH,
 							DATE_FORMAT(e.data, '%d/%c/%Y') as DATA1, e.LOTE, e.PUREZA_RADIOQUIMICA,
-							e.SUPERIOR, e.INFERIOR, e.ATV, e.ATVTECNEZIO, e.ATVFUNDO
+							e.SUPERIOR, e.INFERIOR, e.ATV, e.ATVTECNEZIO, e.ATVFUNDO, e.APROVADO
 				from 		eluicao e				
 				where 		e.codeluicao = $codeluicao
 				"

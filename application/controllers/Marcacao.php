@@ -81,19 +81,7 @@ class Marcacao extends MY_Controller {
 	public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-		/*		
-		$this->load->library('form_validation');		
-		$this->form_validation->set_rules('FFELUICAO','Eluição','required');
-		$this->form_validation->set_rules('FFDATAHORA','Data','required');	
-		$this->form_validation->set_rules('FFHORA','Hora','required');
-		$this->form_validation->set_rules('FFKITFABRICANTE','Kit Fabricnte','required');	
-		$this->form_validation->set_rules('FFKITLOTE','Kit lote','required');	
-		if($post['FFCQ'] == 'S'){
-			$this->form_validation->set_rules('FFORGANICO','Eficiência Organico','required');
-			$this->form_validation->set_rules('FFQUIMICO','Eficiência Quimico','required');
-			$this->form_validation->set_rules('FFPH','PH','required');
-		}		
-		*/
+	
 		$codigo = null;
 		$post['APELUSER'] = $_SESSION['APELUSER'];
 		$this->load->model('MarcacaoModel');

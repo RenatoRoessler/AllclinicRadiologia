@@ -13,6 +13,104 @@ var Eluicao = function(){
 
 	}
 
+	function aprovado() {
+		if($('#FFATIVIDADETEORICA').val() == ""){
+			//mensagem( 'e', 'Informe a Atividade Teórica');
+			return false;
+		}
+		if($('#FFATIVIDADE_MEDIDA').val() == ""){
+			//mensagem( 'e', 'Informe a Atividade Medida ');
+			return false;
+		}
+		let eficienciaEluicao = $('#FFRESULTADO');
+		if(eficienciaEluicao.val() == ""){
+			//mensagem( 'e', 'Informe o Resultado da Eficiência ');
+			return false;
+		}
+		if($('#FFSUPERIOR').val() == ""){
+			//mensagem( 'e', 'Informe a parte Superior ');
+			return false;
+		}
+		if($('#FFINFERIOR').val() == ""){
+			//mensagem( 'e', 'Informe a parte Inferior');
+			return false;
+		}
+		let purezaRadioquimica = $('#FFRADIOQUIMICA');
+		if(purezaRadioquimica.val() == ""){
+			//mensagem( 'e', 'Informe O resultado da Pureza Radioquímica');
+			return false;
+		}
+		if($('#FFATV').val() == ""){
+			//mensagem( 'e', 'Informe a Atividade');
+			return false;
+		}
+		if($('#FFATVTECNEZIO').val() == ""){
+			//mensagem( 'e', 'Informe a Atividade de 99m Tc ');
+			return false;
+		}
+		if($('#FFATVFUNDO').val() == ""){
+			//mensagem( 'e', 'Informe a Atividade de Fundo');
+			return false;
+		}
+		let purezaRadionuclidica = $('#FFRADIONUCLIDICA')
+		if(purezaRadionuclidica.val() == ""){
+			//mensagem( 'e', 'Informe o Resultado da Pureza Radionuclídica ');
+			return false;
+		}
+		let ph = $('#FFPH');
+		if(ph.val() == ""){
+			//mensagem( 'e', 'Informe o PH');
+			return false;
+		}
+		if(ph.val() != 7){
+			//mensagem( 'e', 'PH tem que ser 7');
+			return false;
+		}
+		
+		let eficienciaEluicaoVal = eficienciaEluicao.val();
+		eficienciaEluicaoVal = apenasNumeroPontoVirgula(eficienciaEluicaoVal);
+
+		if(eficienciaEluicaoVal > 95){
+			//mensagem( 'e', 'Eficiência da Eluição Maior que 95% ');
+			return false;
+		}				
+		if(eficienciaEluicaoVal <= 0 ){
+			//mensagem( 'e', 'Eficiência da Eluição igual a 0 ' );
+			return false;
+		}
+		let purezaRadioquimicaVal = purezaRadioquimica.val();
+		purezaRadioquimicaVal = apenasNumeroPontoVirgula(purezaRadioquimicaVal);
+		if(purezaRadioquimicaVal < 95){
+			//mensagem( 'e', 'Pureza Quimica Menor que 95% ');
+			return false;
+		}				
+		if(purezaRadioquimicaVal <= 0 ){
+			//mensagem( 'e', 'Pureza Quimica igual a 0 ' );
+			return false;
+		}
+		let purezaRadionuclidicaVal =  purezaRadionuclidica.val();
+		purezaRadionuclidicaVal = apenasNumeroPontoVirgula(purezaRadionuclidicaVal);
+		if(purezaRadionuclidicaVal > 0.15){
+			//mensagem( 'e', 'Pureza Radionuclídica Maior que 0.15 ');
+			return false;
+		}				
+		if(purezaRadionuclidicaVal <= 0 ){
+			//mensagem( 'e', ' Não é Permitido Pureza Radionuclídica igual a 0 ' );
+			return false;
+		}	
+		let purezaQuimica = $("#FFPUREZAQUIMICA");
+		if(purezaQuimica.val() != 'S'){
+			return false;
+		}		
+		let limpida = $("#FFLIMPIDA");
+		if(limpida.val() != 'S'){
+			return false;
+		}
+			
+		return true;
+	}
+	
+
 	this.gerarLote = function(){
 		let codgeardor = $("#FFGERADOR").val();
 		let atvTeorica = 0;
@@ -112,98 +210,23 @@ var Eluicao = function(){
 			return false;
 		}	
 		
-		if($('#FFCQ').val() == "S"){
-			if($('#FFATIVIDADETEORICA').val() == ""){
-				mensagem( 'e', 'Informe a Atividade Teórica');
-				return false;
-			}
-			if($('#FFATIVIDADE_MEDIDA').val() == ""){
-				mensagem( 'e', 'Informe a Atividade Medida ');
-				return false;
-			}
-			let eficienciaEluicao = $('#FFRESULTADO');
-			if(eficienciaEluicao.val() == ""){
-				mensagem( 'e', 'Informe o Resultado da Eficiência ');
-				return false;
-			}
-			if($('#FFSUPERIOR').val() == ""){
-				mensagem( 'e', 'Informe a parte Superior ');
-				return false;
-			}
-			if($('#FFINFERIOR').val() == ""){
-				mensagem( 'e', 'Informe a parte Inferior');
-				return false;
-			}
-			let purezaRadioquimica = $('#FFRADIOQUIMICA');
-			if(purezaRadioquimica.val() == ""){
-				mensagem( 'e', 'Informe O resultado da Pureza Radioquímica');
-				return false;
-			}
-			if($('#FFATV').val() == ""){
-				mensagem( 'e', 'Informe a Atividade');
-				return false;
-			}
-			if($('#FFATVTECNEZIO').val() == ""){
-				mensagem( 'e', 'Informe a Atividade de 99m Tc ');
-				return false;
-			}
-			if($('#FFATVFUNDO').val() == ""){
-				mensagem( 'e', 'Informe a Atividade de Fundo');
-				return false;
-			}
-			let purezaRadionuclidica = $('#FFRADIONUCLIDICA')
-			if(purezaRadionuclidica.val() == ""){
-				mensagem( 'e', 'Informe o Resultado da Pureza Radionuclídica ');
-				return false;
-			}
-			let ph = $('#FFPH');
-			if(ph.val() == ""){
-				mensagem( 'e', 'Informe o PH');
-				
-				return false;
-			}
-			if(ph.val() != 7){
-				mensagem( 'e', 'PH tem que ser 7');
-				return false;
-			}
-			
-			let eficienciaEluicaoVal = eficienciaEluicao.val();
-			eficienciaEluicaoVal = apenasNumeroPontoVirgula(eficienciaEluicaoVal);
-
-			if(eficienciaEluicaoVal > 95){
-				mensagem( 'e', 'Eficiência da Eluição Maior que 95% ');
-				return false;
-			}				
-			if(eficienciaEluicaoVal <= 0 ){
-				mensagem( 'e', 'Eficiência da Eluição igual a 0 ' );
-				return false;
-			}
-
-			let purezaRadioquimicaVal = purezaRadioquimica.val();
-			purezaRadioquimicaVal = apenasNumeroPontoVirgula(purezaRadioquimicaVal);
-			if(purezaRadioquimicaVal < 95){
-				mensagem( 'e', 'Pureza Quimica Menor que 95% ');
-				return false;
-			}				
-			if(purezaRadioquimicaVal <= 0 ){
-				mensagem( 'e', 'Pureza Quimica igual a 0 ' );
-				return false;
-			}
-			let purezaRadionuclidicaVal =  purezaRadionuclidica.val();
-			purezaRadionuclidicaVal = apenasNumeroPontoVirgula(purezaRadionuclidicaVal);
-			if(purezaRadionuclidicaVal > 0.15){
-				mensagem( 'e', 'Pureza Radionuclídica Maior que 0.15 ');
-				return false;
-			}				
-			if(purezaRadionuclidicaVal <= 0 ){
-				mensagem( 'e', ' Não é Permitido Pureza Radionuclídica igual a 0 ' );
-				return false;
+		if($('#FFCQ').val() == "S"){			
+			let eluicaoAprovado = aprovado();
+			if(eluicaoAprovado){
+				$("#FFAPROVADODESC").val('Aprovado');
+				$("#FFAPROVADO").val('S');
+			}else {
+				$("#FFAPROVADODESC").val('Reprovado');
+				$("#FFAPROVADO").val('N');
 			}			
+		}else {
+			$("#FFAPROVADODESC").val('Reprovado');
+			$("#FFAPROVADO").val('N');	
 		}
 		$("#formularioCadastro").submit();
 	}
 	this.calcEficiencia = function (a){
-		let teorica = parseFloat($('#FFATIVIDADETEORICA').val());
+		let teorica = parseFloat($('#FFATIVIDADETEORICA').val());   
 		let medida = parseFloat($('#FFATIVIDADE_MEDIDA').val());
 		if(teorica > 0 && medida > 0){
 			let resultado =  ( 100 * medida) / teorica;
@@ -231,6 +254,7 @@ var Eluicao = function(){
 			$('#FFRADIOQUIMICA').val("0")  ;	
 			$('#FFRADIOQUIMICA').css("color","black");
 		}
+
 	}
 
 	this.calcPurezaRadionuclidica = function() {
@@ -249,11 +273,8 @@ var Eluicao = function(){
 				$('#FFRADIONUCLIDICA').val( a.toFixed(2) + ' Aprovado' );
 				$('#FFRADIONUCLIDICA').css("color","green");
 			}			
-		}
+		}	
 	}
-
-	
-
 }
 
 $("document").ready(function(){
@@ -310,7 +331,7 @@ $("document").ready(function(){
 	.change(function(){
 		controle.gerarLote();
 		controle.calcEficiencia();
-		controle.atividadeTeorica();
+		//controle.atividadeTeorica();
 	});
 
 	$("#btnExcluirEluicao")

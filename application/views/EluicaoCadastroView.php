@@ -49,27 +49,32 @@
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off"  readonly>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off"  readonly >
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data :</label>
-								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required  >  								
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required  <?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?> />  								
 					        </div>						       
 					        <div class="col-main col-sm-1 col-xs-12">
        							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora:</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" />
+        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" <?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?>/>
     						</div>
     						 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFVOLUME" class="sys-label col-sm-12 col-xs-12">Volume(ml) :</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" placeholder="Volume em ml" required />
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" placeholder="Volume em ml" required <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />
 							</div>
 							 <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" required />
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" required <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />
 							</div>	
 							<div class="col-main col-sm-1 col-xs-12">
+								<label for="FFAPROVADODESC" class="sys-label col-sm-12 col-xs-12">Aprovado:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFAPROVADODESC" name="FFAPROVADODESC" value="<?php echo ($retorno[0]["APROVADO"] == 'S') ? 'Aprovado' : 'Reprovado' ?>" readonly />
+								<input type="hidden" id="FFAPROVADO" name="FFAPROVADO" value="<?php echo $retorno[0]["APROVADO"]; ?>" >
+							</div>
+							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
-								<select class="form-control form-control-sm col-sm-12 col-xs-12" id="FFCQ" name="FFCQ" onchange="mostraDiv()">
+								<select class="form-control form-control-sm col-sm-12 col-xs-12" id="FFCQ" name="FFCQ" onchange="mostraDiv()" <?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?> >
 									<option <?php if( $retorno[0]["CQ"] == "S") echo "selected"; ?> value="S">Sim</option>
 									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>
 								</select>
@@ -107,11 +112,11 @@
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFSUPERIOR" name="FFSUPERIOR" value="<?php echo $retorno[0]["SUPERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFSUPERIOR" name="FFSUPERIOR" value="<?php echo $retorno[0]["SUPERIOR"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFINFERIOR" class="sys-label col-sm-12 col-xs-12">Parte Inferior: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINFERIOR" name="FFINFERIOR" value="<?php echo $retorno[0]["INFERIOR"] ; ?>"  autocomplete="off"  min="0" max="999.99" step="0.01" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFINFERIOR" name="FFINFERIOR" value="<?php echo $retorno[0]["INFERIOR"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
@@ -128,15 +133,16 @@
 									  	</div>							  	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATV" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99</SUP>Mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="9999.99" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATV" name="FFATV" value="<?php echo $retorno[0]["ATV"] ; ?>" step="0.01"  autocomplete="off"  min="0" max="9999.99" 
+											<?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVTECNEZIO" class="sys-label col-sm-12 col-xs-12">Atividade de <SUP>99m</SUP>Tc: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVTECNEZIO" name="FFATVTECNEZIO" value="<?php echo $retorno[0]["ATVTECNEZIO"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATVFUNDO" class="sys-label col-sm-12 col-xs-12">Atividade de fundo de <SUP>99</SUP>Mo: </label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" />		
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFATVFUNDO" name="FFATVFUNDO" value="<?php echo $retorno[0]["ATVFUNDO"] ; ?>"  autocomplete="off"  min="0" max="9999.99" step="0.01" <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />		
 										</div>
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
@@ -153,19 +159,20 @@
 									  	</div>
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"] ; ?>"  autocomplete="off"  min="0" max="99" required/>					
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"] ; ?>"  autocomplete="off"  min="0" max="99" required <?php if($retorno[0]["CODELUICAO"]) echo 'readonly'  ?> />					
 										</div>
 										
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPUREZAQUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica:</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZAQUIMICA" name="FFPUREZAQUIMICA">
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZAQUIMICA" name="FFPUREZAQUIMICA" <?php if($retorno[0]["PUREZA_QUIMICA"]) echo 'disabled'  ?> >
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>
 											</select>
 										</div>	
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Limpida</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFLIMPIDA" name="FFLIMPIDA">
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFLIMPIDA" name="FFLIMPIDA"
+											<?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?> >
 												<option <?php if( $retorno[0]["LIMPIDA"] == "N") echo "selected"; ?> value="N">Não</option>
 												<option <?php if( $retorno[0]["LIMPIDA"] == "S") echo "selected"; ?> value="S">Sim</option>
 											</select>
