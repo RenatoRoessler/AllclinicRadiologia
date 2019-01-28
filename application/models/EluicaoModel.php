@@ -48,7 +48,8 @@ class EluicaoModel extends MY_Model {
 							g.LOTE as LOTEGERADOR, e.DATAINATIVO,
 							DATE_FORMAT(e.DATAINATIVO, '%d/%c/%Y %H:%i') as DATAINATIVO1,
 							DATE_FORMAT(e.HORA, '%H:%i') as HORA,
-							case when e.CQ = 'S' then 'Sim' else 'Não' end CQDESC
+							case when e.CQ = 'S' then 'Sim' else 'Não' end CQDESC,
+							case when e.APROVADO = 'S' then 'Aprovado' else 'Reprovado' end APROVADOA
 				from 		Eluicao e
 				join        Gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 		g.CODINST =  $_SESSION[CODINST]
@@ -328,6 +329,7 @@ class EluicaoModel extends MY_Model {
 		if($ativo =='S'){
 			$dataAtual = date("Y-m-d H:i:s");
 			$FF .= " and e.DATAINATIVO >= '$dataAtual'";
+			$FF .= " and e.APROVADO = 'S' ";
 		}
 		if($codeluicao > 0){
 			$FF .= " and  e.CODELUICAO = $codeluicao "; 

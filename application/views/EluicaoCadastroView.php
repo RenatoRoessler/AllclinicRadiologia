@@ -164,7 +164,7 @@
 										
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPUREZAQUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica:</label>
-											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZAQUIMICA" name="FFPUREZAQUIMICA" <?php if($retorno[0]["PUREZA_QUIMICA"]) echo 'disabled'  ?> >
+											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZAQUIMICA" name="FFPUREZAQUIMICA" <?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?> >
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>
 											</select>
@@ -187,7 +187,7 @@
 					<div class="col-xs-1 col-sm-1 pull-left">
 		      			<button type="button" id="btnVoltar" class="btn btn-default btn-sm sys-btn-search" ><i class="fa fa-chevron-left"></i> Voltar</button>
 	      			</div>
-				<div class="col-xs-12 col-md-12 col-sm-12">
+				<div class="col-xs-12 col-md-12 col-sm-12" <?php  if($retorno[0]["CODELUICAO"]) echo 'style="visibility: hidden;"'  ?>>
 					<div class="col-xs-1 col-sm-1 pull-right">
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>

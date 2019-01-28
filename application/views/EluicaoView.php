@@ -77,7 +77,7 @@
 						    					<th>Atividade MCI</th>
 						    					<th>CQ</th>
 												<th>Data Inativo</th>
-						    					
+												<th>Status</th>						    					
 						    					
 						    					<th>Editar</th>
 						    				</tr>
@@ -97,7 +97,8 @@
 												<td><?php echo $v['VOLUME']; ?></td>
 												<td><?php echo $v['ATIVIDADE_MCI']; ?></td>
 												<td><?php echo $v['CQDESC']; ?></td>
-												<td><?php echo $v['DATAINATIVO1']; ?></td>											
+												<td><?php echo $v['DATAINATIVO1']; ?></td>	
+												<td><?php echo $v['APROVADOA']; ?></td>										
 												
 						    					<td width="10"> 
 						    						<a href=<?php echo base_url() .'/Eluicao/editar/'. $v['CODELUICAO']  ?> > 

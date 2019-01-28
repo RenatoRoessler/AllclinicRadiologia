@@ -21,8 +21,7 @@
 	      			</div>
 	    			<ul class="nav nav-tabs col-sm-12 col-md-12 col-xs-12" role="tablist">
 	    				<li role="presentation" class="active"><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab">Geral</a></li>
-					</ul>
-					
+					</ul>					
 				</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 				<div class="tab-content">
@@ -109,8 +108,7 @@
 									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>						
 								</select>
 							</div>														
-						</div>
-					
+						</div>					
 						<div class="row col-sm-12 col-xs-12" style="visibility: hidden;" id="EFICIENCIA">	
 							<div class="row col-sm-4 col-xs-12"><!--inicio card -->
 								<div class="form-group col-main col-sm-12 col-xs-12">
