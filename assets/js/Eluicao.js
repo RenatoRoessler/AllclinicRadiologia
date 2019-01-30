@@ -1,16 +1,36 @@
 var Eluicao = function(){
 	var _self = this;
+	var _atividade = 0;
+	var _dataUltimaEluica ;
+	var _horaDiferenca = 0 ;
+	var _decaimento = 0.01050223 
 
-	function atividadeTeorica(AtvMo = 0.01050223, tempo = 24, atv = 1500 ){
+	function atividadeTeorica( ){
+		calcularDiferencaHoras()
 		let resultado = 0;
-		let exponencial  = -AtvMo * tempo;
+		let exponencial  = -_decaimento * _horaDiferenca;
 		resultado = Math.pow( 2.71, exponencial);
-		resultado = atv * resultado;
-		console.log('AtvMo:', AtvMo);
-		console.log('tempo:', tempo);
-		console.log('atv:', atv);
+		resultado = _atividade * resultado;
 		return resultado.toFixed(2) ; 
 
+	}
+
+	this.calculaAtividadeTeorica = function(){
+		let res  = atividadeTeorica();
+		$('#FFATIVIDADETEORICA').val(res);
+	}
+
+	function calcularDiferencaHoras() {
+		if(_dataUltimaEluica > 0){
+			console.log('data',_dataUltimaEluica)
+			let dataAtual = new Date(moment( $('#FFDATAHORA').val()+' '+  $('#FFHORA').val() ));
+			console.log(dataAtual);
+			var diferenca = Math.abs(_dataUltimaEluica - dataAtual); 
+			var hora = 1000*60*60; // milésimos de segundo correspondente a um dia
+			var emHoras = Math.trunc(diferenca/hora); // valor total em Horas
+			console.log(emHoras);
+			_horaDiferenca = emHoras;
+		}	
 	}
 
 	function aprovado() {
@@ -62,7 +82,7 @@ var Eluicao = function(){
 			//mensagem( 'e', 'Informe o PH');
 			return false;
 		}
-		if(ph.val() != 7){
+		if(ph.val() <= 4.5 && ph.val()  >= 7.5){
 			//mensagem( 'e', 'PH tem que ser 7');
 			return false;
 		}
@@ -70,10 +90,14 @@ var Eluicao = function(){
 		let eficienciaEluicaoVal = eficienciaEluicao.val();
 		eficienciaEluicaoVal = apenasNumeroPontoVirgula(eficienciaEluicaoVal);
 
-		if(eficienciaEluicaoVal > 95){
+		if(eficienciaEluicaoVal > 110){
 			//mensagem( 'e', 'Eficiência da Eluição Maior que 95% ');
 			return false;
-		}				
+		}
+		if(eficienciaEluicaoVal < 90){
+			//mensagem( 'e', 'Eficiência da Eluição Maior que 95% ');
+			return false;
+		}					
 		if(eficienciaEluicaoVal <= 0 ){
 			//mensagem( 'e', 'Eficiência da Eluição igual a 0 ' );
 			return false;
@@ -113,7 +137,6 @@ var Eluicao = function(){
 
 	this.gerarLote = function(){
 		let codgeardor = $("#FFGERADOR").val();
-		let atvTeorica = 0;
 		let horasDif = 0;
 		if(codgeardor > 0){
 			$.ajax({
@@ -129,8 +152,9 @@ var Eluicao = function(){
 				success: function( retorno ){
 					var j = jsonEncode( retorno, 'json' );	
 					var nroEluicao = 	j.content.lote;			
-					atvTeorica = j.content.atividade;
-					horasDif = j.content.horasDiferenca;					
+					_atividade = j.content.atividade;				
+					_dataUltimaEluica = new Date(moment( j.content.dataEluicao+' '+  j.content.hora ));
+	
 					$("#FFLOTE").val("E" + nroEluicao);	
 					loader('hide');						
 				},
@@ -140,7 +164,8 @@ var Eluicao = function(){
 				}
 			});
 			setTimeout(function(){ 
-				let res = atividadeTeorica( 0.01050223, horasDif, atvTeorica);
+				calcularDiferencaHoras();
+				let res = atividadeTeorica();
 				$('#FFATIVIDADETEORICA').val(res);
 			}, 500);		
 			
@@ -365,6 +390,14 @@ $("document").ready(function(){
 	$("#FFATVFUNDO")
 	.blur(function(){
 		controle.calcPurezaRadionuclidica();
+	});
+	$("#FFDATAHORA")
+	.blur(function(){
+		controle.calculaAtividadeTeorica();
+	});
+	$("#FFHORA")
+	.blur(function(){
+		controle.calculaAtividadeTeorica();
 	});
 
 	controle.calcPurezaRadioquimica();

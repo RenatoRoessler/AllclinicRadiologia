@@ -117,7 +117,7 @@
 											<div class="form-group col-main col-sm-6 col-xs-12">
 												<div class="card ">
 													<div class="card-header">
-														Eficiência Inorgânico
+														Teste Inorgânico
 													</div>
 													<div class="form-group col-main col-sm-12 col-xs-12">
 														<label for="FFORGANICOSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior:</label>
@@ -136,7 +136,7 @@
 											<div class="form-group col-main col-sm-6 col-xs-12">
 												<div class="card">
 													<div class="card-header">
-														Eficiência Inorgânico
+														Teste Inorgânico
 													</div>
 													<div class="form-group col-main col-sm-12 col-xs-12">
 														<label for="FFINORGANICOSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior:</label>

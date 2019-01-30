@@ -27,6 +27,7 @@
 	<script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.pt-BR.js') ?>" charset="UTF-8"></script>
 	<script src="<?php echo base_url('assets/js/jquery.mask.min.js') ?>" charset="UTF-8"></script>
 	<script src="<?php echo base_url('assets/bibliotecas/bootstrap/js/bootstrap-select.min.js') ?>" ></script>
+	<script src="<?php echo base_url('assets/js/moment.js') ?>" ></script>
 	<?php if(isset($js)){ ?>
 		<script src="<?php echo base_url('assets/'. $js .' ') ?>" type="text/javascript"></script>
 	<?php } ?>

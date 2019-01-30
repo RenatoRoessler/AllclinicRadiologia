@@ -138,7 +138,7 @@ class Eluicao extends MY_Controller {
 		$lote += 1;	
 		$this->GeradorModel->buscaGerador( $post['codgerador'] );
 		$dados = $this->GeradorModel->dados;
-		$atividadeGerador = $dados[0]['ATIVIDADE_CALIBRACAO'];
+		$atividadeGerador = $dados[0]['ATIVIDADE_CALIBRACAO'];		
 		$atvEluicao =  $this->GeradorModel->atividadeUltimaEluicao( $post['codgerador'] );
 		$atividade = 0;
 		$diferencaHoras = 0;
@@ -148,10 +148,13 @@ class Eluicao extends MY_Controller {
 			$diferencaHoras = Eluicao::horasDiferenca( $dataEluicao);
 		}else {
 			$atividade = $atividadeGerador ;
-		}		
-		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,'horasDiferenca' => $diferencaHoras ) ,  true );	
+		}	
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,'horasDiferenca' => $diferencaHoras,
+		'dataEluicao' => $atvEluicao['DATA'] , 'hora' => $atvEluicao['HORA'] ) ,  true );	
 		echo jsonEncodeArray( $this->json );
 	}
+
+	
 
 
 	public function horasDiferenca($datahora){

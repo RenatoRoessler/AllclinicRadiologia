@@ -64,7 +64,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFVOLUME" name="FFVOLUME" value="<?php echo $retorno[0]["VOLUME"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" placeholder="Volume em ml" required <?php if($retorno[0]["APROVADO"] == 'S') echo 'readonly'  ?> />
 							</div>
 							 <div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atividade mCi:</label>
+								<label for="FFATIVIDADE_MCI" class="sys-label col-sm-12 col-xs-12">Atv. Medida mCi:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MCI" name="FFATIVIDADE_MCI" value="<?php echo $retorno[0]["ATIVIDADE_MCI"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" required <?php if($retorno[0]["APROVADO"] == 'S') echo 'readonly'  ?> />
 							</div>	
 							<div class="col-main col-sm-1 col-xs-12">
@@ -99,6 +99,7 @@
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRESULTADO" class="sys-label col-sm-12 col-xs-12">Resultado(%):</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRESULTADO" name="FFRESULTADO" value="<?php echo $retorno[0]["EFI_RESULTADO"];  ?>" readonly />
+											<small id="emailHelp" class="form-text text-muted">Dever estar entre 90 e 110%</small>
 										</div>
 									</div>
 								</div>
@@ -121,6 +122,7 @@
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIOQUIMICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIOQUIMICA" name="FFRADIOQUIMICA" value="<?php echo $retorno[0]["PUREZA_RADIOQUIMICA"];  ?>" readonly />
+											<small id="emailHelp" class="form-text text-muted">Dever ser maior igual que 95%</small>
 										</div>
 									</div>
 								</div>
@@ -147,6 +149,7 @@
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIONUCLIDICA" name="FFRADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly />
+											<small id="emailHelp" class="form-text text-muted">Valor deve ser Menor que 0,15uCi de (99Mo) para 1mCi de (99m)Tc.</small>
 										</div>
 									</div>
 								</div>
@@ -159,7 +162,8 @@
 									  	</div>
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPH" class="sys-label col-sm-12 col-xs-12">PH:</label>
-											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"] ; ?>"  autocomplete="off"  min="0" max="99" required <?php if($retorno[0]["APROVADO"] == 'S') echo 'readonly'  ?> />					
+											<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFPH" name="FFPH" value="<?php echo $retorno[0]["PH"] ; ?>"  autocomplete="off"  min="0" max="9" required <?php if($retorno[0]["APROVADO"] == 'S') echo 'readonly'  ?> step="0.01"/>	
+											<small id="emailHelp" class="form-text text-muted">Dever estar entre 4,5 e 7,5</small>				
 										</div>
 										
 										<div class="form-group col-main col-sm-12 col-xs-12">
@@ -168,11 +172,13 @@
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
 												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>
 											</select>
+											<small id="emailHelp" class="form-text text-muted">A consentração maxima de alumina deve ser de 10ug/ml</small>
+											
 										</div>	
 										<div class="form-group col-main col-sm-12 col-xs-12">
-											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Limpida</label>
+											<label for="FFLIMPIDA" class="sys-label col-sm-12 col-xs-12">Aparência Limpida?</label>
 											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFLIMPIDA" name="FFLIMPIDA"
-											<?php if($retorno[0]["CODELUICAO"]) echo 'disabled'  ?> >
+											<?php if($retorno[0]["APROVADO"] == 'S') echo 'disabled'  ?> >
 												<option <?php if( $retorno[0]["LIMPIDA"] == "N") echo "selected"; ?> value="N">Não</option>
 												<option <?php if( $retorno[0]["LIMPIDA"] == "S") echo "selected"; ?> value="S">Sim</option>
 											</select>

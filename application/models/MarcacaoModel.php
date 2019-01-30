@@ -110,9 +110,7 @@ class MarcacaoModel extends MY_Model {
 			if(isset($post['FFAPROVADO'])){
 				$post['FFAPROVADO'] = 'N';
 			}
-			if(isset($post['FFPUREZAQUIMICA'])){
-				$post['FFPUREZAQUIMICA'] = 'N';
-			}		
+		
 
 			$this->db->trans_begin();
 			$this->db->query("insert into MARCACAO(
@@ -132,9 +130,7 @@ class MarcacaoModel extends MY_Model {
 								ORGANICO_INFERIOR,
 								INORGANICO_SUPERIOR,
 								INORGANICO_INFERIOR,
-								EFICIENCIA_MEDIA,
-								APROVADO,
-								PUREZA_QUIMICA
+								EFICIENCIA_MEDIA
 								) value 
 								($post[FFELUICAO],
 								'$post[FFDATAHORA]',
@@ -152,9 +148,7 @@ class MarcacaoModel extends MY_Model {
 								$post[FFORGANICOINFERIOR],
 								$post[FFINORGANICOSUPERIOR],
 								$post[FFINORGANICOINFERIOR],
-								$post[FFMEDIA],
-								'$post[FFAPROVADO]',
-								'$post[FFPUREZAQUIMICA]'
+								$post[FFMEDIA]
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -208,9 +202,6 @@ class MarcacaoModel extends MY_Model {
 			if(isset($post['FFAPROVADO'])){
 				$post['FFAPROVADO'] = 'N';
 			}
-			if(isset($post['FFPUREZAQUIMICA'])){
-				$post['FFPUREZAQUIMICA'] = 'N';
-			}
 
 			$this->db->trans_begin();
 			$this->db->query(" update marcacao set 
@@ -229,9 +220,7 @@ class MarcacaoModel extends MY_Model {
 								ORGANICO_INFERIOR = $post[FFORGANICOINFERIOR],
 								INORGANICO_SUPERIOR = $post[FFINORGANICOSUPERIOR],
 								INORGANICO_INFERIOR = $post[FFINORGANICOINFERIOR],	
-								EFICIENCIA_MEDIA = $post[FFMEDIA],	
-								APROVADO = '$post[FFAPROVADO]',
-								PUREZA_QUIMICA = '$post[FFPUREZAQUIMICA]'							
+								EFICIENCIA_MEDIA = $post[FFMEDIA]							
 							where  	CODMARCACAO = $post[FFCODMARCACAO]"
 			);
 			if( $this->db->trans_status() === false ){
