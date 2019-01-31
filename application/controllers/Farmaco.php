@@ -32,6 +32,11 @@ class Farmaco extends MY_Controller {
 		$dados['js'] = 'js/Farmaco.js';
  		$dados['retorno'] = null; 
 		$dados['MSG'] = $this->session->MSG; 
+
+		/** Carregando os Fabricantes */
+		$this->load->model('FabricanteModel');
+		$this->FabricanteModel->buscaTodosFabricante();
+		$dados['fabricante'] = $this->FabricanteModel->dados;
 		 
  		$this->load->model('FarmacoModel');
 		$this->FarmacoModel->buscaFarmacosAtivos();
@@ -45,17 +50,10 @@ class Farmaco extends MY_Controller {
 	
 	public function atualizar(){
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFDESCRICAO','Descricao','required|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('FFSOLVINORGANICO','Solvente Inorgânico','required');
-		$this->form_validation->set_rules('FFSOLVORGANICO','Solvente Orgânico','required');
-		$this->form_validation->set_rules('FFPH','PH','required');
-		$this->form_validation->set_rules('FFATIVO','Ativo','required');
+	
 		$post['CODINST'] = $_SESSION['CODINST'];
 		$this->load->model('FarmacoModel');
-		if($this->form_validation->run() == FALSE){
-			$this->novo();
-		}else{			
+					
 			if($post){
 				if($post['FFCODFARMACO']){
 					$codigo =$this->FarmacoModel->atualizar($post);
@@ -70,7 +68,7 @@ class Farmaco extends MY_Controller {
 				$this->session->set_userdata('MSG', array( 's', 'Farmaco salvo com sucesso' ));
 			}
 			redireciona('editar/' . $codigo);
-		}	
+
 	}	
 
 	public function editar()
@@ -78,10 +76,6 @@ class Farmaco extends MY_Controller {
 		$dados['js'] = 'js/Farmaco.js';
  		//caregando o Farmaco
  		$this->load->model('FarmacoModel');		
-
-		/*  Carregando os fabricantesFarmacos*/
-		$this->FarmacoModel->farmacoFabricante($this->uri->segment(3));
-		$dados['farmacoFabricante'] = $this->FarmacoModel->dados;
 
 		/** Carregando os Fabricantes */
 		$this->load->model('FabricanteModel');
@@ -142,6 +136,28 @@ class Farmaco extends MY_Controller {
 			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao Adicioar' ) ,  true );
 		}
 		echo jsonEncodeArray( $this->json ); 	
+	}
+
+	public function getLimitesFarmaco(){
+		$post = limpaVariavelArray( $this->input->post());
+		$this->load->model('FarmacoModel');
+		$this->FarmacoModel->buscaFarmaco( $post['codfarmaco'] );
+		$farmaco = $this->FarmacoModel->dados;
+		if($farmaco){
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 
+												'Mensagem' => 'Excluido com Sucesso',
+												'ph_superior' =>  $farmaco[0]['PH'] ,
+												'ph_inferior' => $farmaco[0]['PH_INFERIOR'],
+												'solv_organico' => $farmaco[0]['SOLV_ORGANICO'],
+												'solv_inorganico' => $farmaco[0]['SOLV_INORGANICO']
+			) ,  true );
+		}else{
+			echo $this->msgSucesso( '', array( 'tipoMsg' => 'e' , 'Mensagem' => 'Erro ao buscar Limites' ) ,  true );
+		}
+
+		echo jsonEncodeArray( $this->json ); 
+
+
 	}
 
 	

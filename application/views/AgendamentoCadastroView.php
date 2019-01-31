@@ -62,7 +62,7 @@
 								minlength="0" maxlength="15" placeholder="CPF.: 000.000.000-00" autocomplete="off" required>
 							</div>								
 							<div class="form-group col-main col-sm-2 col-xs-12">
-								<label for="FFDATANASCIMENTO" class="sys-label col-sm-12 col-xs-12">Date</label>
+								<label for="FFDATANASCIMENTO" class="sys-label col-sm-12 col-xs-12">Nascimento:</label>
 								<input class="form-control" type="date" value="<?php echo $retorno[0]["NASCIMENTO"]   ?>" id="FFDATANASCIMENTO" name="FFDATANASCIMENTO" required> 								
 					        </div>
 							<div class="form-group col-main col-sm-1 col-xs-12">

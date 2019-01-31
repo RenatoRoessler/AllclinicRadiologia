@@ -47,7 +47,7 @@ class AdministrarModel extends MY_Model {
 		
 		
 			$this->dados = $this->query(
-                "select  i.CODITFRACIONAMENTO, i.CODMARCACAO, i.CODAGTOEXA, i.ATIVIDADE_INICIAL, 				i.HORA_INICIAL,
+                "select  i.CODITFRACIONAMENTO, i.CODMARCACAO, i.CODAGTOEXA, i.ATIVIDADE_INICIAL, i.HORA_INICIAL,
                          i.ATIVIDADE_ADMINISTRADA , i.HORA_ADMINISTRADA,a.NOME as NOMEPACIENTE,
                          pr.DESCRICAO,DATE_FORMAT(a.DATA, '%d/%c/%Y') as DATA1, a.HORA,
 						 pr.DESCRICAO,DATE_FORMAT(a.HORA,'%H:%i') AS HORAMINUTO,
@@ -56,12 +56,12 @@ class AdministrarModel extends MY_Model {
 						 e.PUREZA_RADIONUCLIDICA
 						 
                 from 	itfracionamento i
-                join    agtoexame ag on (i.CODAGTOEXA = ag.CODAGTOEXA)  
-                join    agendamento a on (ag.codagto = a.codagto)
-				join    procedimentos pr on (ag.codprocedimento = pr.codprocedimento)
-				join    marcacao m on (i.CODMARCACAO =  m.CODMARCACAO)
-				join    eluicao e on (m.CODELUICAO = e.CODELUICAO)
-				join    gerador g on (e.CODGERADOR = g.CODGERADOR)
+                left join    agtoexame ag on (i.CODAGTOEXA = ag.CODAGTOEXA)  
+                left join    agendamento a on (ag.codagto = a.codagto)
+				left join    procedimentos pr on (ag.codprocedimento = pr.codprocedimento)
+				left join    marcacao m on (i.CODMARCACAO =  m.CODMARCACAO)
+				left join    eluicao e on (m.CODELUICAO = e.CODELUICAO)
+				left join    gerador g on (e.CODGERADOR = g.CODGERADOR)
 							$FF
 				order by 	i.CODITFRACIONAMENTO
 				"

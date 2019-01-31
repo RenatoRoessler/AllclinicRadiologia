@@ -41,15 +41,15 @@ class MarcacaoModel extends MY_Model {
 				$FF .= ( $post['FFATIVOFILTRO'] == 'N') ? "and e.DATAINATIVO < '$dataAtual' " : '';
 			}
 			$this->dados = $this->query(
-				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
+				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, 
 							m.CQ, m.ORGANICO, m.INORGANICO, m.APELUSER,
 							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO,
-							m.PH, m.CODFARMACO, m.LOTE
+							m.PH, m.CODFARMACO, m.LOTE, m.APROVADO
 				from 		marcacao m
-				left join usuario u on (m.apeluser = u.apeluser)
-				left join fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
+				left join usuario u on (m.apeluser = u.apeluser)				
 				left join farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
+				left join fabricante f on (fa.CODFABRICANTE = f.CODFABRICANTE)
 				join      eluicao e on (m.CODELUICAO = e.CODELUICAO)
 				join      gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 	  g.CODINST = $_SESSION[CODINST]
@@ -75,50 +75,37 @@ class MarcacaoModel extends MY_Model {
 	 */
 	public function inserir( $post ){
 		try{
-			//tratando a data
-			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA']))); 
-			if(isset($post['FFORGANICO'])){
+						
+			if(!$post['FFORGANICOSUPERIOR'] > 0){
+				$post['FFORGANICOSUPERIOR'] = 0;
+			}
+			if(!$post['FFORGANICOINFERIOR'] > 0){
+				$post['FFORGANICOINFERIOR'] = 0;
+			}
+			if(!$post['FFORGANICO'] > 0){
 				$post['FFORGANICO'] = 0;
-			} 
-			if(isset($post['FFINORGANICO'])){
+			}
+			if(!$post['FFINORGANICO'] > 0){
 				$post['FFINORGANICO'] = 0;
 			}
-			if(isset($post['FFPH'])){
+			if(!$post['FFINORGANICOSUPERIOR'] > 0){
+				$post['FFINORGANICOSUPERIOR'] = 0;
+			}
+			if(!$post['FFINORGANICOINFERIOR'] > 0){
+				$post['FFINORGANICOINFERIOR'] = 0;
+			}
+			if(!$post['FFMEDIA'] > 0){
+				$post['FFMEDIA'] = 0;
+			}			
+			if(!$post['FFPH'] > 0){
 				$post['FFPH'] = 0;
 			}
-			if(isset($post['ORGANICO_SUPERIOR'])){
-				$post['ORGANICO_SUPERIOR'] = 0;
-			}
-			if(isset($post['ORGANICO'])){
-				$post['ORGANICO'] = 0;
-			}
-			if(isset($post['INORGANICO'])){
-				$post['INORGANICO'] = 0;
-			}
-			if(isset($post['ORGANICO_INFERIOR'])){
-				$post['ORGANICO_INFERIOR'] = 0;
-			}
-			if(isset($post['INORGANICO_SUPERIOR'])){
-				$post['INORGANICO_SUPERIOR'] = 0;
-			}
-			if(isset($post['INORGANICO_INFERIOR'])){
-				$post['INORGANICO_INFERIOR'] = 0;
-			}
-			if(isset($post['EFICIENCIA_MEDIA'])){
-				$post['EFICIENCIA_MEDIA'] = 0;
-			}
-			if(isset($post['FFAPROVADO'])){
-				$post['FFAPROVADO'] = 'N';
-			}
-		
-
+			
 			$this->db->trans_begin();
 			$this->db->query("insert into MARCACAO(
 								CODELUICAO,
 								DATA,
 								HORA,
-								KIT_CODFABRICANTE,
-								KIT_LOTE,
 								CQ,
 								ORGANICO,
 								INORGANICO,
@@ -130,13 +117,12 @@ class MarcacaoModel extends MY_Model {
 								ORGANICO_INFERIOR,
 								INORGANICO_SUPERIOR,
 								INORGANICO_INFERIOR,
-								EFICIENCIA_MEDIA
+								EFICIENCIA_MEDIA,
+								APROVADO
 								) value 
 								($post[FFELUICAO],
 								'$post[FFDATAHORA]',
 								'$post[FFHORA]',
-								$post[FFKITFABRICANTE],
-								'$post[FFKITLOTE]',
 								'$post[FFCQ]',
 								$post[FFORGANICO],
 								$post[FFINORGANICO],
@@ -148,7 +134,8 @@ class MarcacaoModel extends MY_Model {
 								$post[FFORGANICOINFERIOR],
 								$post[FFINORGANICOSUPERIOR],
 								$post[FFINORGANICOINFERIOR],
-								$post[FFMEDIA]
+								$post[FFMEDIA],
+								'$post[FFAPROVADO]'
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -174,42 +161,36 @@ class MarcacaoModel extends MY_Model {
 	 * 	@return boolean
 	 */
 	public function atualizar( $post ){
-		try{
-			//tratando a data
-			//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['FFDATAHORA'])));  
-
-			if(isset($post['ORGANICO_SUPERIOR'])){
-				$post['ORGANICO_SUPERIOR'] = 0;
+		try{		
+			if(!$post['FFORGANICOSUPERIOR'] > 0){
+				$post['FFORGANICOSUPERIOR'] = 0;
 			}
-			if(isset($post['ORGANICO'])){
-				$post['ORGANICO'] = 0;
+			if(!$post['FFORGANICOINFERIOR'] > 0){
+				$post['FFORGANICOINFERIOR'] = 0;
 			}
-			if(isset($post['INORGANICO'])){
-				$post['INORGANICO'] = 0;
+			if(!$post['FFORGANICO'] > 0){
+				$post['FFORGANICO'] = 0;
 			}
-			if(isset($post['ORGANICO_INFERIOR'])){
-				$post['ORGANICO_INFERIOR'] = 0;
+			if(!$post['FFINORGANICO'] > 0){
+				$post['FFINORGANICO'] = 0;
 			}
-			if(isset($post['INORGANICO_SUPERIOR'])){
-				$post['INORGANICO_SUPERIOR'] = 0;
+			if(!$post['FFINORGANICOSUPERIOR'] > 0){
+				$post['FFINORGANICOSUPERIOR'] = 0;
 			}
-			if(isset($post['INORGANICO_INFERIOR'])){
-				$post['INORGANICO_INFERIOR'] = 0;
+			if(!$post['FFINORGANICOINFERIOR'] > 0){
+				$post['FFINORGANICOINFERIOR'] = 0;
+			}			
+			if(!$post['FFPH'] > 0){
+				$post['FFPH'] = 0;
 			}
-			if(isset($post['EFICIENCIA_MEDIA'])){
-				$post['EFICIENCIA_MEDIA'] = 0;
+			if(!$post['FFMEDIA'] > 0){
+				$post['FFMEDIA'] = 0;
 			}
-			if(isset($post['FFAPROVADO'])){
-				$post['FFAPROVADO'] = 'N';
-			}
-
 			$this->db->trans_begin();
 			$this->db->query(" update marcacao set 
 								DATA = '$post[FFDATAHORA]', 
 								HORA = '$post[FFHORA]',
 								CODELUICAO = $post[FFELUICAO],
-								KIT_CODFABRICANTE = $post[FFKITFABRICANTE],
-								KIT_LOTE = '$post[FFKITLOTE]',
 								CQ = '$post[FFCQ]',
 								ORGANICO = $post[FFORGANICO],
 								INORGANICO = $post[FFINORGANICO],
@@ -220,7 +201,8 @@ class MarcacaoModel extends MY_Model {
 								ORGANICO_INFERIOR = $post[FFORGANICOINFERIOR],
 								INORGANICO_SUPERIOR = $post[FFINORGANICOSUPERIOR],
 								INORGANICO_INFERIOR = $post[FFINORGANICOINFERIOR],	
-								EFICIENCIA_MEDIA = $post[FFMEDIA]							
+								EFICIENCIA_MEDIA = $post[FFMEDIA],
+								APROVADO = '$post[FFAPROVADO]'						
 							where  	CODMARCACAO = $post[FFCODMARCACAO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -249,17 +231,17 @@ class MarcacaoModel extends MY_Model {
 
 		try {			
 			$this->dados = $this->query(
-				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
-				            m.KIT_LOTE, m.CQ, m.ORGANICO, 
+				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, fa.CODFABRICANTE, 
+				            m.CQ, m.ORGANICO, 
 				            m.INORGANICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 							m.PH, m.CODFARMACO, m.LOTE,
 							DATE_FORMAT(m.HORA,'%H:%i') AS HORAMINUTO, f.DESCRICAO,
 							fa.DESCRICAO AS DESCFARMACO,m.ORGANICO_SUPERIOR,
 							m.ORGANICO_INFERIOR,m.INORGANICO_SUPERIOR,
-							m.INORGANICO_INFERIOR, m.EFICIENCIA_MEDIA
-				from 		marcacao m
-				join        fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)	
-				left join  	farmaco fa on (m.CODFARMACO = fa.CODFARMACO)	
+							m.INORGANICO_INFERIOR, m.EFICIENCIA_MEDIA,m.APROVADO
+				from 		marcacao m				
+				left join  	farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
+				left join        fabricante f on (fa.CODFABRICANTE = f.CODFABRICANTE)		
 				where 		m.codmarcacao = $codmarcacao
 				"
 			);			
@@ -305,7 +287,7 @@ class MarcacaoModel extends MY_Model {
 		return false;
 	}
 
-		/**
+	/**
 	 * 	Metodo para buscar todoas as marcações  
 	 *
 	 *	@author Renato Roessler <renatoroessler@gmail.com>
@@ -317,8 +299,8 @@ class MarcacaoModel extends MY_Model {
 
 		try {			
 			$this->dados = $this->query(
-				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, 
-				            m.KIT_LOTE, m.CQ, m.ORGANICO, 
+				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA,  
+				            m.CQ, m.ORGANICO, 
 				            m.INORGANICO, m.APELUSER,DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 				            m.CODFARMACO
 				from 		marcacao m

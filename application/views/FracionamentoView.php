@@ -21,11 +21,7 @@
 	      			</div>    		
 		    	</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
-		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
-		    		<div class="form-group col-main col-sm-2 col-xs-2">
-						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
-						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>"  >
-					</div>	 	
+		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12"> 	
 		    	
 					<div class="form-group col-main col-sm-2 col-xs-2">
 						<label for="Lote" class="sys-label col-sm-12 col-xs-12">Lote:</label>
@@ -61,14 +57,14 @@
 						    		<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
 						    			<thead>
 						    				<tr>
-											<th>Código</th>	
-												<th>Lote</th>	
+												<th>Lote</th>
+												<th>Lote Gerador</th>
+												<th>Lote Eluição</th>
 						    					<th>Data</th>
 						    					<th>Hora</th>
 						    					<th>Usuário</th>
-						    					<th>KIT Fabricante</th>
-						    					<th>KIT Fármaco</th>
-						    					<th>KIT Lote</th>
+												<th>Fármaco</th>
+						    					<th>Fabricante</th>
 												<th>PH</th>
 												<th>Fracionar</th>
 						    				</th>
@@ -80,14 +76,15 @@
 						    				$false =  '<i class="fa fa-times-circle fa-2x">';				
 						    				?>
 						    				<tr id="<?php echo $v['CODMARCACAO']; ?>">
-						    					<td><?php echo $v['CODMARCACAO']; ?></td>
+
 												<td><?php echo $v['LOTE']; ?></td>
+												<td><?php echo $v['LOTEGERADOR']; ?></td>
+												<td><?php echo $v['LOTEELUICAO']; ?></td>
 						    					<td><?php echo $v['DATA1']; ?></td>
 												<td><?php echo $v['HORA']; ?></td>
 												<td><?php echo $v['NOME']; ?></td>
-												<td><?php echo $v['DESCKITFABRICANTE']; ?></td>
 												<td><?php echo $v['DESCKITFARMACO']; ?></td>
-												<td><?php echo $v['KIT_LOTE']; ?></td>
+												<td><?php echo $v['DESCKITFABRICANTE']; ?></td>
 												<td><?php echo $v['PH']; ?></td>
 						    					<td width="10"> 
 						    						<a class="btn btn-default" href=<?php echo base_url() .'/Fracionamento/editar/'. $v['CODMARCACAO']

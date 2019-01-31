@@ -51,7 +51,8 @@
 						    				<tr>
 						    					<th>Código</th>	
 						    					<th>Descriçãoo</th>
-						    					<th>PH</th>
+						    					<th>PH Superior</th>
+												<th>PH Inferiro</th>
 						    					<th>Solvente Orgânico</th>
 						    					<th>Solvente Inorgânico</th>
                                                 <th>Ativo</th>
@@ -66,6 +67,7 @@
 						    					<td><?php echo $v['CODFARMACO']; ?></td>
 						    					<td><?php echo $v['DESCRICAO']; ?></td>
 						    					<td><?php echo $v['PH']; ?></td>
+												<td><?php echo $v['PH_INFERIOR']; ?></td>
 												<td><?php echo $v['SOLV_ORGANICO']; ?></td>
 												<td><?php echo $v['SOLV_INORGANICO']; ?></td>
                                                 <td><?php echo $v['ATIVODESC']; ?></td>

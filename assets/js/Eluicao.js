@@ -3,14 +3,17 @@ var Eluicao = function(){
 	var _atividade = 0;
 	var _dataUltimaEluica ;
 	var _horaDiferenca = 0 ;
-	var _decaimento = 0.01050223 
+	var _decaimento = 0.01050223;
+	var _primeria  = false;
+	var _tc99mo =  0.11533231
 
 	function atividadeTeorica( ){
 		calcularDiferencaHoras()
+		console.log('_horaDiferenca', _horaDiferenca);
 		let resultado = 0;
 		let exponencial  = -_decaimento * _horaDiferenca;
 		resultado = Math.pow( 2.71, exponencial);
-		resultado = _atividade * resultado;
+		resultado = _atividade * resultado;		
 		return resultado.toFixed(2) ; 
 
 	}
@@ -154,6 +157,7 @@ var Eluicao = function(){
 					var nroEluicao = 	j.content.lote;			
 					_atividade = j.content.atividade;				
 					_dataUltimaEluica = new Date(moment( j.content.dataEluicao+' '+  j.content.hora ));
+					_primeria = j.content.primeira;
 	
 					$("#FFLOTE").val("E" + nroEluicao);	
 					loader('hide');						

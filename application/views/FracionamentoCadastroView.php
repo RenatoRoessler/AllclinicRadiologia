@@ -55,7 +55,7 @@
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFUSER" name="FFUSER" value="<?php echo $marcacao[0]["APELUSER"]; ?>"  readonly >
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
-								<label for="FFFABRICANTE" class="sys-label col-sm-12 col-xs-12">Kit Fabricante:</label>
+								<label for="FFFABRICANTE" class="sys-label col-sm-12 col-xs-12">Fabricante:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFFABRICANTE" name="FFFABRICANTE" value="<?php echo $marcacao[0]["DESCRICAO"]; ?>"  readonly >
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">
@@ -105,7 +105,7 @@
 						    							<th>Nome</th>
 						    							<th>Procedimento</th>
 														<th>Atividade Inicial</th>
-														<th>Hora Inciail</th>
+														<th>Hora Inicial</th>
 														<th>Volume</th>
 						    							<th>Excluir</th>
 						    						</tr>

@@ -81,7 +81,6 @@ class Marcacao extends MY_Controller {
 	public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-	
 		$codigo = null;
 		$post['APELUSER'] = $_SESSION['APELUSER'];
 		$this->load->model('MarcacaoModel');
@@ -99,7 +98,7 @@ class Marcacao extends MY_Controller {
 			}else{
 				$this->session->set_userdata('MSG', array( 's', 'Marcação salvo com sucesso' ));
 			}
-			redireciona('editar/' . $codigo);					
+			redireciona('editar/' . $codigo);			
 	}
 
 	public function editar()

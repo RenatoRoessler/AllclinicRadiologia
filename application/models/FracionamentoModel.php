@@ -39,15 +39,15 @@ class FracionamentoModel extends MY_Model {
 				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
 			}
 			$this->dados = $this->query(
-				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, m.KIT_CODFABRICANTE, m.KIT_LOTE,
-							m.CQ, m.ORGANICO, m.QUIMICO, m.APELUSER,
+				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, fa.CODFABRICANTE,
+							m.CQ, m.ORGANICO, m.INORGANICO, m.APELUSER,
 							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO,
-							m.PH, m.CODFARMACO, m.LOTE
+							m.PH, m.CODFARMACO, m.LOTE, g.LOTE as LOTEGERADOR, e.LOTE as LOTEELUICAO
 				from 		marcacao m
 				left join usuario u on (m.apeluser = u.apeluser)
-				left join fabricante f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
 				left join farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
+				left join fabricante f on (fa.CODFABRICANTE = f.CODFABRICANTE)
 				join      eluicao e on (m.CODELUICAO = e.CODELUICAO)
 				join      gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 	  g.CODINST = $_SESSION[CODINST]

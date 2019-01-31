@@ -142,15 +142,18 @@ class Eluicao extends MY_Controller {
 		$atvEluicao =  $this->GeradorModel->atividadeUltimaEluicao( $post['codgerador'] );
 		$atividade = 0;
 		$diferencaHoras = 0;
+		$primeria = false;
 		if($atvEluicao['EFI_ATV_TEORICA'] > 0){
 			$atividade = $atvEluicao['EFI_ATV_TEORICA'];		
 			$dataEluicao = $atvEluicao['DATA'] . ' ' .$atvEluicao['HORA']; 
 			$diferencaHoras = Eluicao::horasDiferenca( $dataEluicao);
+			$primeria = false;
 		}else {
 			$atividade = $atividadeGerador ;
+			$primeria = true;
 		}	
 		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,'horasDiferenca' => $diferencaHoras,
-		'dataEluicao' => $atvEluicao['DATA'] , 'hora' => $atvEluicao['HORA'] ) ,  true );	
+		'dataEluicao' => $atvEluicao['DATA'] , 'hora' => $atvEluicao['HORA'] , 'primeira' =>  $primeria) ,  true );	
 		echo jsonEncodeArray( $this->json );
 	}
 
