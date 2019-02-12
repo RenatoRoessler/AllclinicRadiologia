@@ -1,6 +1,7 @@
 <script type="text/placeholder" id="DialogPesquisaAgendamento">
 <div class='row col-sm-12 col-md-12 col-xs-12'>
     <div class="form-group col-main col-sm-3 col-xs-12">
+		<!--
 		<label for="FFDATAHORAFILTRO" class="sys-label col-sm-12 col-xs-12">Data:</label>
 		<div class='input-group date' >
 			<input type='text' class="form-control" id='FFDATAHORAFILTRO' name="FFDATAHORAFILTRO" value="<?php echo   date ("d/m/Y")  ?>"  autocomplete="off"/>
@@ -8,6 +9,9 @@
 				<span class="glyphicon glyphicon-calendar"></span>
 			 </span>
 		</div>
+		-->
+			<label for="FFDATAHORAFILTRO" class="sys-label col-sm-12 col-xs-12">Date</label>
+			<input class="form-control" type="date" value="<?php echo   date ("Y-m-d")  ?>" id="FFDATAHORAFILTRO" name="FFDATAHORAFILTRO" > 								
 	</div>
     <div class="col-main col-md-7 col-sm-7 col-xs-10" id="divNome">
 		<label class="sys-label col-sm-12 col-xs-12">Nome Paciente:</label>
@@ -39,11 +43,3 @@
 </div>
 <input type="text" class="col-sm-12 col-xs-12 form-control input-sm" id="FFCODAGTOEXA" value="" hidden >
 
-<script type="text/javascript">
-$('#FFDATAHORAFILTRO').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-
-	});
-</script>

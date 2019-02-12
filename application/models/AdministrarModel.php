@@ -31,7 +31,7 @@ class AdministrarModel extends MY_Model {
 				$FF .= ( $post['FILTROLOTE'] ) ? "and m.LOTE = '$post[FILTROLOTE]' " : '';
 			}
 			//só filtra por data se não tiver prontuario ou lote
-			if( empty($FF)){
+			//if( $FF != ''){
 				if(isset($post['FFDATAPESQUISA'])) {
 					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
 					$FF .= ( $post['FFDATAPESQUISA'] ) ? "and a.DATA >= '$data' " : '';
@@ -40,11 +40,10 @@ class AdministrarModel extends MY_Model {
 					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
 					$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and a.DATA <= '$data' " : '';
 				}
-			}
+			//}
 			if(isset($post['FILTRONOME'])) {
 				$FF .= ( $post['FILTRONOME'] ) ? "and p.NOME LIKE '%$post[FILTRONOME]%' " : '';
-			}
-		
+			}		
 		
 			$this->dados = $this->query(
                 "select  i.CODITFRACIONAMENTO, i.CODMARCACAO, i.CODAGTOEXA, i.ATIVIDADE_INICIAL, i.HORA_INICIAL,
@@ -64,9 +63,7 @@ class AdministrarModel extends MY_Model {
 				left join    gerador g on (e.CODGERADOR = g.CODGERADOR)
 							$FF
 				order by 	i.CODITFRACIONAMENTO
-				"
-
-				
+				"				
 			);			
 			$this->dados = $this->dados->result_array();			
 			return true;

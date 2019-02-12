@@ -71,19 +71,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-	    function somenteNumeros(num) {
-	    	//campo.value.replace(',','.');
-	        var er = /[^0-9.]/;
-	        er.lastIndex = 0;
-	        var campo = num;
-	    	campo.value =  campo.value.replace(',','.');        
-	        
-	        if (er.test(campo.value)) {
-	          campo.value = "";
-	      	 }		 
-   		}
-	</script>
+
 
 
 

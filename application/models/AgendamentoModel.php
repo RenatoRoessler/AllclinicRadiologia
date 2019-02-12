@@ -332,12 +332,15 @@ class AgendamentoModel extends MY_Model {
 
 		try {				
 			$FF = '';
+			
 			if(isset($post['data'])) {
-				$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['data'])));  
-				$FF .= ( $post['data'] ) ? "and a.DATA = '$data' " : '';
+				//$data = date("Y-m-d",strtotime(str_replace('/','-',$_POST['data'])));  
+				//$FF .= ( $post['data'] ) ? "and a.DATA = '$data' " : '';
+				$FF .= ( $post['data'] ) ? "and a.DATA = '$post[data]' " : '';
 			}
+			
 			if(isset($post['nome'])) {
-				$FF .= ( $post['nome'] ) ? "and p.nome like '%" . strtoupper( $post['nome'] ) . "%'" : "";
+				$FF .= ( $post['nome'] ) ? "and a.nome like '%" . strtoupper( $post['nome'] ) . "%'" : "";
 			}
 			
 			$this->dados = $this->query(
@@ -345,7 +348,7 @@ class AgendamentoModel extends MY_Model {
 							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA, a.SOBRENOME
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
-				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
+				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO) 
 				where 		1 = 1
 				$FF
 				order by a.DATA, a.HORA desc

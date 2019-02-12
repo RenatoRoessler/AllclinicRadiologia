@@ -31,6 +31,7 @@ class Administrar extends MY_Controller {
 		if($post['FFDATAFINALPESQUISA'] < 1){
 			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");	
 		}
+		
         
         /* carregando  */
  		$this->load->model('AdministrarModel');

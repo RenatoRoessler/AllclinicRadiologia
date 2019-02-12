@@ -103,6 +103,7 @@
 								    			<thead>
 								    				<tr>
 						    							<th>Nome</th>
+														<th>Sobrenome</th>
 						    							<th>Procedimento</th>
 														<th>Atividade Inicial</th>
 														<th>Hora Inicial</th>
@@ -117,6 +118,7 @@
 								    				?>
 								    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 								    					<td><?php echo $v['NOME']; ?></td>
+														<td><?php echo $v['SOBRENOME']; ?></td>
 								    					<td><?php echo $v['NOMEPROCEDIMENTO']; ?></td>
 														<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>
 														<td><?php echo $v['HORA_INICIAL']; ?></td>

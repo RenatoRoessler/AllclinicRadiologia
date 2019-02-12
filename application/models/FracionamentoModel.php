@@ -180,7 +180,7 @@ class FracionamentoModel extends MY_Model {
 				"select 	i.CODMARCACAO, i.CODITFRACIONAMENTO,   
 							ag.NOME , ag.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
 							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
-							i.VOLUME
+							i.VOLUME, ag.SOBRENOME
 				from 		ITFRACIONAMENTO i 
 				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
 				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
