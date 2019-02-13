@@ -22,7 +22,7 @@ $("document").ready(function(){
 	$("#btnLimpar")
 		.click(function(){
 			$("input").val('');
-			$('#btnSearch').trigger('click')
+			//$('#btnSearch').trigger('click')
 	});	
 	
 
@@ -52,17 +52,6 @@ $("document").ready(function(){
 	$("#FFAGENDAMENTO")
 	.click(function(){
 		controle.pesquisaAgendamento();
-	});	
-
-	$('#FFDATAPESQUISA').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-	});	
-	$('#FFDATAFINALPESQUISA').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
 	});	
 
 	$(document).ready(function(){

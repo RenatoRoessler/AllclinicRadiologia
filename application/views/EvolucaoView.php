@@ -57,8 +57,11 @@
 						    					<th>Hóraio <br />Incial</th>
 						    					<th>Atividade<br />Administrada</th>
 						    					<th>Horáriao<br />Administração</th>
+												<th>Lote Gerador</th>
+												<th>Lote Eluato</th>
 						    					<th>Pureza<br />Radionuclídica</th>
 						    					<th>Aparência<br />solução Limpida</th>
+												<th>Aparência<br />Radioquímica</th>
 						    					<th>PH</th>
 						    					<th>Pureza<br />Quimica</th>
 						    					<th>Responsavel<br />pelo Gerador</th>
@@ -82,11 +85,14 @@
 						    					<td><?php echo $v['DATAMARCACAO']; ?></td>
 						    					<td><?php echo $v['NOME'] .' ' . $v['SOBRENOME'] ; ?></td>
 						    					<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>
-						    					<td><?php echo $v['HORA_INICIAL']; ?></td>
+						    					<td><?php echo $v['HORA_INICIAL']; ?></td>												
 						    					<td><?php echo $v['ATIVIDADE_ADMINISTRADA']; ?></td>
 						    					<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
+												<td><?php echo $v['LOTEGERADOR']; ?></td>
+												<td><?php echo $v['LOTEELUICAO']; ?></td>
 						    					<td><?php echo $v['PUREZA_RADIONUCLIDICA']; ?></td>
 						    					<td><?php echo $v['LIMPIDA']; ?></td>
+												<td><?php echo 'falta'?></td>
 						    					<td><?php echo $v['PH']; ?></td>
 						    					<td><?php echo $v['PUREZA_QUIMICA']; ?></td>
 						    					<td><?php echo $v['APELUSER']; ?></td>

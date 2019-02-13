@@ -33,25 +33,15 @@
 					<div class="form-group col-main col-sm-2 col-xs-2">
 						<label for="FILTROLOTE" class="sys-label col-sm-12 col-xs-12">Lote Marcação:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTROLOTE" name="FILTROLOTE" value="<?php echo $this->input->post("FILTROLOTE") ?>"  style="text-transform:uppercase"  autocomplete="off">
-					</div> 		
+					</div> 	
 					<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial</label>
-					    <div class='input-group date' >
-					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
-					        <span class="input-group-addon">
-					        	<span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-			        </div>
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('Y-m-d');  ?>" id="FFDATAPESQUISA" name="FFDATAPESQUISA" required> 	
+				    </div>
 					<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final</label>
-					    <div class='input-group date' >
-					    	<input type='text' class="form-control" id='FFDATAFINALPESQUISA' name="FFDATAFINALPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('d/m/Y');  ?>"/>
-					        <span class="input-group-addon">
-					        	<span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-			        </div> 			
+						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('Y-m-d');  ?>" id="FFDATAFINALPESQUISA" name="FFDATAFINALPESQUISA" required> 	
+				    </div>			
 				</div>
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
@@ -66,9 +56,9 @@
 											    <th>Código</th>	
 												<th>Paciente</th>	
 						    					<th>Exame</th>
-												<th>Lote Gerador</th>
-												<th>Lote Maração</th>
+												<th>Lote Gerador</th>												
 												<th>Lote Eluição</th>
+												<th>Lote Maração</th>
 						    					<th>Data</th>
 						    					<th>Hora</th>
 						    					<th>Atividade Inicial</th>
@@ -88,9 +78,9 @@
 						    					<td><?php echo $v['CODITFRACIONAMENTO']; ?></td>
 												<td><?php echo $v['NOMEPACIENTE']; ?></td>
 						    					<td><?php echo $v['DESCRICAO']; ?></td>
-												<td><?php echo $v['LOTEGERADOR']; ?></td>
-												<td><?php echo $v['LOTEMARCACAO']; ?></td>
+												<td><?php echo $v['LOTEGERADOR']; ?></td>												
 												<td><?php echo $v['LOTEELUICAO']; ?></td>
+												<td><?php echo $v['LOTEMARCACAO']; ?></td>
 												<td><?php echo $v['DATA1']; ?></td>
 												<td><?php echo $v['HORAMINUTO']; ?></td>
 												<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>

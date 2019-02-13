@@ -16,24 +16,16 @@ class Administrar extends MY_Controller {
 		$post = limpaVariavelArray( $this->input->post());
 		$dados['js'] = 'js/Administrar.js'; 
 		$post['CODINST'] = $_SESSION['CODINST'];
-		
+
 		//se tiver vazio -- criado por causa do Limpar
 		if( !isset($post['FFDATAPESQUISA']) ){
-			$post['FFDATAPESQUISA'] = date("d/m/Y");
+			$post['FFDATAPESQUISA'] = date("Y-m-d");
 		}
 		if($post['FFDATAPESQUISA'] < 1){
-			$post['FFDATAPESQUISA'] = date("d/m/Y");	
+			$post['FFDATAPESQUISA'] = date("Y-m-d");	
 		}
-		if( !isset($post['FFDATAFINALPESQUISA']) ){
-			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");
-		}
-		//se tiver vazio -- criado por causa do Limpar
-		if($post['FFDATAFINALPESQUISA'] < 1){
-			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");	
-		}
-		
-        
-        /* carregando  */
+	    
+		/* carregando  */	
  		$this->load->model('AdministrarModel');
  		$this->AdministrarModel->index($post);
  		$dados['administrar'] = $this->AdministrarModel->dados;

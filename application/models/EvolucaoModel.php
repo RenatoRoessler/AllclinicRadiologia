@@ -27,6 +27,7 @@ class EvolucaoModel extends MY_Model {
 			if(isset($post['Codigo'])) {
 				$FF .= ( $post['Codigo'] ) ? "and e.CODELUICAO = $post[Codigo] " : '';
 			}
+			/*
 			if(isset($post['FFDATAPESQUISA'])) {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
 				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$data' " : '';
@@ -35,6 +36,7 @@ class EvolucaoModel extends MY_Model {
 				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
 				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
 			}
+			*/
 			$this->dados = $this->query(
 				"select 	i.CODITFRACIONAMENTO, 
 							g.LOTE as LOTEGERADOR,  
@@ -55,9 +57,9 @@ class EvolucaoModel extends MY_Model {
 							g.APELUSER,
 							f.DESCRICAO as KITFABRICANTE,
 							fa.DESCRICAO as DFARMACO,
-							m.KIT_LOTE,
+							m.LOTE,
 							m.ORGANICO,
-							m.QUIMICO,
+							m.INORGANICO,
 							m.APELUSER as USEMARCACAO,
 							ag.SOBRENOME
 
@@ -66,9 +68,9 @@ class EvolucaoModel extends MY_Model {
 				join        ELUICAO e on (m.CODELUICAO = e.CODELUICAO)
 				join        GERADOR g on (e.CODGERADOR = g.CODGERADOR)
 				join        AGTOEXAME ae on (i.CODAGTOEXA = ae.CODAGTOEXA)
-				join        AGENDAMENTO ag on (ae.CODAGTO = ag.CODAGTO)
-				join        FABRICANTE f on (m.KIT_CODFABRICANTE = f.CODFABRICANTE)
-				join        FARMACO    fa on (m.CODFARMACO = fa.CODFARMACO)				
+				join        AGENDAMENTO ag on (ae.CODAGTO = ag.CODAGTO)				
+				join        FARMACO    fa on (m.CODFARMACO = fa.CODFARMACO)	
+				join        FABRICANTE f on (fa.CODFABRICANTE = f.CODFABRICANTE)			
 				where 		1=1
 				and         g.CODINST = $_SESSION[CODINST]
 							$FF

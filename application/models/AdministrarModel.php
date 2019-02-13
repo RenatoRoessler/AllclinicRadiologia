@@ -31,18 +31,18 @@ class AdministrarModel extends MY_Model {
 				$FF .= ( $post['FILTROLOTE'] ) ? "and m.LOTE = '$post[FILTROLOTE]' " : '';
 			}
 			//só filtra por data se não tiver prontuario ou lote
-			//if( $FF != ''){
+			if( $FF == ''){
 				if(isset($post['FFDATAPESQUISA'])) {
-					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-					$FF .= ( $post['FFDATAPESQUISA'] ) ? "and a.DATA >= '$data' " : '';
+					//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+					$FF .= ( $post['FFDATAPESQUISA'] ) ? "and a.DATA >= '$post[FFDATAPESQUISA]' " : '';
 				}
 				if(isset($post['FFDATAFINALPESQUISA'])) {
-					$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
-					$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and a.DATA <= '$data' " : '';
+					//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
+					$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and a.DATA <= '$post[FFDATAFINALPESQUISA]' " : '';
 				}
-			//}
+			}
 			if(isset($post['FILTRONOME'])) {
-				$FF .= ( $post['FILTRONOME'] ) ? "and p.NOME LIKE '%$post[FILTRONOME]%' " : '';
+				$FF .= ( $post['FILTRONOME'] ) ? "and a.NOME LIKE '%$post[FILTRONOME]%' " : '';
 			}		
 		
 			$this->dados = $this->query(
@@ -61,7 +61,7 @@ class AdministrarModel extends MY_Model {
 				left join    marcacao m on (i.CODMARCACAO =  m.CODMARCACAO)
 				left join    eluicao e on (m.CODELUICAO = e.CODELUICAO)
 				left join    gerador g on (e.CODGERADOR = g.CODGERADOR)
-							$FF
+				where 1=1			$FF
 				order by 	i.CODITFRACIONAMENTO
 				"				
 			);			

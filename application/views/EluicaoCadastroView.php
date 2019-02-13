@@ -149,7 +149,7 @@
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFRADIONUCLIDICA" class="sys-label col-sm-12 col-xs-12">Resultado:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFRADIONUCLIDICA" name="FFRADIONUCLIDICA" value="<?php echo $retorno[0]["PUREZA_RADIONUCLIDICA"];  ?>" readonly />
-											<small id="emailHelp" class="form-text text-muted">Valor deve ser Menor que 0,15uCi de (99Mo) para 1mCi de (99m)Tc.</small>
+											<small id="emailHelp" class="form-text text-muted">Valor deve ser Menor que 0,15uCi de <SUP>99m</SUP>Mo para 1mCi de <SUP>99m</SUP>Tc.</small>
 										</div>
 									</div>
 								</div>
