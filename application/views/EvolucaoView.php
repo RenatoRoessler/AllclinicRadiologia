@@ -10,32 +10,20 @@
 				</li>
 			</ol>
 			<form id="formulario" name="formulario" action="<?php echo base_url() .'/Evolucao/' ?> " method="post" class="form-horizontal" data-parsley-validate >
-				<div class="row sys-main-title sys-title sys-title-2">
-					<div class="col-xs-12 col-md-12 col-sm-12">
+		
+		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
+		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12"> 
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('Y-m-d');  ?>" id="FFDATAPESQUISA" name="FFDATAPESQUISA" required> 	
+				    </div>
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('Y-m-d');  ?>" id="FFDATAFINALPESQUISA" name="FFDATAFINALPESQUISA" required> 	
+				    </div>
 					<div class="col-md-2 col-xs-2 col-sm-2 pull-right">
 		      			<button type="button" id="btnSearch" class="btn btn-primary btn-sm sys-btn-search" ><i class="fa fa-search"></i> Filtar</button>
-	      			</div>	      		
-		    	</div>
-		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
-		    	<div class="row tab-content col-xs-12 col-md-12 col-sm-12">
-				<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial</label>
-					    <div class='input-group date' >
-					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
-					        <span class="input-group-addon">
-					        	<span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-			        </div>
-					<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final</label>
-					    <div class='input-group date' >
-					    	<input type='text' class="form-control" id='FFDATAFINALPESQUISA' name="FFDATAFINALPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('d/m/Y');  ?>"/>
-					        <span class="input-group-addon">
-					        	<span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-			        </div>  	
+	      			</div>	
 		    	</div>		    
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
@@ -61,7 +49,7 @@
 												<th>Lote Eluato</th>
 						    					<th>Pureza<br />Radionuclídica</th>
 						    					<th>Aparência<br />solução Limpida</th>
-												<th>Aparência<br />Radioquímica</th>
+												<th>Pureza<br />Radioquímica</th>
 						    					<th>PH</th>
 						    					<th>Pureza<br />Quimica</th>
 						    					<th>Responsavel<br />pelo Gerador</th>
@@ -75,7 +63,9 @@
 						    			</thead>
 						    			<tbody>
 						    				<?php 
-						    				foreach ($evolucao as $k => $v) {  			
+						    				foreach ($evolucao as $k => $v) {  
+												$success = 	' <i class="fa fa-check-circle fa-3x" style="color: green;"></i>  '; 	
+											    $error = '<i class="fa fa-times-circle fa-3x" style="color: red;"></i>';
 						    				?>
 						    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 						    					<td><?php echo $v['LOTEGERADOR']; ?></td>
@@ -90,17 +80,17 @@
 						    					<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
 												<td><?php echo $v['LOTEGERADOR']; ?></td>
 												<td><?php echo $v['LOTEELUICAO']; ?></td>
-						    					<td><?php echo $v['PUREZA_RADIONUCLIDICA']; ?></td>
-						    					<td><?php echo $v['LIMPIDA']; ?></td>
-												<td><?php echo 'falta'?></td>
-						    					<td><?php echo $v['PH']; ?></td>
-						    					<td><?php echo $v['PUREZA_QUIMICA']; ?></td>
+						    					<td><?php echo ($v['PUREZA_RADIONUCLIDICA'] <= 0.15) ? $success : $error ; ?></td>
+						    					<td><?php echo ($v['LIMPIDA'] == 'S') ? $success : $error ; ?></td>
+												<td><?php echo ($v['PUREZA_RADIOQUIMICA'] >= 95) ? $success : $error ?></td>
+						    					<td><?php echo ($v['PH'] >= 4.5 && $v['PH'] <=7.5) ? $success : $error ;  ?></td>
+						    					<td><?php echo ($v['PUREZA_QUIMICA']=='S') ? $success : $error ;  ?></td>
 						    					<td><?php echo $v['APELUSER']; ?></td>
 						    					<td><?php echo $v['KITFABRICANTE']; ?></td>
 						    					<td><?php echo $v['DFARMACO']; ?></td>
-						    					<td><?php echo $v['KIT_LOTE']; ?></td>
+						    					<td><?php echo $v['LOTEELUICAO']; ?></td>
 						    					<td><?php echo $v['ORGANICO']; ?></td>
-						    					<td><?php echo $v['QUIMICO']; ?></td>
+						    					<td><?php echo $v['INORGANICO']; ?></td>
 						    					<td><?php echo $v['USEMARCACAO']; ?></td>
 						    				</tr>
 						    				<?php } ?>

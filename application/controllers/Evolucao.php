@@ -18,18 +18,18 @@ class Evolucao extends CI_Controller {
 		$post['CODINST'] = $_SESSION['CODINST'];
 
 		if( !isset($post['FFDATAPESQUISA']) ){
-			$post['FFDATAPESQUISA'] = date("d/m/Y");
+			$post['FFDATAPESQUISA'] = date("Y-m-d");
 		}
 		//se tiver vazio -- criado por causa do Limpar
 		if($post['FFDATAPESQUISA'] < 1){
-			$post['FFDATAPESQUISA'] = date("d/m/Y");	
+			$post['FFDATAPESQUISA'] = date("Y-m-d");	
 		}
 		if( !isset($post['FFDATAFINALPESQUISA']) ){
-			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");
+			$post['FFDATAFINALPESQUISA'] = date("Y-m-d");
 		}
 		//se tiver vazio -- criado por causa do Limpar
 		if($post['FFDATAFINALPESQUISA'] < 1){
-			$post['FFDATAFINALPESQUISA'] = date("d/m/Y");	
+			$post['FFDATAFINALPESQUISA'] = date("Y-m-d");
 		}
 
 		/*Carregando as Evoluções */

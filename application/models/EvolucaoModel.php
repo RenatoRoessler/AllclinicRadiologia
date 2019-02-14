@@ -27,16 +27,15 @@ class EvolucaoModel extends MY_Model {
 			if(isset($post['Codigo'])) {
 				$FF .= ( $post['Codigo'] ) ? "and e.CODELUICAO = $post[Codigo] " : '';
 			}
-			/*
+			
 			if(isset($post['FFDATAPESQUISA'])) {
-				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$data' " : '';
+				//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$post[FFDATAPESQUISA]' " : '';
 			}
 			if(isset($post['FFDATAFINALPESQUISA'])) {
-				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
-				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$data' " : '';
+				//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINALPESQUISA']))); 
+				$FF .= ( $post['FFDATAFINALPESQUISA'] ) ? "and m.DATA <= '$post[FFDATAFINALPESQUISA]' " : '';
 			}
-			*/
 			$this->dados = $this->query(
 				"select 	i.CODITFRACIONAMENTO, 
 							g.LOTE as LOTEGERADOR,  
@@ -61,7 +60,8 @@ class EvolucaoModel extends MY_Model {
 							m.ORGANICO,
 							m.INORGANICO,
 							m.APELUSER as USEMARCACAO,
-							ag.SOBRENOME
+							ag.SOBRENOME,
+							e.PUREZA_RADIOQUIMICA
 
 				from 	    ITFRACIONAMENTO i
 				join        MARCACAO m on (i.CODMARCACAO = m.CODMARCACAO)

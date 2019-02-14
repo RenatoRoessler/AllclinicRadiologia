@@ -84,8 +84,8 @@ class EluicaoModel extends MY_Model {
 			$post['FFRADIOQUIMICA'] =  str_replace('% Reprovado' , '' , $post['FFRADIOQUIMICA'] );
 			$post['FFRADIOQUIMICA'] =  str_replace('% Aprovado' , '' , $post['FFRADIOQUIMICA'] );
 
-			$post['FFRADIONUCLIDICA'] = str_replace(' Aprovado' , '' , $post['FFRADIOQUIMICA'] );
-			$post['FFRADIONUCLIDICA'] = str_replace(' Reprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Aprovado' , '' , $post['FFRADIONUCLIDICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Reprovado' , '' , $post['FFRADIONUCLIDICA'] );
 			
 			if($post['FFCQ'] == 'N'){
 				if(isset($post['FFATIVIDADETEORICA'])){
@@ -138,13 +138,16 @@ class EluicaoModel extends MY_Model {
 								EFI_ATV_TEORICA,
 								EFI_ATV_MEDIDA,
 								EFI_RESULTADO,
+
 								SUPERIOR,
 								INFERIOR,
 								PUREZA_RADIOQUIMICA,
+
 								ATV,
 								ATVTECNEZIO,
 								ATVFUNDO,
 								PUREZA_RADIONUCLIDICA,
+
 								PH,
 								LIMPIDA,								
 								CODGERADOR,
@@ -213,8 +216,8 @@ class EluicaoModel extends MY_Model {
 			$post['FFRESULTADO'] =  str_replace('%' , '' , $post['FFRESULTADO'] );
 			$post['FFRADIOQUIMICA'] =  str_replace('% Reprovado' , '' , $post['FFRADIOQUIMICA'] );
 			$post['FFRADIOQUIMICA'] =  str_replace('% Aprovado' , '' , $post['FFRADIOQUIMICA'] );
-			$post['FFRADIONUCLIDICA'] = str_replace(' Aprovado' , '' , $post['FFRADIOQUIMICA'] );
-			$post['FFRADIONUCLIDICA'] = str_replace(' Reprovado' , '' , $post['FFRADIOQUIMICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Aprovado' , '' , $post['FFRADIONUCLIDICA'] );
+			$post['FFRADIONUCLIDICA'] = str_replace(' Reprovado' , '' , $post['FFRADIONUCLIDICA'] );
 			$this->db->trans_begin();
 			$this->db->query(" update eluicao set 
 								DATA ='$post[FFDATAHORA]', 
@@ -227,7 +230,7 @@ class EluicaoModel extends MY_Model {
 								EFI_RESULTADO = $post[FFRESULTADO],
 								SUPERIOR = $post[FFSUPERIOR],
 								INFERIOR = $post[FFINFERIOR],	
-								PUREZA_RADIONUCLIDICA = $post[FFRADIONUCLIDICA],
+								PUREZA_RADIOQUIMICA = $post[FFRADIOQUIMICA],
 								ATV = $post[FFATV],
 								ATVTECNEZIO = $post[FFATVTECNEZIO],
 								ATVFUNDO = $post[FFATVFUNDO],
