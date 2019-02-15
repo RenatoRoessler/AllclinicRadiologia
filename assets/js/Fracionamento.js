@@ -142,18 +142,6 @@ $("document").ready(function(){
 	.click(function(){
 		controle.pesquisaAgendamento();
 	});	
-
-	$('#FFDATAPESQUISA').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-	});	
-	$('#FFDATAFINALPESQUISA').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-	});	
-
 	startTooltip();
 
 });

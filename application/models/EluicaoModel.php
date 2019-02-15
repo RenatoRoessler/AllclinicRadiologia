@@ -28,12 +28,12 @@ class EluicaoModel extends MY_Model {
 				$FF .= ( $post['Codigo'] ) ? "and e.CODELUICAO = $post[Codigo] " : '';
 			}
 			if(isset($post['FFDATAPESQUISA'])) {
-				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA >= '$data' " : '';
+				//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and e.DATA >= '$post[FFDATAPESQUISA]' " : '';
 			}
 			if(isset($post['FFDATAFINAL'])) {
-				$dataf = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINAL']))); 
-				$FF .= ( $post['FFDATAFINAL'] ) ? "and e.DATA <= '$dataf' " : '';
+				//$dataf = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINAL']))); 
+				$FF .= ( $post['FFDATAFINAL'] ) ? "and e.DATA <= '$post[FFDATAFINAL]' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
 				$dataAtual = date("Y-m-d H:i:s");
@@ -96,8 +96,7 @@ class EluicaoModel extends MY_Model {
 				}
 				if(isset($post['FFRESULTADO'])){
 					$post['FFRESULTADO'] = 0;
-				}
-					
+				}					
 				if(isset($post['FFSUPERIOR'])){
 					$post['FFSUPERIOR'] = 0;
 				}
@@ -125,8 +124,7 @@ class EluicaoModel extends MY_Model {
 				if(isset($post['FFRADIONUCLIDICA'])){
 					$post['FFRADIONUCLIDICA'] = 0;
 				}
-			}
-			
+			}			
 
 			$this->db->trans_begin();
 			$this->db->query("insert into ELUICAO(
@@ -267,7 +265,6 @@ class EluicaoModel extends MY_Model {
 	 * 	@return array
 	 */
 	public function buscaEluicao( $codeluicao ) {
-
 		try {			
 			$this->dados = $this->query(
 				"select 	e.CODELUICAO,e.DATA,e.HORA, e.VOLUME, e.ATIVIDADE_MCI, e.CQ,
@@ -298,7 +295,6 @@ class EluicaoModel extends MY_Model {
 	 * 	@return array
 	 */
 	public function excluir( $codeluicao ) {
-
 		try {
 			$this->db->trans_begin();
 			/* update na conta corrente*/
@@ -397,7 +393,7 @@ class EluicaoModel extends MY_Model {
 	public function updateNroEluicao( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("update gerador g set  g.NRO_ELUICAO = (select count(*) from eluicao e  where e.CODGERADOR = 								g.CODGERADOR )
+			$this->db->query("update gerador g set  g.NRO_ELUICAO = (select count(*) from eluicao e  where e.CODGERADOR = 	g.CODGERADOR )
 							where g.CODGERADOR =  $post[FFGERADOR]
 								"
 			);

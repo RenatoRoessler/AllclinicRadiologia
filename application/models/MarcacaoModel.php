@@ -28,12 +28,12 @@ class MarcacaoModel extends MY_Model {
 				$FF .= ( $post['Codigo'] ) ? "and m.CODMARCACAO = $post[Codigo] " : '';
 			}
 			if(isset($post['FFDATAPESQUISA'])) {
-				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
-				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$data' " : '';
+				//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAPESQUISA']))); 
+				$FF .= ( $post['FFDATAPESQUISA'] ) ? "and m.DATA >= '$post[FFDATAPESQUISA]' " : '';
 			}
 			if(isset($post['FFDATAFINAL'])) {
-				$dataf = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINAL']))); 
-				$FF .= ( $post['FFDATAFINAL'] ) ? "and m.DATA <= '$dataf' " : '';
+				//$dataf = date("Y-m-d",strtotime(str_replace('/','-',$post['FFDATAFINAL']))); 
+				$FF .= ( $post['FFDATAFINAL'] ) ? "and m.DATA <= '$post[FFDATAFINAL]' " : '';
 			}
 			if(isset($post['FFATIVOFILTRO'])) {
 				$dataAtual = date("Y-m-d H:i:s");

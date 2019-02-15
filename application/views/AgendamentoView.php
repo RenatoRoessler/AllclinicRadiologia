@@ -32,15 +32,11 @@
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="number" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>" autocomplete="off" >
 					</div>   
-					<div class="form-group col-main col-sm-1 col-xs-12">
-					    <label for="Data" class="sys-label col-sm-12 col-xs-12">Data:</label>
-					    <div class='input-group date' >
-							<input type='text' class="form-control" id='Data' name="Data" value="<?php echo $this->input->post("Data") ?  $this->input->post("Data") :  date ("d/m/Y")  ?>"  autocomplete="off"/>
-					        <span class="input-group-addon">
-					            <span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-					</div>
+		
+					<div class="form-group col-main col-sm-2 col-xs-12">
+						<label for="Data" class="sys-label col-sm-12 col-xs-12">Data Inicial:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("Data") ? $this->input->post("Data") : date('Y-m-d');  ?>" id="Data" name="Data" required> 	
+				    </div>
 					<div class="form-group col-main col-sm-3 col-xs-12">
 						<label for="FILTERNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTERNOME" name="FILTERNOME" value="<?php echo $this->input->post("FILTERNOME") ?>" autocomplete="off" >							
@@ -49,7 +45,7 @@
 						<label for="FILTERSOBRENOME" class="sys-label col-sm-12 col-xs-12">Sobrenome:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FILTERSOBRENOME" name="FILTERSOBRENOME" value="<?php echo $this->input->post("FILTERSOBRENOME") ?>" autocomplete="off" >							
 					</div>
-					<div class="form-group col-main col-sm-4 col-xs-12">
+					<div class="form-group col-main col-sm-3 col-xs-12">
 						<label for="FFNOMEPROCEDIMENTOTELA" class="sys-label col-sm-12 col-xs-12">Procedimento:</label>
 						<div class="input-group mb-3">
 							<input type="text" class="form-control" placeholder="Nome do Procedimento" aria-label="Nome do Procedimento" aria-describedby="basic-addon2" id="FFNOMEPROCEDIMENTOTELA" name="FFNOMEPROCEDIMENTOTELA" value= "<?php echo $this->input->post("FFNOMEPROCEDIMENTOTELA") ?>" readonly>

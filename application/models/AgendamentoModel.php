@@ -28,8 +28,8 @@ class AgendamentoModel extends MY_Model {
 				$FF .= ( $post['Codigo'] ) ? "and a.CODAGTO = $post[Codigo] " : '';
 			}
 			if(isset($post['Data'])) {
-				$data = date("Y-m-d",strtotime(str_replace('/','-',$post['Data'])));  
-				$FF .= ( $post['Data'] ) ? "and a.DATA = '$data'  " : '';
+				//$data = date("Y-m-d",strtotime(str_replace('/','-',$post['Data'])));  
+				$FF .= ( $post['Data'] ) ? "and a.DATA = '$post[Data]'  " : '';
 			}
 			if(isset($post['FFPROCEDIMENTO'])) {
 				$FF .= ( $post['FFPROCEDIMENTO'] ) ? "and ae.CODPROCEDIMENTO =  $post[FFPROCEDIMENTO]  " : '';
@@ -202,9 +202,7 @@ class AgendamentoModel extends MY_Model {
 								PESO = $post[FFPESO],
 								ALTURA = $post[FFALTURA],
 								CODCONV = $post[FFCONVENIO],
-								ATIVIDADE = $post[FFATIVIDADE]
-													
-					
+								ATIVIDADE = $post[FFATIVIDADE]			
 							where  CODAGTO = $post[FFCODAGTO];
 							"
 			);

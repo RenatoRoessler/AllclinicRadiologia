@@ -223,22 +223,11 @@ $("document").ready(function(){
 	.click(function(){
 		controle.salvar();
 	});	
-
-	$('#FFDATAPESQUISA').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-	});	
 	
 	$("#FFELUICAO")
 	.change(function(){
 		controle.gerarLote();
 	});
-	$('#FFDATAFINAL').datepicker({	
-		format: "dd/mm/yyyy",	
-		language: "pt-BR",
-		autoclose: true
-	});	
 
 	$("#FFKITFABRICANTE")
 		.change(function(){
