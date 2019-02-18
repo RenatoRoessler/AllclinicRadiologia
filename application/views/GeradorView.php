@@ -13,7 +13,6 @@
 			<form id="formulario" name="formulario" action="<?php echo base_url() .'/Gerador/' ?> " method="post" class="form-horizontal" data-parsley-validate >
 				<div class="row sys-main-title sys-title sys-title-2">
 					<div class="col-xs-12 col-md-12 col-sm-12">
-
 					<div class="col-md-2 col-xs-2 col-sm-2 pull-right">
 		      			<button type="button" id="btnSearch" class="btn btn-primary btn-sm sys-btn-search" ><i class="fa fa-search"></i> Filtar</button>
 	      			</div>	  
@@ -29,41 +28,28 @@
 		    		<div class="form-group col-main col-sm-1 col-xs-2">
 						<label for="FFCodigo" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCodigo" name="FFCodigo" value="<?php echo $this->input->post("FFCodigo") ?>"  autocomplete="off">
-					</div>	
+					</div>
 					<div class="form-group col-main col-sm-3 col-xs-3">
 						<label for="Lote" class="sys-label col-sm-12 col-xs-12">Lote:</label>
 						<input type="text" class="col-sm-12 col-xs-12 form-control" id="Lote" name="Lote" value="<?php echo $this->input->post("Lote") ?>"  style="text-transform:uppercase"  autocomplete="off">
-					</div> 
+					</div> 				
 					<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial</label>
-					    <div class='input-group date' >
-					    	<input type='text' class="form-control" id='FFDATAPESQUISA' name="FFDATAPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('d/m/Y');  ?>"/>
-					        <span class="input-group-addon">
-					        	<span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-			        </div>
+						<label for="FFDATAPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Inicial:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("FFDATAPESQUISA") ? $this->input->post("FFDATAPESQUISA") : date('Y-m-d');  ?>" id="FFDATAPESQUISA" name="FFDATAPESQUISA" required> 	
+				    </div>
 					<div class="form-group col-main col-sm-2 col-xs-12">
-						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final</label>
-					    <div class='input-group date' >
-					    	<input type='text' class="form-control" id='FFDATAFINALPESQUISA' name="FFDATAFINALPESQUISA"   autocomplete="off" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('d/m/Y');  ?>"/>
-					        <span class="input-group-addon">
-					        	<span class="glyphicon glyphicon-calendar"></span>
-					        </span>
-					    </div>
-			        </div>  	
-	
+						<label for="FFDATAFINALPESQUISA" class="sys-label col-sm-12 col-xs-12">Data Final:</label>
+						<input class="form-control" type="date" value="<?php echo $this->input->post("FFDATAFINALPESQUISA") ? $this->input->post("FFDATAFINALPESQUISA") : date('Y-m-d');  ?>" id="FFDATAFINALPESQUISA" name="FFDATAFINALPESQUISA" required> 	
+				    </div>		
 					<div class="form-group col-main col-sm-1 col-xs-12">
 						<label for="FFATIVOFILTRO" class="sys-label col-sm-12 col-xs-12">Ativo</label>
 						<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFATIVOFILTRO" name="FFATIVOFILTRO">
 							<option <?php if( $this->input->post("FFATIVOFILTRO") == "S") echo "selected"; ?> value="S">Ativos</option>	
-							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Inativos</option>		
-							<option <?php if( $this->input->post("FFATIVOFILTRO") == "T") echo "selected"; ?> value="T">Todos</option>												
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "N") echo "selected"; ?> value="N">Inativos</option>	
+							<option <?php if( $this->input->post("FFATIVOFILTRO") == "T") echo "selected"; ?> value="T">Todos</option>	
 						</select>
 					</div>        	
-
 		    	</div>
-
 		    	<div class="row col-md-12 col-sm-12 col-xs-12" style='margin-top:3px;'></div>
 			</div>
 				<div class="row col-md-12 col-sm-12 col-xs-12">
@@ -113,7 +99,6 @@
 						    							<i class="fa fa-minus-circle fa-lg"  style="color:red"></i> 
 						    						</a>    
 						    					</td>
-
 						    				</tr>
 						    				<?php } ?>
 						    			</tbody>
@@ -126,7 +111,6 @@
 			</form>
 		</div>
 	</div>
-
 
 <div class="row col-md-11 col-sm-11 col-xs-11 sys-btn-action-base-container">
 	<div class="col-sm-1 col-xs-2">

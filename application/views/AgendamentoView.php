@@ -31,8 +31,7 @@
 		    		<div class="form-group col-main col-sm-1 col-xs-1">
 						<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Código:</label>
 						<input type="number" class="col-sm-12 col-xs-12 form-control" id="Codigo" name="Codigo" value="<?php echo $this->input->post("Codigo") ?>" autocomplete="off" >
-					</div>   
-		
+					</div>   		
 					<div class="form-group col-main col-sm-2 col-xs-12">
 						<label for="Data" class="sys-label col-sm-12 col-xs-12">Data Inicial:</label>
 						<input class="form-control" type="date" value="<?php echo $this->input->post("Data") ? $this->input->post("Data") : date('Y-m-d');  ?>" id="Data" name="Data" required> 	
