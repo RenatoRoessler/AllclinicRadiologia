@@ -87,11 +87,15 @@
 									<div class="card">
 									  	<div class="card-header">
 									    	Eficiência da Eluição
-									  	</div>									  	
+									  	</div>
+										<div class="form-group col-main col-sm-12 col-xs-12">
+											<label for="FFATIVIDADEMO99" class="sys-label col-sm-12 col-xs-12">Atividade 99mo:</label>
+											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADEMO99" name="FFATIVIDADEMO99" value="<?php echo $retorno[0]["ATIVIDADEMO99"];  ?>" readonly />
+										</div>									  	
 									  	<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADETEORICA" class="sys-label col-sm-12 col-xs-12">Atividade Teórica:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADETEORICA" name="FFATIVIDADETEORICA" value="<?php echo $retorno[0]["EFI_ATV_TEORICA"];  ?>" readonly />
-										</div>
+										</div>										
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFATIVIDADE_MEDIDA" class="sys-label col-sm-12 col-xs-12">Medida:</label>
 											<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADE_MEDIDA" name="FFATIVIDADE_MEDIDA" value="<?php echo $retorno[0]["EFI_ATV_MEDIDA"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off" readonly/>

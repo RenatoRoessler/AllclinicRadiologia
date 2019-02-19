@@ -140,22 +140,28 @@ class Eluicao extends MY_Controller {
 		$lote += 1;	
 		$this->GeradorModel->buscaGerador( $post['codgerador'] );
 		$dados = $this->GeradorModel->dados;
-		$atividadeGerador = $dados[0]['ATIVIDADE_CALIBRACAO'];		
+		$atividadeGerador = $dados[0]['ATIVIDADE_CALIBRACAO'];	
+		$atividade99mo = $dados[0]['ATIVIDADEMO99'];
+		$dataGerador = $dados[0]['DATA_CALIBRACAO'] ;		
+		$horaGerador = $dados[0]['HORA'];	
 		$atvEluicao =  $this->GeradorModel->atividadeUltimaEluicao( $post['codgerador'] );
 		$atividade = 0;
-		$diferencaHoras = 0;
+		$hora = $atvEluicao['HORA'] ;
+		//$diferencaHoras = 0;
 		$primeria = false;
-		if($atvEluicao['EFI_ATV_TEORICA'] > 0){
-			$atividade = $atvEluicao['EFI_ATV_TEORICA'];		
-			$dataEluicao = $atvEluicao['DATA'] . ' ' .$atvEluicao['HORA']; 
-			$diferencaHoras = Eluicao::horasDiferenca( $dataEluicao);
+		if($atvEluicao['ATIVIDADEMO99'] > 0){
+			$atividade = $atvEluicao['ATIVIDADEMO99'];		
+			$dataEluicao = $atvEluicao['DATA'] ; 
+			//$diferencaHoras = Eluicao::horasDiferenca( $dataEluicao);
 			$primeria = false;
 		}else {
 			$atividade = $atividadeGerador ;
 			$primeria = true;
+			$dataEluicao = $dataGerador;
+			$hora = $horaGerador;
 		}	
-		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,'horasDiferenca' => $diferencaHoras,
-		'dataEluicao' => $atvEluicao['DATA'] , 'hora' => $atvEluicao['HORA'] , 'primeira' =>  $primeria) ,  true );	
+		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,
+		'dataEluicao' => $dataEluicao , 'hora' => $hora , 'primeira' =>  $primeria, 'ativade99mo' => $atividade99mo) ,  true );	
 		echo jsonEncodeArray( $this->json );
 	}
 

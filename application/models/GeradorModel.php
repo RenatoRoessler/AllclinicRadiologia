@@ -86,9 +86,9 @@ class GeradorModel extends MY_Model {
 			$this->db->trans_begin();
 			$this->db->query("insert into gerador(
 								LOTE,DATA,NRO_ELUICAO,DATA_CALIBRACAO,ATIVIDADE_CALIBRACAO,
-								CODINST,APELUSER,CODFABRICANTE, HORA, DATAINATIVO) value 
+								CODINST,APELUSER,CODFABRICANTE, HORA, DATAINATIVO,ATIVIDADEMO99) value 
 								('$post[FFLOTE]','$post[FFDATAHORA]', $post[FFNROELUICAO],'$post[FFDATACALIBRACAO]', $post[FFATIVIDADECAL],
-								$post[CODINST],'$post[APELUSER]',$post[FFFABRICANTE],'$post[FFHORA]','$post[DATAINATIVO]')"
+								$post[CODINST],'$post[APELUSER]',$post[FFFABRICANTE],'$post[FFHORA]','$post[DATAINATIVO]', $post[FFATIVIDADEMO99])"
 			);
 			if( $this->db->trans_status() === false){
 				$this->db->trans_rollback();				
@@ -127,7 +127,8 @@ class GeradorModel extends MY_Model {
 				CODINST = $post[CODINST],
 				APELUSER = '$post[APELUSER]',
 				CODFABRICANTE = $post[FFFABRICANTE],
-				HORA = '$post[FFHORA]'
+				HORA = '$post[FFHORA]',
+				ATIVIDADEMO99 = $post[FFATIVIDADEMO99]
 				where  CODGERADOR = $post[FFCODGERADOR]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -161,7 +162,7 @@ class GeradorModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO, g.DATA_CALIBRACAO,g.ATIVIDADE_CALIBRACAO,
 							g.CODINST,g.APELUSER,g.CODFABRICANTE,g.DATA	,DATE_FORMAT(DATA, '%d/%c/%Y') as DATAF,
-							DATE_FORMAT(DATA_CALIBRACAO, '%d/%c/%Y') as DATA_CALIBRACAOF			
+							DATE_FORMAT(DATA_CALIBRACAO, '%d/%c/%Y') as DATA_CALIBRACAOF, g.ATIVIDADEMO99	
 				from 		gerador g				
 				where 		g.codgerador = $codgerador
 				order by 	g.CODGERADOR"
@@ -221,7 +222,7 @@ class GeradorModel extends MY_Model {
 			$dataAtual = date("Y-m-d");
 			$this->dados = $this->query(
 				"select 	g.CODGERADOR, g.LOTE,g.HORA, g.NRO_ELUICAO, DATE_FORMAT(g.DATA, '%d/%c/%Y') as DATA1,
-							DATE_FORMAT(g.DATA_CALIBRACAO, '%d/%c/%Y') as DATACALIBRACAO
+							DATE_FORMAT(g.DATA_CALIBRACAO, '%d/%c/%Y') as DATACALIBRACAO, g.ATIVIDADEMO99
 				from 		gerador g				
 				where 		g.DATAINATIVO >=  '$dataAtual'
 				and         g.CODINST = $codinst
@@ -290,7 +291,7 @@ class GeradorModel extends MY_Model {
 	public function atividadeUltimaEluicao( $codgerador ){
 		try {
 			$this->dados =  $this->query(
-				" select e.EFI_ATV_TEORICA, e.DATA, e.HORA from eluicao e where e.CODGERADOR = $codgerador order by 1 desc "
+				" select e.EFI_ATV_TEORICA, e.DATA, e.HORA, e.ATIVIDADEMO99 from eluicao e where e.CODGERADOR = $codgerador order by 1 desc "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

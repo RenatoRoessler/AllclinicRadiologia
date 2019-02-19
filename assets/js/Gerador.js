@@ -17,6 +17,32 @@ var Gerador = function(){
 
 	}	
 
+	this.atividade99mo = function(a){
+		let atividade = $('#FFATIVIDADECAL').val();
+		let atividade99mo1 = $('#FFATIVIDADEMO99');
+		if(atividade == 2000){
+			atividade99mo1.val(2400);
+		}
+		if(atividade == 1500){
+			atividade99mo1.val(1800);
+		}
+		if(atividade == 1250){
+			atividade99mo1.val(1500);			
+		}
+		if(atividade == 1000){
+			atividade99mo1.val(1200);			
+		}
+		if(atividade == 750){
+			atividade99mo1.val(900);			
+		}
+		if(atividade == 500){
+			atividade99mo1.val(600);			
+		}
+		if(atividade == 250){
+			atividade99mo1.val(300);			
+		}
+	}
+
 }
 
 $("document").ready(function(){
@@ -53,6 +79,9 @@ $("document").ready(function(){
                     format: "dd/mm/yyyy hh:i",
                     language: "pt-BR"
 
-    });
+	});
+	$('#FFATIVIDADECAL').change(function(){
+		controle.atividade99mo()
+	});
 
 });

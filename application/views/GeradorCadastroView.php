@@ -57,8 +57,25 @@
 							</div>	
 							<div class="form-group col-main col-sm- col-xs-12">
 								<label for="FFATIVIDADECAL" class="sys-label col-sm-12 col-xs-12">Atividade Calibração mCi</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADECAL" name="FFATIVIDADECAL" value="<?php echo $retorno[0]["ATIVIDADE_CALIBRACAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off"  required>
-							</div>							
+								<select class="form-control form-control-sm" id="FFATIVIDADECAL" name="FFATIVIDADECAL" required>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == "") echo "selected"; ?> value="">Selecione a Atividade</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 2000) echo "selected"; ?> value="2000">2000</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1500) echo "selected"; ?> value="1500">1500</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1250) echo "selected"; ?> value="1250">1250</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1000) echo "selected"; ?> value="1000">1000</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 750) echo "selected"; ?> value="750">750</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 500) echo "selected"; ?> value="500">500</option>
+								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 250) echo "selected"; ?> value="250">250</option>
+																	
+								</select>
+
+								<!--<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADECAL" name="FFATIVIDADECAL" value="<?php echo $retorno[0]["ATIVIDADE_CALIBRACAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off"  required>
+								-->
+							</div>	
+							<div class="form-group col-main col-sm- col-xs-12">
+								<label for="FFATIVIDADEMO99" class="sys-label col-sm-12 col-xs-12">Atividade <SUP>99</SUP>Mo:</label>		
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADEMO99" name="FFATIVIDADEMO99" value="<?php echo $retorno[0]["ATIVIDADEMO99"];  ?>" readonly>	
+							</div>			
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFFABRICANTE" class="sys-label col-sm-12 col-xs-12">Fabricante:</label>	
 								<select class="form-control form-control-sm" id="FFFABRICANTE" name="FFFABRICANTE" data-live-search="true" required>
