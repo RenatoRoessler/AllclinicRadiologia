@@ -11,8 +11,7 @@
 				</li>
 			</ol>
 
-			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
-
+			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
 			<?php 
 			echo validation_errors('<div class="alert alert-danger">','</div>');
 			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioAdministrar','name' => 'formularioAdministrar');
@@ -65,9 +64,9 @@
 								<label for="FFATVADMINISTRADA" class="sys-label col-sm-12 col-xs-12">Atividade Administrada:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATVADMINISTRADA" name="FFATVADMINISTRADA" value="<?php echo $itfracionamento[0]["ATIVIDADE_ADMINISTRADA"]; ?>"  onkeyup="somenteNumeros(this); " autocomplete="off" >
 							</div>
-    						 <div class="col-main col-sm-2 col-xs-12">
+    						<div class="col-main col-sm-2 col-xs-12">
        							<label  for="FFHORAADMINISTRADA" class="sys-label col-sm-12 col-xs-12">Hora Administrada:</label>
-        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORAADMINISTRADA" name="FFHORAADMINISTRADA" min="00:00" max="24:00" required value="<?php echo $itfracionamento[0]["HORA_ADMINISTRADA"];  ?>" />
+        						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORAADMINISTRADA" name="FFHORAADMINISTRADA" min="00:00" max="24:00" required value="<?php echo ($itfracionamento[0]["HORA_ADMINISTRADA"] > 0) ? $itfracionamento[0]['HORA_ADMINISTRADA'] : date("H:i")  ?>" />
     						</div>
     					</div>
 					</div>
