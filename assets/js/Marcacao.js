@@ -109,7 +109,7 @@ var Marcacao = function(){
 			campoAprovadoTable.val('S');
 			campoAprovado.val('Aprovado');
 		}else{
-			campoAprovado.val('N');
+			campoAprovadoTable.val('N');
 			campoAprovado.val('Reprovado');
 		}
 		return true;
@@ -127,7 +127,6 @@ var Marcacao = function(){
 		}
 		marcacaoAprovada();
 
-		
 
 		$("#formularioCadastro").submit();
 		
@@ -185,8 +184,13 @@ var Marcacao = function(){
 	this.calcMedia = function() {
 		let m1 = parseFloat($("#FFORGANICO").val());
 		let m2 = parseFloat($("#FFINORGANICO").val());
+		if(isNaN(m1) ){
+			m1 = 0;
+		}
+		if(isNaN(m2) ){
+			m2 = 0;
+		}
 		let resultado =0;
-
 		if(m1 > 0 && m2 > 0){
 			resultado = ((m1 + m2) / 2);
 		}else if(m1 > 0 && m2 <= 0){

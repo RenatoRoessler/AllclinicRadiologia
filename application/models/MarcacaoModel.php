@@ -190,7 +190,6 @@ class MarcacaoModel extends MY_Model {
 			$this->db->query(" update marcacao set 
 								DATA = '$post[FFDATAHORA]', 
 								HORA = '$post[FFHORA]',
-								CODELUICAO = $post[FFELUICAO],
 								CQ = '$post[FFCQ]',
 								ORGANICO = $post[FFORGANICO],
 								INORGANICO = $post[FFINORGANICO],
