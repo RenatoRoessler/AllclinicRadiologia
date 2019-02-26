@@ -74,8 +74,7 @@ class MarcacaoModel extends MY_Model {
 	 * 	@return array
 	 */
 	public function inserir( $post ){
-		try{
-						
+		try{						
 			if(!$post['FFORGANICOSUPERIOR'] > 0){
 				$post['FFORGANICOSUPERIOR'] = 0;
 			}
@@ -208,7 +207,6 @@ class MarcacaoModel extends MY_Model {
 				$this->db->trans_rollback();
 				return false;
 			}
-
 			$this->db->trans_commit();
 			return true;
 
@@ -227,7 +225,6 @@ class MarcacaoModel extends MY_Model {
 	 * 	@return array
 	 */
 	public function buscaMarcacao( $codmarcacao ) {
-
 		try {			
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA, fa.CODFABRICANTE, 
@@ -253,7 +250,6 @@ class MarcacaoModel extends MY_Model {
 		}
 		return false;
 	}
-
 
 	/**
 	 * 	Metodo para excluir uma Marcaçaõ
@@ -295,7 +291,6 @@ class MarcacaoModel extends MY_Model {
 	 */
 	public function buscaTodasMarcacao() {
 		$dataAtual = date("Y-m-d H:i:s");
-
 		try {			
 			$this->dados = $this->query(
 				"select 	m.CODMARCACAO, m.CODELUICAO, m.DATA, m.HORA,  

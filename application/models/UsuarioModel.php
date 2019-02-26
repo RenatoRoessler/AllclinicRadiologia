@@ -219,6 +219,32 @@ class UsuarioModel extends MY_Model {
 		}
 		return false;
 	}
-
-
+	/**
+	 * Metodo para verificar se o usuario já está cadastrado
+	 * @author Renato Roessler <renatoroessler@gmail.com>
+	 * @param $apeluser = string 
+	 * @param $codinst = integer (NÃO OBRIGATÓRIO) 
+	 */
+	public function usuarioJaCadastrado( $apeluser, $codisnt = 0 ){
+		try {
+			$FF = '';
+			if(!$codinst > 0){
+				$FF = " and codinst = $codinst";
+			}
+			$this->dados = $this->query(
+				"select count(*) as QTD from usuario where apeluser = $apeluser $FF"
+			);
+			$this->dados = $this->dados->result_array();
+			//se a quantidade for maior que zero então localizou usuario
+			if ($this->dados[0]['QTD' > 0]){
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception $e) {
+			/* criando log  */
+			log_message('error', $this->db->error()); 
+		}
+		return false;
+	}
 }

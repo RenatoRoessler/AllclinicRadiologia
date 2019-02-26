@@ -208,12 +208,12 @@ var Eluicao = function(){
 					mensagem( 'e', error )
 				}
 			});
-			setTimeout(function(){ 
+			//setTimeout(function(){ 
 				//calcularDiferencaHoras();
 				//let res = atividadeTeorica();
 				//$('#FFATIVIDADETEORICA').val(res);
 				
-			}, 500);		
+			//}, 500);		
 			
 		}else{
 			$("#FFLOTE").val("") ;	

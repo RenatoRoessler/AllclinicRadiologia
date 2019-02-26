@@ -13,13 +13,7 @@
 
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
 
-
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Usuarios/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Usuarios/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
             	<input type="hidden" id="FFAPELUSER1" name="FFAPELUSER1" value="<?php echo $retorno[0]["APELUSER"]; ?>" >
 			
 		    	<!-- ABAS -->
@@ -36,16 +30,16 @@
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Login:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFAPELUSER" name="FFAPELUSER" 
-								value="<?php echo $retorno[0]["APELUSER"]; ?>" minlength="5" maxlength="10"  style="text-transform:uppercase" >
+								value="<?php echo $retorno[0]["APELUSER"]; ?>" minlength="4" maxlength="10"  style="text-transform:uppercase" required>
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>
-								<input type="email" class="col-sm-12 col-xs-12 form-control" id="FFNOME" name="FFNOME" value="<?php echo $retorno[0]["NOME"]; ?>" 
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFNOME" name="FFNOME" value="<?php echo $retorno[0]["NOME"]; ?>" 
 								minlength="5" maxlength="45"  required style="text-transform:uppercase" autocomplete="off">
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFEMAIL" class="sys-label col-sm-12 col-xs-12">E-mail:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFEMAIL" name="FFEMAIL" value="<?php echo $retorno[0]["EMAIL"]; ?>" 
+								<input type="email" class="col-sm-12 col-xs-12 form-control" id="FFEMAIL" name="FFEMAIL" value="<?php echo $retorno[0]["EMAIL"]; ?>" 
 								minlength="3" maxlength="255" required  style="text-transform:lowercase" autocomplete="off">
 							</div>
 							
@@ -53,7 +47,7 @@
 						<div class="row col-sm-12 col-xs-12">
 							<div class="col-main col-sm-3 col-xs-12">
 								<label for="FFINSTITUICAO" class="sys-label col-sm-12 col-xs-12">Instituição:</label>	
-								<select class="form-control form-control-sm" id="FFINSTITUICAO" name="FFINSTITUICAO" data-live-search="true">
+								<select class="form-control form-control-sm" id="FFINSTITUICAO" name="FFINSTITUICAO" data-live-search="true" required>
 								<option <?php if( $retorno[0]["CODINST"] == "") echo "selected"; ?> value="">Selecione a Conta</option>
 								<?php
 									foreach ($instituicao as $k => $v) {
@@ -71,7 +65,7 @@
                                 <input type="password" id="txt-senha" name="txt-senha" class="form-control" >
                             </div>
                             <div class="form-group col-main col-sm-2 col-xs-12">
-                                <label for="txt-confir-senha"  id="txt-confir-senha" class="sys-label col-sm-12 col-xs-12">Confirmar Senha</label>
+                                <label for="txt-confir-senha" class="sys-label col-sm-12 col-xs-12">Confirmar Senha</label>
                                 <input type="password" id="txt-confir-senha" name="txt-confir-senha" class="form-control">
                             </div>
 						</div>
@@ -86,9 +80,7 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 
 		</div>
 	</div>

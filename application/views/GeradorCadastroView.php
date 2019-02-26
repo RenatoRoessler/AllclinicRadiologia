@@ -12,7 +12,6 @@
 			</ol>
 		    <?php include VIEWPATH . "_includes/_mensagem.php";?> 
 			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Gerador/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
-
             	<input type="hidden" id="FFCODGERADOR1" name="FFCODGERADOR1" value="<?php echo $retorno[0]["CODGERADOR"]; ?>" >			
 		    	<!-- ABAS -->
 				<div class="col-sm-12 col-md-12 col-xs-12">
@@ -58,19 +57,15 @@
 							<div class="form-group col-main col-sm- col-xs-12">
 								<label for="FFATIVIDADECAL" class="sys-label col-sm-12 col-xs-12">Atividade Calibração mCi</label>
 								<select class="form-control form-control-sm" id="FFATIVIDADECAL" name="FFATIVIDADECAL" required>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == "") echo "selected"; ?> value="">Selecione a Atividade</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 2000) echo "selected"; ?> value="2000">2000</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1500) echo "selected"; ?> value="1500">1500</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1250) echo "selected"; ?> value="1250">1250</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1000) echo "selected"; ?> value="1000">1000</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 750) echo "selected"; ?> value="750">750</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 500) echo "selected"; ?> value="500">500</option>
-								<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 250) echo "selected"; ?> value="250">250</option>
-																	
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == "") echo "selected"; ?> value="">Selecione a Atividade</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 2000) echo "selected"; ?> value="2000">2000</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1500) echo "selected"; ?> value="1500">1500</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1250) echo "selected"; ?> value="1250">1250</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1000) echo "selected"; ?> value="1000">1000</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 750) echo "selected"; ?> value="750">750</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 500) echo "selected"; ?> value="500">500</option>
+									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 250) echo "selected"; ?> value="250">250</option>							
 								</select>
-
-								<!--<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFATIVIDADECAL" name="FFATIVIDADECAL" value="<?php echo $retorno[0]["ATIVIDADE_CALIBRACAO"];  ?>" onkeyup="somenteNumeros(this);" autocomplete="off"  required>
-								-->
 							</div>	
 							<div class="form-group col-main col-sm- col-xs-12">
 								<label for="FFATIVIDADEMO99" class="sys-label col-sm-12 col-xs-12">Atividade <SUP>99</SUP>Mo:</label>		
@@ -99,7 +94,7 @@
 	      			</div>
 				<div class="col-xs-12 col-md-12 col-sm-12">
 					<div class="col-xs-1 col-sm-1 pull-right">
-		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
+		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search"  ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
 			</form>

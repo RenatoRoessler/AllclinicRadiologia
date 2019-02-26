@@ -14,7 +14,6 @@ var Gerador = function(){
 			'btn1':'Salvar',
 			'btn2':'Cancelar'
 		});
-
 	}	
 
 	this.atividade99mo = function(a){
@@ -42,7 +41,6 @@ var Gerador = function(){
 			atividade99mo1.val(300);			
 		}
 	}
-
 }
 
 $("document").ready(function(){
@@ -70,8 +68,12 @@ $("document").ready(function(){
 	});		
 
 	$("#btnSalvar")
-	.click(function(){
-		$("#formularioCadastro").submit();
+	.click(function(){	   
+	   $("#formularioCadastro").submit();
+	   $("#btnSalvar").attr("disabled", "disabled");	  
+	   setTimeout(function(){ 
+			$("#btnSalvar").removeAttr("disabled") 		
+		}, 1000);
 	});
 
 	$('#FFDATAHORA2').datetimepicker({
