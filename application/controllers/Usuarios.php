@@ -226,11 +226,13 @@ class Usuarios extends MY_Controller {
 	public function usuarioJaCadastrado()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->model('UsuarioModel');
-		$this->UsuarioModel->usuarioJaCadastrado( $post['apeluser'], $post['codinst']);
-		//$usuarioCadastrado = $this->UsuarioModel->dados;
-		echo $this->msgSucesso('', array( 'usuarioCadastrado' => '$usuarioCadastrado' ), true );	
-		echo jsonEncodeArray( $this->json );
+		$this->load->model('UsuarioModel');		
+		if($this->UsuarioModel->usuarioJaCadastrado( $post['apeluser'], $post['codinst'])){
+			echo $this->msgSucesso('', array( 'usuarioCadastrado' => true ), true );
+		}else{
+			echo $this->msgSucesso('', array( 'usuarioCadastrado' => false ), true );
+		}			
+		echo jsonEncodeArray( $this->json ); 
 	}
 
 

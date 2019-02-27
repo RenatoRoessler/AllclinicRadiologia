@@ -1,12 +1,15 @@
 var Usuario = function(){
 	var _self = this;
+	var _usuarioCadastrado = false;
 
 	this.salvar = function(){
+		
 		let apeluser = $('#FFAPELUSER1').val();
 		let apeluserNovo = $('#FFAPELUSER').val();
 		let codinst = $('#FFINSTITUICAO').val();
 		let senha1 = $('#txt-senha').val();
 		let senha2 = $('#txt-confir-senha').val();
+		
 		if(!codinst > 0){
 			mensagem('e', 'Informe a Instituição');
 			return
@@ -23,31 +26,35 @@ var Usuario = function(){
 					return
 				}
 			}			
-		}else{ //novo
-			if(validaSeUsuarioJaFoiCadastrado(apeluserNovo, codinst)){
-				mensagem('e', 'Login já cadastrado nessa Instituição');
+		}else{ //novo	
+			validaSeUsuarioJaFoiCadastrado(apeluserNovo , codinst);	
+			setTimeout(function(){ 
+				if( _usuarioCadastrado){
+					mensagem('e', 'Login já cadastrado nessa Instituição');
+						return
+				}
+			
+				console.log('valida2',_usuarioCadastrado)
+				if(senha1 == false){
+					mensagem('e', 'Informe a senha');
 					return
-			}
-			if(senha1 == false){
-				mensagem('e', 'Informe a senha');
+				}
+				if(senha2 == false){
+					mensagem('e', 'Confirme a Senha');
+					return
+				}
+				if(senha1 != senha2){
+					mensagem('e', 'Senha não confere');
 				return
-			}
-			if(senha2 == false){
-				mensagem('e', 'Confirme a Senha');
-				return
-			}
-			if(senha1 != senha2){
-				mensagem('e', 'Senha não confere');
-			return
-			}
+				}	
+			}, 500);
+			
 		}
 		//$("#formularioCadastro").submit();
 			
 	}
 
 	function validaSeUsuarioJaFoiCadastrado(apeluser, codinst) {
-		var usuarioCadastrado = false;
-		console.log("teste1");
 		$.ajax({
 			url : '/AllclinicRadiologia/Usuarios/usuarioJaCadastrado/',
 			type :  'POST',
@@ -59,19 +66,17 @@ var Usuario = function(){
 			beforeSend: function(){
 				loader('show');
 			},
-			success: function( retorno){
-				console.log("teste");
-				var j = jsonEncode( retorno, 'json');
-				usuarioCadastrado =  j.usuarioCadastrado;
-				console.log("teste");
+			success: function( retorno ){
+				var j = jsonEncode( retorno, 'json' );
+				_usuarioCadastrado =  j.content.usuarioCadastrado;
+				console.log("usuarioCadastrado",_usuarioCadastrado);
 				loader('hide');
 			},
 			error: function( request, status, error){
 				loader('hide');
 				mensagem('e', error );
 			}
-		});
-		return usuarioCadastrado;
+		});		
 	}
 
 }
@@ -103,7 +108,6 @@ $("document").ready(function(){
 		//
 		controle.salvar();
 	});	
-
 		
 
 });

@@ -30,7 +30,7 @@
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="UsuarioModel" class="sys-label col-sm-12 col-xs-12">Login:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFAPELUSER" name="FFAPELUSER" 
-								value="<?php echo $retorno[0]["APELUSER"]; ?>" minlength="4" maxlength="10"  style="text-transform:uppercase" required>
+								value="<?php echo $retorno[0]["APELUSER"]; ?>" minlength="4" maxlength="10"  style="text-transform:uppercase" required >
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>
@@ -56,8 +56,7 @@
 									<option value="<?php echo $v['CODINST'];?>" <?php echo $sel; ?> > <?php echo $v["FANTASIA"]; ?> </option>
 									<?php  
 										}
-									?>
-									
+									?>									
 								</select>
 							</div>
 							<div class="form-group col-main col-sm-2 col-xs-12">

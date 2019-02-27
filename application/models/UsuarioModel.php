@@ -225,22 +225,24 @@ class UsuarioModel extends MY_Model {
 	 * @param $apeluser = string 
 	 * @param $codinst = integer (NÃO OBRIGATÓRIO) 
 	 */
-	public function usuarioJaCadastrado( $apeluser, $codisnt = 0 ){
+	public function usuarioJaCadastrado( $apeluser, $codinst = 0){
 		try {
+			
 			$FF = '';
-			if(!$codinst > 0){
-				$FF = " and codinst = $codinst";
-			}
+			
+			if($codinst > 0){
+				$FF = " and CODINST = $codinst";
+			}			
 			$this->dados = $this->query(
-				"select count(*) as QTD from usuario where apeluser = $apeluser $FF"
-			);
+				"select count(*) as QTD from usuario where APELUSER = '$apeluser' $FF "
+			);			
 			$this->dados = $this->dados->result_array();
-			//se a quantidade for maior que zero então localizou usuario
-			if ($this->dados[0]['QTD' > 0]){
+			//se a quantidade for maior que zero não pode excluir
+			if ($this->dados[0]['QTD'] > 0 ){
 				return true;
-			}else {
+			}else{
 				return false;
-			}
+			}	
 		} catch (Exception $e) {
 			/* criando log  */
 			log_message('error', $this->db->error()); 
