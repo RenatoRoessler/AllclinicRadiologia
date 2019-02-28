@@ -53,10 +53,13 @@ $("document").ready(function(){
 		ir('/AllclinicRadiologia/Convenio');
     });
 
-    $("#btnSalvar")
-	.click(function(){
-		$("#formularioCadastro").submit();
-    });
+    $("#btnSalvar").click(function(){
+			$("#formularioCadastro").submit();
+			$("#btnSalvar").attr("disabled", "disabled");	  
+			setTimeout(function(){ 
+			  	$("#btnSalvar").removeAttr("disabled") 		
+			}, 1000);
+		});	
     
     $("#btnExcluirConvenio")
 	.click(function(){

@@ -11,12 +11,9 @@
 				</li>
 			</ol>
 			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Fabricante/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Fabricante/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
+			
             	<input type="hidden" id="FFCODFABRICANTE1" name="FFCODFABRICANTE1" value="<?php echo $retorno[0]["CODFABRICANTE"]; ?>" >
 			
 		    	<!-- ABAS -->
@@ -37,12 +34,12 @@
 							<div class="form-group col-main col-sm-3 col-xs-12">
 								<label for="FFDESCRICAO" class="sys-label col-sm-12 col-xs-12">Descrição:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFDESCRICAO" name="FFDESCRICAO" value="<?php echo $retorno[0]["DESCRICAO"]; ?>" 
-								minlength="10" maxlength="45"  required style="text-transform:uppercase" autocomplete="off">
+								minlength="3" maxlength="45"  required style="text-transform:uppercase" autocomplete="off">
 							</div>
 							<div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFESPECIFICACAO" class="sys-label col-sm-12 col-xs-12">Especificação:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFESPECIFICACAO" name="FFESPECIFICACAO" value="<?php echo $retorno[0]["ESPECIFICACAO"]; ?>" 
-								minlength="10" maxlength="45" required  style="text-transform:uppercase" autocomplete="off">
+								minlength="3" maxlength="45" required  style="text-transform:uppercase" autocomplete="off">
 							</div>	
 											
 						</div>
@@ -59,9 +56,7 @@
 	      			</div>
 		    	</div>
 				
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 		</div>
 	</div>
 

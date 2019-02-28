@@ -51,30 +51,23 @@ class Instituicao extends CI_Controller {
 		/*	Limpando variaveis*/		
 		$post = limpaVariavelArray( $this->input->post() );
 		$this->load->model('InstituicaoModel');
-
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFFantasia','Fantasia','required|min_length[5]');
-		$this->form_validation->set_rules('FFRazao','Razão','required|min_length[5]');
-		$this->form_validation->set_rules('FFCNPJ','CNPJ','required|min_length[9]');
-		if($this->form_validation->run() == FALSE){
-			$this->novo();
-		}else{
-			if( $post ){
-			    //Se já tiver codinst faz update			
-				if( $post['FFCODINST'] ){				
-					$id = $this->InstituicaoModel->atualizar( $post ) ;
-				}else{				
-					$id = $this->InstituicaoModel->inserir( $post ) ;
-					$post['FFCODINST'] = $id;
-				}
+	
+		if( $post ){
+		    //Se já tiver codinst faz update			
+			if( $post['FFCODINST'] ){				
+				$id = $this->InstituicaoModel->atualizar( $post ) ;
+			}else{				
+				$id = $this->InstituicaoModel->inserir( $post ) ;
+				$post['FFCODINST'] = $id;
 			}
-			if( !$id ){
-					$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Conta Corrente. <br/>[' . $this->InstituicaoModel->db->error() . ']' ));
-				}else{
-					$this->session->set_userdata('MSG', array( 's', 'Mensagem salva com sucesso' ));
-				}
-			redireciona('editar/' . $post['FFCODINST']);
-		}		
+		}
+		if( !$id ){
+				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Conta Corrente. <br/>[' . $this->InstituicaoModel->db->error() . ']' ));
+			}else{
+				$this->session->set_userdata('MSG', array( 's', 'Mensagem salva com sucesso' ));
+			}
+		redireciona('editar/' . $post['FFCODINST']);
+				
 	}
 
 	public function editar()

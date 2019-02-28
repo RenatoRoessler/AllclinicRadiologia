@@ -11,13 +11,7 @@
 				</li>
 			</ol>
 			 <?php include VIEWPATH . "_includes/_mensagem.php";?> 
-
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formularioCadastro','name' => 'formularioCadastro');
-			$action  =  base_url() .'Convenio/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Convenio/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
             	<input type="hidden" id="FFCODCONV1" name="FFCODCONV1" value="<?php echo $retorno[0]["CODCONV"]; ?>" >
 			
 		    	<!-- ABAS -->
@@ -39,8 +33,7 @@
                             <div class="form-group col-main col-sm-4 col-xs-12">
 								<label for="FFDESCRICAO" class="sys-label col-sm-12 col-xs-12">Descrição:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFDESCRICAO" name="FFDESCRICAO" value="<?php echo $retorno[0]["DESCRICAO"]; ?>" >
-							</div>		
-							
+							</div>								
 						</div>	
 					</div>
 				</div>
@@ -53,9 +46,7 @@
 		      			<button type="button" id="btnSalvar" class="btn btn-success btn-sm sys-btn-search" ><i class="fa fa-save"></i> Salvar</button>
 	      			</div>
 		    	</div>
-			<?php 
-            echo form_close();
-            ?>
+			</form>
 
 		</div>
 	</div>

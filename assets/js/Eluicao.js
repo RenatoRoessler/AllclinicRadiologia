@@ -377,6 +377,10 @@ $("document").ready(function(){
 	.click(function(){
 		controle.salvar();
 		//$("#formularioCadastro").submit();
+	   $("#btnSalvar").attr("disabled", "disabled");	  
+	   setTimeout(function(){ 
+			$("#btnSalvar").removeAttr("disabled") 		
+		}, 1000);
 	});
 
 	$(document).ready(function(){

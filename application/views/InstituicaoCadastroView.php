@@ -16,12 +16,7 @@
 			<form id="formulario" name="formulario" action="<?php echo base_url() .'/Instituicao/atualizar' ?> " method="post" class="form-horizontal" data-parsley-validate >
 			-->
 
-			<?php 
-			echo validation_errors('<div class="alert alert-danger">','</div>');
-			$attributes = array('class' => 'form-horizontal', 'id' => 'formulario','name' => 'formulario');
-			$action  =  base_url() .'Instituicao/atualizar';
-            echo form_open($action , $attributes);
-            ?>
+			<form id="formularioCadastro" name="formularioCadastro" action="<?php echo base_url() .'Instituicao/atualizar' ?> " method="post" class="form-horizontal"   data-parsley-validate >
 
 				<input type="hidden" id="FFCODINST" name="FFCODINST" value="<?php echo $retorno[0]["CODINST"]; ?>" >
 				
@@ -68,11 +63,7 @@
 	      			</div>
 		    	</div>
 
-			<!-- </form>  -->
-			<?php 
-            echo form_close();
-            ?>
-
+			</form>  
 		</div>
 	</div>
 <div class="row col-md-11 col-sm-11 col-xs-11 sys-btn-action-base-container">

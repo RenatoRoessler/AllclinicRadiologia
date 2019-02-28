@@ -40,30 +40,25 @@ class Convenio extends MY_Controller {
 
     public function atualizar() {
         $post = limpaVariavelArray( $this->input->post());
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('FFDESCRICAO','Descrição','required|min_length[3]|max_length[99]');
+    
         $codconv = null;
-        $post['CODINST'] = $_SESSION['CODINST'];
-
-        if($this->form_validation->run() == false){
-            $this->novo();
-        }else{
-            $this->load->model('ConvenioModel');
-            if($post){
-                if($post['FFCODCONV']){
-                    $this->ConvenioModel->atualizarConvenio( $post );
-                    $codconv = $post['FFCODCONV'];
-                }else{
-                    $codconv  = $this->ConvenioModel->inserirConvenio( $post );
-                }
+        $post['CODINST'] = $_SESSION['CODINST'];      
+    	$this->load->model('ConvenioModel');
+        if($post){
+            if($post['FFCODCONV']){
+                $this->ConvenioModel->atualizarConvenio( $post );
+                $codconv = $post['FFCODCONV'];
+            }else{
+                $codconv  = $this->ConvenioModel->inserirConvenio( $post );
             }
-            if( !$codconv ){
-				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Convênio. <br/>[' . $this->ConvenioModel->db->error() . ']' ));
-			}else{
-				$this->session->set_userdata('MSG', array( 's', 'Convênio salvo com sucesso' ));
-            }
-            redireciona('editar/' . $codconv);
         }
+        if( !$codconv ){
+		$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Convênio. <br/>[' . $this->ConvenioModel->db->error() . ']' ));
+		}else{
+			$this->session->set_userdata('MSG', array( 's', 'Convênio salvo com sucesso' ));
+        }
+        redireciona('editar/' . $codconv);
+        
     }
 
     public function editar() {

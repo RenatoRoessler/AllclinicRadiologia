@@ -45,7 +45,7 @@
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFMEIAVIDA" class="sys-label col-sm-12 col-xs-12">Meia Vida: </label>
 								<input type="number" class="col-sm-12 col-xs-12 form-control" id="FFMEIAVIDA" name="FFMEIAVIDA" value="<?php echo $radioisotopo[0]["MEIAVIDA"] ? $radioisotopo[0]["MEIAVIDA"] : 0 ;  ?>"  autocomplete="off" required min="0" max="36" >
-								<small id="" class="form-text text-muted">Em Horas</small>											
+								<small id="" class="form-text text-muted">Em Horas</small>			
 							</div>
 														       	
 						</div>	

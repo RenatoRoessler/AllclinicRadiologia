@@ -47,29 +47,24 @@ class Fabricante extends MY_Controller {
 	public function atualizar()
 	{
 		$post = limpaVariavelArray( $this->input->post());
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('FFDESCRICAO','Descrição','required|min_length[5]|max_length[45]');
-		$this->form_validation->set_rules('FFESPECIFICACAO','Especificação','required|min_length[5]|max_length[45]');
 		$codigo = null;
 		$this->load->model('FabricanteModel');
-		if($this->form_validation->run() == FALSE){
-			$this->editar($post['FFCODFABRICANTE']);
-		}else{			
-			if($post){
-				if($post['FFCODFABRICANTE']){
-					$this->FabricanteModel->atualizar($post);
-					$codigo = $post['FFCODFABRICANTE'];
-				}else{
-					$codigo = $this->FabricanteModel->inserir($post);
-				}
-			}
-			if( !$codigo ){
-				$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Fabricante. <br/>[' . $this->FabricanteModel->db->error() . ']' ));
+				
+		if($post){
+			if($post['FFCODFABRICANTE']){
+				$this->FabricanteModel->atualizar($post);
+				$codigo = $post['FFCODFABRICANTE'];
 			}else{
-				$this->session->set_userdata('MSG', array( 's', 'Fabricante salvo com sucesso' ));
+				$codigo = $this->FabricanteModel->inserir($post);
 			}
-			redireciona('editar/' . $codigo);
-		}				
+		}
+		if( !$codigo ){
+			$this->session->set_userdata('MSG', array( 'e', 'Falha ao salvar Fabricante. <br/>[' . $this->FabricanteModel->db->error() . ']' ));
+		}else{
+			$this->session->set_userdata('MSG', array( 's', 'Fabricante salvo com sucesso' ));
+		}
+		redireciona('editar/' . $codigo);
+				
 	}
 
 	public function editar( $cod = null )

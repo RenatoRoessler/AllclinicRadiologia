@@ -22,7 +22,11 @@ $("document").ready(function(){
 	});	
 	$("#btnSalvar")
 	.click(function(){
-		$("#formulario").submit();
+	   $("#formularioCadastro").submit();
+	   $("#btnSalvar").attr("disabled", "disabled");	  
+	   setTimeout(function(){ 
+			$("#btnSalvar").removeAttr("disabled") 		
+		}, 1000);
 	});
 	
 	$("#btnVoltar")
