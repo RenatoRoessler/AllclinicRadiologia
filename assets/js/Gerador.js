@@ -23,7 +23,7 @@ var Gerador = function(){
 			atividade99mo1.val(2400);
 		}
 		if(atividade == 1500){
-			atividade99mo1.val(1800);
+			atividade99mo1.val(2000);
 		}
 		if(atividade == 1250){
 			atividade99mo1.val(1500);			

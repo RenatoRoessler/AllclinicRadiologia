@@ -17,13 +17,9 @@ var Eluicao = function(){
 		}else{
 			atividadeUsar = _atividade;
 		}
-		console.log('atividadeUsar',atividadeUsar)
 		let resultado = 0;
-		console.log('_decaimento',_decaimento)
 		let exponencial  = -_decaimento * _horaDiferenca;
-		console.log('_horaDiferenca',_horaDiferenca)
 		resultado = Math.pow( 2.71, exponencial);
-		console.log('_horaDiferenca',_horaDiferenca)
 		resultado = atividadeUsar * resultado;		
 		return resultado.toFixed(2); 
 
@@ -39,18 +35,9 @@ var Eluicao = function(){
 			atividadeUsar = _atividade;
 		}
 		//resultado = facaoMo99 * (( _tc99mo / (_tc99mo - _decaimento)) * atividadeUsar * ((2.71^(-_decaimento * _horaDiferenca)) - 2.71^(-_tc99mo * _horaDiferenca)));
-		console.log('_horaDiferenca', _horaDiferenca)
-		let exponencial1 = Math.pow( 2.71,(-_decaimento * _horaDiferenca));
-		console.log('exponencial1', exponencial1)
-		
+		let exponencial1 = Math.pow( 2.71,(-_decaimento * _horaDiferenca));		
 		let exponencial2 = Math.pow( 2.71,(-_tc99mo * _horaDiferenca));
-		console.log('exponencial2', exponencial2)
 		resultado = facaoMo99 * (( _tc99mo / (_tc99mo - _decaimento)) * atividadeUsar * ((exponencial1) -(exponencial2)));
-		console.log('facaoMo99', facaoMo99)
-		console.log('_tc99mo', _tc99mo)
-		console.log('atividadeUsar', atividadeUsar)
-		console.log('_decaimento', _decaimento)
-		console.log('resultado', resultado)
 		
 		return resultado.toFixed(2); 
 
@@ -59,11 +46,8 @@ var Eluicao = function(){
 	this.calculaAtividadeTeorica = function(){
 		let res  = atividadeTeorica();
 		$('#FFATIVIDADETEORICA').val(res);
-
 		res = atividadeTeoricaMo99();
 		$('#FFATIVIDADEMO99').val(res);
-
-
 	}
 
 	function calcularDiferencaHoras() {
@@ -71,8 +55,10 @@ var Eluicao = function(){
 			let dataAtual = new Date(moment( $('#FFDATAHORA').val()+' '+  $('#FFHORA').val() ));
 			var diferenca = Math.abs(_dataUltimaEluica - dataAtual); 
 			var hora = 1000*60*60; // milésimos de segundo correspondente a um dia
-			var emHoras = Math.trunc(diferenca/hora); // valor total em Horas
-			_horaDiferenca = emHoras;
+			var emHoras = Math.trunc(diferenca/hora) ; // valor total em Horas
+			var minutsDiferenca = (diferenca / hora) % 1 
+			var horasMinutosDiferenca =  parseFloat(emHoras) + parseFloat(minutsDiferenca.toFixed(2));
+			_horaDiferenca = horasMinutosDiferenca;
 		//}	
 	}
 
