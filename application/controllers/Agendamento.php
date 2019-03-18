@@ -81,9 +81,9 @@ class Agendamento extends MY_Controller {
 		$this->load->model('AgendamentoModel');
 				
 		if($post){
-			if( $post['FFCODAGTO'] ){
+			if( $post['FFCODAGTO1'] ){
 				$this->AgendamentoModel->atualizar($post);
-				$codigo = $post['FFCODAGTO'];
+				$codigo = $post['FFCODAGTO1'];
 			}else{
 				$codigo = $this->AgendamentoModel->inserir($post);
 			}

@@ -34,31 +34,39 @@
 						    	<div class="panel-body table-responsive">
 						    		<table id="tableIndex" class="table table-middle table-condensed table-hover table-borderless table-striped table-bordered" style="width:100% !important;">
 						    			<thead>
+												<tr>
+											  	<th colspan=10 style="text-align:center;"> Dados Gerais</th>
+													<th colspan=8 style="text-align:center;"> Controle de Eluição/Qualidade do Gerador de TC-99M</th>
+													<th colspan=3 style="text-align:center;"> KIT Farmaco</th>
+													<th colspan=2 style="text-align:center;"> Eficiência de Marcação</th>
+												</tr>
+											</thead>
+											<thead>
 						    				<tr>
 						    					<th>Lote <br />Gerador</th>	
 						    					<th>Lote <br />Marcação</th>
-												<th>Lote <br />Eluição</th>
 						    					<th>Calibração <br />Gerador</th>
 						    					<th>Controle <br />Marcação</th>
 						    					<th>Nome do <br />Paciente</th>
+													<th>Código do <br />Paciente</th>
 						    					<th>Atividade Iniciada <br />da Seringa</th>
 						    					<th>Hóraio <br />Incial</th>
 						    					<th>Atividade<br />Administrada</th>
 						    					<th>Horáriao<br />Administração</th>
-												<th>Lote Gerador</th>
-												<th>Lote Eluato</th>
+												  <th>Lote Eluato</th>
 						    					<th>Pureza<br />Radionuclídica</th>
 						    					<th>Aparência<br />solução Limpida</th>
-												<th>Pureza<br />Radioquímica</th>
+												  <th>Pureza<br />Radioquímica</th>
 						    					<th>PH</th>
 						    					<th>Pureza<br />Quimica</th>
 						    					<th>Responsavel<br />pelo Gerador</th>
-						    					<th>KIT<br />Fabricante</th>
-						    					<th>KIT<br />Fármaco</th>
-						    					<th>KIT<br />Lote</th>
-						    					<th>Sol<br />Orgânico</th>
-						    					<th>Sol<br />Químico</th>
-						    					<th>Responsável<br />pela Marcação</th>
+													<th>Responsável<br />pela Marcação</th>
+						    					<th>Fabricante</th>
+						    					<th>Fármaco</th>
+						    					<th>Lote</th>
+						    					<th>Solv. Orgânico</th>
+						    					<th>Solv. Químico</th>
+						    					
 						    				</tr>
 						    			</thead>
 						    			<tbody>
@@ -70,28 +78,28 @@
 						    				<tr id="<?php echo $v['CODITFRACIONAMENTO']; ?>">
 						    					<td><?php echo $v['LOTEGERADOR']; ?></td>
 						    					<td><?php echo $v['LOTEMARCACAO']; ?></td>
-												<td><?php echo $v['LOTEELUICAO']; ?></td>
 						    					<td><?php echo $v['DATAGERADOR']; ?></td>
 						    					<td><?php echo $v['DATAMARCACAO']; ?></td>
 						    					<td><?php echo $v['NOME'] .' ' . $v['SOBRENOME'] ; ?></td>
+													<td><?php echo $v['CODPAC']; ?></td>
 						    					<td><?php echo $v['ATIVIDADE_INICIAL']; ?></td>
 						    					<td><?php echo $v['HORA_INICIAL']; ?></td>												
 						    					<td><?php echo $v['ATIVIDADE_ADMINISTRADA']; ?></td>
 						    					<td><?php echo $v['HORA_ADMINISTRADA']; ?></td>
-												<td><?php echo $v['LOTEGERADOR']; ?></td>
-												<td><?php echo $v['LOTEELUICAO']; ?></td>
+												  <td><?php echo $v['LOTEELUICAO']; ?></td>
 						    					<td><?php echo ($v['PUREZA_RADIONUCLIDICA'] <= 0.15) ? $success : $error ; ?></td>
 						    					<td><?php echo ($v['LIMPIDA'] == 'S') ? $success : $error ; ?></td>
-												<td><?php echo ($v['PUREZA_RADIOQUIMICA'] >= 95) ? $success : $error ?></td>
+												  <td><?php echo ($v['PUREZA_RADIOQUIMICA'] >= 95) ? $success : $error ?></td>
 						    					<td><?php echo ($v['PH'] >= 4.5 && $v['PH'] <=7.5) ? $success : $error ;  ?></td>
 						    					<td><?php echo ($v['PUREZA_QUIMICA']=='S') ? $success : $error ;  ?></td>
 						    					<td><?php echo $v['APELUSER']; ?></td>
+													<td><?php echo $v['USEMARCACAO']; ?></td>
 						    					<td><?php echo $v['KITFABRICANTE']; ?></td>
 						    					<td><?php echo $v['DFARMACO']; ?></td>
-						    					<td><?php echo $v['LOTEELUICAO']; ?></td>
-						    					<td><?php echo $v['ORGANICO']; ?></td>
-						    					<td><?php echo $v['INORGANICO']; ?></td>
-						    					<td><?php echo $v['USEMARCACAO']; ?></td>
+						    					<td><?php echo $v['LOTEFARMACO']; ?></td>
+						    				  <td><?php echo ($v['ORGANICO'] >= $v['SOLV_ORGANICO']) ? $success : $error ;?></td>
+						    				  <td><?php echo ($v['INORGANICO'] >= $v['SOLV_INORGANICO']) ? $success : $error ; ?></td>
+						    					
 						    				</tr>
 						    				<?php } ?>
 						    			</tbody>

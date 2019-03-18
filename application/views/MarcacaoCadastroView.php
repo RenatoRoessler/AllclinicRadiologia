@@ -51,8 +51,8 @@
 								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data :</label>
 								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required <?php if($retorno[0]["APROVADO"] == 'S') echo 'disabled'  ?> >  								
 					        </div>	
-					        <div class="col-main col-sm-2 col-xs-12">
-       							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Controle:</label>
+					        <div class="col-main col-sm-1 col-xs-12">
+       							<label  for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora</label>
         						<input class="col-sm-12 col-xs-12 form-control" type="time" id="FFHORA" name="FFHORA" min="00:00" max="24:00" required value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" <?php if($retorno[0]["APROVADO"] == 'S') echo 'disabled'  ?>/>
     						</div>											        									
 							<div class="col-main col-sm-2 col-xs-12">
@@ -69,6 +69,10 @@
 									?>									
 								</select>
 							</div>					
+							<div class="form-group col-main col-sm-1 col-xs-12">
+								<label for="FFLOTEFARMACO" class="sys-label col-sm-12 col-xs-12">Lote Farmaco</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTEFARMACO" name="FFLOTEFARMACO" value="<?php echo $retorno[0]["LOTEFARMACO"];  ?>" autocomplete="off" required <?php if($retorno[0]["APROVADO"] == 'S') echo 'disabled'  ?>>
+							</div>
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFAPROVADODESC" class="sys-label col-sm-12 col-xs-12">Aprovado:</label>
 								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFAPROVADODESC" name="FFAPROVADODESC" value="<?php echo ($retorno[0]["APROVADO"] == 'S') ? 'Aprovado' : 'Reprovado' ?>" readonly />
@@ -76,7 +80,7 @@
 							</div>							
 							<div class="col-main col-sm-1 col-xs-12">
 								<label for="FFCQ" class="sys-label col-sm-12 col-xs-12">C.Q:</label>
-								<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFCQ" name="FFCQ" onchange="mostraDiv()">
+								<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFCQ" name="FFCQ" onchange="mostraDiv()" <?php if($retorno[0]["APROVADO"] == 'S') echo 'disabled'  ?>>
 									<option <?php if( $retorno[0]["CQ"] == "S") echo "selected"; ?> value="S">Sim</option>
 									<option <?php if( $retorno[0]["CQ"] == "N") echo "selected"; ?> value="N">Não</option>						
 								</select>

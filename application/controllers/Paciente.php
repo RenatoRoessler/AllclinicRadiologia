@@ -47,6 +47,7 @@ class Paciente extends MY_Controller {
 		$this->form_validation->set_rules('FFDTNASC','Data','required');
 		$this->form_validation->set_rules('FFPESO','Peso','required|min_length[1]');
 		$this->form_validation->set_rules('FFALTURA','Altura','required');
+		$this->form_validation->set_rules('FFCODIO','Código','required|min_length[3]|max_length[11]');
 		$this->load->model('PacienteModel');
 		$post['CODINST'] = $_SESSION['CODINST'];
 		if($this->form_validation->run() == FALSE){

@@ -29,13 +29,13 @@ class UsuarioModel extends MY_Model {
 				$FF .= ( $post['Instituicao'] ) ? "and a.CODINST = $post[Instituicao] " : '';
 			}
 			if(isset($post['Login'])) {
-				$FF .= ( $post['Login'] ) ? "and A.APELUSER like upper('%$post[Login]%') " : '';
+				$FF .= ( $post['Login'] ) ? "and a.APELUSER like upper('%$post[Login]%') " : '';
 			}
 			if(isset($post['Nome'])) {
-				$FF .= ( $post['Nome'])  ? "and A.NOME like upper('%$post[Nome]%') " : '';
+				$FF .= ( $post['Nome'])  ? "and a.NOME like upper('%$post[Nome]%') " : '';
 			}
 			$this->dados = $this->query(
-				"select 	a.APELUSER, a.NOME,a.EMAIL	,A.CODINST, i.RAZAO	
+				"select 	a.APELUSER, a.NOME,a.EMAIL, a.CODINST, i.RAZAO	
 				from 		usuario a
 				left join    instituicao i on (a.codinst = i.codinst)
 				where 		1=1

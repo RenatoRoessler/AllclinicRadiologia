@@ -39,7 +39,7 @@ class PacienteModel extends MY_Model {
 			
 			$this->dados = $this->query(
 				"select 	p.PRONTUARIO,p.NOME,p.CODINST,p.CPF,p.DTNASCIMENTO,p.TELEFONE,p.PESO,p.EMAIL,
-							DATE_FORMAT(p.DTNASCIMENTO, '%d/%c/%Y') as DATANASCIMENTO
+							DATE_FORMAT(p.DTNASCIMENTO, '%d/%c/%Y') as DATANASCIMENTO, p.CODIGO
 				from 		PACIENTE p
 				where 		1=1
 							$FF
@@ -70,8 +70,8 @@ class PacienteModel extends MY_Model {
 
 			$this->db->trans_begin();
 			$this->db->query("insert into PACIENTE(
-								NOME,TELEFONE,PESO,CPF,EMAIL,DTNASCIMENTO,CODINST,ALTURA) value 
-								(upper('$post[FFNOME]'),'$post[FFTELEFONE]',$post[FFPESO],'$post[FFCPF]','$post[FFEMAIL]','$data', $post[CODINST],$post[FFALTURA])"
+								NOME,TELEFONE,PESO,CPF,EMAIL,DTNASCIMENTO,CODINST,ALTURA,CODIGO) value 
+								(upper('$post[FFNOME]'),'$post[FFTELEFONE]',$post[FFPESO],'$post[FFCPF]','$post[FFEMAIL]','$data', $post[CODINST],$post[FFALTURA], $post[FFCODIGO] )"
 			);
 			if( $this->db->trans_status() === false){
 				$this->db->trans_rollback();				
@@ -108,7 +108,8 @@ class PacienteModel extends MY_Model {
 				EMAIL = '$post[FFEMAIL]',
 				ALTURA = $post[FFALTURA],
 				DTNASCIMENTO = '$data',
-				CODINST = $post[CODINST]
+				CODINST = $post[CODINST],
+				CODIGO = $post[FFCODIGO]
 				where  PRONTUARIO = $post[FFPRONTUARIO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -139,7 +140,8 @@ class PacienteModel extends MY_Model {
 			$FF = '';
 			$this->dados = $this->query(
 				"select 	p.PRONTUARIO, DATE_FORMAT(p.DTNASCIMENTO, '%d/%c/%Y') as DATANASCIMENTO,
-						    p.NOME, p.TELEFONE,p.PESO,p.CPF,p.EMAIL,p.EMAIL,p.CODINST,p.ALTURA
+							p.NOME, p.TELEFONE,p.PESO,p.CPF,p.EMAIL,p.EMAIL,p.CODINST,p.ALTURA,
+							P.CODIGO
 				from 		PACIENTE p				
 				where 		p.PRONTUARIO = $prontuario
 				order by 	p.NOME"
@@ -209,7 +211,8 @@ class PacienteModel extends MY_Model {
 
 			$this->dados = $this->query(
 				"select 	p.PRONTUARIO, DATE_FORMAT(p.DTNASCIMENTO, '%d/%c/%Y') as DATANASCIMENTO,
-						    p.NOME, p.TELEFONE,p.PESO,p.CPF,p.EMAIL,p.EMAIL,p.CODINST,p.ALTURA
+							p.NOME, p.TELEFONE,p.PESO,p.CPF,p.EMAIL,p.EMAIL,p.CODINST,p.ALTURA,
+							p.CODIGO
 				from 		PACIENTE p
 				where		1 = 1
 							$param 				

@@ -30,11 +30,11 @@
 							</div>
 							<div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFLOTE" class="sys-label col-sm-12 col-xs-12">Lote:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off" required maxlength="11" >
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFLOTE" name="FFLOTE" value="<?php echo $retorno[0]["LOTE"];  ?>"  autocomplete="off" required maxlength="11" <?php if($retorno[0]["NRO_ELUICAO"] > 0) echo 'disabled'  ?> >
 							</div>	
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFDATAHORA" class="sys-label col-sm-12 col-xs-12">Data de Geração:</label>
-								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required> 								
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA"] ?  $retorno[0]["DATA"] :  date ("Y-m-d")  ?>" id="FFDATAHORA" name="FFDATAHORA" required <?php if($retorno[0]["NRO_ELUICAO"] > 0) echo 'disabled'  ?> > 								
 					        </div>		
 					        <div class="form-group col-main col-sm-1 col-xs-12">
 								<label for="FFNROELUICAO" class="sys-label col-sm-12 col-xs-12">Nro. Eluição:</label>
@@ -42,11 +42,11 @@
 							</div>	
 							<div class="form-group col-main col-sm-2 col-xs-12">
 								<label for="FFDATACALIBRACAO" class="sys-label col-sm-12 col-xs-12">Data Calibração:</label>
-								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA_CALIBRACAO"] ?  $retorno[0]["DATA_CALIBRACAO"] :  date ("Y-m-d")  ?>" id="FFDATACALIBRACAO" name="FFDATACALIBRACAO" required> 								
+								<input class="form-control" type="date" value="<?php echo $retorno[0]["DATA_CALIBRACAO"] ?  $retorno[0]["DATA_CALIBRACAO"] :  date ("Y-m-d")  ?>" id="FFDATACALIBRACAO" name="FFDATACALIBRACAO" required <?php if($retorno[0]["NRO_ELUICAO"] > 0) echo 'disabled'  ?> > 								
 					        </div>
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFHORA" class="sys-label col-sm-12 col-xs-12">Hora Calibração:</label>
-								<input class="col-sm-12 col-xs-12 form-control" type="time" value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" id="FFHORA" name="FFHORA" required >
+								<input class="col-sm-12 col-xs-12 form-control" type="time" value="<?php echo $retorno[0]['HORA'] ? $retorno[0]['HORA'] : date("H:i")  ?>" id="FFHORA" name="FFHORA" required <?php if($retorno[0]["NRO_ELUICAO"] > 0) echo 'disabled'  ?>  >
 							</div> 					        		
 						</div>
 						<div class="row col-sm-12 col-xs-12">
@@ -56,7 +56,7 @@
 							</div>	
 							<div class="form-group col-main col-sm- col-xs-12">
 								<label for="FFATIVIDADECAL" class="sys-label col-sm-12 col-xs-12">Atividade Calibração mCi</label>
-								<select class="form-control form-control-sm" id="FFATIVIDADECAL" name="FFATIVIDADECAL" required>
+								<select class="form-control form-control-sm" id="FFATIVIDADECAL" name="FFATIVIDADECAL" required <?php if($retorno[0]["NRO_ELUICAO"] > 0) echo 'disabled'  ?> >
 									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == "") echo "selected"; ?> value="">Selecione a Atividade</option>
 									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 2000) echo "selected"; ?> value="2000">2000</option>
 									<option <?php if( $retorno[0]["ATIVIDADE_CALIBRACAO"] == 1500) echo "selected"; ?> value="1500">1500</option>
@@ -73,7 +73,7 @@
 							</div>			
 							<div class="col-main col-sm-2 col-xs-12">
 								<label for="FFFABRICANTE" class="sys-label col-sm-12 col-xs-12">Fabricante:</label>	
-								<select class="form-control form-control-sm" id="FFFABRICANTE" name="FFFABRICANTE" data-live-search="true" required>
+								<select class="form-control form-control-sm" id="FFFABRICANTE" name="FFFABRICANTE" data-live-search="true" required <?php if($retorno[0]["NRO_ELUICAO"] > 0) echo 'disabled'  ?> >
 								<option <?php if( $fabricante[0]["CODFABRICANTE"] == "") echo "selected"; ?> value="">Selecione o Fabricante</option>
 								<?php
 									foreach ($fabricante as $k => $v) {

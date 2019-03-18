@@ -25,36 +25,35 @@ var Usuario = function(){
 					mensagem('e', 'Senha não confere');
 					return
 				}
-			}			
+			}	
+			$("#formularioCadastro").submit();		
 		}else{ //novo	
-			validaSeUsuarioJaFoiCadastrado(apeluserNovo , codinst);	
-			setTimeout(function(){ 
+			console.log('valida2',_usuarioCadastrado)
+			if(senha1 == false){
+				mensagem('e', 'Informe a senha');
+				return
+			}
+			if(senha2 == false){
+				mensagem('e', 'Confirme a Senha');
+				return
+			}
+			if(senha1 != senha2){
+				mensagem('e', 'Senha não confere');
+			return
+			}	
+			validaSeUsuarioJaFoiCadastrado(apeluserNovo , codinst, function () {
 				if( _usuarioCadastrado){
 					mensagem('e', 'Login já cadastrado nessa Instituição');
 						return
-				}
-			
-				console.log('valida2',_usuarioCadastrado)
-				if(senha1 == false){
-					mensagem('e', 'Informe a senha');
-					return
-				}
-				if(senha2 == false){
-					mensagem('e', 'Confirme a Senha');
-					return
-				}
-				if(senha1 != senha2){
-					mensagem('e', 'Senha não confere');
-				return
-				}	
-			}, 500);
-			
+				}				
+				$("#formularioCadastro").submit();		
+			});			
 		}
-		//$("#formularioCadastro").submit();
 			
 	}
 
-	function validaSeUsuarioJaFoiCadastrado(apeluser, codinst) {
+
+	function validaSeUsuarioJaFoiCadastrado(apeluser, codinst, calback) {
 		$.ajax({
 			url : '/AllclinicRadiologia/Usuarios/usuarioJaCadastrado/',
 			type :  'POST',
@@ -69,14 +68,14 @@ var Usuario = function(){
 			success: function( retorno ){
 				var j = jsonEncode( retorno, 'json' );
 				_usuarioCadastrado =  j.content.usuarioCadastrado;
-				console.log("usuarioCadastrado",_usuarioCadastrado);
+				calback();
 				loader('hide');
 			},
 			error: function( request, status, error){
 				loader('hide');
 				mensagem('e', error );
 			}
-		});		
+		});	
 	}
 
 }

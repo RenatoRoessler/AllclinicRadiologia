@@ -36,7 +36,7 @@ var Agendamento = function(){
 	}
 
 	this.excluir = function(a){
-		if(document.getElementById("FFCODAGTO").value > 0){
+		if(document.getElementById("FFCODAGTO1").value > 0){
 			dialogo({
 				"titulo":'Excluir Agendamento',
 				"texto":'Deseja Excluir',
@@ -46,7 +46,7 @@ var Agendamento = function(){
 						type : 'POST',
 						timeout: 30000,
 						data : {
-							'Codigo' : $('#FFCODAGTO').val(),
+							'Codigo' : $('#FFCODAGTO1').val(),
 						},
 						beforeSend: function(){
 							loader('show');
@@ -130,9 +130,5 @@ $("document").ready(function(){
 		.click(function(){
 		controle.excluir();
 	});
-
-
-
-
 
 });

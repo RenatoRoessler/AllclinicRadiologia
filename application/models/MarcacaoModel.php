@@ -45,7 +45,7 @@ class MarcacaoModel extends MY_Model {
 							m.CQ, m.ORGANICO, m.INORGANICO, m.APELUSER,
 							DATE_FORMAT(m.DATA, '%d/%c/%Y') as DATA1,
 							u.NOME, f.DESCRICAO AS DESCKITFABRICANTE,fa.DESCRICAO AS DESCKITFARMACO,
-							m.PH, m.CODFARMACO, m.LOTE, m.APROVADO
+							m.PH, m.CODFARMACO, m.LOTE, m.APROVADO, m.LOTEFARMACO
 				from 		marcacao m
 				left join usuario u on (m.apeluser = u.apeluser)				
 				left join farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
@@ -117,7 +117,8 @@ class MarcacaoModel extends MY_Model {
 								INORGANICO_SUPERIOR,
 								INORGANICO_INFERIOR,
 								EFICIENCIA_MEDIA,
-								APROVADO
+								APROVADO,
+								LOTEFARMACO
 								) value 
 								($post[FFELUICAO],
 								'$post[FFDATAHORA]',
@@ -134,7 +135,8 @@ class MarcacaoModel extends MY_Model {
 								$post[FFINORGANICOSUPERIOR],
 								$post[FFINORGANICOINFERIOR],
 								$post[FFMEDIA],
-								'$post[FFAPROVADO]'
+								'$post[FFAPROVADO]',
+								'$post[FFLOTEFARMACO]'
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -200,7 +202,8 @@ class MarcacaoModel extends MY_Model {
 								INORGANICO_SUPERIOR = $post[FFINORGANICOSUPERIOR],
 								INORGANICO_INFERIOR = $post[FFINORGANICOINFERIOR],	
 								EFICIENCIA_MEDIA = $post[FFMEDIA],
-								APROVADO = '$post[FFAPROVADO]'						
+								APROVADO = '$post[FFAPROVADO]',
+								LOTEFARMACO = '$post[FFLOTEFARMACO]'					
 							where  	CODMARCACAO = $post[FFCODMARCACAO]"
 			);
 			if( $this->db->trans_status() === false ){
@@ -234,7 +237,8 @@ class MarcacaoModel extends MY_Model {
 							DATE_FORMAT(m.HORA,'%H:%i') AS HORAMINUTO, f.DESCRICAO,
 							fa.DESCRICAO AS DESCFARMACO,m.ORGANICO_SUPERIOR,
 							m.ORGANICO_INFERIOR,m.INORGANICO_SUPERIOR,
-							m.INORGANICO_INFERIOR, m.EFICIENCIA_MEDIA,m.APROVADO
+							m.INORGANICO_INFERIOR, m.EFICIENCIA_MEDIA,m.APROVADO,
+							m.LOTEFARMACO
 				from 		marcacao m				
 				left join  	farmaco fa on (m.CODFARMACO = fa.CODFARMACO)
 				left join        fabricante f on (fa.CODFABRICANTE = f.CODFABRICANTE)		

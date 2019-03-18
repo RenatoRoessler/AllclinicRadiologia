@@ -44,7 +44,7 @@ class AgendamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF , a.HORA, a.DATA, 
 				DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
-				a.PESO, a.ALTURA, ae.CODRADIOISOTOPO, ae.PERMANENCIA, ae.REPETICAO
+				a.PESO, a.ALTURA, ae.CODRADIOISOTOPO, ae.PERMANENCIA, ae.REPETICAO, a.CODPAC
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
@@ -109,7 +109,8 @@ class AgendamentoModel extends MY_Model {
 								PESO,
 								ALTURA,
 								CODCONV	,
-								ATIVIDADE				
+								ATIVIDADE,
+								CODPAC			
 								) value 
 								('$post[FFDATAHORA]',
 								'$post[FFHORA]',
@@ -121,7 +122,8 @@ class AgendamentoModel extends MY_Model {
 								$post[FFPESO],
 								$post[FFALTURA],
 								$post[FFCONVENIO],
-								$post[FFATIVIDADE]												
+								$post[FFATIVIDADE],
+								$post[FFCODPAC]											
 								)"
 			);
 			if( $this->db->trans_status() === false){
@@ -202,8 +204,9 @@ class AgendamentoModel extends MY_Model {
 								PESO = $post[FFPESO],
 								ALTURA = $post[FFALTURA],
 								CODCONV = $post[FFCONVENIO],
-								ATIVIDADE = $post[FFATIVIDADE]			
-							where  CODAGTO = $post[FFCODAGTO];
+								ATIVIDADE = $post[FFATIVIDADE],
+								CODPAC = $post[FFCODPAC]			
+							where  CODAGTO = $post[FFCODAGTO1];
 							"
 			);
 			$this->db->query(" update AGTOEXAME set 
@@ -211,7 +214,7 @@ class AgendamentoModel extends MY_Model {
 								CODRADIOISOTOPO = $post[FFRADIOISOTOPO],
 								PERMANENCIA = '$post[FFPERMANENCIA]',
 								REPETICAO = '$post[FFREPETICAO]'	
-							where CODAGTO = $post[FFCODAGTO]; "
+							where CODAGTO = $post[FFCODAGTO1]; "
 				);
 			if( $this->db->trans_status() === false ){
 				$this->db->trans_rollback();
@@ -242,7 +245,7 @@ class AgendamentoModel extends MY_Model {
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,
 							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
 							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE,a.NASCIMENTO,
-							ae.PERMANENCIA, ae.REPETICAO
+							ae.PERMANENCIA, ae.REPETICAO, a.CODPAC
 				from 		AGENDAMENTO a
 				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
 				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)

@@ -46,7 +46,6 @@ class Marcacao extends MY_Controller {
 		$this->load->view('template/footer');
 	}
 
-
 	public function novo()
 	{
 		$dados['js'] = 'js/Marcacao.js';

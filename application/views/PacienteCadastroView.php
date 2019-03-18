@@ -36,8 +36,8 @@
 					<div role="tabpanel" class="tab-pane active" id="geral">
 						<div class="row col-sm-12 col-xs-12">
 							<div class="form-group col-main col-sm-1 col-xs-12">
-								<label for="FFPRONTUARIO" class="sys-label col-sm-12 col-xs-12">Prontuario:</label>
-								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFPRONTUARIO" name="FFPRONTUARIO" value="<?php echo $retorno[0]["PRONTUARIO"]; ?>"  readonly >
+								<label for="FFCODIGO" class="sys-label col-sm-12 col-xs-12">Código:</label>
+								<input type="text" class="col-sm-12 col-xs-12 form-control" id="FFCODIGO" name="FFCODIGO" value="<?php echo $retorno[0]["CODIGO"]; ?>" >
 							</div>
 							<div class="form-group col-main col-sm-3 col-xs-12">
 								<label for="FFNOME" class="sys-label col-sm-12 col-xs-12">Nome:</label>

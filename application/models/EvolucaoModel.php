@@ -61,7 +61,11 @@ class EvolucaoModel extends MY_Model {
 							m.INORGANICO,
 							m.APELUSER as USEMARCACAO,
 							ag.SOBRENOME,
-							e.PUREZA_RADIOQUIMICA
+							e.PUREZA_RADIOQUIMICA,
+							ag.CODPAC,
+							m.LOTEFARMACO,
+							fa.SOLV_ORGANICO,
+							fa.SOLV_INORGANICO
 
 				from 	    ITFRACIONAMENTO i
 				join        MARCACAO m on (i.CODMARCACAO = m.CODMARCACAO)
