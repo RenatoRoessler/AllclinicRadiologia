@@ -250,7 +250,7 @@ class FabricanteModel extends MY_Model {
 	public function fabricantePodeSerExcluido( $codfabricante ){
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from GERADOR where CODFABRICANTE = $codfabricante "
+				" select count(*) as QTD from gerador where CODFABRICANTE = $codfabricante "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

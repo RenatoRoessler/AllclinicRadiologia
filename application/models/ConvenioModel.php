@@ -33,8 +33,8 @@ class ConvenioModel extends MY_Model {
 
 			$this->dados = $this->query(
                 "Select c.CODCONV, c.DESCRICAO, c.CODINST, i.RAZAO, i.FANTASIA
-                from CONVENIO c 
-                join  INSTITUICAO i on (c.CODINST = i.CODINST)
+                from convenio c 
+                join  instituicao i on (c.CODINST = i.CODINST)
                 where c.codinst =  $post[CODINST] 
                 $FF "
 			);			
@@ -74,7 +74,7 @@ class ConvenioModel extends MY_Model {
         try {			
 			$this->dados = $this->query(
 				"select 	c.CODCONV, c.DESCRICAO, c.CODINST	
-				from 		CONVENIO c				
+				from 		convenio c				
 				where 		c.CODCONV = $codconv
 				"
 			);			
@@ -91,7 +91,7 @@ class ConvenioModel extends MY_Model {
     public function atualizarConvenio( $post ){
         try{
 			$this->db->trans_begin();
-			$this->db->query(" update CONVENIO set 
+			$this->db->query(" update convenio set 
 								DESCRICAO = '$post[FFDESCRICAO]'			
 							where  CODCONV = $post[FFCODCONV]"
 			);
@@ -114,7 +114,7 @@ class ConvenioModel extends MY_Model {
 			$this->db->trans_begin();
 			/* update na conta corrente*/
 			$this->db->query(
-				"delete from CONVENIO where CODCONV = $codconv "
+				"delete from convenio where CODCONV = $codconv "
 			);
 
 			if( $this->db->trans_status() === false ){
@@ -136,7 +136,7 @@ class ConvenioModel extends MY_Model {
     public function convenioVinculadoNoAgendamento( $codconv ) {
         try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from AGENDAMENTO where CODCONV = $codconv "
+				" select count(*) as QTD from agendamento where CODCONV = $codconv "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

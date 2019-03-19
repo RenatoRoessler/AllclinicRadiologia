@@ -43,11 +43,11 @@ class AgendamentoModel extends MY_Model {
 	
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF , a.HORA, a.DATA, 
-				DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
+				DATE_FORMAT(a.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
 				a.PESO, a.ALTURA, ae.CODRADIOISOTOPO, ae.PERMANENCIA, ae.REPETICAO, a.CODPAC
-				from 		AGENDAMENTO a
-				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
-				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
+				from 		agendamento a
+				Join   agtoexame ae on (a.CODAGTO = ae.CODAGTO)
+				left join procedimentos e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
 				where   a.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	a.DATA, a.hora DESC"
@@ -98,7 +98,7 @@ class AgendamentoModel extends MY_Model {
 			} 
 
 			$this->db->trans_begin();
-			$this->db->query("insert into AGENDAMENTO(
+			$this->db->query("insert into agendamento(
 								DATA,
 								HORA,
 								NOME,
@@ -130,12 +130,12 @@ class AgendamentoModel extends MY_Model {
 				$this->db->trans_rollback();				
 			}
 			//pegando o id
-			$id = $this->retornaMaxColuna('Agendamento', 'CODAGTO');
+			$id = $this->retornaMaxColuna('agendamento', 'CODAGTO');
 			$codagto = $id[0]['CODAGTO'];
 			/* Inserindo o Exame */
 			$this->db->trans_commit();
 			$this->db->trans_begin();
-			$this->db->query("insert into AGTOEXAME(
+			$this->db->query("insert into agtoexame(
 								CODPROCEDIMENTO,
 								CODAGTO,
 								CODRADIOISOTOPO,
@@ -194,7 +194,7 @@ class AgendamentoModel extends MY_Model {
 			} 
 			
 			$this->db->trans_begin();
-			$this->db->query(" update AGENDAMENTO set 
+			$this->db->query(" update agendamento set 
 								DATA = '$post[FFDATAHORA]', 
 								HORA = '$post[FFHORA]',
 								NOME = upper('$post[FFNOMEPAC]'),	
@@ -209,7 +209,7 @@ class AgendamentoModel extends MY_Model {
 							where  CODAGTO = $post[FFCODAGTO1];
 							"
 			);
-			$this->db->query(" update AGTOEXAME set 
+			$this->db->query(" update agtoexame set 
 								CODPROCEDIMENTO = $post[FFPROCEDIMENTO],
 								CODRADIOISOTOPO = $post[FFRADIOISOTOPO],
 								PERMANENCIA = '$post[FFPERMANENCIA]',
@@ -243,12 +243,12 @@ class AgendamentoModel extends MY_Model {
 			
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,
-							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
+							DATE_FORMAT(a.DATA, '%d/%c/%Y') as DATA1, DATE_FORMAT(a.NASCIMENTO, '%d/%c/%Y') as DNASCIMENTO,
 							a.PESO, a.ALTURA, a.CODCONV, ae.CODRADIOISOTOPO, a.ATIVIDADE,a.NASCIMENTO,
 							ae.PERMANENCIA, ae.REPETICAO, a.CODPAC
-				from 		AGENDAMENTO a
-				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
-				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
+				from 		agendamento a
+				Join   agtoexame ae on (a.CODAGTO = ae.CODAGTO)
+				left join procedimentos e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO)
 				where 		a.CODAGTO = $codagto
 				"
 			);			
@@ -347,9 +347,9 @@ class AgendamentoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME , a.CPF,  a.HORA, a.DATA,
 							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA, a.SOBRENOME
-				from 		AGENDAMENTO a
-				Join   AGTOEXAME ae on (a.CODAGTO = ae.CODAGTO)
-				left join PROCEDIMENTOS e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO) 
+				from 		agendamento a
+				Join   agtoexame ae on (a.CODAGTO = ae.CODAGTO)
+				left join procedimentos e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO) 
 				where 		1 = 1
 				$FF
 				order by a.DATA, a.HORA desc

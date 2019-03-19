@@ -60,7 +60,7 @@ class RadioisotopoModel extends MY_Model {
 		try{			
 
 			$this->db->trans_begin();
-			$this->db->query("insert into RADIOISOTOPO(
+			$this->db->query("insert into radioisotopo(
 								DESCRICAO,
 								CODINST,
 								GAMAO,
@@ -99,7 +99,7 @@ class RadioisotopoModel extends MY_Model {
 		try {			
 			$this->dados = $this->query(
 				"select 	p.CODRADIOISOTOPO, p.DESCRICAO, p.GAMAO, p.MEIAVIDA
-				from 		RADIOISOTOPO p				
+				from 		radioisotopo p				
 				where 		p.CODRADIOISOTOPO = $codradioisotopo
 				"
 			);			
@@ -125,7 +125,7 @@ class RadioisotopoModel extends MY_Model {
 		try{
 
 			$this->db->trans_begin();
-			$this->db->query(" update RADIOISOTOPO set 
+			$this->db->query(" update radioisotopo set 
 								DESCRICAO = upper('$post[FFDESCRICAO]'),
 								GAMAO = $post[FFGAMAO],
 								MEIAVIDA =$post[FFMEIAVIDA]
@@ -154,7 +154,7 @@ class RadioisotopoModel extends MY_Model {
 	public function RadioisotopoVinculadoAgendamento( $codradioisotopo ){
 		try{
 			$this->dados = $this->query(
-				" select count(*) as QTD from AGTOEXAME where CODRADIOISOTOPO = $codradioisotopo"
+				" select count(*) as QTD from agtoexame where CODRADIOISOTOPO = $codradioisotopo"
 			);
 			$this->dados = $this->dados->result_array();			
 			if($this->dados[0]['QTD'] > 0){
@@ -185,7 +185,7 @@ class RadioisotopoModel extends MY_Model {
 			$this->db->trans_begin();
 			/* update na conta corrente*/
 			$this->db->query(
-				"delete from RADIOISOTOPO where codradioisotopo = $codradioisotopo "
+				"delete from radioisotopo where codradioisotopo = $codradioisotopo "
 			);
 
 			if( $this->db->trans_status() === false ){
@@ -216,7 +216,7 @@ class RadioisotopoModel extends MY_Model {
 			$FF = '';			
 			$this->dados = $this->query(
 				"select 	r.CODRADIOISOTOPO,r.DESCRICAO		
-				from 		RADIOISOTOPO r	
+				from 		radioisotopo r	
 				where       r.CODINST = $_SESSION[CODINST]			
 				order by 	r.DESCRICAO"
 			);			

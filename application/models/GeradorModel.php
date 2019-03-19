@@ -53,7 +53,7 @@ class GeradorModel extends MY_Model {
 				from 		gerador g
 				left join   instituicao i on (g.codinst = i.codinst)
 				left join   fabricante a on (g.codfabricante = a.codfabricante)
-				left join   Usuario u on (g.apeluser = u.apeluser)
+				left join   usuario u on (g.apeluser = u.apeluser)
 				where 		g.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	g.CODGERADOR"

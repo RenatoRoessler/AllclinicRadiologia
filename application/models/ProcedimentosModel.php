@@ -28,14 +28,14 @@ class ProcedimentosModel extends MY_Model {
 				$FF .= ( $post['FFCodigo'] ) ? "and p.CODPROCEDIMENTO = $post[FFCodigo] " : '';
 			}
 			if(isset($post['Descricao'])) {
-				$FF .= ( $post['Descricao'] ) ? "and p.DESCRICAO like  '%$post[Descricao]%'' " : '';
+				$FF .= ( $post['Descricao'] ) ? "and p.DESCRICAO like  '%$post[Descricao]%' " : '';
 			}
 			$this->dados = $this->query(
 				"select 	p.CODPROCEDIMENTO, p.DESCRICAO, 
 							case when p.ATIVO = 'S'  then 'Ativo'
 								 when p.ATIVO = 'N' then 'Inativo' end DESCATIVO
 				
-				from 		PROCEDIMENTOS p
+				from 		procedimentos p
 				where 		p.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	p.DESCRICAO"
@@ -61,7 +61,7 @@ class ProcedimentosModel extends MY_Model {
 	public function inserir( $post) {
 		try{
 			$this->db->trans_begin();
-			$this->db->query(" insert into PROCEDIMENTOS (DESCRICAO, ATIVO, CODINST) value (
+			$this->db->query(" insert into procedimentos (DESCRICAO, ATIVO, CODINST) value (
 							 	upper('$post[FFDESCRICAO]'),'$post[FFATIVO]' , $_SESSION[CODINST]) "
 							 );
 			if( $this->db->trans_status() === false){
@@ -88,7 +88,7 @@ class ProcedimentosModel extends MY_Model {
 	public function atualizar( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query(" update PROCEDIMENTOS set 
+			$this->db->query(" update procedimentos set 
 							   DESCRICAO = upper('$post[FFDESCRICAO]'),
 							   ATIVO = '$post[FFATIVO]'
 							   where CODPROCEDIMENTO = $post[FFCODIGO];
@@ -121,7 +121,7 @@ class ProcedimentosModel extends MY_Model {
 			//$FF .= ( $post['FFNome'] ) ? "and B.Nome like upper('%$post[FFNome]%') " : '';
 			$this->dados = $this->query(
 				"select 	p.CODPROCEDIMENTO,p.DESCRICAO, p.ATIVO			
-				from 		PROCEDIMENTOS p				
+				from 		procedimentos p				
 				where 		p.CODPROCEDIMENTO = $codprocedimento
 				order by 	p.DESCRICAO"
 			);			
@@ -153,7 +153,7 @@ class ProcedimentosModel extends MY_Model {
 			
 			$this->dados = $this->query(
 				"select 	p.CODPROCEDIMENTO,p.DESCRICAO, p.ATIVO			
-				from 		PROCEDIMENTOS p	
+				from 		procedimentos p	
 				where       p.ATIVO = 'S'
 				and         p.CODINST = $_SESSION[CODINST]
 				 $FF			

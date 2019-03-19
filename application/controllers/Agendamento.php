@@ -29,10 +29,11 @@ class Agendamento extends MY_Controller {
  		$this->load->model('AgendamentoModel');
  		$this->AgendamentoModel->index( $post );
  		$dados['agendamento'] = $this->AgendamentoModel->dados;
- 		/* Carregnado os Pacientes */
+ 		/* Carregnado os Pacientes 
  		$this->load->model('PacienteModel');
  		$this->PacienteModel->buscaTodosPaciente();
- 		$dados['pacientes'] = $this->PacienteModel->dados;
+		 $dados['pacientes'] = $this->PacienteModel->dados;
+		*/
  		/* Carregnado os Procedimentos */
  		$this->load->model('ProcedimentosModel');
  		$this->ProcedimentosModel->buscaTodosProcedimento();
@@ -50,10 +51,11 @@ class Agendamento extends MY_Controller {
  		$dados['retorno'] = null; 
  		$dados['MSG'] = $this->session->MSG;
 
- 		/* Carregnado os Pacientes */
+ 		/* Carregnado os Pacientes 
  		$this->load->model('PacienteModel');
  		$this->PacienteModel->buscaTodosPaciente();
- 		$dados['paciente'] = $this->PacienteModel->dados;
+		 $dados['paciente'] = $this->PacienteModel->dados;
+		 */
  			/* Carregnado os Procedimentos */
  		$this->load->model('ProcedimentosModel');
  		$this->ProcedimentosModel->buscaTodosProcedimento();
@@ -101,10 +103,11 @@ class Agendamento extends MY_Controller {
 	public function editar()
 	{
 		$dados['js'] = 'js/Agendamento.js'; 
-		/* Carregnado os Pacientes */
+		/* Carregnado os Pacientes 
  		$this->load->model('PacienteModel');
  		$this->PacienteModel->buscaTodosPaciente();
 		$dados['paciente'] = $this->PacienteModel->dados;
+		*/
 		 /**carregando os Radioisótopos */
 		$this->load->model('RadioisotopoModel');
 		$this->RadioisotopoModel->buscaTodosRadioisotopos();
