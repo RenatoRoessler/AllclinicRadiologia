@@ -346,7 +346,7 @@ class AgendamentoModel extends MY_Model {
 			
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME , a.CPF,  a.HORA, a.DATA,
-							DATE_FORMAT(A.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA, a.SOBRENOME
+							DATE_FORMAT(a.DATA, '%d/%c/%Y') as DATA1, ae.CODAGTOEXA, a.SOBRENOME
 				from 		agendamento a
 				Join   agtoexame ae on (a.CODAGTO = ae.CODAGTO)
 				left join procedimentos e on (ae.CODPROCEDIMENTO = e.CODPROCEDIMENTO) 

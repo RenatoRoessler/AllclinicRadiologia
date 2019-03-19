@@ -67,10 +67,11 @@ class Fracionamento extends MY_Controller {
 	{
 		$dados['js'] = 'js/Fracionamento.js';
 		$codmarcacao = $cod > 0 ? $cod : $this->uri->segment(3);
-		/* Carregando os Pacientes */ 
+		/* Carregando os Pacientes  
 		$this->load->model('PacienteModel');
 		$this->PacienteModel->buscaTodosPaciente();
 		$dados['paciente'] = $this->PacienteModel->dados;
+		*/
 
 		/*  Carregando as marcação */
 		$this->load->model('MarcacaoModel');

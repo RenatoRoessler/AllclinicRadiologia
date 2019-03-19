@@ -101,7 +101,7 @@ class MarcacaoModel extends MY_Model {
 			}
 			
 			$this->db->trans_begin();
-			$this->db->query("insert into MARCACAO(
+			$this->db->query("insert into marcacao(
 								CODELUICAO,
 								DATA,
 								HORA,

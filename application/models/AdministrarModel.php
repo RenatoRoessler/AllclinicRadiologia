@@ -86,7 +86,7 @@ class AdministrarModel extends MY_Model {
 	public function administrar( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("update  ITFRACIONAMENTO set 
+			$this->db->query("update  itfracionamento set 
 								ATIVIDADE_INICIAL = $post[FFATIVIDADE],
 								HORA_INICIAL = '$post[FFHORAINICIO]',
 								ATIVIDADE_ADMINISTRADA = $post[FFATVADMINISTRADA],
@@ -123,10 +123,10 @@ class AdministrarModel extends MY_Model {
 							ag.NOME , ag.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
 							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
 							DATE_FORMAT(ag.DATA, '%d/%c/%Y') as DATA1, ag.HORA
-				from 		ITFRACIONAMENTO i 
-				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
-				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
-				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
+				from 		itfracionamento i 
+				join agtoexame age on (i.CODAGTOEXA = age.CODAGTOEXA)
+				join agendamento ag on ( ag.CODAGTO = age.CODAGTO)
+				join procedimentos pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
 				where  i.CODITFRACIONAMENTO = 		$coditfracionamento
 				"
 			);			

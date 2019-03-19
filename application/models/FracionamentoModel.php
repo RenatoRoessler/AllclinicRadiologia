@@ -76,7 +76,7 @@ class FracionamentoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into FRACIONAMENTO(
+			$this->db->query("insert into fracionamento(
 								CODMARCACAO,
 								CODINST
 								) value 
@@ -109,7 +109,7 @@ class FracionamentoModel extends MY_Model {
 	public function inserirItemFracionamento( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into ITFRACIONAMENTO(
+			$this->db->query("insert into itfracionamento(
 								CODMARCACAO,
 								CODAGTOEXA,
 								ATIVIDADE_INICIAL,
@@ -151,7 +151,7 @@ class FracionamentoModel extends MY_Model {
 
 			$this->dados = $this->query(
 				"select 	f.CODFRACIONAMENTO, f.CODMARCACAO
-				from 		FRACIONAMENTO f 
+				from 		fracionamento f 
 				where  f.CODFRACIONAMENTO = 	$codfracionamento
 				"
 			);			
@@ -181,10 +181,10 @@ class FracionamentoModel extends MY_Model {
 							ag.NOME , ag.CPF,pr.DESCRICAO as NOMEPROCEDIMENTO,
 							i.ATIVIDADE_INICIAL, i.HORA_INICIAL, i.ATIVIDADE_ADMINISTRADA, i.HORA_ADMINISTRADA,
 							i.VOLUME, ag.SOBRENOME
-				from 		ITFRACIONAMENTO i 
-				join AGTOEXAME age on (i.CODAGTOEXA = age.CODAGTOEXA)
-				join AGENDAMENTO ag on ( ag.CODAGTO = age.CODAGTO)
-				join PROCEDIMENTOS pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
+				from 		itfracionamento i 
+				join agtoexame age on (i.CODAGTOEXA = age.CODAGTOEXA)
+				join agendamento ag on ( ag.CODAGTO = age.CODAGTO)
+				join procedimentos pr on (age.CODPROCEDIMENTO = pr.CODPROCEDIMENTO)
 				where  i.CODMARCACAO = 	$codmarcacao
 				"
 			);			
@@ -211,7 +211,7 @@ class FracionamentoModel extends MY_Model {
 		try {
 			$this->dados = $this->query(
 				"select 	f.CODMARCACAO
-				from 		ITFRACIONAMENTO f
+				from 		itfracionamento f
 				where  f.CODITFRACIONAMENTO = 	$coditfracionamento
 				"
 			);			

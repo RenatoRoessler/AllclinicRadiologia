@@ -50,8 +50,8 @@ class EluicaoModel extends MY_Model {
 							DATE_FORMAT(e.HORA, '%H:%i') as HORA,
 							case when e.CQ = 'S' then 'Sim' else 'Não' end CQDESC,
 							case when e.APROVADO = 'S' then 'Aprovado' else 'Reprovado' end APROVADOA
-				from 		Eluicao e
-				join        Gerador g on (e.CODGERADOR = g.CODGERADOR)
+				from 		eluicao e
+				join        gerador g on (e.CODGERADOR = g.CODGERADOR)
 				where 		g.CODINST =  $_SESSION[CODINST]
 							$FF
 				order by 	e.CODELUICAO"
@@ -127,7 +127,7 @@ class EluicaoModel extends MY_Model {
 			}			
 
 			$this->db->trans_begin();
-			$this->db->query("insert into ELUICAO(
+			$this->db->query("insert into eluicao(
 								DATA,
 								HORA,
 								VOLUME,

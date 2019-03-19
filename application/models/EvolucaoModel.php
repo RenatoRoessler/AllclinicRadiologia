@@ -67,14 +67,14 @@ class EvolucaoModel extends MY_Model {
 							fa.SOLV_ORGANICO,
 							fa.SOLV_INORGANICO
 
-				from 	    ITFRACIONAMENTO i
-				join        MARCACAO m on (i.CODMARCACAO = m.CODMARCACAO)
-				join        ELUICAO e on (m.CODELUICAO = e.CODELUICAO)
-				join        GERADOR g on (e.CODGERADOR = g.CODGERADOR)
-				join        AGTOEXAME ae on (i.CODAGTOEXA = ae.CODAGTOEXA)
-				join        AGENDAMENTO ag on (ae.CODAGTO = ag.CODAGTO)				
-				join        FARMACO    fa on (m.CODFARMACO = fa.CODFARMACO)	
-				join        FABRICANTE f on (fa.CODFABRICANTE = f.CODFABRICANTE)			
+				from 	    itfracionamento i
+				join        marcacao m on (i.CODMARCACAO = m.CODMARCACAO)
+				join        eluicao e on (m.CODELUICAO = e.CODELUICAO)
+				join        gerador g on (e.CODGERADOR = g.CODGERADOR)
+				join        agtoexame ae on (i.CODAGTOEXA = ae.CODAGTOEXA)
+				join        agendamento ag on (ae.CODAGTO = ag.CODAGTO)				
+				join        farmaco    fa on (m.CODFARMACO = fa.CODFARMACO)	
+				join        fabricante f on (fa.CODFABRICANTE = f.CODFABRICANTE)			
 				where 		1=1
 				and         g.CODINST = $_SESSION[CODINST]
 							$FF
