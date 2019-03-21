@@ -10,7 +10,7 @@
 				</li>
 			</ol>
 			<?php include VIEWPATH . "_includes/_mensagem.php";?> 
-			<form id="formulario" name="uploadCSV" action="<?php echo base_url() .'/ImportarAgenda/Importar' ?> " method="post" class="form-horizontal"   enctype="multipart/form-data"  data-parsley-validate >
+			<form id="formulario" name="uploadCSV" action="<?php echo base_url() .'/ImportarAgenda/importar' ?> " method="post" class="form-horizontal"   enctype="multipart/form-data"  data-parsley-validate >
 				<div class="row col-sm-12 col-xs-12">
 					<div class="col-xs-8 col-sm-8 ">
 						<label class="col-md-4 control-label">Choose CSV File</label>

@@ -1156,5 +1156,23 @@ $("document").ready( function () {
 	$('#dialogo1, #dialogo2').on('hidden.bs.modal,hidden', '.modal', function(){
 		$(this).removeData('bs.modal');
 	});
+
+	setInterval(function(){ 
+		$.ajax({
+			url : '/AllclinicRadiologia/ImportarAgenda/importarTodasPasta',
+			type : 'POST',
+			timeout: 30000,
+			data : {			},
+			beforeSend: function(){
+				loader('show');
+			},
+			success: function( retorno ){
+									
+			},
+			error: function( request, status, error ){ 
+			}
+		});
+	}, 500000);
+	
 })
 
