@@ -92,6 +92,9 @@
 						<li>
 							<a href="<?php echo base_url('Procedimentos');  ?>"> Procedimentos</a>
 						</li>
+						<li>
+							<a href="<?php echo base_url('ImportarAgenda');  ?>"> Importar Agenda</a>
+						</li>
 						<!--
 						<li>
 							<a href="<?php echo base_url('Paciente');  ?>"> Paciente</a>
@@ -133,7 +136,7 @@
 						<i class="fa fa-sign-out"></i>
 						<span class="nav-link-text">Sair</span>	
 					</a>
-				</li>					
+				</li>						
 			</ul>
 
 			<ul class="navbar-nav sidenav-toggler">
