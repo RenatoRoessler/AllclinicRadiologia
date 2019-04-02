@@ -239,7 +239,7 @@ class AgendamentoModel extends MY_Model {
 	 */
 	public function buscaAgendamento( $codagto ) {
 
-		try {			
+		try {		
 			
 			$this->dados = $this->query(
 				"select 	a.CODAGTO, ae.CODPROCEDIMENTO, e.DESCRICAO, a.NOME, a.SOBRENOME ,a.CPF, a.HORA, a.DATA,

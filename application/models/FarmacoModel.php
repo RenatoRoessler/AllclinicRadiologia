@@ -93,7 +93,7 @@ class FarmacoModel extends MY_Model {
 	public function inserir( $post ){
 		try{
 			$this->db->trans_begin();
-			$this->db->query("insert into FARMACO(
+			$this->db->query("insert into farmaco(
 								DESCRICAO,
                                 PH,
                                 SOLV_ORGANICO,
@@ -261,7 +261,7 @@ class FarmacoModel extends MY_Model {
 	public function FarmacoPodeSerExcluido($codfarmaco) {
 		try {
 			$this->dados =  $this->query(
-				" select count(*) as QTD from MARCACAO where CODFARMACO  = $codfarmaco "
+				" select count(*) as QTD from marcacao where CODFARMACO  = $codfarmaco "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir
