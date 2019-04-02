@@ -48,6 +48,8 @@
 			<span class="navbar-toggler-icon"></span>
 			
 		</button>
+
+		
 		
 		<div id="navbarCurso" class="collapse navbar-collapse">
 			<ul class="navbar-nav navbar-sidenav" id="linksaccordion">
@@ -146,20 +148,21 @@
 					</a>
 				</li>
 			</ul>				
-			<ul class="navbar-nav ml-auto">							
-				<li class="nav-item dropdown">				
-					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa-user-circle fa-fw"></i>
-					</a>					
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-						<a class="dropdown-item" ><?php echo $_SESSION['NOME']?></a>
-						<a class="dropdown-item" ><?php echo $_SESSION['INST_FANTASIA']?></a>
-					<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?php echo base_url('usuarios/logout');  ?>" >Sair</a>
-					</div>
-				</li>
-			</ul>
+			
 		</div>
+		<ul class="navbar-nav ml-auto">							
+			<li class="nav-item dropdown">				
+				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-user-circle fa-fw"></i>
+				</a>					
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+					<a class="dropdown-item" ><?php echo $_SESSION['NOME']?></a>
+					<a class="dropdown-item" ><?php echo $_SESSION['INST_FANTASIA']?></a>
+				<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="<?php echo base_url('usuarios/logout');  ?>" >Sair</a>
+				</div>
+			</li>
+		</ul>
 	</nav>
 
 	
