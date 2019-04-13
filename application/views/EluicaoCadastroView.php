@@ -173,8 +173,8 @@
 										<div class="form-group col-main col-sm-12 col-xs-12">
 											<label for="FFPUREZAQUIMICA" class="sys-label col-sm-12 col-xs-12">Pureza Quimica:</label>
 											<select class="form-control form-control-sm col-sm-12 col-xs-12 " id="FFPUREZAQUIMICA" name="FFPUREZAQUIMICA" <?php if($retorno[0]["APROVADO"] == 'S') echo 'disabled'  ?> >
-												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Não</option>
-												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Sim</option>
+												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "N") echo "selected"; ?> value="N">Reprovado</option>
+												<option <?php if( $retorno[0]["PUREZA_QUIMICA"] == "S") echo "selected"; ?> value="S">Aprovado</option>
 											</select>
 											<small id="emailHelp" class="form-text text-muted">A consentração maxima de alumina deve ser de 10ug/ml</small>
 											

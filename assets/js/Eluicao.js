@@ -2,7 +2,9 @@ var Eluicao = function(){
 	var _self = this;
 	var _atividade = 0;
 	var _atividade99mo = 0;
-	var _dataUltimaEluica ;
+	var _dataHoraUltimaEluica;
+	var _dataGerdaor;
+	var _HoraGerador;
 	var _horaDiferenca = 0 ;
 	var _decaimento = 0.01050223;
 	var _primeiro  = false;
@@ -14,6 +16,7 @@ var Eluicao = function(){
 		let atividadeUsar = 0;
 		if(_primeiro){
 			atividadeUsar = _atividade99mo;
+			return  _atividade99mo;
 		}else{
 			atividadeUsar = _atividade;
 		}
@@ -31,16 +34,16 @@ var Eluicao = function(){
 		let atividadeUsar = 0;
 		if(_primeiro){
 			atividadeUsar = _atividade99mo;
+			return _atividade;
 		}else{
 			atividadeUsar = _atividade;
-		}
-		//resultado = facaoMo99 * (( _tc99mo / (_tc99mo - _decaimento)) * atividadeUsar * ((2.71^(-_decaimento * _horaDiferenca)) - 2.71^(-_tc99mo * _horaDiferenca)));
-		let exponencial1 = Math.pow( 2.71,(-_decaimento * _horaDiferenca));		
-		let exponencial2 = Math.pow( 2.71,(-_tc99mo * _horaDiferenca));
-		resultado = facaoMo99 * (( _tc99mo / (_tc99mo - _decaimento)) * atividadeUsar * ((exponencial1) -(exponencial2)));
-		
-		return resultado.toFixed(2); 
-
+			console.log('atividadeUsar',atividadeUsar);
+			let exponencial1 = Math.pow( 2.71,(-_decaimento * _horaDiferenca));		
+			let exponencial2 = Math.pow( 2.71,(-_tc99mo * _horaDiferenca));
+			resultado = facaoMo99 * (( _tc99mo / (_tc99mo - _decaimento)) * atividadeUsar * ((exponencial1) -(exponencial2)));
+			console.log('res', resultado);
+			return resultado.toFixed(2); 
+		}		
 	}
 
 	this.calculaAtividadeTeorica = function(){
@@ -52,14 +55,23 @@ var Eluicao = function(){
 
 	function calcularDiferencaHoras() {
 		//if(_dataUltimaEluica > 0){
-			let dataAtual = new Date(moment( $('#FFDATAHORA').val()+' '+  $('#FFHORA').val() ));
-			var diferenca = Math.abs(_dataUltimaEluica - dataAtual); 
-			var hora = 1000*60*60; // milésimos de segundo correspondente a um dia
-			var emHoras = Math.trunc(diferenca/hora) ; // valor total em Horas
-			var minutsDiferenca = (diferenca / hora) % 1 
-			var horasMinutosDiferenca =  parseFloat(emHoras) + parseFloat(minutsDiferenca.toFixed(2));
-			_horaDiferenca = horasMinutosDiferenca;
-		//}	
+		let dataAtual = new Date(moment( $('#FFDATAHORA').val()+' '+  $('#FFHORA').val() ));
+		var diferenca = Math.abs(_dataHoraUltimaEluica - dataAtual); 
+		var hora = 1000*60*60; // milésimos de segundo correspondente a um dia
+		var emHoras = Math.trunc(diferenca/hora) ; // valor total em Horas
+		var minutsDiferenca = (diferenca / hora) % 1 
+		var horasMinutosDiferenca =  parseFloat(emHoras) + parseFloat(minutsDiferenca.toFixed(2));
+		_horaDiferenca = horasMinutosDiferenca;
+		//}
+		//console.log('_dataGerdaor',_dataGerdaor);
+		//console.log('_HoraGerador',_HoraGerador);
+		if (($('#FFDATAHORA').val() ==  _dataGerdaor) && (_HoraGerador == ($('#FFHORA').val()+ ':00') )) {
+			//console.log('data igual');
+			_primeiro = true;
+		} else {
+			//console.log('data diferente');
+			_primeiro = false;
+		}
 	}
 
 	function aprovado() {
@@ -115,7 +127,7 @@ var Eluicao = function(){
 			//mensagem( 'e', 'PH tem que ser 7');
 			return false;
 		}
-		
+		/*
 		let eficienciaEluicaoVal = eficienciaEluicao.val();
 		eficienciaEluicaoVal = apenasNumeroPontoVirgula(eficienciaEluicaoVal);
 		if(eficienciaEluicaoVal > 110){
@@ -130,6 +142,7 @@ var Eluicao = function(){
 			//mensagem( 'e', 'Eficiência da Eluição igual a 0 ' );
 			return false;
 		}
+		*/
 		let purezaRadioquimicaVal = purezaRadioquimica.val();
 		purezaRadioquimicaVal = apenasNumeroPontoVirgula(purezaRadioquimicaVal);
 		if(purezaRadioquimicaVal < 95){
@@ -179,14 +192,24 @@ var Eluicao = function(){
 					var j = jsonEncode( retorno, 'json' );	
 					var nroEluicao = 	j.content.lote;			
 					_atividade = j.content.atividade;				
-					_dataUltimaEluica = new Date(moment( j.content.dataEluicao+' '+  j.content.hora ));
+					_dataHoraUltimaEluica = new Date(moment( j.content.dataEluicao+' '+  j.content.hora ));
 					_atividade99mo = j.content.ativade99mo;
-					_primeiro = j.content.primeira;	
+					_dataGerdaor = j.content.dataGerador;
+					_HoraGerador = j.content.horaGerador;
+					console.log('_atividade', _atividade);
+					console.log('primeiro', j.content.atividade);
+					
+					//_primeiro = j.content.primeira;	
+					//console.log('primeiro', _primeiro);
+					//console.log('_atividade',_atividade);
+					//console.log('_atividade99mo',_atividade99mo);
 					$("#FFLOTE").val("E" + nroEluicao);	
-					let res  = atividadeTeorica();
-					$('#FFATIVIDADETEORICA').val(res);
-					res = atividadeTeoricaMo99();
-					$('#FFATIVIDADEMO99').val(res);
+					//let res  = atividadeTeorica();
+					$('#FFATIVIDADETEORICA').val(atividadeTeorica());
+					//res = atividadeTeoricaMo99();
+					$('#FFATIVIDADEMO99').val(atividadeTeoricaMo99());
+					
+									
 					loader('hide');						
 				},
 				error: function( request, status, error ){ 

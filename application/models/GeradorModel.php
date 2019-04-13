@@ -291,7 +291,7 @@ class GeradorModel extends MY_Model {
 	public function atividadeUltimaEluicao( $codgerador ){
 		try {
 			$this->dados =  $this->query(
-				" select e.EFI_ATV_TEORICA, e.DATA, e.HORA, e.ATIVIDADEMO99 from eluicao e where e.CODGERADOR = $codgerador order by 1 desc "
+				" select e.EFI_ATV_TEORICA, e.DATA, e.HORA, e.ATIVIDADEMO99 from eluicao e where e.CODGERADOR = $codgerador order by codeluicao desc "
 			);
 			$this->dados = $this->dados->result_array();
 			//se a quantidade for maior que zero não pode excluir

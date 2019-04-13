@@ -161,7 +161,7 @@ class Eluicao extends MY_Controller {
 			$hora = $horaGerador;
 		}	
 		echo $this->msgSucesso( '', array( 'tipoMsg' => 's' , 'lote' => $lote, 'atividade' => $atividade,
-		'dataEluicao' => $dataEluicao , 'hora' => $hora , 'primeira' =>  $primeria, 'ativade99mo' => $atividade99mo) ,  true );	
+		'dataEluicao' => $dataEluicao , 'hora' => $hora , 'primeira' =>  $primeria, 'ativade99mo' => $atividade99mo,'dataGerador' => $dataGerador ,'horaGerador' => $horaGerador) ,  true );	
 		echo jsonEncodeArray( $this->json );
 	}
 

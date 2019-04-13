@@ -51,6 +51,7 @@
 						    				<tr>
 						    					<th>Código</th>	
 						    					<th>Descriçãoo</th>
+												<th>Fabricante</th>
 						    					<th>PH Superior</th>
 												<th>PH Inferiro</th>
 						    					<th>Solvente Orgânico</th>
@@ -66,6 +67,7 @@
 						    				<tr id="<?php echo $v['CODFARMACO']; ?>">
 						    					<td><?php echo $v['CODFARMACO']; ?></td>
 						    					<td><?php echo $v['DESCRICAO']; ?></td>
+												<th><?php echo $v['DESCFA']; ?></th>
 						    					<td><?php echo $v['PH']; ?></td>
 												<td><?php echo $v['PH_INFERIOR']; ?></td>
 												<td><?php echo $v['SOLV_ORGANICO']; ?></td>

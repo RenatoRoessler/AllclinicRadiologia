@@ -63,7 +63,7 @@
 									foreach ($farmaco as $k => $v) {
 									$sel = ( $v["CODFARMACO"] == $retorno[0]["CODFARMACO"] ) ? 'selected' : '';
 								?>
-									<option value="<?php echo $v['CODFARMACO'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"]  ?> </option>
+									<option value="<?php echo $v['CODFARMACO'];?>" <?php echo $sel; ?> > <?php echo $v["DESCRICAO"] .' / '. $v["DESCFABRICANTE"] ?> </option>
 									<?php  
 										}
 									?>									
@@ -97,7 +97,7 @@
 											<div class="form-group col-main col-sm-6 col-xs-12">
 												<div class="card ">
 													<div class="card-header">
-														Teste Inorgânico
+														Teste Orgânico
 													</div>
 													<div class="form-group col-main col-sm-12 col-xs-12">
 														<label for="FFORGANICOSUPERIOR" class="sys-label col-sm-12 col-xs-12">Parte Superior:</label>

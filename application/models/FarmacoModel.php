@@ -36,9 +36,11 @@ class FarmacoModel extends MY_Model {
 			$this->dados = $this->query(
                 "select 	f.CODFARMACO, f.DESCRICAO, f.PH, f.SOLV_ORGANICO, f.SOLV_INORGANICO,
 							f.ATIVO, case when f.ATIVO = 'S' then 'Ativo' 
-							else 'Inativo' end ATIVODESC, f.PH_INFERIOR, f.CODFARMACO
+							else 'Inativo' end ATIVODESC, f.PH_INFERIOR, f.CODFARMACO,
+							fa.descricao as DESCFA
 				
 				from 		farmaco f
+				left join fabricante fa on (f.codfabricante = fa.codfabricante)
 				where 		f.CODINST = $_SESSION[CODINST]
 							$FF
 				order by 	f.DESCRICAO"
@@ -67,7 +69,7 @@ class FarmacoModel extends MY_Model {
 			$this->dados = $this->query(
 				"select 	f.CODFARMACO, f.DESCRICAO, f.PH, f.SOLV_ORGANICO, f.SOLV_INORGANICO,
                         f.ATIVO, f.CODFABRICANTE
-                from 		farmaco f
+								from 		farmaco f
                 where 		f.CODINST = $_SESSION[CODINST]
                 $FF
                 order by 	f.DESCRICAO"
@@ -207,9 +209,10 @@ class FarmacoModel extends MY_Model {
 			$this->dados = $this->query(
                 "select 	f.CODFARMACO, f.DESCRICAO, f.PH, f.SOLV_ORGANICO, f.SOLV_INORGANICO,
 							f.ATIVO, case when f.ATIVO = 'S' then 'Ativo' 
-							else 'Inativo' end ATIVODESC 
+							else 'Inativo' end ATIVODESC , fa.DESCRICAO AS DESCFABRICANTE
 				
 				from 		farmaco f
+				left join fabricante fa on(f.CODFABRICANTE = fa.CODFABRICANTE)
 				where 		f.CODINST = $_SESSION[CODINST]
 				and         f.ATIVO= 'S'
 

@@ -89,14 +89,17 @@ var Marcacao = function(){
 	function marcacaoAprovada(){
 		let aprovado = true;
 		let inorganico = $("#FFINORGANICO").val();
-		if(inorganico <= solv_inorganico){
+		let organico = $("#FFORGANICO").val();
+		if(inorganico <= solv_inorganico && inorganico > 0 ){
 			console.log('reprovado por solv_inorganico')
 			aprovado =  false;
 		}
-		let organico = $("#FFORGANICO").val();
-		if(organico <= solv_organico){
+		if(organico <= solv_organico && organico > 0){
 			console.log('reprovado por solv_organico')
 			aprovado =  false;
+		}
+		if(organico <=0 && inorganico <= 0 ) {
+			aprovado = false;
 		}
 		let ph = $("#FFPH").val();
 		if(ph < ph_inferior || ph > ph_superior){
